@@ -1353,6 +1353,9 @@ function purgeTrivia(){
 }
 
 /* --------- Router Script --------- */
+function openMenu(){document.getElementById('menuOverlay').style.display='flex';}
+function closeMenu(){document.getElementById('menuOverlay').style.display='none';}
+
 const Router = {
   go(hash){location.hash=hash; Router.sync();},
   sync(){
