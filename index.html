@@ -885,24 +885,6 @@ const Router = {
     if (view === 'streak') renderCalendar();
   }
 };
-/* --------- Router Script --------- */
-function openMenu(){document.getElementById('menuOverlay').style.display='flex';}
-function closeMenu(){document.getElementById('menuOverlay').style.display='none';}
-
-const Router = {
-  go(hash){location.hash=hash; Router.sync();},
-  sync(){
-    const hash = location.hash || '#home';
-    document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
-    const target=document.querySelector(hash);
-    if(target) target.classList.add('active');
-    document.querySelectorAll('.bottom-nav button').forEach(btn=>btn.classList.remove('active'));
-    const navBtn=document.querySelector('#nav-'+hash.replace('#',''));
-    if(navBtn) navBtn.classList.add('active');
-  }
-};
-window.addEventListener('hashchange', Router.sync);
-document.addEventListener('DOMContentLoaded', Router.sync);
 
 /* ---------- Rendering: Home ---------- */
 function renderHome(){
@@ -1351,6 +1333,25 @@ function closeShare() {
 }
 
 document.addEventListener('DOMContentLoaded', init);
+
+/* --------- Router Script --------- */
+function openMenu(){document.getElementById('menuOverlay').style.display='flex';}
+function closeMenu(){document.getElementById('menuOverlay').style.display='none';}
+
+const Router = {
+  go(hash){location.hash=hash; Router.sync();},
+  sync(){
+    const hash = location.hash || '#home';
+    document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+    const target=document.querySelector(hash);
+    if(target) target.classList.add('active');
+    document.querySelectorAll('.bottom-nav button').forEach(btn=>btn.classList.remove('active'));
+    const navBtn=document.querySelector('#nav-'+hash.replace('#',''));
+    if(navBtn) navBtn.classList.add('active');
+  }
+};
+window.addEventListener('hashchange', Router.sync);
+document.addEventListener('DOMContentLoaded', Router.sync);
 </script>
 
 <!-- Bottom Nav -->
