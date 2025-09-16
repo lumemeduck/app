@@ -1234,6 +1234,22 @@ function dataURLToBlob(dataURL) {
   }
   return new Blob([ab], { type: mime });
   }
+
+/* ===== Trivia life-cycle ===== */
+function injectTrivia(){
+  const container = document.querySelector('#trivia .card');
+  if(container.querySelector('iframe')) return;          // already there
+  const iframe = document.createElement('iframe');
+  iframe.src = 'https://take.quiz-maker.com/QBR1K9XYY';
+  iframe.width = '100%';
+  iframe.height = '600';
+  iframe.frameBorder = '0';
+  container.appendChild(iframe);
+}
+function purgeTrivia(){
+  const iframe = document.querySelector('#trivia iframe');
+  if(iframe) iframe.remove();
+}
   
 /* ---------- Init ---------- */
 function init(){
