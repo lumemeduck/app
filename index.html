@@ -226,3 +226,510 @@
    .btn-cancel:hover{ transform: translateY(-1px); border-color: var(--ring); box-shadow: 0 12px 40px rgba(99,102,241,.14); }
 </style>
 </head>
+<body>
+<!-- Pretty share-modal -->
+<div id="shareModal" style="display:none;position:fixed;inset:0;background:rgba(255,255,255,.4);z-index:999;align-items:center;justify-content:center;">
+  <div style="background:#eef1ff;border:1px solid rgba(0,0,0,.1);border-radius:18px;padding:22px 28px;max-width:300px;text-align:center;color:#454545;font-family:system-ui;">
+    <h3 style="margin:0 0 12px;font-size:18px;">Share Quote</h3>
+    <p id="shareText" style="margin:0 0 18px;font-size:15px;line-height:1.4;"></p>
+    <button class="btn" onclick="copyShare()" style="margin-right:18px;">Copy</button>
+    <button class="btn" onclick="closeShare()">Close</button>
+  </div>
+</div>
+  <header>
+    <div class="nav">
+      <div class="brand" role="button" onclick="Router.go('#home')" title="Go Home">
+        <div class="logo" aria-hidden></div>
+        <div class="title">Rise & Shine™ </div>
+      </div>
+      <div class="actions">
+        <button type="button" class="btn btn-accent" id="btnProgress" title="View Streak Progress">Streak</button>
+        <button type="button" class="btn btn-warn" id="btnReset" title="Reset all data">Reset</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- HOME VIEW -->
+    <section id="home" class="view active" aria-labelledby="home-title">
+      <div class="grid">
+        <!-- Quotes column -->
+        <article class="card" aria-live="polite">
+          <h2 id="home-title">✨ Today's Motivation <span class="pill" id="quoteTag">Today</span></h2>
+          <div id="quoteText" class="quote">Loading…</div>
+          <div id="quoteAuthor" class="author" style="text-align:right; margin-right:20px">LMD Quotes</div>
+          <div class="row">
+            <button class="btn" id="btnNewQuote" title="Shuffle today's quote">More Quote</button>
+            <button type="button" class="btn" onclick="shareQuote()" title="Share quote text">Share</button>
+            <button class="btn" id="btnSaveQuote" title="Save quote as image">Create image</button>
+          </div>
+          <p class="muted" style="margin-top:10px;"></p>
+        </article>
+
+        <!-- Exercise column -->
+        <article class="card" aria-live="polite">
+          <h2>💪 Today's Challenge <span class="pill" id="challengeTag">Today</span></h2>
+          <div id="challengeText" class="challenge">Loading…</div>
+          <div class="row">
+            <button class="btn" id="btnNewChallenge" title="Shuffle today’s challenge">More Challenge</button>
+            <button class="btn btn-accent" id="btnComplete" title="Mark today completed">Mark Completed</button>
+          </div>
+          <div class="status" id="completeStatus" hidden="true">✔ Logged to your streak!</div>
+          <p class="muted" style="margin-top:10px;"></p>
+        </article>
+      </div>
+
+      <p class="footnote"></p>
+    </section>
+
+    <!-- STREAK VIEW -->
+    <section id="streak" class="view" aria-labelledby="streak-title">
+      <article class="card cal-wrap">
+        <div class="cal-head">
+          <div class="cal-title" id="streak-title">🗓️ Streak Progress</div>
+          <div class="cal-nav">
+            <button class="cal-btn" id="prevMonth" aria-label="Previous Month"><strong>←</strong></button>
+            <button class="cal-btn" id="todayBtn" aria-label="Jump to Current Month">Today</button>
+            <button class="cal-btn" id="nextMonth" aria-label="Next Month"><strong>→</strong></button>
+          </div>
+        </div>
+        <div id="calMeta" class="muted" style="margin:0 0 10px;"></div>
+        <div class="calendar" id="calendar" role="grid"></div>
+        <div class="legend">
+          <span class="dot"></span> Missed
+          <span class="ok"></span> Completed
+          <span style="margin-left:8px;" class="mark"></span> marks <strong>today</strong>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <!-- Hidden canvas for image export -->
+  <canvas id="exportCanvas" width="1080" height="1080" style="display:none;"></canvas>
+
+<script>
+/* ---------- Utilities & Storage ---------- */
+const STORAGE = {
+  dailyKey: (prefix, date=new Date()) => {
+    const y = date.getFullYear(), m = String(date.getMonth()+1).padStart(2,'0'), d = String(date.getDate()).padStart(2,'0');
+    return `${prefix}_${y}-${m}-${d}`;
+  },
+  set(k, v){ localStorage.setItem(k, JSON.stringify(v)); },
+  get(k, fallback=null){
+    try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : fallback; }
+    catch{ return fallback; }
+  },
+  remove(k){ localStorage.removeItem(k); },
+  clearAll(){
+    localStorage.removeItem('completedDays');
+    // Keep other keys generic wipe:
+    Object.keys(localStorage).forEach(k=>{
+      if(/^quote_\d{4}-\d{2}-\d{2}$/.test(k) || /^challenge_\d{4}-\d{2}-\d{2}$/.test(k)) localStorage.removeItem(k);
+    });
+  }
+};
+
+const DateUtil = {
+  ymd(d=new Date()){ return d.toISOString().slice(0,10); },
+  monthKey(y,m){ return `${y}-${String(m+1).padStart(2,'0')}`; }, // m 0-based
+  startOfMonth(y,m){ return new Date(y,m,1); },
+  daysInMonth(y,m){ return new Date(y, m+1, 0).getDate(); },
+  isToday(y,m,day){ const t=new Date(); return t.getFullYear()===y && t.getMonth()===m && t.getDate()===day; }
+};
+/* ---------- Datasets ---------- */
+const QUOTES = [
+  {t:"A year from now you may wish you had started today.", a:"Karen Lamb"},
+  {t:"You don’t have to be great to start, but you have to start to be great.", a:"Zig Ziglar"},
+  {t:"The way to get started is to quit talking and begin doing.", a:"Walt Disney"},
+  {t:"Doubt kills more dreams than failure ever will.", a:"Suzy Kassem"},
+  {t:"With the new day comes new strength and new thoughts.", a:"Eleanor Roosevelt"},
+  {t:"He who has a why to live can bear almost any how.", a:"Friedrich Nietzsche"},
+  {t:"A river cuts through rock not because of its power but because of its persistence.", a:"James N. Watkins"},
+  {t:"What lies behind us and what lies before us are tiny matters compared to what lies within us.", a:"Ralph Waldo Emerson"},
+  {t:"I attribute my success to this: I never gave or took any excuse.", a:"Florence Nightingale"},
+  {t:"If you want something you’ve never had, you must be willing to do something you’ve never done.", a:"Thomas Jefferson"},
+  {t:"Your potential is limitless when fueled by persistence.", a:"LMD Quotes"},
+  {t:"Discipline is choosing your future over your feelings.", a:"LMD Quotes"},
+  {t:"Each small victory is a spark toward transformation.", a:"LMD Quotes"},
+  {t:"Don’t wait for energy—create it through action.", a:"LMD Quotes"},
+  {t:"Your best investment is effort compounded daily.", a:"LMD Quotes"},
+  {t:"Strength is silent but undeniable in those who keep going.", a:"LMD Quotes"},
+  {t:"The gap between who you are and who you want to be is filled with habits.", a:"LMD Quotes"},
+  {t:"Your resilience is proof that setbacks are temporary.", a:"LMD Quotes"},
+  {t:"The most powerful motivation comes from honoring your own word.", a:"LMD Quotes"},
+  {t:"Every sunrise is an invitation to rise stronger.", a:"LMD Quotes"},
+  {t:"Patience today is progress in disguise.", a:"LMD Quotes"},
+  {t:"Your sweat is a reminder that growth is happening.", a:"LMD Quotes"},
+  {t:"Discipline feels heavy now but makes life lighter later.", a:"LMD Quotes"},
+  {t:"The road to mastery is paved with repeated effort.", a:"LMD Quotes"},
+  {t:"Your strength multiplies when your excuses divide.", a:"LMD Quotes"},
+  {t:"Consistency is the true engine of transformation.", a:"LMD Quotes"},
+  {t:"Your inner fire burns brighter with every challenge you accept.", a:"LMD Quotes"},
+  {t:"Progress is built, not wished for—lay a brick today.", a:"LMD Quotes"},
+  {t:"Excuses fade the moment you take action.", a:"LMD Quotes"},
+  {t:"Keep walking—momentum grows step by step.", a:"LMD Quotes"},
+  {t:"Every step forward is a victory over doubt. Keep grinding—your purpose lights the way.", a:"LMD Quotes"},
+  {t:"Small daily wins compound into unstoppable momentum.", a:"LMD Quotes"},
+  {t:"Discipline is self-respect in action.", a:"LMD Quotes"},
+  {t:"You don’t need the perfect start—just the honest one.", a:"LMD Quotes"},
+  {t:"Courage is a habit. Practice it in tiny reps.", a:"LMD Quotes"},
+  {t:"When it feels heavy, it’s building you.", a:"LMD Quotes"},
+  {t:"Consistency beats intensity when intensity doesn’t last.", a:"LMD Quotes"},
+  {t:"Your future self is begging you to begin today.", a:"LMD Quotes"},
+  {t:"Energy follows focus. Guard what you give attention to.", a:"LMD Quotes"},
+  {t:"Progress loves patience. Keep showing up.", a:"LMD Quotes"},
+  {t:"Storms grow roots and wings—choose which one to use today.", a:"LMD Quotes"},
+  {t:"Hard things, done daily, make life easier.", a:"LMD Quotes"},
+  {t:"You are a result of what you repeat.", a:"LMD Quotes"},
+  {t:"Quietly improve. Loud results will speak later.", a:"LMD Quotes"},
+  {t:"You’re closer than your doubt suggests.", a:"LMD Quotes"},
+  {t:"In the middle of every difficulty lies opportunity.", a:"Albert Einstein"},
+  {t:"Do what you can, with what you have, where you are.", a:"Theodore Roosevelt"},
+  {t:"Success is not final, failure is not fatal: It is the courage to continue that counts.", a:"Winston Churchill"},
+  {t:"Don’t count the days, make the days count.", a:"Muhammad Ali"},
+  {t:"Happiness depends upon ourselves.", a:"Aristotle"},
+  {t:"It always seems impossible until it’s done.", a:"Nelson Mandela"},
+  {t:"Action is the foundational key to all success.", a:"Pablo Picasso"},
+  {t:"Fall seven times and stand up eight.", a:"Japanese Proverb"},
+  {t:"Do not wait to strike till the iron is hot; but make it hot by striking.", a:"William Butler Yeats"},
+  {t:"The best way to predict the future is to create it.", a:"Peter Drucker"},
+  {t:"Your tomorrow is built on the bricks of today’s effort.", a:"LMD Quotes"},
+  {t:"Growth begins where comfort ends—dare to step further.", a:"LMD Quotes"},
+  {t:"Rest when you must, but never quit on yourself.", a:"LMD Quotes"},
+  {t:"Strength isn’t measured by weight lifted, but by persistence kept.", a:"LMD Quotes"},
+  {t:"Dream big, start small, act daily.", a:"LMD Quotes"},
+  {t:"Challenges are proof that you’re moving forward.", a:"LMD Quotes"},
+  {t:"Every small victory is a promise of greater triumphs ahead.", a:"LMD Quotes"},
+  {t:"The best investment you’ll ever make is in your own discipline.", a:"LMD Quotes"},
+  {t:"Courage whispers louder than fear when you take the next step.", a:"LMD Quotes"},
+  {t:"Progress doesn’t shout—it quietly accumulates into greatness.", a:"LMD Quotes"},
+  {t:"Consistency is the silent architect of success.", a:"LMD Quotes"},
+  {t:"Your body listens when your mind decides.", a:"LMD Quotes"},
+  {t:"Keep watering your goals—they bloom with patience.", a:"LMD Quotes"},
+  {t:"Discomfort today is the foundation of tomorrow’s strength.", a:"LMD Quotes"},
+  {t:"The climb may be steep, but the view is worth every step.", a:"LMD Quotes"},
+  {t:"You are capable of far more than your doubts allow.", a:"LMD Quotes"},
+  {t:"Let your actions today inspire your future self.", a:"LMD Quotes"},
+  {t:"A disciplined morning creates a victorious day.", a:"LMD Quotes"},
+  {t:"When focus meets effort, progress is guaranteed.", a:"LMD Quotes"},
+  {t:"Your strength multiplies every time you refuse to give up.", a:"LMD Quotes"},
+  {t:"The only way to do great work is to love what you do.", a:"Steve Jobs"},
+  {t:"Success usually comes to those who are too busy to be looking for it.", a:"Henry David Thoreau"},
+  {t:"What you get by achieving your goals is not as important as what you become by achieving your goals.", a:"Zig Ziglar"},
+  {t:"Don’t let the fear of losing be greater than the excitement of winning.", a:"Robert Kiyosaki"},
+  {t:"Hardships often prepare ordinary people for an extraordinary destiny.", a:"C.S. Lewis"},
+  {t:"We are what we repeatedly do. Excellence, then, is not an act, but a habit.", a:"Aristotle"},
+  {t:"Act as if what you do makes a difference. It does.", a:"William James"},
+  {t:"Everything you’ve ever wanted is on the other side of fear.", a:"George Addair"},
+  {t:"Limit your ‘always’ and your ‘nevers’.", a:"Amy Poehler"},
+  {t:"Quality is not an act, it is a habit.", a:"Aristotle"},
+  {t:"Your body is a canvas—each healthy choice paints a masterpiece.", a:"LMD Quotes"},
+  {t:"Small habits today are the giant leaps of tomorrow.", a:"LMD Quotes"},
+  {t:"Strength grows when excuses shrink.", a:"LMD Quotes"},
+  {t:"No alarm clock rings louder than your own purpose.", a:"LMD Quotes"},
+  {t:"You are stronger than your last excuse.", a:"LMD Quotes"},
+  {t:"Move with intention—every step is progress.", a:"LMD Quotes"},
+  {t:"Discipline isn’t punishment, it’s freedom earned daily.", a:"LMD Quotes"},
+  {t:"Your dream body, mind, and life are shaped by today’s effort.", a:"LMD Quotes"},
+  {t:"When motivation fades, let discipline carry you.", a:"LMD Quotes"},
+  {t:"Consistency today becomes confidence tomorrow.", a:"LMD Quotes"},
+  {t:"Progress is not about speed—it’s about not stopping.", a:"LMD Quotes"},
+  {t:"Your future applauds the sweat you give today.", a:"LMD Quotes"},
+  {t:"Even slow progress beats standing still.", a:"LMD Quotes"},
+  {t:"A positive mind makes a powerful body.", a:"LMD Quotes"},
+  {t:"Your story is rewritten every time you refuse to quit.", a:"LMD Quotes"},
+  {t:"Effort compounds like interest—invest daily.", a:"LMD Quotes"},
+  {t:"Every time you rise after falling, you redefine strength.", a:"LMD Quotes"},
+  {t:"Greatness grows quietly through small, repeated acts.", a:"LMD Quotes"},
+  {t:"Your inner fire is brighterVinebreSoftware than today’s struggle.", a:"LMD Quotes"},
+  {t:"If you want energy, create it through movement.", a:"LMD Quotes"},
+  {t:"Believe you can and you’re halfway there.", a:"Theodore Roosevelt"},
+  {t:"I am not a product of my circumstances. I am a product of my decisions.", a:"Stephen R. Covey"},
+  {t:"Opportunities don't happen, you create them.", a:"Chris Grosser"},
+  {t:"Do not go where the path may lead, go instead where there is no path and leave a trail.", a:"Ralph Waldo Emerson"},
+  {t:"Dream big and dare to fail.", a:"Norman Vaughan"},
+  {t:"You miss 100% of the shots you don’t take.", a:"Wayne Gretzky"},
+  {t:"Success is walking from failure to failure with no loss of enthusiasm.", a:"Winston Churchill"},
+  {t:"The secret of getting ahead is getting started.", a:"Mark Twain"},
+  {t:"It does not matter how slowly you go as long as you do not stop.", a:"Confucius"},
+  {t:"Courage is grace under pressure.", a:"Ernest Hemingway"},
+  {t:"Every morning is a reset button—press it wisely.", a:"LMD Quotes"},
+  {t:"Your discipline today is the bridge to your dream tomorrow.", a:"LMD Quotes"},
+  {t:"Comfort zones never create champions.", a:"LMD Quotes"},
+  {t:"Every rep is a vote for the person you want to become.", a:"LMD Quotes"},
+  {t:"The body achieves what the mind believes.", a:"LMD Quotes"},
+  {t:"Greatness is carved from ordinary days of effort.", a:"LMD Quotes"},
+  {t:"Be stubborn about your goals, flexible with your methods.", a:"LMD Quotes"},
+  {t:"Resting is not quitting—it’s recharging.", a:"LMD Quotes"},
+  {t:"Your habits are the seeds; your life is the garden.", a:"LMD Quotes"},
+  {t:"Show up for yourself even when no one is watching.", a:"LMD Quotes"},
+  {t:"Momentum is built by choosing progress over perfection.", a:"LMD Quotes"},
+  {t:"Your excuses grow weaker when your purpose grows stronger.", a:"LMD Quotes"},
+  {t:"Patience is training in disguise—it strengthens the spirit.", a:"LMD Quotes"},
+  {t:"Celebrate discipline, for it will one day celebrate you back.", a:"LMD Quotes"},
+  {t:"Every small effort is a silent roar of resilience.", a:"LMD Quotes"},
+  {t:"Strong mornings create victorious nights.", a:"LMD Quotes"},
+  {t:"Your sweat is the proof of your persistence.", a:"LMD Quotes"},
+  {t:"Nothing changes until you decide to.", a:"LMD Quotes"},
+  {t:"A consistent step beats a giant leap that never happens.", a:"LMD Quotes"},
+  {t:"Discipline is the art of keeping promises you made to yourself.", a:"LMD Quotes"},
+  {t:"Keep your face always toward the sunshine—and shadows will fall behind you.", a:"Walt Whitman"},
+  {t:"It’s not whether you get knocked down, it’s whether you get up.", a:"Vince Lombardi"},
+  {t:"Don’t be pushed around by the fears in your mind. Be led by the dreams in your heart.", a:"Roy T. Bennett"},
+  {t:"I never dreamed about success. I worked for it.", a:"Estee Lauder"},
+  {t:"The man who moves a mountain begins by carrying away small stones.", a:"Confucius"},
+  {t:"Great things are done by a series of small things brought together.", a:"Vincent Van Gogh"},
+  {t:"Do one thing every day that scares you.", a:"Eleanor Roosevelt"},
+  {t:"Act the way you’d like to be and soon you’ll be the way you act.", a:"Leonard Cohen"},
+  {t:"If you want to lift yourself up, lift up someone else.", a:"Booker T. Washington"},
+  {t:"Energy and persistence conquer all things.", a:"Benjamin Franklin"},
+  {t:"Momentum grows when excuses shrink.", a:"LMD Quotes"},
+  {t:"Sweat today, shine tomorrow.", a:"LMD Quotes"},
+  {t:"Your mindset sets the pace for your body.", a:"LMD Quotes"},
+  {t:"Each challenge is a doorway to hidden strength.", a:"LMD Quotes"},
+  {t:"You don’t need perfect conditions—just a willing heart.", a:"LMD Quotes"},
+  {t:"Discipline today, freedom tomorrow.", a:"LMD Quotes"},
+  {t:"A step forward, no matter how small, still breaks the chain of doubt.", a:"LMD Quotes"},
+  {t:"Your dreams need your effort more than your excuses.", a:"LMD Quotes"},
+  {t:"Consistency is how ordinary becomes extraordinary.", a:"LMD Quotes"},
+  {t:"Your purpose is louder than your fatigue.", a:"LMD Quotes"},
+  {t:"Every rep you complete is a promise kept to yourself.", a:"LMD Quotes"},
+  {t:"The climb is hard, but so is staying stuck.", a:"LMD Quotes"},
+  {t:"Your body is built by decisions, not wishes.", a:"LMD Quotes"},
+  {t:"Keep watering the seed, even when the soil looks dry.", a:"LMD Quotes"},
+  {t:"Energy is created, not found—move to generate it.", a:"LMD Quotes"},
+  {t:"Your persistence today becomes your pride tomorrow.", a:"LMD Quotes"},
+  {t:"The mirror reflects effort more than excuses.", a:"LMD Quotes"},
+  {t:"Small efforts multiplied daily equal unstoppable progress.", a:"LMD Quotes"},
+  {t:"Your struggle today is your strength being sculpted.", a:"LMD Quotes"},
+  {t:"Keep going—your best chapter is still unwritten.", a:"LMD Quotes"},
+  {t:"Start where you are. Use what you have. Do what you can.", a:"Arthur Ashe"},
+  {t:"Don’t watch the clock; do what it does. Keep going.", a:"Sam Levenson"},
+  {t:"Opportunities multiply as they are seized.", a:"Sun Tzu"},
+  {t:"Turn your wounds into wisdom.", a:"Oprah Winfrey"},
+  {t:"Success is not in what you have, but who you are.", a:"Bo Bennett"},
+  {t:"Setting goals is the first step in turning the invisible into the visible.", a:"Tony Robbins"},
+  {t:"Keep going. Be all in.", a:"Bryan Hutchinson"},
+  {t:"Perseverance is not a long race; it is many short races one after the other.", a:"Walter Elliot"},
+  {t:"Don’t wait. The time will never be just right.", a:"Napoleon Hill"},
+  {t:"You cannot plow a field by turning it over in your mind.", a:"Gordon B. Hinckley"},
+  {t:"Your discipline is proof you believe in your future.", a:"LMD Quotes"},
+  {t:"Strong days are built from strong choices.", a:"LMD Quotes"},
+  {t:"Excuses weigh more than any workout ever will.", a:"LMD Quotes"},
+  {t:"Your dreams deserve sweat, not hesitation.", a:"LMD Quotes"},
+  {t:"Courage grows with every step you refuse to skip.", a:"LMD Quotes"},
+  {t:"The grind today becomes the glow tomorrow.", a:"LMD Quotes"},
+  {t:"Your focus is your superpower—guard it.", a:"LMD Quotes"},
+  {t:"Every habit you build becomes a pillar of strength.", a:"LMD Quotes"},
+  {t:"Your progress is fueled by what you repeat daily.", a:"LMD Quotes"},
+  {t:"The hardest reps create the strongest version of you.", a:"LMD Quotes"},
+  {t:"Discipline is simply remembering what you want most.", a:"LMD Quotes"},
+  {t:"Tough days shape tougher people.", a:"LMD Quotes"},
+  {t:"Your potential is waiting behind your persistence.", a:"LMD Quotes"},
+  {t:"Action is the antidote to doubt.", a:"LMD Quotes"},
+  {t:"Sweat is the ink with which victory is written.", a:"LMD Quotes"},
+  {t:"Keep building—you’re closer to your breakthrough than you think.", a:"LMD Quotes"},
+  {t:"Strength is borrowed from today’s effort, not tomorrow’s wish.", a:"LMD Quotes"},
+  {t:"Momentum loves discipline—feed it daily.", a:"LMD Quotes"},
+  {t:"Your consistency is your contract with success.", a:"LMD Quotes"},
+  {t:"Keep moving—your energy multiplies in motion.", a:"LMD Quotes"},
+];
+
+const CHALLENGES = [
+  "Walk outdoors for 30 minutes.",
+  "Do 2 sets of 20 sit-to-stands from a chair.",
+  "Stretch arms, legs, and back for 12 minutes.",
+  "Hold a gentle lunge stretch for 45s each side.",
+  "Perform 20 wall push-ups, 2 rounds.",
+  "March in place for 6 minutes.",
+  "Do 15 calf raises, 3 times.",
+  "Hold a shoulder stretch across the chest for 30s each side.",
+  "Perform 2 sets of 12 seated knee extensions.",
+  "Practice deep belly breathing for 10 minutes.",
+  "Do 3 sets of 15 squats.",
+  "Perform 3 sets of 15 alternating lunges.",
+  "Hold a plank for 60s, 3 times.",
+  "Do 3 rounds of 25 mountain climbers.",
+  "Perform 3 sets of 15 dips on a sturdy chair.",
+  "Complete 20 jump squats, repeat 3 rounds.",
+  "Do 3 sets of 20 bicycle crunches.",
+  "Hold a wall-sit for 90 seconds, 2 times.",
+  "Perform 3 rounds of 15 donkey kicks per leg.",
+  "Do 3 sets of 20 side leg lifts each side.",
+  "Do 3 sets of 25 burpees.",
+  "Perform 3 sets of 20 decline push-ups.",
+  "Complete 3 rounds of 20 jump lunges.",
+  "Hold a plank with alternating arm and leg lifts, 60s x 3.",
+  "Perform 3 sets of 20 pike push-ups.",
+  "Do 3 rounds of 30 mountain climbers fast-paced.",
+  "Sprint in place for 90s, rest, repeat 4 times.",
+  "Perform 3 sets of 20 Russian twists with weight.",
+  "Do 3 rounds of 15 single-leg squats each side.",
+  "Hold a handstand against a wall for 45s, 3 times.",
+  "Walk briskly for 20 minutes.",
+  "Do 3 sets of 15 squats.",
+  "Hold a 60-second plank for 3 sections.",
+  "Do 20 push-ups (break into 3 sets).",
+  "Stretch your full body for 10 minutes.",
+  "Do jumping jacks for 60 seconds 3 times.",
+  "Do 15 burpees (any pace).",
+  "Climb stairs for 10 minutes.",
+  "Do slow jog for 15 minutes.",
+  "Core circuit: do 20 crunches 3 times.",
+  "Do 20 glute bridges 3 times.",
+  "Wall-sit: do 45 seconds 3 times.",
+  "Do yoga flow for 15 minutes.",
+  "Do shadow boxing for 10 minutes.",
+  "Balance drill: do a single-leg stand for 60 seconds.",
+  "Take a 15-minute walk after meals.",
+  "Do 2 sets of 12 wall push-ups.",
+  "Stretch your arms and back for 8 minutes.",
+  "Perform 20 seated leg raises.",
+  "Hold a 30-second wall-sit, repeat 2 times.",
+  "Do 15 calf raises on each leg.",
+  "Practice deep breathing for 5 minutes.",
+  "Do 2 sets of 10 bodyweight squats.",
+  "Balance on one leg for 40 seconds each side.",
+  "Walk up and down stairs for 5 minutes.",
+  "Do 3 sets of 12 standard push-ups.",
+  "Perform 3 sets of 15 lunges (each leg).",
+  "Jump rope (or mimic rope jumps) for 3 minutes.",
+  "Do 3 rounds of 20 bicycle crunches.",
+  "Perform 2 sets of 10 tricep dips on a chair.",
+  "Hold a plank for 45 seconds, 3 times.",
+  "Do 3 sets of 12 glute bridges.",
+  "Perform 20 jump squats.",
+  "Shadow box with high intensity for 3 minutes.",
+  "Do 3 sets of 15 mountain climbers.",
+  "Perform 3 sets of 15 burpees.",
+  "Do 3 rounds of 20 push-up to side planks.",
+  "Hold a plank with shoulder taps for 60 seconds, 3 times.",
+  "Perform 3 sets of 12 pistol squats (use support if needed).",
+  "Complete 3 rounds of 25 jump lunges.",
+  "Do 2 sets of 15 V-ups.",
+  "Perform 3 rounds of 20 Russian twists.",
+  "Sprint in place at full effort for 45 seconds, rest 30s, repeat 5 times.",
+  "Hold a wall-sit for 90 seconds, repeat 3 times.",
+  "Do 3 rounds of 12 dive-bomber push-ups.",
+  "Walk in place for 10 minutes while listening to music.",
+  "Do 2 sets of 10 chair squats.",
+  "Stretch hamstrings and calves for 5 minutes.",
+  "Hold a seated twist stretch for 30 seconds each side.",
+  "Perform 15 standing side leg lifts each side.",
+  "Do 2 rounds of 12 shoulder rolls backward and forward.",
+  "March in place with high knees for 2 minutes.",
+  "Stand and touch your toes 15 times slowly.",
+  "Do 10 seated knee extensions per leg.",
+  "Practice mindful breathing for 10 minutes.",
+  "Perform 3 sets of 10 push-ups with knees or standard.",
+  "Do 3 rounds of 20 standing lunges.",
+  "Hold a side plank for 30 seconds each side, 3 times.",
+  "Do 2 sets of 15 reverse crunches.",
+  "Perform 3 sets of 12 step-ups on a chair or stair.",
+  "Do 20 sumo squats.",
+  "Complete 3 sets of 15 donkey kicks each leg.",
+  "Perform 3 rounds of 20 standing oblique crunches.",
+  "Do 2 minutes of jumping jacks, rest, repeat 2 times.",
+  "Hold a forearm plank for 60 seconds.",
+  "Perform 3 sets of 15 decline push-ups (feet elevated).",
+  "Do 3 rounds of 12 explosive jump squats.",
+  "Complete 20 burpees, rest, then repeat once.",
+  "Hold a plank while alternating leg lifts, 45 seconds x 3.",
+  "Perform 3 sets of 15 pike push-ups.",
+  "Do 3 rounds of 20 bicycle crunches at fast pace.",
+  "Sprint in place for 60 seconds, rest, repeat 3 times.",
+  "Perform 3 rounds of 15 side lunges each leg.",
+  "Do 3 sets of 12 single-leg glute bridges each side.",
+  "Hold a handstand against the wall for 20 seconds, repeat 3 times.",
+  "Walk outdoors for 20 minutes at a steady pace.",
+  "Perform 2 sets of 12 sit-to-stands from a chair.",
+  "Stretch your neck and shoulders for 5 minutes.",
+  "Do 10 standing calf raises per leg, 3 times.",
+  "Hold a standing quad stretch for 30 seconds each side.",
+  "Perform 15 gentle seated twists.",
+  "Climb stairs slowly for 8 minutes.",
+  "Do 2 sets of 12 wall push-ups.",
+  "March in place with arms swinging for 3 minutes.",
+  "Practice mindful body scan meditation for 8 minutes.",
+  "Perform 3 sets of 15 squats.",
+  "Do 3 sets of 12 alternating step-back lunges.",
+  "Hold a high plank for 45 seconds, repeat 3 times.",
+  "Perform 20 mountain climbers, 3 rounds.",
+  "Do 3 rounds of 12 dips on a sturdy chair.",
+  "Complete 15 glute bridges, 3 times.",
+  "Shadow box for 2 minutes, rest, repeat 3 rounds.",
+  "Do 3 sets of 15 side leg lifts each side.",
+  "Perform 20 bicycle crunches, 3 rounds.",
+  "Hold a wall-sit for 1 minute, repeat twice.",
+  "Perform 3 rounds of 20 burpees.",
+  "Do 3 sets of 15 decline push-ups.",
+  "Complete 25 jump squats, rest, repeat 2 times.",
+  "Hold a plank with alternating shoulder taps, 60s x 3.",
+  "Perform 3 sets of 20 jump lunges.",
+  "Do 3 rounds of 15 pike push-ups.",
+  "Sprint in place for 1 minute, rest, repeat 5 times.",
+  "Perform 3 sets of 20 Russian twists with a water bottle.",
+  "Hold a handstand against a wall for 30 seconds, 3 times.",
+  "Do 3 sets of 12 single-leg squats per side.",
+  "Walk outdoors for 25 minutes.",
+  "Do 2 sets of 15 sit-to-stands from a chair.",
+  "Stretch hamstrings and hips for 8 minutes.",
+  "Perform 15 standing calf raises, 3 times.",
+  "Hold a chest stretch against a wall, 30s each side.",
+  "Do 20 arm circles forward and backward.",
+  "March in place with high knees for 3 minutes.",
+  "Do 10 step-ups on a stair, each leg.",
+  "Hold a seated hamstring stretch for 45 seconds each side.",
+  "Practice mindful breathing for 8 minutes.",
+  "Perform 3 sets of 15 standard squats.",
+  "Do 3 sets of 12 push-ups.",
+  "Hold a plank for 60 seconds, 3 times.",
+  "Perform 3 sets of 20 alternating lunges.",
+  "Do 3 sets of 12 dips on a chair.",
+  "Complete 20 jump squats, rest, repeat twice.",
+  "Do 3 rounds of 15 side leg lifts each side.",
+  "Perform 3 sets of 20 crunches.",
+  "Do 3 sets of 15 glute bridges.",
+  "Hold a wall-sit for 75 seconds.",
+  "Do 3 rounds of 20 burpees.",
+  "Perform 3 sets of 15 decline push-ups (feet elevated).",
+  "Complete 3 sets of 20 jump lunges.",
+  "Hold a plank with shoulder taps for 60s, 3 times.",
+  "Perform 3 sets of 12 pike push-ups.",
+  "Do 3 rounds of 25 mountain climbers.",
+  "Sprint in place for 60s, rest, repeat 4 times.",
+  "Do 3 rounds of 20 Russian twists holding a bottle.",
+  "Perform 3 sets of 12 pistol squats each side (use support).",
+  "Hold a wall handstand for 30s, 3 times.",
+  "Take a 20-minute walk with deep breaths.",
+  "Perform 2 sets of 15 chair squats.",
+  "Stretch your shoulders and back for 10 minutes.",
+  "Hold a standing hamstring stretch for 40s each leg.",
+  "Do 2 sets of 12 seated knee raises.",
+  "Perform 15 wall push-ups, 2 rounds.",
+  "Walk in place for 5 minutes during TV breaks.",
+  "Hold a calf stretch for 30s each side, repeat twice.",
+  "Do 15 side leg lifts per leg.",
+  "Practice guided meditation for 10 minutes.",
+  "Do 3 sets of 12 regular push-ups.",
+  "Perform 3 sets of 20 lunges alternating legs.",
+  "Hold a side plank for 40s each side, repeat twice.",
+  "Do 3 rounds of 20 mountain climbers.",
+  "Perform 3 sets of 12 dips on a chair.",
+  "Complete 20 jump squats, repeat twice.",
+  "Do 3 sets of 15 bicycle crunches.",
+  "Hold a wall-sit for 80 seconds, 2 times.",
+  "Perform 3 rounds of 20 high knees.",
+  "Do 3 sets of 15 donkey kicks per leg.",
+  "Perform 3 sets of 20 burpees.",
+  "Do 3 rounds of 15 decline push-ups (feet raised).",
+  "Complete 3 sets of 20 jump lunges.",
+  "Hold a plank with alternating arm reach, 60s x 3.",
+  "Perform 3 sets of 15 pike push-ups.",
+  "Do 3 rounds of 25 bicycle crunches fast-paced.",
+  "Sprint in place for 90s, rest, repeat 3 times.",
+  "Perform 3 sets of 15 Russian twists with weight.",
+  "Do 3 rounds of 12 pistol squats each leg.",
+  "Hold a handstand against wall for 40s, 3 times."
+];
+
