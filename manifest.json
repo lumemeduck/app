@@ -6,7 +6,7 @@
   "background_color": "#ffffff",
   "theme_color": "#0ea5e9",
   "icons": [
-    {"src": "rise-shine.png", "sizes": "192x192", "type": "image/png"},
+    {"src": "rise-shine1.png", "sizes": "192x192", "type": "image/png"},
     {"src": "rise-shine.png", "sizes": "512x512", "type": "image/png"}
   ]
 }
