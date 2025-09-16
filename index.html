@@ -402,7 +402,7 @@
     <a data-quiz="QBR1K9XYY" data-type=4 data-fullscreen="true" href="https://take.quiz-maker.com/QBR1K9XYY">Loading…</a>
     <script>(function(i,s,o,g,r,a,m){var ql=document.querySelectorAll('A[data-quiz],DIV[data-quiz]');
       if(ql){if(ql.length){for(var k=0;k<ql.length;k++){ql[k].id='quiz-embed-'+k;ql[k].href="javascript:var i=document.getElementById('quiz-embed-"+k+"');try{qz.startQuiz(i)}catch(e){i.start=1;i.style.cursor='wait';i.style.opacity='0.5'};void(0);"}}};
-      i['QP']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://take.quiz-maker.com/3012/CDN/quiz-embed-v1.js','qp');</script>
+      i['QP']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'qp');</script>
   </div>
 </section>
 
@@ -1336,17 +1336,19 @@ function closeShare() {
 
 document.addEventListener('DOMContentLoaded', init);
 
-/* ===== Trivia life-cycle ===== */
+/* ===== Trivia life-cycle (no auto-inject) ===== */
 function injectTrivia(){
-  const container = document.querySelector('#trivia .card');
-  if(container.querySelector('iframe')) return;          // already there
-  const iframe = document.createElement('iframe');
-  iframe.src = 'https://take.quiz-maker.com/QBR1K9XYY';
-  iframe.width = '100%';
-  iframe.height = '600';
-  iframe.frameBorder = '0';
-  container.appendChild(iframe);
+  const box = document.querySelector('#trivia .card');
+  if(box.querySelector('iframe')) return;          // already there
+  const iframe        = document.createElement('iframe');
+  iframe.src          = 'https://take.quiz-maker.com/QBR1K9XYY';
+  iframe.width        = '100%';
+  iframe.height       = '600';
+  iframe.frameBorder  = '0';
+  iframe.allowFullscreen = true;
+  box.appendChild(iframe);
 }
+
 function purgeTrivia(){
   const iframe = document.querySelector('#trivia iframe');
   if(iframe) iframe.remove();
