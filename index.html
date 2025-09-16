@@ -1234,22 +1234,6 @@ function dataURLToBlob(dataURL) {
   }
   return new Blob([ab], { type: mime });
   }
-
-/* ===== Trivia life-cycle ===== */
-function injectTrivia(){
-  const container = document.querySelector('#trivia .card');
-  if(container.querySelector('iframe')) return;          // already there
-  const iframe = document.createElement('iframe');
-  iframe.src = 'https://take.quiz-maker.com/QBR1K9XYY';
-  iframe.width = '100%';
-  iframe.height = '600';
-  iframe.frameBorder = '0';
-  container.appendChild(iframe);
-}
-function purgeTrivia(){
-  const iframe = document.querySelector('#trivia iframe');
-  if(iframe) iframe.remove();
-}
   
 /* ---------- Init ---------- */
 function init(){
@@ -1352,10 +1336,23 @@ function closeShare() {
 
 document.addEventListener('DOMContentLoaded', init);
 
-/* --------- Router Script --------- */
-function openMenu(){document.getElementById('menuOverlay').style.display='flex';}
-function closeMenu(){document.getElementById('menuOverlay').style.display='none';}
+/* ===== Trivia life-cycle ===== */
+function injectTrivia(){
+  const container = document.querySelector('#trivia .card');
+  if(container.querySelector('iframe')) return;          // already there
+  const iframe = document.createElement('iframe');
+  iframe.src = 'https://take.quiz-maker.com/QBR1K9XYY';
+  iframe.width = '100%';
+  iframe.height = '600';
+  iframe.frameBorder = '0';
+  container.appendChild(iframe);
+}
+function purgeTrivia(){
+  const iframe = document.querySelector('#trivia iframe');
+  if(iframe) iframe.remove();
+}
 
+/* --------- Router Script --------- */
 const Router = {
   go(hash){location.hash=hash; Router.sync();},
   sync(){
@@ -1363,20 +1360,22 @@ const Router = {
     document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
     const target=document.querySelector(hash);
     if(target) target.classList.add('active');
+
+    if(hash === '#trivia') injectTrivia();
+    else                   purgeTrivia();
+
     document.querySelectorAll('.bottom-nav button').forEach(btn=>btn.classList.remove('active'));
     const navBtn=document.querySelector('#nav-'+hash.replace('#',''));
     if(navBtn) navBtn.classList.add('active');
   }
 };
-window.addEventListener('hashchange', Router.sync);
-document.addEventListener('DOMContentLoaded', Router.sync);
 </script>
 
 <!-- Bottom Nav -->
 <div class="bottom-nav">
   <button onclick="Router.go('#home')" id="nav-home"><i class="fas fa-home"></i><span>Home</span></button>
   <button onclick="Router.go('#trivia')" id="nav-trivia"><i class="fas fa-question-circle"></i><span>Trivia</span></button>
-  <button onclick="Router.go('#games')" id="nav-games"><i class="fas fa-gamepad"></i><span>Games</span></button>
+  <button onclick="Router.go('#games')" id="nav-games"><i class="fas fa-gamepad"></i><span>Game</span></button>
   <button onclick="Router.go('#newsflash')" id="nav-newsflash"><i class="fas fa-newspaper"></i><span>News</span></button>
   <button onclick="Router.go('#converter')" id="nav-converter"><i class="fas fa-exchange-alt"></i><span>Convert</span></button>
 </div>
