@@ -733,3 +733,482 @@ const CHALLENGES = [
   "Hold a handstand against wall for 40s, 3 times."
 ];
 
+/* ---------- Daily Selection (deterministic per day unless shuffled) ---------- */
+function pickDaily(keyPrefix, pool){
+  const key = STORAGE.dailyKey(keyPrefix);
+  let idx = STORAGE.get(key);
+  if (idx == null){
+    idx = Math.floor(Math.random() * pool.length);
+    STORAGE.set(key, idx);
+  }
+  return {key, idx};
+}
+
+/* ---------- App State & Router ---------- */
+const AppState = {
+  quoteIndex: 0,
+  challengeIndex: 0,
+  completedDays: STORAGE.get('completedDays', {}), // { "YYYY-MM": { "DD": true } }
+  viewMonth: (()=>{ const d=new Date(); return {y:d.getFullYear(), m:d.getMonth()}; })()
+};
+
+const Router = {
+  go(hash){ location.hash = hash; },
+  sync(){
+    const view = location.hash === '#streak' ? 'streak' : 'home';
+    document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+    document.getElementById(view).classList.add('active');
+    if (view === 'streak') renderCalendar();
+  }
+};
+
+/* ---------- Rendering: Home ---------- */
+function renderHome(){
+  const q = QUOTES[AppState.quoteIndex];
+  const c = CHALLENGES[AppState.challengeIndex];
+  document.getElementById('quoteText').textContent = q.t.replace(/[“”]/g, "");
+  document.getElementById('quoteAuthor').textContent = q.a && q.a !== "—" ? q.a : "";
+  document.getElementById('challengeText').textContent = c;
+
+  // Status if already completed today
+  const d = new Date();
+  const y = d.getFullYear(), m=d.getMonth(), day=d.getDate();
+  const mk = DateUtil.monthKey(y,m);
+  const done = !!(AppState.completedDays[mk] && AppState.completedDays[mk][String(day).padStart(2,'0')]);
+  const status = document.getElementById('completeStatus');
+  status.hidden = !done;
+
+  // Tag dates
+  const today = DateUtil.ymd();
+  document.getElementById('quoteTag').textContent = new Date().toLocaleDateString(undefined, { weekday:'short', month:'short', day:'numeric' });
+  document.getElementById('challengeTag').textContent = document.getElementById('quoteTag').textContent;
+}
+
+/* ---------- Calendar ---------- */
+function renderCalendar(){
+  const cal = document.getElementById('calendar');
+  cal.innerHTML = '';
+  const meta = document.getElementById('calMeta');
+
+  const {y,m} = AppState.viewMonth;
+  const monthName = new Date(y,m,1).toLocaleDateString(undefined, {month:'long', year:'numeric'});
+  meta.textContent = `Viewing ${monthName}`;
+
+  const dow = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+  dow.forEach(d=>{
+    const el = document.createElement('div');
+    el.className='dow';
+   el.setAttribute('role','columnheader');
+    el.textContent = d;
+    cal.appendChild(el);
+  });
+
+  const first = DateUtil.startOfMonth(y,m).getDay();
+  const days = DateUtil.daysInMonth(y,m);
+  const prevDays = (first + 7) % 7;
+
+  // Add blanks
+  for (let i=0;i<prevDays;i++){
+    const pad = document.createElement('div');
+    pad.className = 'day muted';
+    pad.setAttribute('role','gridcell');
+    cal.appendChild(pad);
+  }
+
+  const monthMap = AppState.completedDays[DateUtil.monthKey(y,m)] || {};
+
+  for (let d=1; d<=days; d++){
+    const el = document.createElement('div');
+    el.className = 'day';
+    el.setAttribute('role','gridcell');
+    if (DateUtil.isToday(y,m,d)) el.classList.add('today');
+
+    const n = document.createElement('div');
+    n.className = 'n';
+    n.textContent = d;
+    el.appendChild(n);
+
+    const dd = String(d).padStart(2,'0');
+    if (monthMap[dd]) el.classList.add('done');
+
+    cal.appendChild(el);
+  }
+}
+
+/* ---------- Actions ---------- */
+function shuffleQuoteForToday(){
+  const k = STORAGE.dailyKey('quote');
+  const next = Math.floor(Math.random() * QUOTES.length);
+  STORAGE.set(k, next);
+  AppState.quoteIndex = next;
+  renderHome();
+}
+  
+function shuffleChallengeForToday(){
+  const k = STORAGE.dailyKey('challenge');
+  const next = Math.floor(Math.random() * CHALLENGES.length);
+  STORAGE.set(k, next);
+  AppState.challengeIndex = next;
+  renderHome();
+}
+
+function markTodayCompleted(){
+  const d = new Date();
+  const y = d.getFullYear(), m=d.getMonth(), day=d.getDate();
+  const mk = DateUtil.monthKey(y,m);
+  if (!AppState.completedDays[mk]) AppState.completedDays[mk] = {};
+  AppState.completedDays[mk][String(day).padStart(2,'0')] = true;
+  STORAGE.set('completedDays', AppState.completedDays);
+  document.getElementById('completeStatus') .hidden = false;
+  renderCalendar();
+}
+
+function resetAll() {
+  // build modal
+  const modal = document.createElement('div');
+  modal.className = 'reset-modal';
+  modal.innerHTML = `
+    <div class="reset-box">
+      <div>Delete All Your Streak?</div>
+      <button class="btn-ok" onclick="doReset()">Reset</button>
+      <button class="btn-cancel" onclick="closeReset()">Close</button>
+    </div>
+  `;
+  document.body.appendChild(modal);
+
+  // actual reset
+  window.doReset = () => {
+    localStorage.removeItem('completedDays');
+    localStorage.removeItem('quote_' + DateUtil.ymd());
+    localStorage.removeItem('challenge_' + DateUtil.ymd());
+    AppState.completedDays = {};
+    renderHome(); renderCalendar();
+    closeReset();
+  };
+  window.closeReset = () => modal.remove();
+}
+
+/* ---------- Quote Image Export ---------- */
+function saveQuoteAsImage(){
+  const canvas = document.getElementById('exportCanvas');
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width, H = canvas.height;
+
+  // Background gradient
+  const g1 = ctx.createLinearGradient(0,0,W,H);
+  g1.addColorStop(0, "#11152a");
+  g1.addColorStop(1, "#0b0e1d");
+  ctx.fillStyle = g1; ctx.fillRect(0,0,W,H);
+
+  const g2 = ctx.createRadialGradient(W*0.8, H*0.15, 40, W*0.8, H*0.15, 700);
+  g2.addColorStop(0, "rgba(102,229,181,0.35)");
+  g2.addColorStop(1, "rgba(102,229,181,0)");
+  ctx.fillStyle = g2; ctx.fillRect(0,0,W,H);
+
+  const g3 = ctx.createRadialGradient(W*0.1, H*0.85, 40, W*0.1, H*0.85, 700);
+  g3.addColorStop(0, "rgba(154,167,255,0.30)");
+  g3.addColorStop(1, "rgba(154,167,255,0)");
+  ctx.fillStyle = g3; ctx.fillRect(0,0,W,H);
+
+  // Card
+  const pad = 64;
+  const cardR = 32;
+  const cardX = pad, cardY = pad, cardW = W - pad*2, cardH = H - pad*2;
+  roundRect(ctx, cardX, cardY, cardW, cardH, cardR);
+  ctx.fillStyle = "rgba(255,255,255,0.04)";
+  ctx.fill();
+  ctx.strokeStyle = "rgba(255,255,255,0.10)";
+  ctx.lineWidth = 2;
+  ctx.stroke();
+
+  // Title/brand
+  ctx.font = "bold 38px system-ui, Segoe UI, Roboto, Arial";
+  ctx.fillStyle = "#eaf0ff";
+  ctx.fillText("Rise & Shine", cardX + 40, cardY + 70);
+  ctx.font = "600 22px system-ui, Segoe UI, Roboto, Arial";
+  ctx.fillStyle = "rgba(186,194,228,.85)";
+  const dateStr = new Date().toLocaleDateString(undefined, { weekday:'short', month:'short', day:'numeric', year:'numeric' });
+  ctx.fillText(dateStr, cardX + 40, cardY + 100);
+
+  // Quote
+  const quote  = document.getElementById('quoteText').textContent.replace(/[“”]/g, '');
+const author = document.getElementById('quoteAuthor').textContent;
+ctx.font = '800 46px system-ui, Segoe UI, Roboto, Arial';
+ctx.fillStyle = '#eef1ff';
+ctx.textAlign = 'center';
+ctx.textBaseline = 'middle';
+const quoteLines = wrapText(ctx, quote, cardW - 120);
+const authorLine = `— ${author}`;
+const totalHeight = (quoteLines.length * 58) + 70;  // +70 for author spacing
+const startY = cardY + cardH / 2 - totalHeight / 2 + 29;
+
+  // Quote lines
+quoteLines.forEach((line, i) => {
+  ctx.fillText(line, cardX + cardW / 2, startY + i * 58);
+});
+
+  // Author line
+ctx.font      = '600 30px system-ui';
+ctx.fillStyle = '#eef1ff';
+ctx.textAlign = 'right';               // right edge
+ctx.fillText(
+  authorLine,
+  cardX + cardW - 120,                  // 120 px from right edge
+  startY + quoteLines.length * 58 + 32 // same vertical spot
+);
+  
+  // Reset alignments
+ctx.textAlign = 'start';
+ctx.textBaseline = 'alphabetic';
+
+  // Footer mark
+  ctx.font = "700 20px system-ui, Segoe UI, Roboto, Arial";
+  ctx.fillStyle = "rgba(200,210,255,.9)";
+  ctx.fillText("Powered by: lumeme duck", cardX + 40, cardY + cardH - 50);
+
+  // Decorative corner sun
+  drawSun(ctx, cardX + cardW - 110, cardY + 110, 44);
+
+  // Download
+  const dataURL = canvas.toDataURL('image/png');
+  uploadToFileHost(dataURL);
+}
+
+  function roundRect(ctx, x, y, w, h, r){
+  const rr = Math.min(r, w/2, h/2);
+  ctx.beginPath();
+  ctx.moveTo(x+rr, y);
+  ctx.arcTo(x+w, y, x+w, y+h, rr);
+  ctx.arcTo(x+w, y+h, x, y+h, rr);
+  ctx.arcTo(x, y+h, x, y, rr);
+  ctx.arcTo(x, y, x+w, y, rr);
+  ctx.closePath();
+}
+
+  function wrapText(ctx, text, maxWidth){
+  const words = text.split(' ');
+  const lines = [];
+  let line = '';
+  for (let i=0;i<words.length;i++){
+    const test = line ? line + ' ' + words[i] : words[i];
+    const {width} = ctx.measureText(test);
+    if (width > maxWidth && line){
+      lines.push(line);
+      line = words[i];
+    } else {
+      line = test;
+    }
+  }
+  if (line) lines.push(line);
+  return lines;
+}
+
+function drawSun(ctx, x, y, r){
+  // core
+  const g = ctx.createRadialGradient(x, y, 5, x, y, r+28);
+  g.addColorStop(0, "#ffe084");
+  g.addColorStop(.6, "#ffbe55");
+  g.addColorStop(1, "rgba(255,190,85,0)");
+  ctx.fillStyle = g;
+  ctx.beginPath(); ctx.arc(x,y,r,0,Math.PI*2); ctx.fill();
+
+  // rays
+  ctx.save();
+  ctx.translate(x,y);
+  ctx.strokeStyle = "rgba(255, 224, 132, .65)";
+  ctx.lineWidth = 4;
+  for(let i=0;i<12;i++){
+    const a = (Math.PI*2) * (i/12);
+    const r1 = r + 10, r2 = r + 34;
+    ctx.beginPath();
+    ctx.moveTo(Math.cos(a)*r1, Math.sin(a)*r1);
+    ctx.lineTo(Math.cos(a)*r2, Math.sin(a)*r2);
+    ctx.stroke();
+  }
+  ctx.restore();
+}
+
+function uploadToFileHost(dataURL) {
+  // Show waiting prompt immediately
+  document.body.style.margin = "0";
+  document.body.style.background = "#f5f7ff";
+  document.body.innerHTML = `
+    <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100vh;gap:20px;color:white;font-family:sans-serif;text-align:center;">
+      <div class="spinner" style="
+        width:40px;height:40px;
+        border:4px solid rgba(0,0,0,.1);
+        border-top:4px solid #0ea5e9;
+        border-radius:50%;
+        animation:spin 1s linear infinite;">
+      </div>
+      <p style="font-size:16px;color:#454545;">Generating image...</p>
+    </div>
+    <style>
+      @keyframes spin {
+        from { transform:rotate(0deg); }
+        to { transform:rotate(360deg); }
+      }
+    </style>
+  `;
+
+  // Prepare upload
+  const blob = dataURLToBlob(dataURL);
+  const fd = new FormData();
+  fd.append('file', blob, `quote-${Date.now()}.png`);
+
+  fetch('https://tmpfiles.org/api/v1/upload', { method: 'POST', body: fd })
+    .then(r => r.json())
+    .then(res => {
+      let url = res.data?.url || res.data || res.url;
+      if (url && !url.includes('/dl/')) {
+        url = url.replace('tmpfiles.org', 'tmpfiles.org/dl');
+      }
+      if (!url) {
+        alert('Upload succeeded but no file URL returned.');
+        return;
+      }
+
+      // Replace waiting prompt with image + fallback note
+      document.body.innerHTML = `
+        <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100vh;gap:20px;color:#454545;font-family:sans-serif;text-align:center;">
+          <img src="${url}" style="max-width:90%;height:auto;border-radius:0;box-shadow:0 0 10px rgba(0,0,0,0.5);" />
+          <p style="font-size:14px;max-width:90%;opacity:0.8;">
+            🔆 If a download doesn’t start, tap-hold the image above and tap <strong>save</strong> on the pop-up screen<br><br><strong>*</strong>swipe-down to refresh after download<strong>*</strong>
+          </p>
+        </div>
+      `;
+    })
+    .catch(err => {
+  console.error(err);
+
+  const modal = document.createElement('div');
+  modal.id = 'failModal';
+  modal.className = 'reset-modal';
+  modal.innerHTML = `
+    <div class="reset-box">
+      <div style="font-size:18px;margin-bottom:12px;">Poor Connections!</div>
+      <p style="font-size:15px;margin:0 0 18px;line-height:1.4;">
+        It'll take more time than expected.<br>Check your internet network.
+      </p>
+      <button class="btn-cancel" onclick="document.getElementById('failModal').remove()">Close</button>
+    </div>
+  `;
+  document.body.appendChild(modal);
+  setTimeout(() => modal.remove(), 3000);
+});
+}
+
+function dataURLToBlob(dataURL) {
+  const arr = dataURL.split(',');
+  const mime = arr[0].match(/:(.*?);/)[1];
+  const byteStr = atob(arr[1]);
+  const ab = new Uint8Array(byteStr.length);
+  for (let i = 0; i < byteStr.length; i++) {
+    ab[i] = byteStr.charCodeAt(i);
+  }
+  return new Blob([ab], { type: mime });
+  }
+  
+/* ---------- Init ---------- */
+function init(){
+  // Load today's deterministic selections (unless already shuffled earlier today)
+  const q = pickDaily('quote', QUOTES);
+  const c = pickDaily('challenge', CHALLENGES);
+  AppState.quoteIndex = q.idx;
+  AppState.challengeIndex = c.idx;
+
+  // Bind header
+  document.getElementById('btnProgress').addEventListener('click', ()=>Router.go('#streak'));
+  document.getElementById('btnReset').addEventListener('click', resetAll);
+
+  // Bind home actions
+  document.getElementById('btnNewQuote').addEventListener('click', shuffleQuoteForToday);
+  document.getElementById('btnSaveQuote').addEventListener('click', saveQuoteAsImage);
+  document.getElementById('btnNewChallenge').addEventListener('click', shuffleChallengeForToday);
+  document.getElementById('btnComplete').addEventListener('click', markTodayCompleted);
+
+  // Bind calendar nav
+  document.getElementById('prevMonth').addEventListener('click', ()=>{
+    const {y,m} = AppState.viewMonth;
+    const d = new Date(y, m-1, 1);
+    AppState.viewMonth = {y:d.getFullYear(), m:d.getMonth()};
+    renderCalendar();
+  });
+  document.getElementById('nextMonth').addEventListener('click', ()=>{
+    const {y,m} = AppState.viewMonth;
+    const d = new Date(y, m+1, 1);
+    AppState.viewMonth = {y:d.getFullYear(), m:d.getMonth()};
+    renderCalendar();
+  });
+  document.getElementById('todayBtn').addEventListener('click', ()=>{
+    const d = new Date();
+    AppState.viewMonth = {y:d.getFullYear(), m:d.getMonth()};
+    renderCalendar();
+  });
+
+  // Router
+  window.addEventListener('hashchange', Router.sync);
+
+  // First render
+  renderHome();
+  renderCalendar();
+  Router.sync();
+}
+
+function shareQuote() {
+  const text = `"${document.getElementById('quoteText').textContent}" — ${document.getElementById('quoteAuthor').textContent}`;
+
+  if (navigator.share) {
+    navigator.share({ title: 'Rise & Shine', text });
+    return;
+  }
+
+  // Show our styled modal instead of the ugly prompt
+  const modal  = document.getElementById('shareModal');
+  const output = document.getElementById('shareText');
+  output.textContent = text;
+  modal.style.display = 'flex';
+}
+
+function copyShare() {
+  const text = document.getElementById('shareText').textContent;
+  navigator.clipboard.writeText(text)
+    .then(() => {
+      // Create a tiny toast
+const toast = document.createElement('div');
+toast.textContent = '✔ Copied';
+toast.style.cssText =
+  'position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);' +
+  'background:#f5f7ff;color:#22c55e;border:1px solid rgba(0,0,0,0.05);font-weight:bold;padding:8px 16px;' +
+  'border-radius:8px;z-index:9999;animation:fade 2.5s forwards;';
+document.body.appendChild(toast);
+
+// Remove after fade
+setTimeout(() => document.body.removeChild(toast), 2500);
+
+// Optional CSS keyframe
+const style = document.createElement('style');
+style.textContent = '@keyframes fade{0%{opacity:1}80%{opacity:1}100%{opacity:0}}';
+document.head.appendChild(style);
+      closeShare();
+    })
+    .catch(() => {
+      // last resort fallback for *very* old WebViews
+      const ta = document.createElement('textarea');
+      ta.value = text; ta.style.position='fixed'; ta.style.opacity=0;
+      document.body.appendChild(ta); ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+      alert('✔ Copied!');
+      closeShare();
+    });
+}
+
+function closeShare() {
+  document.getElementById('shareModal').style.display = 'none';
+}
+
+document.addEventListener('DOMContentLoaded', init);
+</script>
+</body>
+</html>
