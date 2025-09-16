@@ -92,7 +92,7 @@
 
   .actions{display:flex; gap:10px; align-items:center;}
   .btn{
-  appearance:none; border:none; cursor:none;
+  appearance:none; border:none; cursor:pointer;
   padding:8px 10px; border-radius:10px;
   background:linear-gradient(180deg, #ffffff, #f3f4f6);
   color:var(--text); font-weight:700; letter-spacing:.2px;
@@ -114,7 +114,7 @@
 
 /* ===== Overlay Menu ===== */
 .overlay {
-  display: none;
+  display: flex;
   position: fixed;
   inset: 0;
   background: rgba(0,0,0,.6);
@@ -146,7 +146,7 @@
   background: none;
   border: none;
   font-size: 22px;
-  cursor: none;
+  cursor: pointer;
   color: var(--text);
 }
 
@@ -232,7 +232,7 @@
   }
   .cal-title{ font-weight:800; letter-spacing:.3px; }
   .cal-nav{ display:flex; gap:8px; }
-  .cal-btn{ padding:8px 10px; border-radius:10px; border:1px solid rgba(255,255,255,.1); background:linear-gradient(180deg, #ffffff, #f3f4f6); color:var(--text); cursor:none; 
+  .cal-btn{ padding:8px 10px; border-radius:10px; border:1px solid rgba(255,255,255,.1); background:linear-gradient(180deg, #ffffff, #f3f4f6); color:var(--text); cursor:pointer; 
     box-shadow: var(--shadow);
     border:1px solid rgba(0,0,0,.1);
     transition:.2s transform ease, .2s border-color ease, .2s background ease, .2s box-shadow ease;}
@@ -280,7 +280,7 @@
   max-width: 300px;
 }
    .reset-box button {
-  appearance:none; border:none; cursor:none; margin:16px 12px 0;
+  appearance:none; border:none; cursor:pointer; margin:16px 12px 0;
   padding:8px 10px; border-radius:10px;
   background:linear-gradient(180deg, #ffffff, #f3f4f6);
   color:var(--text); font-weight:700; letter-spacing:.2px;
@@ -289,7 +289,7 @@
   transition:.2s transform ease, .2s border-color ease, .2s background ease, .2s box-shadow ease;
    }
    .btn-ok {
-  appearance:none; border:none; cursor:none;
+  appearance:none; border:none; cursor:pointer;
   padding:8px 10px; border-radius:10px;
   background:linear-gradient(180deg, #ffffff, #f3f4f6);
   color:var(--text); font-weight:700; letter-spacing:.2px;
@@ -298,7 +298,7 @@
   transition:.2s transform ease, .2s border-color ease, .2s background ease, .2s box-shadow ease;
    }
    .btn-cancel {
-  appearance:none; border:none; cursor:none;
+  appearance:none; border:none; cursor:pointer;
   padding:8px 10px; border-radius:10px;
   background:linear-gradient(180deg, #ffffff, #f3f4f6);
   color:var(--text); font-weight:700; letter-spacing:.2px;
@@ -1374,6 +1374,15 @@ const Router = {
 };
 window.addEventListener('hashchange', Router.sync);
 window.onload = () => { renderHome(); renderCalendar(); Router.sync(); };
+
+function init(){
+  renderHome(); renderCalendar(); Router.sync();
+  document.getElementById('btnProgress').onclick = () => Router.go('#streak');
+  document.getElementById('btnReset').onclick    = resetAll;
+  document.getElementById('startQuizBtn')?.addEventListener('click', () => {
+    injectTrivia(); document.getElementById('startQuizBtn').style.display = 'none';
+  });
+}
 </script>
 </body>
 </html>
