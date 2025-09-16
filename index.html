@@ -85,8 +85,8 @@
     mix-blend-mode:screen;
   }
   .title{
-    font-weight:800; letter-spacing:.3px; font-size:20px;
-    display:flex; align-items:baseline; gap:8px;
+    font-weight:800; letter-spacing:.2px; font-size:18px;
+    display:flex; align-items:baseline; gap:7px;
   }
   .title small{ color:var(--muted); font-weight:600; font-size:12px; }
 
@@ -333,12 +333,15 @@
 <header>
   <div class="nav">
     <button class="hamburger" onclick="openMenu()"><i class="fas fa-bars"></i></button>
-    <div class="brand" onclick="Router.go('#home')">Rise & Shine™</div>
-    <div class="actions">
-      <button class="btn" onclick="Router.go('#streak')">Streak</button>
-      <button class="btn" onclick="resetAll()">Reset</button>
+    <div class="brand" role="button" onclick="Router.go('#home')" title="Go Home">
+        <div class="logo" aria-hidden></div>
+        <div class="title">Rise & Shine™ </div>
+      </div>
+      <div class="actions">
+        <button type="button" class="btn btn-accent" id="btnProgress" title="View Streak Progress">Streak</button>
+        <button type="button" class="btn btn-warn" id="btnReset" title="Reset all data">Reset</button>
+      </div>
     </div>
-  </div>
 </header>
 
   <main>
