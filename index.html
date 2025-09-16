@@ -400,27 +400,26 @@
   <!-- Trivia -->
 <section id="trivia" class="view">
   <div class="card">
-    <h2>🧩 Trivia Quiz</h2>
-    <a data-quiz="QBR1K9XYY" data-type=4 data-height="100%" href="https://take.quiz-maker.com/QBR1K9XYY"></a><script>(function(i,s,o,g,r,a,m){var ql=document.querySelectorAll('A[data-quiz],DIV[data-quiz]'); if(ql){if(ql.length){for(var k=0;k<ql.length;k++){ql[k].id='quiz-embed-'+k;ql[k].href="javascript:var i=document.getElementById('quiz-embed-"+k+"');try{qz.startQuiz(i)}catch(e){i.start=1;i.style.cursor='wait';i.style.opacity='0.5'};void(0);"}}};i['QP']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://take.quiz-maker.com/3012/CDN/quiz-embed-v1.js','qp');</script>
+    <h2>Trivia Quiz</h2>
   </div>
 </section>
 
 <!-- Game -->
 <section id="games" class="view">
   <div class="card">
-    <h2>🎮 Games</h2>
+    <h2>Fun Mini-game</h2>
     <iframe src="https://example-html5-game.com" width="100%" height="600" frameborder="0"></iframe>
   </div>
 </section>
 
 <!-- Newsflash -->
 <section id="newsflash" class="view">
-  <div class="card"><h2>📰 Newsflash</h2><p>Coindesk RSS feed will be here.</p></div>
+  <div class="card"><h2>Crypto Newsflash</h2><p>Coindesk RSS feed will be here.</p></div>
 </section>
 
 <!-- Converter -->
 <section id="converter" class="view">
-  <div class="card"><h2>💱 Converter</h2><p>Currency converter goes here.</p></div>
+  <div class="card"><h2>Currency Converter</h2><p>Currency converter goes here.</p></div>
 </section>
 
 <!-- Static Pages -->
@@ -431,6 +430,15 @@
 
   <!-- Hidden canvas for image export -->
   <canvas id="exportCanvas" width="1080" height="1080" style="display:none;"></canvas>
+
+<!-- Bottom Nav -->
+<div class="bottom-nav">
+  <button onclick="Router.go('#home')" id="nav-home"><i class="fas fa-home"></i><span>Home</span></button>
+  <button onclick="Router.go('#trivia')" id="nav-trivia"><i class="fas fa-question-circle"></i><span>Trivia</span></button>
+  <button onclick="Router.go('#games')" id="nav-games"><i class="fas fa-gamepad"></i><span>Game</span></button>
+  <button onclick="Router.go('#newsflash')" id="nav-newsflash"><i class="fas fa-newspaper"></i><span>News</span></button>
+  <button onclick="Router.go('#converter')" id="nav-converter"><i class="fas fa-exchange-alt"></i><span>Convert</span></button>
+</div>
 
 <script>
 /* ---------- Utilities & Storage ---------- */
@@ -1336,52 +1344,36 @@ function closeShare() {
 document.addEventListener('DOMContentLoaded', init);
 
 /* ===== Trivia life-cycle (no auto-inject) ===== */
-function injectTrivia(){
+function injectTrivia() {
   const box = document.querySelector('#trivia .card');
-  if(box.querySelector('iframe')) return;          // already there
-  const iframe        = document.createElement('iframe');
-  iframe.src          = 'https://take.quiz-maker.com/QBR1K9XYY';
-  iframe.width        = '100%';
-  iframe.height       = '600';
-  iframe.frameBorder  = '0';
-  iframe.allowFullscreen = true;
+  if (box.querySelector('iframe')) return;
+  const iframe = document.createElement('iframe');
+  iframe.src = 'https://take.quiz-maker.com/QBR1K9XYY';
+  iframe.width = '100%'; iframe.height = '600'; iframe.frameBorder = '0';
   box.appendChild(iframe);
 }
-
-function purgeTrivia(){
+function purgeTrivia() {
   const iframe = document.querySelector('#trivia iframe');
-  if(iframe) iframe.remove();
+  if (iframe) iframe.remove();
+  const btn = document.getElementById('startQuizBtn');
+  if (btn) btn.style.display = 'inline-block';
 }
 
-/* --------- Router Script --------- */
-function openMenu(){document.getElementById('menuOverlay').style.display='flex';}
-function closeMenu(){document.getElementById('menuOverlay').style.display='none';}
-
+/* ---------- router ---------- */
 const Router = {
-  go(hash){location.hash=hash; Router.sync();},
-  sync(){
+  go(hash) { location.hash = hash; },
+  sync() {
     const hash = location.hash || '#home';
-    document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
-    const target=document.querySelector(hash);
-    if(target) target.classList.add('active');
-
-    if(hash === '#trivia') injectTrivia();
-    else                   purgeTrivia();
-
-    document.querySelectorAll('.bottom-nav button').forEach(btn=>btn.classList.remove('active'));
-    const navBtn=document.querySelector('#nav-'+hash.replace('#',''));
-    if(navBtn) navBtn.classList.add('active');
+    document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+    const target = document.querySelector(hash);
+    if (target) target.classList.add('active');
+    if (hash === '#trivia') injectTrivia(); else purgeTrivia();
+    document.querySelectorAll('.bottom-nav button').forEach(b => b.classList.remove('active'));
+    document.getElementById('nav-' + hash.replace('#', ''))?.classList.add('active');
   }
 };
+window.addEventListener('hashchange', Router.sync);
+window.onload = () => { renderHome(); renderCalendar(); Router.sync(); };
 </script>
-
-<!-- Bottom Nav -->
-<div class="bottom-nav">
-  <button onclick="Router.go('#home')" id="nav-home"><i class="fas fa-home"></i><span>Home</span></button>
-  <button onclick="Router.go('#trivia')" id="nav-trivia"><i class="fas fa-question-circle"></i><span>Trivia</span></button>
-  <button onclick="Router.go('#games')" id="nav-games"><i class="fas fa-gamepad"></i><span>Game</span></button>
-  <button onclick="Router.go('#newsflash')" id="nav-newsflash"><i class="fas fa-newspaper"></i><span>News</span></button>
-  <button onclick="Router.go('#converter')" id="nav-converter"><i class="fas fa-exchange-alt"></i><span>Convert</span></button>
-</div>
 </body>
 </html>
