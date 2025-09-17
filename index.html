@@ -969,9 +969,50 @@ ctx.textBaseline = 'alphabetic';
   // Decorative corner sun
   drawSun(ctx, cardX + cardW - 110, cardY + 110, 44);
 
-  // Download
+  // Show the generated image
   const dataURL = canvas.toDataURL('image/png');
-  triggerDownload(dataURL, 'quote-image.png');
+  showGeneratedImage(dataURL);
+
+  // Trigger download after a short delay
+  setTimeout(() => {
+    triggerDownload(dataURL, 'quote-image.png');
+  }, 3000); // Adjust the delay time as needed
+}
+
+function showGeneratedImage(dataURL) {
+  // Show waiting prompt immediately
+  document.body.style.margin = "0";
+  document.body.style.background = "#f5f7ff";
+  document.body.innerHTML = `
+    <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100vh;gap:20px;color:white;font-family:sans-serif;text-align:center;">
+      <div class="spinner" style="
+        width:40px;height:40px;
+        border:4px solid rgba(0,0,0,.1);
+        border-top:4px solid #0ea5e9;
+        border-radius:50%;
+        animation:spin 1s linear infinite;">
+      </div>
+      <p style="font-size:16px;color:#454545;">Generating image...</p>
+    </div>
+    <style>
+      @keyframes spin {
+        from { transform:rotate(0deg); }
+        to { transform:rotate(360deg); }
+      }
+    </style>
+  `;
+
+  // Replace waiting prompt with image after a short delay
+  setTimeout(() => {
+    document.body.innerHTML = `
+      <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100vh;gap:20px;color:#454545;font-family:sans-serif;text-align:center;">
+        <img src="${dataURL}" style="max-width:90%;height:auto;border-radius:0;box-shadow:0 0 10px rgba(0,0,0,0.5);" />
+        <p style="font-size:14px;max-width:90%;opacity:0.8;">
+          🔆 If a download doesn’t start, tap-hold the image above and tap <strong>save</strong> on the pop-up screen<br><br><strong>*</strong>swipe-down to refresh after download<strong>*</strong>
+        </p>
+      </div>
+    `;
+  }, 2000); // Adjust the delay time as needed
 }
 
 function triggerDownload(dataURL, filename) {
