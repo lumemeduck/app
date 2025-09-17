@@ -8,10 +8,7 @@
   <meta name="LMD Quotes App" content="Rise & Shine">
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <link rel="icon" type="image/png" href="rise-shine.png">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <link rel="manifest" href="manifest.json">
-  <meta name="theme-color" content="#0ea5e9">
-<style>
+  <style>
   :root{
     --bg:#f5f7ff;
     --card:#ffffff;
@@ -59,7 +56,7 @@
     margin:0 auto;
     display:flex; align-items:center; justify-content:space-between;
     padding:12px 16px;
-    gap:8px;
+    gap:12px;
   }
   .brand{
     display:flex; align-items:center; gap:8px;
@@ -78,14 +75,14 @@
     mix-blend-mode:screen;
   }
   .title{
-    font-weight:800; letter-spacing:.2px; font-size:20px;
-    display:flex; align-items:baseline; gap:7px;
+    font-weight:800; letter-spacing:.3px; font-size:20px;
+    display:flex; align-items:baseline; gap:8px;
   }
   .title small{ color:var(--muted); font-weight:600; font-size:12px; }
 
   .actions{display:flex; gap:10px; align-items:center;}
   .btn{
-  appearance:none; border:none; cursor:pointer;
+  appearance:none; border:none; cursor:none;
   padding:8px 10px; border-radius:10px;
   background:linear-gradient(180deg, #ffffff, #f3f4f6);
   color:var(--text); font-weight:700; letter-spacing:.2px;
@@ -104,80 +101,6 @@
   @media (min-width: 900px){
     .grid{ grid-template-columns: 1fr 1fr; }
   }
-
-/* ===== Overlay Menu ===== */
-.overlay {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,.6);
-  z-index: 99;
-  align-items: center;
-  justify-content: center;
-}
-.overlay-content {
-  background: #fff;
-  padding: 24px;
-  border-radius: 12px;
-  text-align: center;
-  box-shadow: 0 10px 30px rgba(0,0,0,.2);
-}
-.overlay-content a {
-  display: block;
-  margin: 12px 0;
-  color: var(--accent);
-  text-decoration: none;
-  font-weight: 600;
-  font-size: 16px;
-}
-.overlay-content a:hover {
-  text-decoration: underline;
-}
-
-/* ===== Hamburger Button ===== */
-.hamburger {
-  background: none;
-  border: none;
-  font-size: 22px;
-  cursor: pointer;
-  color: var(--text);
-}
-
-/* ===== Bottom Navigation ===== */
-.bottom-nav {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  display: flex;
-  justify-content: space-around;
-  background: #fff;
-  border-top: 1px solid #ddd;
-  z-index: 50;
-}
-.bottom-nav button {
-  flex: 1;
-  padding: 8px 0;
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-size: 13px;
-  color: #555;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 3px;
-  transition: color 0.2s ease;
-}
-.bottom-nav button i {
-  font-size: 18px;
-}
-.bottom-nav button.active {
-  color: var(--accent);
-}
-.bottom-nav button:hover {
-  color: var(--accent-2);
-}
 
   .card{
   background: linear-gradient(180deg, rgba(255,255,255,.8), rgba(248,250,252,.8));
@@ -225,7 +148,7 @@
   }
   .cal-title{ font-weight:800; letter-spacing:.3px; }
   .cal-nav{ display:flex; gap:8px; }
-  .cal-btn{ padding:8px 10px; border-radius:10px; border:1px solid rgba(255,255,255,.1); background:linear-gradient(180deg, #ffffff, #f3f4f6); color:var(--text); cursor:pointer; 
+  .cal-btn{ padding:8px 10px; border-radius:10px; border:1px solid rgba(255,255,255,.1); background:linear-gradient(180deg, #ffffff, #f3f4f6); color:var(--text); cursor:none; 
     box-shadow: var(--shadow);
     border:1px solid rgba(0,0,0,.1);
     transition:.2s transform ease, .2s border-color ease, .2s background ease, .2s box-shadow ease;}
@@ -273,7 +196,7 @@
   max-width: 300px;
 }
    .reset-box button {
-  appearance:none; border:none; cursor:pointer; margin:16px 12px 0;
+  appearance:none; border:none; cursor:none; margin:16px 12px 0;
   padding:8px 10px; border-radius:10px;
   background:linear-gradient(180deg, #ffffff, #f3f4f6);
   color:var(--text); font-weight:700; letter-spacing:.2px;
@@ -282,7 +205,7 @@
   transition:.2s transform ease, .2s border-color ease, .2s background ease, .2s box-shadow ease;
    }
    .btn-ok {
-  appearance:none; border:none; cursor:pointer;
+  appearance:none; border:none; cursor:none;
   padding:8px 10px; border-radius:10px;
   background:linear-gradient(180deg, #ffffff, #f3f4f6);
   color:var(--text); font-weight:700; letter-spacing:.2px;
@@ -291,7 +214,7 @@
   transition:.2s transform ease, .2s border-color ease, .2s background ease, .2s box-shadow ease;
    }
    .btn-cancel {
-  appearance:none; border:none; cursor:pointer;
+  appearance:none; border:none; cursor:none;
   padding:8px 10px; border-radius:10px;
   background:linear-gradient(180deg, #ffffff, #f3f4f6);
   color:var(--text); font-weight:700; letter-spacing:.2px;
@@ -304,15 +227,6 @@
 </style>
 </head>
 <body>
-<!-- Overlay Menu -->
-<div id="menuOverlay" class="overlay">
-  <div class="overlay-content">
-    <a href="#about" onclick="closeMenu()">About</a>
-    <a href="#contact" onclick="closeMenu()">Contact Us</a>
-    <a href="#privacy" onclick="closeMenu()">Privacy Policy</a>
-    <button class="btn" onclick="closeMenu()">Close</button>
-  </div>
-</div>
 <!-- Pretty share-modal -->
 <div id="shareModal" style="display:none;position:fixed;inset:0;background:rgba(255,255,255,.4);z-index:999;align-items:center;justify-content:center;">
   <div style="background:#eef1ff;border:1px solid rgba(0,0,0,.1);border-radius:18px;padding:22px 28px;max-width:300px;text-align:center;color:#454545;font-family:system-ui;">
@@ -322,12 +236,10 @@
     <button class="btn" onclick="closeShare()">Close</button>
   </div>
 </div>
-
-<header>
-  <div class="nav">
-    <button class="hamburger" onclick="openMenu()"><i class="fas fa-bars"></i></button>
-    <div class="brand" role="button" onclick="Router.go('#home')" title="Go Home">
-    <div class="" aria-hidden></div>
+  <header>
+    <div class="nav">
+      <div class="brand" role="button" onclick="Router.go('#home')" title="Go Home">
+        <div class="logo" aria-hidden></div>
         <div class="title">Rise & Shine™ </div>
       </div>
       <div class="actions">
@@ -335,7 +247,7 @@
         <button type="button" class="btn btn-warn" id="btnReset" title="Reset all data">Reset</button>
       </div>
     </div>
-</header>
+  </header>
 
   <main>
     <!-- HOME VIEW -->
@@ -390,51 +302,12 @@
         </div>
       </article>
     </section>
-
-  <!-- Trivia -->
-<section id="trivia" class="view">
-  <div class="card">
-    <h2>Trivia Quiz</h2>
-  </div>
-</section>
-
-<!-- Game -->
-<section id="games" class="view">
-  <div class="card">
-    <h2>Fun Mini-game</h2>
-    <iframe src="https://example-html5-game.com" width="100%" height="600" frameborder="0"></iframe>
-  </div>
-</section>
-
-<!-- Newsflash -->
-<section id="newsflash" class="view">
-  <div class="card"><h2>Crypto Newsflash</h2><p>Coindesk RSS feed will be here.</p></div>
-</section>
-
-<!-- Converter -->
-<section id="converter" class="view">
-  <div class="card"><h2>Currency Converter</h2><p>Currency converter goes here.</p></div>
-</section>
-
-<!-- Static Pages -->
-<section id="about" class="view"><div class="card"><h2>About</h2><p>About Rise & Shine…</p></div></section>
-<section id="contact" class="view"><div class="card"><h2>Contact Us</h2><p>Contact info…</p></div></section>
-<section id="privacy" class="view"><div class="card"><h2>Privacy Policy</h2><p>Your privacy policy…</p></div></section>
-</main>
+  </main>
 
   <!-- Hidden canvas for image export -->
   <canvas id="exportCanvas" width="1080" height="1080" style="display:none;"></canvas>
 
-<!-- Bottom Nav -->
-<div class="bottom-nav">
-  <button onclick="Router.go('#home')" id="nav-home"><i class="fas fa-home"></i><span>Home</span></button>
-  <button onclick="Router.go('#trivia')" id="nav-trivia"><i class="fas fa-question-circle"></i><span>Trivia</span></button>
-  <button onclick="Router.go('#games')" id="nav-games"><i class="fas fa-gamepad"></i><span>Game</span></button>
-  <button onclick="Router.go('#newsflash')" id="nav-newsflash"><i class="fas fa-newspaper"></i><span>News</span></button>
-  <button onclick="Router.go('#converter')" id="nav-converter"><i class="fas fa-exchange-alt"></i><span>Convert</span></button>
-</div>
-
-<script>
+  <script>
 /* ---------- Utilities & Storage ---------- */
 const STORAGE = {
   dailyKey: (prefix, date=new Date()) => {
@@ -463,6 +336,7 @@ const DateUtil = {
   daysInMonth(y,m){ return new Date(y, m+1, 0).getDate(); },
   isToday(y,m,day){ const t=new Date(); return t.getFullYear()===y && t.getMonth()===m && t.getDate()===day; }
 };
+                   
 /* ---------- Datasets ---------- */
 const QUOTES = [
   {t:"A year from now you may wish you had started today.", a:"Karen Lamb"},
@@ -1083,8 +957,8 @@ ctx.fillText(
   cardX + cardW - 120,                  // 120 px from right edge
   startY + quoteLines.length * 58 + 32 // same vertical spot
 );
-  
-  // Reset alignments
+
+// Reset alignments
 ctx.textAlign = 'start';
 ctx.textBaseline = 'alphabetic';
 
@@ -1234,8 +1108,8 @@ function dataURLToBlob(dataURL) {
     ab[i] = byteStr.charCodeAt(i);
   }
   return new Blob([ab], { type: mime });
-  }
-  
+}
+
 /* ---------- Init ---------- */
 function init(){
   // Load today's deterministic selections (unless already shuffled earlier today)
@@ -1336,47 +1210,6 @@ function closeShare() {
 }
 
 document.addEventListener('DOMContentLoaded', init);
-
-/* ===== Trivia life-cycle (no auto-inject) ===== */
-function injectTrivia() {
-  const box = document.querySelector('#trivia .card');
-  if (box.querySelector('iframe')) return;
-  const iframe = document.createElement('iframe');
-  iframe.src = 'https://take.quiz-maker.com/QBR1K9XYY';
-  iframe.width = '100%'; iframe.height = '600'; iframe.frameBorder = '0';
-  box.appendChild(iframe);
-}
-function purgeTrivia() {
-  const iframe = document.querySelector('#trivia iframe');
-  if (iframe) iframe.remove();
-  const btn = document.getElementById('startQuizBtn');
-  if (btn) btn.style.display = 'inline-block';
-}
-
-/* ---------- router ---------- */
-const Router = {
-  go(hash) { location.hash = hash; },
-  sync() {
-    const hash = location.hash || '#home';
-    document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
-    const target = document.querySelector(hash);
-    if (target) target.classList.add('active');
-    if (hash === '#trivia') injectTrivia(); else purgeTrivia();
-    document.querySelectorAll('.bottom-nav button').forEach(b => b.classList.remove('active'));
-    document.getElementById('nav-' + hash.replace('#', ''))?.classList.add('active');
-  }
-};
-window.addEventListener('hashchange', Router.sync);
-window.onload = () => { renderHome(); renderCalendar(); Router.sync(); };
-
-function init(){
-  renderHome(); renderCalendar(); Router.sync();
-  document.getElementById('btnProgress').onclick = () => Router.go('#streak');
-  document.getElementById('btnReset').onclick    = resetAll;
-  document.getElementById('startQuizBtn')?.addEventListener('click', () => {
-    injectTrivia(); document.getElementById('startQuizBtn').style.display = 'none';
-  });
-}
 </script>
 </body>
 </html>
