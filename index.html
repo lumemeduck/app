@@ -1210,26 +1210,6 @@ function closeShare() {
 
 document.addEventListener('DOMContentLoaded', init);
 
-// Auto-download generated image with date-based filename
-document.getElementById("createImage").addEventListener("click", function () {
-    const canvas = document.getElementById("quoteCanvas"); // make sure this matches your canvas ID
-    if (!canvas) return; // safeguard in case canvas doesn't exist
-
-    const image = canvas.toDataURL("image/png");
-
-    // Generate filename using current date
-    const now = new Date();
-    const dateString = now.toISOString().split("T")[0]; // YYYY-MM-DD
-    const filename = `quote_${dateString}.png`;
-
-    // Create a hidden link element
-    const link = document.createElement("a");
-    link.href = image;
-    link.download = filename;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-});
 </script>
 </body>
 </html>
