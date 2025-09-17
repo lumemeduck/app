@@ -971,7 +971,7 @@ ctx.textBaseline = 'alphabetic';
 
   // Show the generated image
   const dataURL = canvas.toDataURL('image/png');
-  const filename = generateFilename(quote);
+  const filename = generateFilename();
   showGeneratedImage(dataURL);
 
   // Trigger download after a short delay
@@ -980,11 +980,10 @@ ctx.textBaseline = 'alphabetic';
   }, 3000); // Adjust the delay time as needed
 }
 
-function generateFilename(quote) {
-  // Sanitize the quote text for use in a filename
-  const sanitizedQuote = quote.replace(/[^a-zA-Z0-9\s]/g, '').replace(/\s+/g, '_');
+function generateFilename() {
+  // Get the current date in YYYY-MM-DD format
   const date = new Date().toISOString().split('T')[0];
-  return `quote_${date}_${sanitizedQuote}.png`;
+  return `quote_${date}.png`;
 }
 
 function showGeneratedImage(dataURL) {
