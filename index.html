@@ -971,7 +971,17 @@ ctx.textBaseline = 'alphabetic';
 
   // Download
   const dataURL = canvas.toDataURL('image/png');
-  uploadToFileHost(dataURL);
+  triggerDownload(dataURL, 'quote-image.png');
+}
+
+function triggerDownload(dataURL, filename) {
+  const link = document.createElement('a');
+  link.href = dataURL;
+  link.download = filename;
+  link.style.display = 'none';
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
 }
 
   function roundRect(ctx, x, y, w, h, r){
@@ -1207,7 +1217,6 @@ document.head.appendChild(style);
 function closeShare() {
   document.getElementById('shareModal').style.display = 'none';
 }
-
 document.addEventListener('DOMContentLoaded', init);
 
 </script>
