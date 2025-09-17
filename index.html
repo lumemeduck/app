@@ -971,12 +971,20 @@ ctx.textBaseline = 'alphabetic';
 
   // Show the generated image
   const dataURL = canvas.toDataURL('image/png');
+  const filename = generateFilename(quote);
   showGeneratedImage(dataURL);
 
   // Trigger download after a short delay
   setTimeout(() => {
-    triggerDownload(dataURL, 'quote-image.png');
+    triggerDownload(dataURL, filename);
   }, 3000); // Adjust the delay time as needed
+}
+
+function generateFilename(quote) {
+  // Sanitize the quote text for use in a filename
+  const sanitizedQuote = quote.replace(/[^a-zA-Z0-9\s]/g, '').replace(/\s+/g, '_');
+  const date = new Date().toISOString().split('T')[0];
+  return `quote_${date}_${sanitizedQuote}.png`;
 }
 
 function showGeneratedImage(dataURL) {
@@ -1012,7 +1020,7 @@ function showGeneratedImage(dataURL) {
         </p>
       </div>
     `;
-  }, 2000); // Adjust the delay time as needed
+  }, 3000); // Adjust the delay time as needed
 }
 
 function triggerDownload(dataURL, filename) {
