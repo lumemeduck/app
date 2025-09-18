@@ -312,6 +312,14 @@
 
   <!-- Hidden canvas for image export -->
   <canvas id="exportCanvas" width="1080" height="1080" style="display:none;"></canvas>
+  
+  <div id="sidebar" class="sidebar" style="display:none;">
+  <div class="sidebar-content">
+    <a href="#about" onclick="closeSidebar()">About</a>
+    <a href="#privacy-policy" onclick="closeSidebar()">Privacy Policy</a>
+    <button onclick="closeSidebar()">Close</button>
+  </div>
+  </div>
 
   <script>
 /* ---------- Utilities & Storage ---------- */
