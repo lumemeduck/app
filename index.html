@@ -289,7 +289,7 @@
 }
 
 .menu-item i {
-  font-size: 18px;
+  font-size: 24px;
 }
 
 .menu-item span {
@@ -1390,6 +1390,31 @@ function closeSidebar() {
 
 // Add event listener to the menu button
 document.getElementById('menuButton').addEventListener('click', openSidebar);
+
+// Function to show a specific section
+function showSection(sectionId) {
+  // Hide all sections
+  document.querySelectorAll('.view').forEach(section => {
+    section.style.display = 'none';
+  });
+
+  // Show the selected section
+  const section = document.getElementById(sectionId);
+  if (section) {
+    section.style.display = 'block';
+  }
+
+  // Remove active class from all menu items
+  document.querySelectorAll('.menu-item').forEach(item => {
+    item.classList.remove('active');
+  });
+
+  // Add active class to the clicked menu item
+  const clickedItem = document.querySelector(`.menu-item[onclick*="${sectionId}"]`);
+  if (clickedItem) {
+    clickedItem.classList.add('active');
+  }
+}
 
 </script>
 </body>
