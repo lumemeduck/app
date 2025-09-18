@@ -82,7 +82,7 @@
 
   .actions{display:flex; gap:10px; align-items:center;}
   .btn{
-  appearance:none; border:none; cursor:none;
+  appearance:none; border:none; cursor:pointer;
   padding:8px 10px; border-radius:10px;
   background:linear-gradient(180deg, #ffffff, #f3f4f6);
   color:var(--text); font-weight:700; letter-spacing:.2px;
@@ -148,7 +148,7 @@
   }
   .cal-title{ font-weight:800; letter-spacing:.3px; }
   .cal-nav{ display:flex; gap:8px; }
-  .cal-btn{ padding:8px 10px; border-radius:10px; border:1px solid rgba(255,255,255,.1); background:linear-gradient(180deg, #ffffff, #f3f4f6); color:var(--text); cursor:none; 
+  .cal-btn{ padding:8px 10px; border-radius:10px; border:1px solid rgba(255,255,255,.1); background:linear-gradient(180deg, #ffffff, #f3f4f6); color:var(--text); cursor:pointer; 
     box-shadow: var(--shadow);
     border:1px solid rgba(0,0,0,.1);
     transition:.2s transform ease, .2s border-color ease, .2s background ease, .2s box-shadow ease;}
@@ -196,7 +196,7 @@
   max-width: 300px;
 }
    .reset-box button {
-  appearance:none; border:none; cursor:none; margin:16px 12px 0;
+  appearance:none; border:none; cursor:pointer; margin:16px 12px 0;
   padding:8px 10px; border-radius:10px;
   background:linear-gradient(180deg, #ffffff, #f3f4f6);
   color:var(--text); font-weight:700; letter-spacing:.2px;
@@ -205,7 +205,7 @@
   transition:.2s transform ease, .2s border-color ease, .2s background ease, .2s box-shadow ease;
    }
    .btn-ok {
-  appearance:none; border:none; cursor:none;
+  appearance:none; border:none; cursor:pointer;
   padding:8px 10px; border-radius:10px;
   background:linear-gradient(180deg, #ffffff, #f3f4f6);
   color:var(--text); font-weight:700; letter-spacing:.2px;
@@ -214,7 +214,7 @@
   transition:.2s transform ease, .2s border-color ease, .2s background ease, .2s box-shadow ease;
    }
    .btn-cancel {
-  appearance:none; border:none; cursor:none;
+  appearance:none; border:none; cursor:pointer;
   padding:8px 10px; border-radius:10px;
   background:linear-gradient(180deg, #ffffff, #f3f4f6);
   color:var(--text); font-weight:700; letter-spacing:.2px;
@@ -238,8 +238,8 @@
 </div>
   <header>
     <div class="nav">
-      <div class="brand" role="button" onclick="Router.go('#home')" title="Go Home">
-        <div class="title">Rise & Shine™ </div>
+      <div class="brand" role="button" onclick="Router.go('#')" title="Go Home">
+        <div class="title">Rise & Shine </div>
       </div>
       <div class="actions">
         <button type="button" class="btn btn-accent" id="btnProgress" title="View Streak Progress">Streak</button>
@@ -869,7 +869,7 @@ function resetAll() {
   modal.className = 'reset-modal';
   modal.innerHTML = `
     <div class="reset-box">
-      <div>Delete All Your Streak?</div>
+      <div>Delete all your progress streak?</div>
       <button class="btn-ok" onclick="doReset()">Reset</button>
       <button class="btn-cancel" onclick="closeReset()">Close</button>
     </div>
@@ -1015,8 +1015,8 @@ function showGeneratedImage(dataURL) {
       <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100vh;gap:20px;color:#454545;font-family:sans-serif;text-align:center;">
         <img src="${dataURL}" style="max-width:90%;height:auto;border-radius:0;box-shadow:0 0 10px rgba(0,0,0,0.5);" />
         <p style="font-size:14px;max-width:90%;opacity:0.8;">
-          🔆 If the download doesn’t start, tap-hold the image above and click <strong>download</strong> on the pop-up screen</p>
-        <button id="backButton" style="padding:8px 10px; font-size:18px; font-weight:700; cursor:pointer; background-color:#0ea5e9; color:white; border:none; border-radius:10px;">⁠↼ Back</button>
+          🔆 If the download doesn’t start, tap-hold on the image and click <strong>download</strong> on the pop-up screen</p>
+        <button id="backButton" style="padding:8px 10px; font-size:16px; cursor:pointer; background-color:#0ea5e9; color:white; border:none; border-radius:10px;">⁠⊃ Back</button>
       </div>
     `;
 
