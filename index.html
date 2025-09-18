@@ -243,19 +243,21 @@
 
 .sidebar-content {
   background-color: white;
+  backdrop-filter:saturate(120%) blur(8px);
   border-radius: 18px;
   align-items: center;
+  justify-content: center;
   padding: 20px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
 }
 
 .sidebar-content a {
   display: block;
   margin: 10px 0;
   text-decoration: none;
-  color: #0ea5e9;
-  font-size: 16px;
-  font-weight: 600;
+  color: #333;
+  font-size: 18px;
+  font-weight: 700;
 }
 </style>
 </head>
@@ -272,7 +274,7 @@
   <header>
     <div class="nav">
       <button type="button" class="btn" id="menuButton" title="Menu">
-        <i class="fas fa-bars"></i>
+        <i class="fas fa-bars" style="font-size:20px"></i>
       </button>
       <div class="brand" role="button" onclick="Router.go('#')" title="Go Home">
         <div class="title">Rise & Shine </div>
