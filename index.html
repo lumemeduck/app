@@ -263,6 +263,42 @@
   font-size: 18px;
   font-weight: 700;
 }
+
+.bottom-menu {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: #454;
+  display: flex;
+  justify-content: space-around;
+  padding: 10px 0;
+  z-index: 1000;
+}
+
+.menu-item {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 5px;
+  width: 25%;
+}
+
+.menu-item i {
+  font-size: 20px;
+}
+
+.menu-item span {
+  font-size: 12px;
+}
+
+.menu-item.active {
+  color: #0e95e9;
+}
 </style>
 </head>
 <body>
