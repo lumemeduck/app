@@ -1,11 +1,4 @@
-const CACHE_NAME = "rise-shine-v1";
-const urlsToCache = [
-  "/",
-  "/index.html",
-  "/manifest.json"
-];
-
-self.addEventListener('install', event => {
+  self.addEventListener('install', event => {
   self.skipWaiting();
 });
 
