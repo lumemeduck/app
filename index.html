@@ -1287,6 +1287,19 @@ function closeShare() {
 }
 document.addEventListener('DOMContentLoaded', init);
 
+// Function to open the sidebar
+function openSidebar() {
+  document.getElementById('sidebar').style.display = 'block';
+}
+
+// Function to close the sidebar
+function closeSidebar() {
+  document.getElementById('sidebar').style.display = 'none';
+}
+
+// Add event listener to the menu button
+document.getElementById('menuButton').addEventListener('click', openSidebar);
+
 </script>
 </body>
 </html>
