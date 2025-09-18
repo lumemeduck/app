@@ -211,7 +211,7 @@
    .btn-ok {
   appearance:none; border:none; cursor:pointer;
   padding:8px 10px; border-radius:10px;
-  background:linear-gradient(180deg, #ffffff, #f3f4f6);
+  background: linear-gradient(180deg, #0ea5e9, #0284c7); color:#fff;
   color:var(--text); font-weight:700; letter-spacing:.2px;
   box-shadow: var(--shadow);
   border:1px solid rgba(0,0,0,.1);
@@ -220,7 +220,7 @@
    .btn-cancel {
   appearance:none; border:none; cursor:pointer;
   padding:8px 10px; border-radius:10px;
-  background:linear-gradient(180deg, #ffffff, #f3f4f6);
+  background: linear-gradient(180deg, #f59e0b, #d97706); color:#fff;
   color:var(--text); font-weight:700; letter-spacing:.2px;
   box-shadow: var(--shadow);
   border:1px solid rgba(0,0,0,.1);
@@ -254,7 +254,7 @@
   display: block;
   margin: 10px 0;
   text-decoration: none;
-  color: #454;
+  color: linear-gradient(180deg, #0ea5e9, #0284c7);
   font-size: 18px;
   font-weight: 700;
 }
@@ -915,8 +915,8 @@ function resetAll() {
   modal.innerHTML = `
     <div class="reset-box">
       <div>Delete all your progress streak?</div>
-      <button class="btn-ok btn-accent" onclick="doReset()">Reset</button>
-      <button class="btn-cancel btn-warn" onclick="closeReset()">Close</button>
+      <button class="btn-ok" onclick="doReset()">Reset</button>
+      <button class="btn-cancel" onclick="closeReset()">Close</button>
     </div>
   `;
   document.body.appendChild(modal);
