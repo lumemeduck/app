@@ -196,6 +196,7 @@
   background: #eef1ff; border: 1px solid rgba(0,0,0,.1);
   color: #454545; font-family:system-ui; border-radius: 12px;
   padding: 24px 28px; text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
   max-width: 300px;
 }
    .reset-box button {
@@ -233,7 +234,7 @@
   top: 0;
   left: 0;
   width: 100%;
-  background-color: rgba(255, 255, 255, 0.4);
+  background-color: rgba(255, 255, 255, 0.5);
   z-index: 1000;
   display: flex;
   justify-content: center;
@@ -251,8 +252,6 @@
 
 .sidebar-content a {
   display: block;
-  align-items: center;
-  justify-content: center;
   margin: 10px 0;
   text-decoration: none;
   color: #454;
@@ -264,7 +263,7 @@
 <body>
 <!-- Pretty share-modal -->
 <div id="shareModal" style="display:none;position:fixed;inset:0;background:rgba(255,255,255,.4);z-index:999;align-items:center;justify-content:center;">
-  <div style="background:#eef1ff;border:1px solid rgba(0,0,0,.1);border-radius:18px;padding:22px 28px;max-width:300px;text-align:center;color:#454545;font-family:system-ui;">
+  <div style="background:#eef1ff;border:1px solid rgba(0,0,0,.1);border-radius:18px;padding:22px 28px;box-shadow:0 4px 8px rgba(0, 0, 0, 0.4);max-width:300px;text-align:center;color:#454545;font-family:system-ui;">
     <h3 style="margin:0 0 12px;font-size:18px;">Share Quote</h3>
     <p id="shareText" style="margin:0 0 18px;font-size:15px;line-height:1.4;"></p>
     <button class="btn" onclick="copyShare()" style="margin-right:18px;">Copy</button>
@@ -273,8 +272,8 @@
 </div>
   <header>
     <div class="nav">
-      <button type="button" class="btn" id="menuButton" title="Menu" style="gap:8px">
-        <i class="fas fa-bars" style="font-size:18px"></i>
+      <button type="button" class="btn" id="menuButton" title="Menu">
+        <i class="fas fa-bars" style="font-size:18px;font-weight:600;"></i>
       </button>
       <div class="brand" role="button" onclick="Router.go('#')" title="Go Home">
         <div class="title">Rise & Shine </div>
@@ -348,7 +347,7 @@
   <div class="sidebar-content">
     <a href="#about" onclick="closeSidebar()">About</a>
     <a href="#privacy-policy" onclick="closeSidebar()">Privacy Policy</a>
-    <button class="btn btn-accent" onclick="closeSidebar()">Close</button>
+    <button class="btn" onclick="closeSidebar()">Close</button>
   </div>
   </div>
 
@@ -1288,7 +1287,7 @@ const toast = document.createElement('div');
 toast.textContent = '✔ Copied';
 toast.style.cssText =
   'position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);' +
-  'background:#f5f7ff;color:#22c55e;border:1px solid rgba(0,0,0,0.05);font-weight:bold;padding:8px 16px;' +
+  'background:#eef1ff;color:#22c55e;border:1px solid rgba(0,0,0,0.05);font-weight:bold;padding:8px 16px;' +
   'border-radius:8px;z-index:9999;animation:fade 2.5s forwards;';
 document.body.appendChild(toast);
 
