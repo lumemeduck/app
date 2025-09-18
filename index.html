@@ -234,7 +234,7 @@
   top: 0;
   left: 0;
   width: 100%;
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(255, 255, 255, 0.8);
   z-index: 1000;
   display: flex;
   justify-content: center;
@@ -266,8 +266,8 @@
   <div style="background:#eef1ff;border:1px solid rgba(0,0,0,.1);border-radius:18px;padding:22px 28px;box-shadow:0 4px 8px rgba(0, 0, 0, 0.4);max-width:300px;text-align:center;color:#454545;font-family:system-ui;">
     <h3 style="margin:0 0 12px;font-size:18px;">Share Quote</h3>
     <p id="shareText" style="margin:0 0 18px;font-size:15px;line-height:1.4;"></p>
-    <button class="btn" onclick="copyShare()" style="margin-right:18px;">Copy</button>
-    <button class="btn" onclick="closeShare()">Close</button>
+    <button class="btn btn-accent" onclick="copyShare()" style="margin-right:18px;">Copy</button>
+    <button class="btn btn-warn" onclick="closeShare()">Close</button>
   </div>
 </div>
   <header>
@@ -324,9 +324,9 @@
         <div class="cal-head">
           <div class="cal-title" id="streak-title">🗓️ Streak Progress</div>
           <div class="cal-nav">
-            <button class="cal-btn" id="prevMonth" aria-label="Previous Month"><strong>←</strong></button>
+            <button class="cal-btn" id="prevMonth" aria-label="Previous Month"><<</button>
             <button class="cal-btn" id="todayBtn" aria-label="Jump to Current Month">Today</button>
-            <button class="cal-btn" id="nextMonth" aria-label="Next Month"><strong>→</strong></button>
+            <button class="cal-btn" id="nextMonth" aria-label="Next Month">>></button>
           </div>
         </div>
         <div id="calMeta" class="muted" style="margin:0 0 10px;"></div>
@@ -347,7 +347,7 @@
   <div class="sidebar-content">
     <a href="#about" onclick="closeSidebar()">About</a>
     <a href="#privacy-policy" onclick="closeSidebar()">Privacy Policy</a>
-    <button class="btn" onclick="closeSidebar()">Close</button>
+    <button class="btn btn-warn" onclick="closeSidebar()">Close</button>
   </div>
   </div>
 
@@ -915,8 +915,8 @@ function resetAll() {
   modal.innerHTML = `
     <div class="reset-box">
       <div>Delete all your progress streak?</div>
-      <button class="btn-ok" onclick="doReset()">Reset</button>
-      <button class="btn-cancel" onclick="closeReset()">Close</button>
+      <button class="btn-ok btn-accent" onclick="doReset()">Reset</button>
+      <button class="btn-cancel btn-warn" onclick="closeReset()">Close</button>
     </div>
   `;
   document.body.appendChild(modal);
@@ -1061,7 +1061,7 @@ function showGeneratedImage(dataURL) {
         <img src="${dataURL}" style="max-width:90%;height:auto;border-radius:0;box-shadow:0 0 10px rgba(0,0,0,0.5);" />
         <p style="font-size:14px;max-width:90%;opacity:0.8;">
           🔆 If the download doesn’t start, tap-hold on the image, tap <strong>save</strong> from the pop-up options</p>
-        <button id="backButton" style="padding:8px 10px; font-size:16px; cursor:pointer; background-color:#0ea5e9; color:white; border:none; border-radius:10px;">く Back</button>
+        <button class="btn btn-accent" id="backButton">く Back</button>
       </div>
     `;
 
