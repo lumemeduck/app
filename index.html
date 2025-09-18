@@ -224,6 +224,38 @@
    }
    .btn-ok:hover { transform: translateY(-1px); border-color: var(--ring); box-shadow: 0 12px 40px rgba(99,102,241,.14); }
    .btn-cancel:hover{ transform: translateY(-1px); border-color: var(--ring); box-shadow: 0 12px 40px rgba(99,102,241,.14); }
+    
+   .sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  max-width: 300px;
+  backdrop-filter:saturate(120%) blur(8px);
+  background: linear-gradient(to bottom, rgba(245,247,255,.9), rgba(245,247,255,.65));
+  border:1px solid rgba(0,0,0,.06);
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 99;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.sidebar-content {
+  background-color: white;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.sidebar-content a {
+  display: block;
+  margin: 10px 0;
+  text-decoration: none;
+  color: #000;
+  font-size: 16px;
+  font-weight: 600;
+}
 </style>
 </head>
 <body>
@@ -317,7 +349,7 @@
   <div class="sidebar-content">
     <a href="#about" onclick="closeSidebar()">About</a>
     <a href="#privacy-policy" onclick="closeSidebar()">Privacy Policy</a>
-    <button onclick="closeSidebar()">Close</button>
+    <button class="btn" onclick="closeSidebar()">Close</button>
   </div>
   </div>
 
