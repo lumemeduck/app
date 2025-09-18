@@ -233,7 +233,7 @@
   top: 0;
   left: 0;
   width: 100%;
-  background-color: rgba(0, 0, 0, 0.0);
+  background-color: rgba(255, 255, 255, 0.4);
   z-index: 1000;
   display: flex;
   justify-content: center;
@@ -242,20 +242,20 @@
 }
 
 .sidebar-content {
-  background-color: white;
-  backdrop-filter:saturate(120%) blur(8px);
-  border-radius: 18px;
-  align-items: center;
-  justify-content: center;
+  background-color: #eef1ff;
+  border: 1px solid rgb(0,0,0,.1);
+  border-radius: 16px;
   padding: 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
 }
 
 .sidebar-content a {
   display: block;
+  align-items: center;
+  justify-content: center;
   margin: 10px 0;
   text-decoration: none;
-  color: #333;
+  color: #454;
   font-size: 18px;
   font-weight: 700;
 }
@@ -273,8 +273,8 @@
 </div>
   <header>
     <div class="nav">
-      <button type="button" class="btn" id="menuButton" title="Menu">
-        <i class="fas fa-bars" style="font-size:20px"></i>
+      <button type="button" class="btn" id="menuButton" title="Menu" style="gap:8px">
+        <i class="fas fa-bars" style="font-size:18px"></i>
       </button>
       <div class="brand" role="button" onclick="Router.go('#')" title="Go Home">
         <div class="title">Rise & Shine </div>
@@ -346,9 +346,9 @@
   
   <div id="sidebar" class="sidebar" style="display:none;">
   <div class="sidebar-content">
-    <a href="poye.xyz" onclick="closeSidebar()">About</a>
+    <a href="#about" onclick="closeSidebar()">About</a>
     <a href="#privacy-policy" onclick="closeSidebar()">Privacy Policy</a>
-    <button class="btn" onclick="closeSidebar()">Close</button>
+    <button class="btn btn-accent" onclick="closeSidebar()">Close</button>
   </div>
   </div>
 
