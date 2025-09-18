@@ -289,7 +289,7 @@
 }
 
 .menu-item i {
-  font-size: 24px;
+  font-size: 22px;
 }
 
 .menu-item span {
@@ -391,7 +391,7 @@
 
   <!-- Bottom Menu -->
 <div class="bottom-menu">
-  <button class="menu-item" onclick="showSection('home')">
+  <button class="menu-item active" onclick="showSection('home')">
     <i class="fas fa-home"></i>
     <span>Home</span>
   </button>
@@ -1416,6 +1416,8 @@ function showSection(sectionId) {
   }
 }
 
+  // Show the Home section by default
+  showSection('home');
 </script>
 </body>
 </html>
