@@ -300,6 +300,14 @@
 .menu-item.active {
   color: #0e95e9;
 }
+
+iframe {
+  width: 100%;
+  height: 360px;
+  border: none;
+  border-radius: 15px;
+  display: block;
+}
 </style>
 </head>
 <body>
@@ -393,13 +401,14 @@
     <!-- Trivia Section -->
   <section id="trivia" class="view" aria-labelledby="trivia-title">
     <h1 id="trivia-title"></h1>
-    <iframe src="https://lumemeduck.xyz/app/trivia/index.html" width="100%" height="500px"></iframe>
+    <iframe src="https://lumemeduck.xyz/app/trivia/index.html"></iframe>
   </section>
 
    <!-- Game Section -->
   <section id="game" class="view" aria-labelledby="game-title">
     <h1 id="game-title"></h1>
-    <button type="button" class="btn btn-accent"><a href="https://game.example.com">Play Game</a></button>
+    <button type="button" class="btn btn-accent">
+    <a href="https://game.example.com" style="text-decoration:none;color:#fff;">Play Game</a></button>
   </section>
 
 <!-- About Section -->
