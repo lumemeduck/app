@@ -301,12 +301,24 @@
   color: #0e95e9;
 }
 
-iframe {
+.view {
+  display: none;
   width: 100%;
-  height: 500px;
-  border: none;
-  border-radius: 15px;
+  height: 100vh;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+}
+
+.view.active {
   display: block;
+}
+
+.full-page-iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  overflow: hidden;
 }
 </style>
 </head>
@@ -398,17 +410,17 @@ iframe {
       </article>
     </section>
 
-              <!-- Trivia Section -->
-  <section id="trivia" class="view" aria-labelledby="trivia-title">
-    <h1 id="trivia-title"></h1>
-    <iframe src="https://take.quiz-maker.com/QBR1K9XYY"></iframe>
-  </section>
+<!-- Trivia Section -->
+<section id="trivia" class="view" aria-labelledby="trivia-title">
+  <h1 id="trivia-title">Trivia</h1>
+  <iframe src="https://quizmaker.example.com" class="full-page-iframe"></iframe>
+</section>
 
-              <!-- Game Section -->
-  <section id="game" class="view" aria-labelledby="game-title">
-    <h1 id="game-title"></h1>
-    <p><a href="https://www.appcreator24.com/intra/app_sec_game_preview.php?idioma=en&idsesion=bgixd5ykat8s4wo1vzfnpe907mu6rjcqlh32&idg=44&ckp=ybftwi84p2xjn7okus193chv0mq6za5dlger@1575811@0">Play Game</a></p>
-  </section>
+<!-- Game Section -->
+<section id="game" class="view" aria-labelledby="game-title">
+  <h1 id="game-title">Game</h1>
+  <iframe src="https://game.example.com" class="full-page-iframe"></iframe>
+</section>
 
 <!-- About Section -->
 <section id="about" class="view" aria-labelledby="about-title" style="display:none;">
