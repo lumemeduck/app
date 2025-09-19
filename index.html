@@ -425,11 +425,11 @@
     <i class="fas fa-chart-line"></i>
     <span>Streak</span>
   </button>
-  <button class="menu-item" onclick="showSection('trivia')">
+  <button class="menu-item" onclick="openLink('https://lumemeduck.xyz/app/trivia/index.html')">
     <i class="fas fa-question-circle"></i>
     <span>Trivia</span>
   </button>
-  <button class="menu-item" onclick="showSection('game')">
+  <button class="menu-item" onclick="openLink('https://appcreator24.com/intra/app_sec_game_preview.php?idioma=en&idsesion=bgixd5ykat8s4wo1vzfnpe907mu6rjcqlh32&idg=44&ckp=ybftwi84p2xjn7okus193chv0mq6za5dlger@1575811@0')">
     <i class="fas fa-gamepad"></i>
     <span>Game</span>
   </button>
@@ -1417,47 +1417,35 @@ function closeSidebar() {
 // Add event listener to the menu button
 document.getElementById('menuButton').addEventListener('click', openSidebar);
 
-function loadContent(url, targetId) {
-  fetch(url)
-    .then(response => response.text())
-    .then(html => {
-      document.getElementById(targetId).innerHTML = html;
-    })
-    .catch(error => {
-      console.error('Error loading content:', error);
+  // Function to show a specific section
+  function showSection(sectionId) {
+    // Hide all sections
+    document.querySelectorAll('.view').forEach(section => {
+      section.style.display = 'none';
     });
-}
 
-function showSection(sectionId) {
-  // Hide all sections
-  document.querySelectorAll('.view').forEach(section => {
-    section.style.display = 'none';
-  });
-
-  // Show the selected section
-  const section = document.getElementById(sectionId);
-  if (section) {
-    section.style.display = 'block';
-  }
-
-  // Remove active class from all menu items
-  document.querySelectorAll('.menu-item').forEach(item => {
-    item.classList.remove('active');
-  });
-
-  // Add active class to the clicked menu item
-  const clickedItem = document.querySelector(`.menu-item[onclick*="${sectionId}"]`);
-  if (clickedItem) {
-    clickedItem.classList.add('active');
-  }
-
-  // Load content if necessary
-  if (sectionId === 'trivia') {
-    loadContent('https://lumemeduck.xyz/app/trivia/index.html', 'trivia-content');
-  } else if (sectionId === 'game') {
-    loadContent('https://game.example.com', 'game-content');
-  }
+    // Show the selected section
+    const section = document.getElementById(sectionId);
+    if (section) {
+      section.style.display = 'block';
     }
+
+    // Remove active class from all menu items
+    document.querySelectorAll('.menu-item').forEach(item => {
+      item.classList.remove('active');
+    });
+
+    // Add active class to the clicked menu item
+    const clickedItem = document.querySelector(`.menu-item[onclick*="${sectionId}"]`);
+    if (clickedItem) {
+      clickedItem.classList.add('active');
+    }
+  }
+
+  // Function to open a link
+  function openLink(url) {
+    window.location.href = url;
+  }
 
   // Show the Home section by default
   showSection('home');
