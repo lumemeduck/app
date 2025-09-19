@@ -338,8 +338,9 @@ iframe {
   <!-- Pop up menu -->
   <div id="sidebar" class="sidebar" style="display:none;">
   <div class="sidebar-content">
-    <a href="#" onclick="showSection('about'); closeSidebar();">About App</a>
-    <a href="#" onclick="showSection('privacy-policy'); closeSidebar();">Privacy Policy</a>
+    <a href="#" onclick="showSection('about'); closeSidebar();">About app</a>
+    <a href="#" onclick="showSection('user-terms'); closeSidebar();">Terms of use</a>
+    <a href="#" onclick="showSection('privacy-policy'); closeSidebar();">Privacy policy</a>
     <button class="btn btn-warn" onclick="closeSidebar()">Close</button>
   </div>
   </div>
@@ -400,25 +401,31 @@ iframe {
 
     <!-- Trivia Section -->
   <section id="trivia" class="view" aria-labelledby="trivia-title">
-    <h1 id="trivia-title"></h1>
+    <h3 id="trivia-title"></h3>
     <iframe seamless="seamless" allowtransparency="true" allowfullscreen="true" frameborder="0" src="https://lumemeduck.xyz/app/trivia/index.html"></iframe>
   </section>
 
    <!-- Game Section -->
   <section id="game" class="view" aria-labelledby="game-title">
-    <h1 id="game-title"></h1>
+    <h3 id="game-title"></h3>
     <iframe seamless="seamless" allowtransparency="true" allowfullscreen="true" frameborder="0" src="https://games.e-droid.net/en/omg-word-pop-appcreator24/index.html"></iframe>
   </section>
 
 <!-- About Section -->
 <section id="about" class="view" aria-labelledby="about-title" style="display:none;">
-  <h1 id="about-title">About Rise & Shine</h1>
+  <h3 id="about-title">ABOUT APP</h3>
+  <p>Rise & Shine is a habit builder, packed with well curated quotes and exercises challenge for building daily habits with motivation and fitness; powered by the lumeme duck crypto project.</p>
+</section>
+
+<!-- User Terms Section -->
+<section id="user-terms" class="view" aria-labelledby="user-terms-title" style="display:none;">
+  <h3 id="user-terms-title">TERMS OF USE</h3>
   <p>Rise & Shine is a habit builder, packed with well curated quotes and exercises challenge for building daily habits with motivation and fitness; powered by the lumeme duck crypto project.</p>
 </section>
 
 <!-- Privacy Policy Section -->
 <section id="privacy-policy" class="view" aria-labelledby="privacy-policy-title" style="display:none;">
-  <h1 id="privacy-policy-title">Privacy Policy</h1>
+  <h3 id="privacy-policy-title">PRIVACY POLICY</h3>
   <p>Our privacy policy outlines how we collect, use, and protect your personal information.</p>
 </section>
   </main>
