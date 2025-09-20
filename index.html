@@ -434,6 +434,22 @@ iframe {
     <iframe seamless="seamless" allowtransparency="true" allowfullscreen="true" frameborder="0" src="https://games.e-droid.net/en/omg-word-pop-appcreator24/index.html"></iframe>
   </section>
 
+  <!-- Generated Image Section -->
+<section id="generated-image" class="view" aria-labelledby="generated-image-title" style="display:none;">
+  <h1 id="generated-image-title"></h1>
+  <div class="card cal-wrap">
+    <div id="loading-indicator" style="text-align:center; margin-bottom:20px;">
+      <div class="spinner" style="width:40px;height:40px;border:4px solid rgba(0,0,0,.1);border-top:4px solid #0ea5e9;border-radius:50%;animation:spin 1s linear infinite;"></div>
+      <p style="font-size:16px;color:#454545;">Generating image...</p>
+    </div>
+    <img id="generated-image-display" style="max-width:100%; height:auto; display:none; margin-bottom:20px;" src="">
+    <div style="display:flex; justify-content:space-between;">
+      <button id="download-button" onclick="triggerDownload()">Download</button>
+      <button id="share-button" onclick="shareImage()">Share</button>
+    </div>
+  </div>
+</section>
+
 <!-- About Section -->
 <section id="about" class="view" aria-labelledby="about-title" style="display:none;">
   <h4 id="about-title" style="text-align:center">ABOUT APP</h4>
@@ -450,22 +466,6 @@ iframe {
 <section id="privacy-policy" class="view" aria-labelledby="privacy-policy-title" style="display:none;">
   <h4 id="privacy-policy-title" style="text-align:center">PRIVACY POLICY</h4>
   <p> </p>
-</section>
-
-<!-- Generated Image Section -->
-<section id="generated-image" class="view" aria-labelledby="generated-image-title" style="display:none;">
-  <h1 id="generated-image-title"></h1>
-  <div class="card">
-    <div id="loading-indicator" style="text-align:center; margin-bottom:20px;">
-      <div class="spinner" style="width:40px;height:40px;border:4px solid rgba(0,0,0,.1);border-top:4px solid #0ea5e9;border-radius:50%;animation:spin 1s linear infinite;"></div>
-      <p style="font-size:16px;color:#454545;">Generating image...</p>
-    </div>
-    <img id="generated-image-display" style="max-width:100%; height:auto; display:none; margin-bottom:20px;" src="">
-    <div style="display:flex; justify-content:space-between;">
-      <button id="download-button" onclick="triggerDownload()">Download</button>
-      <button id="share-button" onclick="shareImage()">Share</button>
-    </div>
-  </div>
 </section>
   </main>
 
@@ -1190,56 +1190,6 @@ ctx.textBaseline = 'alphabetic';
   document.getElementById('backButton').addEventListener('click', () => {
     window.location.reload(); // Reload the page to return to the home page
   });
-    }
-
-  // Download generated image
-  const dataURL = canvas.toDataURL('image/png');
-  const filename = `quote_${new Date().toISOString().split('T')[0]}.png`;
-  showGeneratedImage(dataURL, filename);
-    }
-
-// Show generated image
- function showGeneratedImage(dataURL, filename) {
-  document.getElementById('loading-indicator').style.display = 'block';
-  document.getElementById('generated-image-display').style.display = 'none';
-  document.getElementById('download-button').disabled = true;
-  document.getElementById('share-button').disabled = true;
-
-  // Simulate image generation delay
-  setTimeout(() => {
-    document.getElementById('loading-indicator').style.display = 'none';
-    document.getElementById('generated-image-display').style.display = 'block';
-    document.getElementById('download-button').disabled = false;
-    document.getElementById('share-button').disabled = false;
-    document.getElementById('generated-image-display').src = dataURL;
-  }, 3000); // Adjust the delay time as needed
-}
-
-function triggerDownload() {
-  const dataURL = document.getElementById('generated-image-display').src;
-  const filename = `quote_${new Date().toISOString().split('T')[0]}.png`;
-  const link = document.createElement('a');
-  link.href = dataURL;
-  link.download = filename;
-  link.style.display = 'none';
-  document.body.appendChild(link);
-  link.click();
-  document.body.removeChild(link);
-}
-
-function shareImage() {
-  const dataURL = document.getElementById('generated-image-display').src;
-  if (navigator.share) {
-    navigator.share({
-      title: 'Rise & Shine',
-      text: 'Check out this quote!',
-      url: dataURL
-    }).then(() => {
-      console.log('Thanks for sharing!');
-    }).catch(console.error);
-  } else {
-    alert('Sharing is not supported on this device.');
-  }
 }
 
   function roundRect(ctx, x, y, w, h, r){
