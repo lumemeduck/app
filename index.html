@@ -1155,6 +1155,43 @@ ctx.textBaseline = 'alphabetic';
   // Decorative corner sun
   drawSun(ctx, cardX + cardW - 110, cardY + 110, 44);
 
+  // Show the generated image
+  const dataURL = canvas.toDataURL('image/png');
+  const filename = generateFilename();
+  showGeneratedImage(dataURL);
+
+  // Trigger download after a short delay
+  setTimeout(() => {
+    triggerDownload(dataURL, filename);
+  }, 3000);
+ }
+
+  function generateFilename() {
+  // Get the current date in YYYY-MM-DD format
+  const date = new Date().toISOString().split('T')[0];
+  return `quote_${date}.png`;
+    }
+
+   function showGeneratedImage(dataURL) {
+  // Show waiting prompt immediately
+  document.body.style.margin = "0";
+  document.body.style.background = "#f5f7ff";
+  document.body.innerHTML = `
+    <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100vh;gap:20px;color:#454545;font-family:sans-serif;text-align:center;">
+      <img src="${dataURL}" style="max-width:90%;height:auto;border-radius:0;box-shadow:0 0 10px rgba(0,0,0,0.5);" />
+      <p style="font-size:14px;max-width:90%;opacity:0.8;">
+        🔆 If a download doesn’t start, tap-hold the image above and tap <strong>save</strong> on the pop-up screen<br><br><strong>*</strong>swipe-down to refresh after download<strong>*</strong>
+      </p>
+      <button id="backButton" style="padding:10px 20px; font-size:16px; cursor:pointer; background-color:#0ea5e9; color:white; border:none; border-radius:5px;">Back</button>
+    </div>
+  `;
+
+  // Add event listener to the "Back" button
+  document.getElementById('backButton').addEventListener('click', () => {
+    window.location.reload(); // Reload the page to return to the home page
+  });
+    }
+
   // Download generated image
   const dataURL = canvas.toDataURL('image/png');
   const filename = `quote_${new Date().toISOString().split('T')[0]}.png`;
