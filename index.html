@@ -227,29 +227,6 @@
    }
    .btn-ok:hover { transform: translateY(-1px); border-color: var(--ring); box-shadow: 0 12px 40px rgba(99,102,241,.14); }
    .btn-cancel:hover{ transform: translateY(-1px); border-color: var(--ring); box-shadow: 0 12px 40px rgba(99,102,241,.14); }
-
-   .download-button{
-  appearance:none; border:none; cursor:pointer;
-  padding:8px 10px; border-radius:10px;
-  background:linear-gradient(180deg, #ffffff, #f3f4f6);
-  color:var(--text); font-weight:700; letter-spacing:.2px;
-  box-shadow: var(--shadow);
-  border:1px solid rgba(0,0,0,.1);
-  transition:.2s transform ease, .2s border-color ease, .2s background ease, .2s box-shadow ease;
-}
- .download-button:hover{ transform: translateY(-1px); border-color: var(--ring); box-shadow: 0 12px 40px rgba(99,102,241,.14); }
- .download-button:active{ transform: translateY(0); }
-
- .share-button{
-  appearance:none; border:none; cursor:pointer;
-  padding:8px 10px; border-radius:10px;
-  background:linear-gradient(180deg, #ffffff, #f3f4f6);
-  color:var(--text); font-weight:700; letter-spacing:.2px;
-  box-shadow: var(--shadow);
-  border:1px solid rgba(0,0,0,.1);
-  transition:.2s transform ease, .2s border-color ease, .2s background ease, .2s box-shadow ease;
-}
- .share-button:hover{ transform: translateY(-1px); border-color: var(--ring); box-shadow: 0 12px 40px rgba(99,102,241,.14); }
     
    .sidebar {
   position: fixed;
@@ -444,8 +421,8 @@ iframe {
     </div>
     <img id="generated-image-display" style="max-width:100%; height:auto; display:none; margin-bottom:20px;" src="">
     <div style="display:flex; justify-content:space-between;">
-      <button id="download-button" onclick="triggerDownload()">Download</button>
-      <button id="share-button" onclick="shareImage()">Share</button>
+      <button type="button" class="btn" id="download-button" onclick="triggerDownload()">Download</button>
+      <button type="button" class="btn" id="share-button" onclick="shareImage()">Share</button>
     </div>
   </div>
 </section>
@@ -1180,16 +1157,16 @@ ctx.textBaseline = 'alphabetic';
     <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100vh;gap:20px;color:#454545;font-family:sans-serif;text-align:center;">
       <img src="${dataURL}" style="max-width:90%;height:auto;border-radius:0;box-shadow:0 0 10px rgba(0,0,0,0.5);" />
       <p style="font-size:14px;max-width:90%;opacity:0.8;">
-        🔆 If a download doesn’t start, tap-hold the image above and tap <strong>save</strong> on the pop-up screen<br><br><strong>*</strong>swipe-down to refresh after download<strong>*</strong>
-      </p>
-      <button id="backButton" style="padding:10px 20px; font-size:16px; cursor:pointer; background-color:#0ea5e9; color:white; border:none; border-radius:5px;">Back</button>
+        🔆 If the download doesn’t start, tap-hold on the image, tap <strong>save</strong> on the pop-up options</p>
+      <button type="buton" class="btn btn-accent" id="backButton">Back</button>
     </div>
   `;
 
   // Add event listener to the "Back" button
   document.getElementById('backButton').addEventListener('click', () => {
-    window.location.reload(); // Reload the page to return to the home page
-  });
+      window.location.reload();
+    });
+  }, 3000);
 }
 
   function roundRect(ctx, x, y, w, h, r){
