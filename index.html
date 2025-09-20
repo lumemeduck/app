@@ -1161,12 +1161,6 @@ ctx.textBaseline = 'alphabetic';
   showGeneratedImage(dataURL, filename);
     }
 
-function generateFilename() {
-  // Get the current date in YYYY-MM-DD format
-  const date = new Date().toISOString().split('T')[0];
-  return `quote_${date}.png`;
-}
-
 // Show generated image
  function showGeneratedImage(dataURL, filename) {
   document.getElementById('loading-indicator').style.display = 'block';
