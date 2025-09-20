@@ -227,6 +227,29 @@
    }
    .btn-ok:hover { transform: translateY(-1px); border-color: var(--ring); box-shadow: 0 12px 40px rgba(99,102,241,.14); }
    .btn-cancel:hover{ transform: translateY(-1px); border-color: var(--ring); box-shadow: 0 12px 40px rgba(99,102,241,.14); }
+
+   .download-btn{
+  appearance:none; border:none; cursor:pointer;
+  padding:8px 10px; border-radius:10px;
+  background:linear-gradient(180deg, #ffffff, #f3f4f6);
+  color:var(--text); font-weight:700; letter-spacing:.2px;
+  box-shadow: var(--shadow);
+  border:1px solid rgba(0,0,0,.1);
+  transition:.2s transform ease, .2s border-color ease, .2s background ease, .2s box-shadow ease;
+}
+ .download-btn:hover{ transform: translateY(-1px); border-color: var(--ring); box-shadow: 0 12px 40px rgba(99,102,241,.14); }
+ .download-btn:active{ transform: translateY(0); }
+
+ .share-btn{
+  appearance:none; border:none; cursor:pointer;
+  padding:8px 10px; border-radius:10px;
+  background:linear-gradient(180deg, #ffffff, #f3f4f6);
+  color:var(--text); font-weight:700; letter-spacing:.2px;
+  box-shadow: var(--shadow);
+  border:1px solid rgba(0,0,0,.1);
+  transition:.2s transform ease, .2s border-color ease, .2s background ease, .2s box-shadow ease;
+}
+ .share-btn:hover{ transform: translateY(-1px); border-color: var(--ring); box-shadow: 0 12px 40px rgba(99,102,241,.14); }
     
    .sidebar {
   position: fixed;
@@ -427,6 +450,22 @@ iframe {
 <section id="privacy-policy" class="view" aria-labelledby="privacy-policy-title" style="display:none;">
   <h4 id="privacy-policy-title" style="text-align:center">PRIVACY POLICY</h4>
   <p> </p>
+</section>
+
+<!-- Generated Image Section -->
+<section id="generated-image" class="view" aria-labelledby="generated-image-title" style="display:none;">
+  <h1 id="generated-image-title"></h1>
+  <div class="card">
+    <div id="loading-indicator" style="text-align:center; margin-bottom:20px;">
+      <div class="spinner" style="width:40px;height:40px;border:4px solid rgba(0,0,0,.1);border-top:4px solid #0ea5e9;border-radius:50%;animation:spin 1s linear infinite;"></div>
+      <p style="font-size:16px;color:#454545;">Generating image...</p>
+    </div>
+    <img id="generated-image-display" style="max-width:100%; height:auto; display:none; margin-bottom:20px;" src="">
+    <div style="display:flex; justify-content:space-between;">
+      <button id="download-button" onclick="triggerDownload()">Download</button>
+      <button id="share-button" onclick="shareImage()">Share</button>
+    </div>
+  </div>
 </section>
   </main>
 
