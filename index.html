@@ -1127,16 +1127,16 @@ ctx.textBaseline = 'alphabetic';
   // Decorative corner sun
   drawSun(ctx, cardX + cardW - 110, cardY + 110, 44);
 
-  // Show the generated image
+  // Show the generated image page
   const dataURL = canvas.toDataURL('image/png');
-  const filename = generateFilename();
-  showGeneratedImage(dataURL);
+  const filename = `quote_${new Date().toISOString().split('T')[0]}.png`;
+  showGeneratedImage(dataURL, filename);
 
-  // Trigger download after a short delay
+  // Trigger download after a short delay (for auto-download)
   setTimeout(() => {
     triggerDownload(dataURL, filename);
   }, 3000); // Adjust the delay time as needed
-}
+  }
 
 function generateFilename() {
   // Get the current date in YYYY-MM-DD format
@@ -1450,17 +1450,6 @@ function triggerDownload(dataURL, filename) {
   link.click();
   document.body.removeChild(link);
 }
-
-  // Show the generated image page
-  const dataURL = canvas.toDataURL('image/png');
-  const filename = `quote_${new Date().toISOString().split('T')[0]}.png`;
-  showGeneratedImage(dataURL, filename);
-
-  // Trigger download after a short delay (for auto-download)
-  setTimeout(() => {
-    triggerDownload(dataURL, filename);
-  }, 3000); // Adjust the delay time as needed
-    }
 
 // Function to open the sidebar
 function openSidebar() {
