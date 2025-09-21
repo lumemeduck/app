@@ -1167,13 +1167,7 @@ function showGeneratedImage(dataURL) {
       </div>
     `;
 
-  document.getElementById('backButton').addEventListener('click', () => {
-      window.location.reload(); // Reload the page to return to the home page
-    });
-  }, 2000); // Adjust the delay time as needed
-    }
-
-  // Add event listener to the "Save" button
+    // Add event listener to the "Save" button
   document.getElementById('saveButton').addEventListener('click', () => {
     triggerDownload(dataURL, generateFilename());
   });
@@ -1182,6 +1176,13 @@ function showGeneratedImage(dataURL) {
   document.getElementById('shareButton').addEventListener('click', () => {
     shareImage(dataURL);
   });
+
+  // Add event listener to the "Back" button
+  document.getElementById('backButton').addEventListener('click', () => {
+    window.location.reload();
+  });
+  }, 2000); // Adjust the delay time as needed
+    }
 
   function triggerDownload(dataURL, filename) {
   const link = document.createElement('a');
