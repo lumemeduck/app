@@ -329,10 +329,13 @@ iframe {
         <i class="fas fa-bars" style="font-size:18px;font-weight:700;color:#454545;"></i>
       </button>
       <div class="brand" role="button" onclick="Router.go('#')" title="Go Home">
-        <img src="images/rs30.jpg" height= "27px" width= "27px">
+        <img src="images/rs30.jpg" height= "26px" width= "26px">
         <div class="title">Rise & Shine </div>
       </div>
       <div class="actions">
+        <button id="notifyBell" style="background:none;border:none;cursor:pointer;">
+        <i id="bellIcon" class="fas fa-bell" style="font-size:22px;color:#454545;"></i>
+        </button>
         <div type="" class="" id="btnProgress" tittle="View Streak Progress"></div>
         <button type="button" class="btn btn-warn" id="btnReset" title="Reset all data">Reset</button>
       </div>
@@ -1164,7 +1167,7 @@ ctx.textBaseline = 'alphabetic';
         </div>
         <br>
         <p style="font-size:14px;max-width:90%;opacity:0.8;">
-            🔆 Download doesn’t start in old webview systems. If you experience this, we suggest you <strong>share</strong> instead
+            🔆 Image sharing doesn’t work in old webview systems. If you experience this, we suggest you <strong>share text</strong> instead
         </p>
         <button class="btn btn-accent" id="backButton">く Back</button>
       </div>
@@ -1227,7 +1230,7 @@ ctx.textBaseline = 'alphabetic';
       console.error('Failed to share quote:', error);
     });
   } else {
-    alert('Sharing images is not supported on this browser. Please download instead.');
+    alert('Sorry image sharing is not supported on this browser!😶‍🌫️');
   }
   }
 
@@ -1516,6 +1519,63 @@ showSection('home');
   }
 </script>
 
+<script>
+const bell = document.getElementById("notifyBell");
+const bellIcon = document.getElementById("bellIcon");
 
+// Update bell color
+function updateBellColor() {
+  if (Notification.permission === "granted") {
+    bellIcon.style.color = "#22c55e"; 
+  } else {
+    bellIcon.style.color = "#454545"; 
+  }
+}
+
+// Ask for permission
+bell.addEventListener("click", async () => {
+  if (!("Notification" in window)) {
+    alert("Notifications are not supported by this browser.");
+    return;
+  }
+
+  if (Notification.permission === "default") {
+    const permission = await Notification.requestPermission();
+    if (permission === "granted") {
+      console.log("✅ Notifications enabled");
+      scheduleDailyNotification();
+    } else {
+      console.log("❌ Notifications denied");
+    }
+  } else if (Notification.permission === "granted") {
+    // Already granted fires a test
+    showLocalNotification("Rise & Shine 🌞", "Notifications are already enabled!");
+  } else {
+    alert("You have blocked notifications. Please allow them in your browser settings.");
+  }
+
+  updateBellColor();
+});
+
+// Alert scheduler
+function scheduleDailyNotification() {
+  setInterval(() => {
+    showLocalNotification("Rise & Shine 🌞", "Your daily motivation is ready!");
+  }, 24 * 60 * 60 * 1000); // once a day
+}
+
+// Show notification
+function showLocalNotification(title, body) {
+  if (Notification.permission === "granted") {
+    new Notification(title, {
+      body: body,
+      icon: "icons/icon-192.png"
+    });
+  }
+}
+
+// Initialize bell color
+updateBellColor();
+</script>
 </body>
 </html>
