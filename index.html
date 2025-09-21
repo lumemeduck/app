@@ -1167,6 +1167,12 @@ function showGeneratedImage(dataURL) {
           <button class="btn btn-accent" id="backButton">くBack</button>
       </div>
     `;
+
+    // Add event listener to the "Back" button
+  document.getElementById('backButton').addEventListener('click', () => {
+    window.location.reload(); // Reload the page to return to the home page
+  });
+    }
   }, 3000); // Adjust the delay time as needed
 }
 
@@ -1178,11 +1184,6 @@ function triggerDownload(dataURL, filename) {
   document.body.appendChild(link);
   link.click();
   document.body.removeChild(link);
-    }
-
-    document.getElementById('backButton').addEventListener('click', () => {
-    window.location.reload(); // Reload the page to return to the home page
-  });
     }
 
   function roundRect(ctx, x, y, w, h, r){
