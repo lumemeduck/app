@@ -1182,7 +1182,8 @@ ctx.textBaseline = 'alphabetic';
       window.location.reload();
     });
   }, 2000); // Adjust the delay time as needed
-                     }
+   }
+}
 
   // Function helper
   function dataURLToBlob(dataURL) {
@@ -1196,7 +1197,7 @@ ctx.textBaseline = 'alphabetic';
   return new Blob([ab], { type: mime });
     }
 
-  // Diwnload image
+  // Download image
   function triggerDownload(dataURL, filename) {
   const link = document.createElement('a');
   link.href = dataURL;
