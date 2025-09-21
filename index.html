@@ -1474,6 +1474,37 @@ showSection('home');
   document.getElementById('shareButton').addEventListener('click', () => {
     shareImage(dataURL);
   });
+
+  function shareImage(dataURL) {
+  const blob = dataURLToBlob(dataURL);
+  const url = URL.createObjectURL(blob);
+
+  if (navigator.share) {
+    navigator.share({
+      title: 'Rise & Shine',
+      text: 'Check out this quote!',
+      url: url
+    }).then(() => {
+      console.log('Quote shared successfully!');
+    }).catch(error => {
+      console.error('Failed to share quote:', error);
+    });
+  } else {
+    // Fallback: Prompt user to manually share the image
+    alert('Share functionality is not supported. Please manually share the image.');
+  }
+  }
+
+  function dataURLToBlob(dataURL) {
+  const arr = dataURL.split(',');
+  const mime = arr[0].match(/:(.*?);/)[1];
+  const byteStr = atob(arr[1]);
+  const ab = new Uint8Array(byteStr.length);
+  for (let i = 0; i < byteStr.length; i++) {
+    ab[i] = byteStr.charCodeAt(i);
+  }
+  return new Blob([ab], { type: mime });
+    }
 </script>
 
 
