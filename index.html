@@ -1118,8 +1118,8 @@ ctx.textBaseline = 'alphabetic';
 
   // Show the generated image
   const dataURL = canvas.toDataURL('image/png');
-  const filename = generateFilename();
-  showGeneratedImage(dataURL);
+  triggerDownload(dataURL, 'quote-image.png');
+    }
 
   // Trigger download after a short delay
   setTimeout(() => {
