@@ -1176,16 +1176,6 @@ function showGeneratedImage(dataURL) {
   }, 3000); // Adjust the delay time as needed
 }
 
-function triggerDownload(dataURL, filename) {
-  const link = document.createElement('a');
-  link.href = dataURL;
-  link.download = filename;
-  link.style.display = 'none';
-  document.body.appendChild(link);
-  link.click();
-  document.body.removeChild(link);
-    }
-
   function roundRect(ctx, x, y, w, h, r){
   const rr = Math.min(r, w/2, h/2);
   ctx.beginPath();
