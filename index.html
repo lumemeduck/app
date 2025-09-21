@@ -1478,7 +1478,7 @@ showSection('home');
 
     // Generated image
     function showGeneratedImage(dataURL, filename) {
-  document.getElementById('loading-indicator').style.display = 'block';
+  document.getElementById('loading-indicator').style.display = 'flex';
   document.getElementById('generated-image-display').style.display = 'none';
   document.getElementById('download-button').disabled = true;
   document.getElementById('share-button').disabled = true;
@@ -1486,7 +1486,7 @@ showSection('home');
   // Simulate image generation delay
   setTimeout(() => {
     document.getElementById('loading-indicator').style.display = 'none';
-    document.getElementById('generated-image-display').style.display = 'block';
+    document.getElementById('generated-image-display').style.display = 'flex';
     document.getElementById('download-button').disabled = false;
     document.getElementById('share-button').disabled = false;
     document.getElementById('generated-image-display').src = dataURL;
