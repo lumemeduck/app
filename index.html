@@ -10,6 +10,9 @@
   <link rel="icon" type="image/jpg" href="images/rise-shine.jpg">
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#eef1f9">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
   :root{
@@ -1503,6 +1506,14 @@ function showSection(sectionId) {
 
 // Show the Home section by default
 showSection('home');
+</script>
+
+<script>
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.register("service-worker.js")
+      .then(() => console.log("✅ Service Worker registered"))
+      .catch(err => console.error("Service Worker failed:", err));
+  }
 </script>
 
 
