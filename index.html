@@ -1118,27 +1118,27 @@ ctx.textBaseline = 'alphabetic';
 
   // Show the generated image
   const dataURL = canvas.toDataURL('image/png');
-  triggerDownload(dataURL, 'quote-image.png');
-    }
+  const filename = generateFilename();
+  showGeneratedImage(dataURL);
 
   // Trigger download after a short delay
   setTimeout(() => {
     triggerDownload(dataURL, filename);
   }, 3000); // Adjust the delay time as needed
-    }
+}
 
-  function generateFilename() {
+function generateFilename() {
   // Get the current date in YYYY-MM-DD format
   const date = new Date().toISOString().split('T')[0];
   return `quote_${date}.png`;
-    }
+}
 
-   function showGeneratedImage(dataURL) {
+function showGeneratedImage(dataURL) {
   // Show waiting prompt immediately
   document.body.style.margin = "0";
   document.body.style.background = "#f5f7ff";
   document.body.innerHTML = `
-    <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100vh;gap:20px;color:#454545;font-family:sans-serif;text-align:center;">
+    <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100vh;gap:20px;color:white;font-family:sans-serif;text-align:center;">
       <div class="spinner" style="
         width:40px;height:40px;
         border:4px solid rgba(0,0,0,.1);
@@ -1146,7 +1146,7 @@ ctx.textBaseline = 'alphabetic';
         border-radius:50%;
         animation:spin 1s linear infinite;">
       </div>
-      <p style="font-size:16px;">Generating image...</p>
+      <p style="font-size:16px;color:#454545;">Generating image...</p>
     </div>
     <style>
       @keyframes spin {
@@ -1162,12 +1162,15 @@ ctx.textBaseline = 'alphabetic';
       <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100vh;gap:20px;color:#454545;font-family:sans-serif;text-align:center;">
         <img src="${dataURL}" style="max-width:90%;height:auto;border-radius:0;box-shadow:0 0 10px rgba(0,0,0,0.5);" />
         <p style="font-size:14px;max-width:90%;opacity:0.8;">
-          🔆 If the download doesn’t start, tap-hold the image above and tap <strong>save</strong> on the pop-up options</p>
-        <button class="btn btn-accent" id="backButton">く Back</button>
-    </div>
+          🔆 If the download doesn’t start, tap-hold on the image above, tap <strong>save</strong> on the pop-up options
+          </p>
+          <button class="btn btn-accent" id="backButton">くBack</button>
+      </div>
     `;
+  }, 3000); // Adjust the delay time as needed
+}
 
-  function triggerDownload(dataURL, filename) {
+function triggerDownload(dataURL, filename) {
   const link = document.createElement('a');
   link.href = dataURL;
   link.download = filename;
@@ -1177,11 +1180,9 @@ ctx.textBaseline = 'alphabetic';
   document.body.removeChild(link);
     }
 
-    // Add event listener to the "Back" button
-  document.getElementById('backButton').addEventListener('click', () => {
-      window.location.reload(); // Reload the page to return to the home page
-    });
-  }, 3000); 
+    document.getElementById('backButton').addEventListener('click', () => {
+    window.location.reload(); // Reload the page to return to the home page
+  });
     }
 
   function roundRect(ctx, x, y, w, h, r){
