@@ -411,6 +411,17 @@ iframe {
     <iframe seamless="seamless" allowtransparency="true" allowfullscreen="true" frameborder="0" src="https://games.e-droid.net/en/sheep-fight-appcreator24/index.html"></iframe>
   </section>
 
+    <!-- Generated Image -->
+  <div id="generated-image-page" style="display:none; position:fixed; inset:0; background:rgba(255,255,255,.95); z-index:1000; display:flex; justify-content:center; align-items:center;">
+  <div style="background:#fff; padding:20px; border-radius:10px; box-shadow:0 4px 10px rgba(0,0,0,.2);">
+    <h2 style="margin:0 0 10px;">Generated Image</h2>
+    <img id="generated-image" style="max-width:100%; height:auto; display:block; margin:0 auto;" src="">
+    <div style="text-align:center; margin-top:20px;">
+      <button class="btn" id="manual-download-button">Download</button>
+    </div>
+  </div>
+</div>
+
 <!-- About Section -->
 <section id="about" class="view" aria-labelledby="about-title" style="display:none;">
   <h4 id="about-title" style="text-align:center">ABOUT APP</h4>
@@ -1418,6 +1429,38 @@ function closeShare() {
   document.getElementById('shareModal').style.display = 'none';
 }
 document.addEventListener('DOMContentLoaded', init);
+
+ // Generated image
+function showGeneratedImage(dataURL, filename) {
+  document.getElementById('generated-image').src = dataURL;
+  document.getElementById('generated-image-page').style.display = 'flex';
+
+  // Add event listener for manual download button
+  document.getElementById('manual-download-button').addEventListener('click', () => {
+    triggerDownload(dataURL, filename);
+  });
+}
+
+function triggerDownload(dataURL, filename) {
+  const link = document.createElement('a');
+  link.href = dataURL;
+  link.download = filename;
+  link.style.display = 'none';
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+}
+
+  // Show the generated image page
+  const dataURL = canvas.toDataURL('image/png');
+  const filename = `quote_${new Date().toISOString().split('T')[0]}.png`;
+  showGeneratedImage(dataURL, filename);
+
+  // Trigger download after a short delay (for auto-download)
+  setTimeout(() => {
+    triggerDownload(dataURL, filename);
+  }, 3000); // Adjust the delay time as needed
+    }
 
 // Function to open the sidebar
 function openSidebar() {
