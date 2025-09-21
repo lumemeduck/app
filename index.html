@@ -1166,8 +1166,6 @@ ctx.textBaseline = 'alphabetic';
         <button id="backButton" style="padding:10px 20px; font-size:16px; cursor:pointer; background-color:#0ea5e9; color:white; border:none; border-radius:5px;">く Back</button>
     </div>
     `;
-  }, 3000); // Adjust the delay time as needed
-    }
 
   function triggerDownload(dataURL, filename) {
   const link = document.createElement('a');
@@ -1181,8 +1179,9 @@ ctx.textBaseline = 'alphabetic';
 
     // Add event listener to the "Back" button
   document.getElementById('backButton').addEventListener('click', () => {
-    window.location.reload();
-  });
+      window.location.reload(); // Reload the page to return to the home page
+    });
+  }, 3000); 
     }
 
   function roundRect(ctx, x, y, w, h, r){
