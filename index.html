@@ -1140,8 +1140,8 @@ ctx.textBaseline = 'alphabetic';
   // Trigger download after a short delay
   setTimeout(() => {
     triggerDownload(dataURL, filename);
-  }, 3000);
- }
+  }, 3000); // Adjust the delay time as needed
+    }
 
   function generateFilename() {
   // Get the current date in YYYY-MM-DD format
@@ -1167,7 +1167,7 @@ ctx.textBaseline = 'alphabetic';
       window.location.reload();
     });
   }, 3000);
-}
+    }
 
   function roundRect(ctx, x, y, w, h, r){
   const rr = Math.min(r, w/2, h/2);
