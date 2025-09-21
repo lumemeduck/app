@@ -1168,7 +1168,13 @@ function showGeneratedImage(dataURL) {
       </div>
     `;
 
-    function triggerDownload(dataURL, filename) {
+    document.getElementById('backButton').addEventListener('click', () => {
+      window.location.reload(); // Reload the page to return to the home page
+    });
+  }, 2000); // Adjust the delay time as needed
+    }
+
+  function triggerDownload(dataURL, filename) {
   const link = document.createElement('a');
   link.href = dataURL;
   link.download = filename;
@@ -1177,14 +1183,6 @@ function showGeneratedImage(dataURL) {
   link.click();
   document.body.removeChild(link);
     }
-
-    // Add event listener to the "Back" button
-  document.getElementById('backButton').addEventListener('click', () => {
-    window.location.reload(); // Reload the page to return to the home page
-  });
-    }
-  }, 2000); // Adjust the delay time as needed
-}
 
   function roundRect(ctx, x, y, w, h, r){
   const rr = Math.min(r, w/2, h/2);
