@@ -1211,21 +1211,20 @@ ctx.textBaseline = 'alphabetic';
   // Share image
   function shareImage(dataURL) {
   const blob = dataURLToBlob(dataURL);
-  const url = URL.createObjectURL(blob);
+  const file = new File([blob], 'quote.png', { type: 'image/png' });
 
-  if (navigator.share) {
+  if (navigator.canShare && navigator.canShare({ files: [file] })) {
     navigator.share({
       title: 'Rise & Shine',
       text: 'Check out this quote!',
-      url: url
+      files: [file]   // Get file
     }).then(() => {
       console.log('Quote shared successfully!');
     }).catch(error => {
       console.error('Failed to share quote:', error);
     });
   } else {
-    // Fallback: Prompt user to manually share the image
-    alert('Share functionality is not supported. Please manually share the image.');
+    alert('Sharing images is not supported on this browser. Please download instead.');
   }
   }
 
