@@ -1121,12 +1121,6 @@ ctx.textBaseline = 'alphabetic';
   const filename = `quote_${new Date().toISOString().split('T')[0]}.png`;
   showGeneratedImage(dataURL, filename);
 
-  // Trigger download after a short delay (for auto-download)
-  setTimeout(() => {
-    triggerDownload(dataURL, filename);
-  }, 3000); // Adjust the delay time as needed
-  }
-
 function generateFilename() {
   // Get the current date in YYYY-MM-DD format
   const date = new Date().toISOString().split('T')[0];
@@ -1173,7 +1167,13 @@ function showGeneratedImage(dataURL) {
       </div>
     `;
 
-    // Add event listener to the "Save" button
+  document.getElementById('backButton').addEventListener('click', () => {
+      window.location.reload(); // Reload the page to return to the home page
+    });
+  }, 2000); // Adjust the delay time as needed
+    }
+
+  // Add event listener to the "Save" button
   document.getElementById('saveButton').addEventListener('click', () => {
     triggerDownload(dataURL, generateFilename());
   });
@@ -1182,12 +1182,6 @@ function showGeneratedImage(dataURL) {
   document.getElementById('shareButton').addEventListener('click', () => {
     shareImage(dataURL);
   });
-
-  document.getElementById('backButton').addEventListener('click', () => {
-      window.location.reload(); // Reload the page to return to the home page
-    });
-  }, 2000); // Adjust the delay time as needed
-    }
 
   function triggerDownload(dataURL, filename) {
   const link = document.createElement('a');
