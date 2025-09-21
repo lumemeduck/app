@@ -411,16 +411,21 @@ iframe {
     <iframe seamless="seamless" allowtransparency="true" allowfullscreen="true" frameborder="0" src="https://games.e-droid.net/en/sheep-fight-appcreator24/index.html"></iframe>
   </section>
 
-    <!-- Generated Image -->
-  <div id="generated-image-page" style="display:none; position:fixed; inset:0; background:rgba(255,255,255,.95); z-index:1000; justify-content:center; align-items:center;">
-  <div style="background:#fff; padding:20px; border-radius:10px; box-shadow:0 4px 10px rgba(0,0,0,.2);">
-    <h2 style="margin:0 0 10px;">Generated Image</h2>
-    <img id="generated-image" style="max-width:100%; height:auto; display:block; margin:0 auto;" src="">
-    <div style="text-align:center; margin-top:20px;">
-      <button class="btn" id="manual-download-button">Download</button>
+<!-- Generated Image Section -->
+<section id="generated-image" class="view" aria-labelledby="generated-image-title" style="display:none;">
+  <h1 id="generated-image-title"></h1>
+  <div class="card">
+    <div id="loading-indicator" style="text-align:center; margin-bottom:20px;">
+      <div class="spinner" style="width:40px;height:40px;border:4px solid rgba(0,0,0,.1);border-top:4px solid #0ea5e9;border-radius:50%;animation:spin 1s linear infinite;"></div>
+      <p style="font-size:16px;color:#454545;">Generating image...</p>
+    </div>
+    <img id="generated-image-display" style="max-width:100%; height:auto; display:none; margin-bottom:20px;" src="">
+    <div style="display:flex; justify-content:space-between;">
+      <button class="btn" id="download-button" onclick="triggerDownload()">Download</button>
+      <button class="btn" id="share-button" onclick="shareImage()">Share</button>
     </div>
   </div>
-</div>
+</section>
 
 <!-- About Section -->
 <section id="about" class="view" aria-labelledby="about-title" style="display:none;">
@@ -1471,17 +1476,26 @@ function showSection(sectionId) {
 // Show the Home section by default
 showSection('home');
 
+    // Generated image
     function showGeneratedImage(dataURL, filename) {
-  document.getElementById('generated-image').src = dataURL;
-  document.getElementById('generated-image-page').style.display = 'flex';
+  document.getElementById('loading-indicator').style.display = 'block';
+  document.getElementById('generated-image-display').style.display = 'none';
+  document.getElementById('download-button').disabled = true;
+  document.getElementById('share-button').disabled = true;
 
-  // Add event listener for manual download button
-  document.getElementById('manual-download-button').addEventListener('click', () => {
-    triggerDownload(dataURL, filename);
-  });
+  // Simulate image generation delay
+  setTimeout(() => {
+    document.getElementById('loading-indicator').style.display = 'none';
+    document.getElementById('generated-image-display').style.display = 'block';
+    document.getElementById('download-button').disabled = false;
+    document.getElementById('share-button').disabled = false;
+    document.getElementById('generated-image-display').src = dataURL;
+  }, 2000); // Adjust the delay time as needed
 }
 
-function triggerDownload(dataURL, filename) {
+function triggerDownload() {
+  const dataURL = document.getElementById('generated-image-display').src;
+  const filename = `quote_${new Date().toISOString().split('T')[0]}.png`;
   const link = document.createElement('a');
   link.href = dataURL;
   link.download = filename;
@@ -1489,6 +1503,21 @@ function triggerDownload(dataURL, filename) {
   document.body.appendChild(link);
   link.click();
   document.body.removeChild(link);
+}
+
+function shareImage() {
+  const dataURL = document.getElementById('generated-image-display').src;
+  if (navigator.share) {
+    navigator.share({
+      title: 'Rise & Shine',
+      text: 'Check out this quote!',
+      url: dataURL
+    }).then(() => {
+      console.log('Thanks for sharing!');
+    }).catch(console.error);
+  } else {
+    alert('Sharing is not supported on this device.');
+  }
     }
 </script>
 
