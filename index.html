@@ -1470,6 +1470,26 @@ function showSection(sectionId) {
 
 // Show the Home section by default
 showSection('home');
+
+    function showGeneratedImage(dataURL, filename) {
+  document.getElementById('generated-image').src = dataURL;
+  document.getElementById('generated-image-page').style.display = 'flex';
+
+  // Add event listener for manual download button
+  document.getElementById('manual-download-button').addEventListener('click', () => {
+    triggerDownload(dataURL, filename);
+  });
+}
+
+function triggerDownload(dataURL, filename) {
+  const link = document.createElement('a');
+  link.href = dataURL;
+  link.download = filename;
+  link.style.display = 'none';
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+    }
 </script>
 
 
