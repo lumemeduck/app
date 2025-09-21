@@ -1173,6 +1173,16 @@ function showGeneratedImage(dataURL) {
       </div>
     `;
 
+    // Add event listener to the "Save" button
+  document.getElementById('saveButton').addEventListener('click', () => {
+    triggerDownload(dataURL, generateFilename());
+  });
+
+  // Add event listener to the "Share" button
+  document.getElementById('shareButton').addEventListener('click', () => {
+    shareImage(dataURL);
+  });
+
     document.getElementById('backButton').addEventListener('click', () => {
       window.location.reload(); // Reload the page to return to the home page
     });
