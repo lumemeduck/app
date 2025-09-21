@@ -1173,11 +1173,21 @@ function showGeneratedImage(dataURL) {
       </div>
     `;
 
-    document.getElementById('backButton').addEventListener('click', () => {
-      window.location.reload(); // Reload the page to return to the home page
-    });
-  }, 2000); // Adjust the delay time as needed
-    }
+    // Add event listener to the "Save" button
+  document.getElementById('saveButton').addEventListener('click', () => {
+    triggerDownload(dataURL, generateFilename());
+  });
+
+  // Add event listener to the "Share" button
+  document.getElementById('shareButton').addEventListener('click', () => {
+    shareImage(dataURL);
+  });
+
+  // Add event listener to the "Back" button
+  document.getElementById('backButton').addEventListener('click', () => {
+    window.location.reload();
+  });
+  }
 
   function triggerDownload(dataURL, filename) {
   const link = document.createElement('a');
@@ -1465,16 +1475,7 @@ function showSection(sectionId) {
 // Show the Home section by default
 showSection('home');
 
-// Add event listener to the "Save" button
-  document.getElementById('saveButton').addEventListener('click', () => {
-    triggerDownload(dataURL, generateFilename());
-  });
-
-  // Add event listener to the "Share" button
-  document.getElementById('shareButton').addEventListener('click', () => {
-    shareImage(dataURL);
-  });
-
+  // Share image button 
   function shareImage(dataURL) {
   const blob = dataURLToBlob(dataURL);
   const url = URL.createObjectURL(blob);
@@ -1495,6 +1496,7 @@ showSection('home');
   }
   }
 
+  // Share image button helper
   function dataURLToBlob(dataURL) {
   const arr = dataURL.split(',');
   const mime = arr[0].match(/:(.*?);/)[1];
