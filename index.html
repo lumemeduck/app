@@ -1016,7 +1016,7 @@ function resetAll() {
   modal.className = 'reset-modal';
   modal.innerHTML = `
     <div class="reset-box">
-      <div>Delete all your progress streak?</div>
+      <div>Delete your tracked records?</div>
       <button class="btn-ok" onclick="doReset()">Reset</button>
       <button class="btn-cancel" onclick="closeReset()">Close</button>
     </div>
@@ -1160,18 +1160,16 @@ function showGeneratedImage(dataURL) {
   setTimeout(() => {
     document.body.innerHTML = `
       <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100vh;gap:60px;">
-      <div style="background:#fff;padding:20px;border-radius:15px;box-shadow:0 4px 10px rgba(0,0,0,.2);">
         <img src="${dataURL}" style="max-width:90%;height:auto;border-radius:0;box-shadow:0 0 10px rgba(0,0,0,0.5);" />
       <div style="display:flex;align-items:center;justify-content:space-between;">
         <button class="btn" id="download-button" onclick="triggerDownload()"><i class="fas fa-download" style="font-size:14px;"></i> Save</button>
         <button class="btn" id="share-button" onclick="shareImage()"><i class="fas fa-share" style="font-size:14px;"></i> Share</button>
       </div>
       </div>
-      </div>
         <p style="font-size:14px;max-width:90%;opacity:0.8;font-family:sans-serif;text-align:center;">
           🔆 If the download doesn’t start, tap-hold on the image above, tap <strong>save</strong> on the pop-up options
           </p>
-          <button class="btn btn-accent" id="backButton">くBack</button>
+          <button class="btn btn-accent" id="backButton" style="align-items:center;">くBack</button>
       
     `;
 
