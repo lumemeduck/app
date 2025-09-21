@@ -1139,18 +1139,40 @@ ctx.textBaseline = 'alphabetic';
   document.body.style.background = "#f5f7ff";
   document.body.innerHTML = `
     <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100vh;gap:20px;color:#454545;font-family:sans-serif;text-align:center;">
-      <img src="${dataURL}" style="max-width:90%;height:auto;border-radius:0;box-shadow:0 0 10px rgba(0,0,0,0.5);" />
-      <p style="font-size:14px;max-width:90%;opacity:0.8;">
-        🔆 If the download doesn’t start, tap-hold on the image, tap <strong>save</strong> on the pop-up options</p>
-      <button type="buton" class="btn btn-accent" id="backButton">Back</button>
+      <div class="spinner" style="
+        width:40px;height:40px;
+        border:4px solid rgba(0,0,0,.1);
+        border-top:4px solid #0ea5e9;
+        border-radius:50%;
+        animation:spin 1s linear infinite;">
+      </div>
+      <p style="font-size:16px;">Generating image...</p>
     </div>
+    <style>
+      @keyframes spin {
+        from { transform:rotate(0deg); }
+        to { transform:rotate(360deg); }
+      }
+    </style>
   `;
 
-  // Add event listener to the "Back" button
-  document.getElementById('backButton').addEventListener('click', () => {
-      window.location.reload();
+  // Replace waiting prompt with image after a short delay
+  setTimeout(() => {
+    document.body.innerHTML = `
+      <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100vh;gap:20px;color:#454545;font-family:sans-serif;text-align:center;">
+        <img src="${dataURL}" style="max-width:90%;height:auto;border-radius:0;box-shadow:0 0 10px rgba(0,0,0,0.5);" />
+        <p style="font-size:14px;max-width:90%;opacity:0.8;">
+          🔆 If a download doesn’t start, tap-hold the image above and tap <strong>save</strong> on the pop-up screen<br><br><strong>*</strong>swipe-down to refresh after download<strong>*</strong>
+        </p>
+        <button id="backButton" style="padding:10px 20px; font-size:16px; cursor:pointer; background-color:#0ea5e9; color:white; border:none; border-radius:5px;">Back</button>
+      </div>
+    `;
+
+    // Add event listener to the "Back" button
+    document.getElementById('backButton').addEventListener('click', () => {
+      window.location.reload(); // Reload the page to return to the home page
     });
-  }, 3000);
+  }, 3000); // Adjust the delay time as needed
     }
 
   function roundRect(ctx, x, y, w, h, r){
