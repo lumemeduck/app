@@ -335,10 +335,10 @@ iframe {
       <div class="actions">
         <div type="" class="" id="btnProgress" tittle="View Streak Progress"></div>
         <button id="notifyBell" style="background:none;border:none;cursor:pointer;">
-        <i id="bellIcon" class="fas fa-bell" style="font-size:24px;color:#454545;"></i>
+        <i id="bellIcon" class="fas fa-bell" style="font-size:23px;color:#454545;"></i>
         </button>
         <button id="btnReset" title="Reset all data" style="background:none;border:none;cursor:pointer;">
-        <i class="fa fa-refresh" style="font-size:25px;color:#f59e0b;"></i></button>
+        <i class="fa fa-refresh" style="font-size:24px;color:#f59e0b;"></i></button>
       </div>
     </div>
   </header>
@@ -457,6 +457,33 @@ iframe {
   </button>
 </div>
 
+  <!-- Custom Modal -->
+<div id="notifyModal" style="
+  display:none;
+  position:fixed;top:0;left:0;width:100%;height:100%;
+  background:rgba(255,255,255,.4);
+  display:flex;align-items:center;justify-content:center;
+  z-index:9999;
+">
+  <div style="
+    background:#eef1ff;
+    padding:20px;
+    box-shadow:0 4px 8px rgba(0, 0, 0, 0.4);
+    border:1px solid rgba(0,0,0,.1);
+    border-radius:18px;
+    width:80%;
+    max-width:300px;
+    text-align:center;
+    font-family:system-ui;
+    color:#454545;
+  ">
+    <p id="notifyMessage" style="margin-bottom:20px;font-size:16px;">
+      <!-- Message goes here -->
+    </p>
+    <button class="btn btn-accent" onclick="closeNotifyModal()">OK</button>
+  </div>
+</div>
+  
   <!-- Hidden canvas for image export -->
   <canvas id="exportCanvas" width="1080" height="1080" style="display:none;"></canvas>
 
@@ -1512,8 +1539,6 @@ function showSection(sectionId) {
 showSection('home');
 </script>
 
-
-
 <script>
 const bell = document.getElementById("notifyBell");
 const bellIcon = document.getElementById("bellIcon");
@@ -1530,7 +1555,7 @@ function updateBellColor() {
 // Ask for permission
 bell.addEventListener("click", async () => {
   if (!("Notification" in window)) {
-    alert("Notifications are not supported by this browser.");
+    showNotifyModal("Notifications are not supported by this system.");
     return;
   }
 
@@ -1546,7 +1571,7 @@ bell.addEventListener("click", async () => {
     // Already granted fires a test
     showLocalNotification("Rise & Shine 🌞", "Notifications are already enabled!");
   } else {
-    alert("You have blocked notifications. Please allow them in your browser settings.");
+    showNotifyModal("You have blocked notifications. Please allow them in your system settings.");
   }
 
   updateBellColor();
@@ -1571,6 +1596,17 @@ function showLocalNotification(title, body) {
 
 // Initialize bell color
 updateBellColor();
+</script>
+
+<script>
+function showNotifyModal(message) {
+  document.getElementById("notifyMessage").innerText = message;
+  document.getElementById("notifyModal").style.display = "flex";
+}
+
+function closeNotifyModal() {
+  document.getElementById("notifyModal").style.display = "none";
+}
 </script>
 </body>
 </html>
