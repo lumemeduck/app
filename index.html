@@ -293,7 +293,7 @@
 }
 
 .menu-item i {
-  font-size: 22px;
+  font-size: 23px;
 }
 
 .menu-item span {
@@ -335,7 +335,7 @@ iframe {
       <div class="actions">
         <div type="" class="" id="btnProgress" tittle="View Streak Progress"></div>
         <button id="notifyBell" style="background:none;border:none;cursor:pointer;">
-        <i id="bellIcon" class="fas fa-bell" style="font-size:25px;color:#454545;"></i>
+        <i id="bellIcon" class="fas fa-bell" style="font-size:24px;color:#454545;"></i>
         </button>
         <button id="btnReset" title="Reset all data" style="background:none;border:none;cursor:pointer;">
         <i class="fa fa-refresh" style="font-size:25px;color:#f59e0b;"></i></button>
@@ -1521,7 +1521,7 @@ const bellIcon = document.getElementById("bellIcon");
 // Update bell color
 function updateBellColor() {
   if (Notification.permission === "granted") {
-    bellIcon.style.color = "#22c55e"; 
+    bellIcon.style.color = "#0e95e9"; 
   } else {
     bellIcon.style.color = "#454545"; 
   }
