@@ -61,8 +61,8 @@
     max-width:1000px;
     margin:0 auto;
     display:flex; align-items:center; justify-content:space-between;
-    padding:12px 16px;
-    gap:12px;
+    padding:14px 10px;
+    gap:10px;
   }
   .brand{
     display:flex; align-items:center; gap:8px;
@@ -81,12 +81,12 @@
     mix-blend-mode:screen;
   }
   .title{
-    font-weight:800; letter-spacing:.3px; font-size:22px;
+    font-weight:800; letter-spacing:.2px; font-size:22px;
     display:flex; align-items:baseline; gap:8px;
   }
   .title small{ color:var(--muted); font-weight:600; font-size:12px; }
 
-  .actions{display:flex; gap:10px; align-items:center;}
+  .actions{display:flex; gap:8px; align-items:center;}
   .btn{
   appearance:none; border:none; cursor:pointer;
   padding:8px 10px; border-radius:10px;
@@ -329,16 +329,16 @@ iframe {
         <i class="fas fa-bars" style="font-size:18px;font-weight:700;color:#454545;"></i>
       </button>
       <div class="brand" role="button" onclick="Router.go('#')" title="Go Home">
-        <img src="images/rs30.jpg" height= "26px" width= "26px">
+        <img src="images/rs30.jpg" height= "27px" width= "27px">
         <div class="title">Rise & Shine </div>
       </div>
       <div class="actions">
-        <button id="notifyBell" style="background:none;border:none;cursor:pointer;">
-        <i id="bellIcon" class="fas fa-bell" style="font-size:24px;color:#454545;"></i>
-        </button>
         <div type="" class="" id="btnProgress" tittle="View Streak Progress"></div>
-        <button id="btnReset" title="Reset all data">
-        <i class="fa fa-refresh" style="font-size:24px;color:#f59e0b;"></i></button>
+        <button id="notifyBell" style="background:none;border:none;cursor:pointer;">
+        <i id="bellIcon" class="fas fa-bell" style="font-size:25px;color:#454545;"></i>
+        </button>
+        <button id="btnReset" title="Reset all data" style="background:none;border:none;cursor:pointer;">
+        <i class="fa fa-refresh" style="font-size:25px;color:#f59e0b;"></i></button>
       </div>
     </div>
   </header>
