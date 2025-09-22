@@ -1258,7 +1258,7 @@ ctx.textBaseline = 'alphabetic';
       console.error('Failed to share quote:', error);
     });
   } else {
-    alert('Sorry image sharing is not supported on this browser!😶‍🌫️');
+    showNotifyModal('Sorry!<br>Image sharing is not supported on this system.');
   }
   }
 
@@ -1555,7 +1555,7 @@ function updateBellColor() {
 // Ask for permission
 bell.addEventListener("click", async () => {
   if (!("Notification" in window)) {
-    showNotifyModal("Notifications are not supported by this system.");
+    showNotifyModal("Sorry!<br>Notifications are not supported on this system.");
     return;
   }
 
