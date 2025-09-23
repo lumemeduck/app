@@ -1189,15 +1189,15 @@ ctx.textBaseline = 'alphabetic';
   document.body.style.margin = "0";
   document.body.style.background = "#f5f7ff";
   document.body.innerHTML = `
-    <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100vh;gap:20px;color:white;font-family:sans-serif;text-align:center;">
+    <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100vh;gap:20px;color:white;font-family:sans-serif;text-align:center;animation: fadeInBg 0.3s ease forwards;">
       <div class="spinner" style="
         width:40px;height:40px;
         border:4px solid rgba(0,0,0,.1);
         border-top:4px solid #0ea5e9;
         border-radius:50%;
-        animation:spin 1s linear infinite;">
+        animation:spin 1s linear infinite;animation: fadeInCard 0.3s ease forwards;">
       </div>
-      <p style="font-size:16px;color:#454545;">Generating image...</p>
+      <p style="font-size:16px;color:#454545;animation: fadeInCard 0.3s ease forwards;">Generating image...</p>
     </div>
     <style>
       @keyframes spin {
@@ -1210,13 +1210,13 @@ ctx.textBaseline = 'alphabetic';
   // Simulate image generation delay
   setTimeout(() => {
     document.body.innerHTML = `
-      <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100vh;gap:15px;font-family:sans-serif;text-align:center;">
-        <img src="${dataURL}" style="max-width:90%;height:auto;border-radius:0;box-shadow:0 0 10px rgba(0,0,0,0.5);" />
-        <div style="display:flex;max-width:90%;align-items:center;justify-content:space-between;gap:100px;">
+      <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100vh;gap:15px;font-family:sans-serif;text-align:center;animation: fadeInBg 0.3s ease forwards;">
+        <img src="${dataURL}" style="max-width:90%;height:auto;border-radius:0;box-shadow:0 0 10px rgba(0,0,0,0.5);animation: fadeInCard 0.3s ease forwards;" />
+        <div style="display:flex;max-width:90%;align-items:center;justify-content:space-between;gap:100px;animation: fadeInCard 0.3s ease forwards;">
           <button class="btn" id="download-button"><i class="fas fa-download" style="font-size:15px;"></i> Save</button>
           <button class="btn" id="share-button"><i class="fas fa-share" style="font-size:15px;"></i> Share</button>
         </div>
-        <p style="font-size:14px;max-width:90%;opacity:0.8;">
+        <p style="font-size:14px;max-width:90%;opacity:0.8;animation: fadeInCard 0.3s ease forwards;">
             🔆 Sharing doesn’t work in some old webview<br>If notified, you can tap <strong>save</strong> instead.
         </p>
         <br>
