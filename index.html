@@ -1180,7 +1180,7 @@ showGeneratedImage(dataURL, filename);
 
 function generateFilename() {
   const date = new Date().toISOString().split('T')[0];
-  return `quote-${Date.now()}.png`);
+  return `quote-${Date.now()}.png`;
 }
 
 function showGeneratedImage(dataURL, filename) {
@@ -1232,17 +1232,6 @@ function showGeneratedImage(dataURL, filename) {
 }
 }
 
-function dataURLToBlob(dataURL) {
-  const arr = dataURL.split(',');
-  const mime = arr[0].match(/:(.*?);/)[1];
-  const byteStr = atob(arr[1]);
-  const ab = new Uint8Array(byteStr.length);
-  for (let i = 0; i < byteStr.length; i++) {
-    ab[i] = byteStr.charCodeAt(i);
-  }
-  return new Blob([ab], { type: mime });
-}
-
 // Trigger download (browser vs. webview)
 function triggerDownload(dataURL, filename) {
   const isWebView = /(wv|WebView)/i.test(navigator.userAgent);
@@ -1283,7 +1272,7 @@ function triggerDownload(dataURL, filename) {
         display:flex;align-items:center;justify-content:center;
         z-index:9999;animation:fadeInBg 0.3s ease forwards;
       `;
-      fallback.innerHTML = `
+      fallback.body.innerHTML = `
         <style>
           @keyframes fadeInBg { from{opacity:0;} to{opacity:1;} }
           @keyframes fadeInCard { from{opacity:0;transform:scale(0.9);} to{opacity:1;transform:scale(1);} }
@@ -1308,6 +1297,17 @@ function triggerDownload(dataURL, filename) {
       alert("Upload failed. Please try again.");
       console.error(err);
     });
+    }
+
+  function dataURLToBlob(dataURL) {
+  const arr = dataURL.split(',');
+  const mime = arr[0].match(/:(.*?);/)[1];
+  const byteStr = atob(arr[1]);
+  const ab = new Uint8Array(byteStr.length);
+  for (let i = 0; i < byteStr.length; i++) {
+    ab[i] = byteStr.charCodeAt(i);
+  }
+  return new Blob([ab], { type: mime });
     }
 
   // Share image
