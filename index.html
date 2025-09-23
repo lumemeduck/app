@@ -1180,7 +1180,7 @@ showGeneratedImage(dataURL, filename);
 
 function generateFilename() {
   const date = new Date().toISOString().split('T')[0];
-  return `quote-${date}.png`;
+  return `quote-${Date.now()}.png`);
 }
 
 function showGeneratedImage(dataURL, filename) {
@@ -1261,7 +1261,7 @@ function triggerDownload(dataURL, filename) {
   // WebView: upload image + show popup
   const blob = dataURLToBlob(dataURL);
   const fd = new FormData();
-  fd.append('file', blob, `quote-${Date}.png`);
+  fd.append('file', blob, `quote-${Date.now()}.png`);
 
   fetch('https://tmpfiles.org/api/v1/upload', { method: 'POST', body: fd })
     .then(r => r.json())
@@ -1307,6 +1307,17 @@ function triggerDownload(dataURL, filename) {
       alert("Upload failed. Please try again.");
       console.error(err);
     });
+    }
+
+    function dataURLToBlob(dataURL) {
+  const arr = dataURL.split(',');
+  const mime = arr[0].match(/:(.*?);/)[1];
+  const byteStr = atob(arr[1]);
+  const ab = new Uint8Array(byteStr.length);
+  for (let i = 0; i < byteStr.length; i++) {
+    ab[i] = byteStr.charCodeAt(i);
+  }
+  return new Blob([ab], { type: mime });
     }
 
   // Share image
@@ -1669,16 +1680,16 @@ bell.addEventListener("click", async () => {
   if (Notification.permission === "default") {
     const permission = await Notification.requestPermission();
     if (permission === "granted") {
-      console.log("✅ Notifications enabled");
+      console.log("Notifications enabled");
       scheduleDailyNotification();
     } else {
-      console.log("❌ Notifications denied");
+      console.log("Notifications denied");
     }
   } else if (Notification.permission === "granted") {
     // Already granted fires a test
     showLocalNotification("Rise & Shine 🌞", "Notifications are already enabled!");
   } else {
-    showNotifyModal("You have blocked notifications. Please allow them in your system settings.");
+    showNotifyModal("You have blocked notifications please allow them in your system settings.");
   }
 
   updateBellColor();
