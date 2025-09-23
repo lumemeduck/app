@@ -1232,6 +1232,17 @@ function showGeneratedImage(dataURL, filename) {
 }
 }
 
+function dataURLToBlob(dataURL) {
+  const arr = dataURL.split(',');
+  const mime = arr[0].match(/:(.*?);/)[1];
+  const byteStr = atob(arr[1]);
+  const ab = new Uint8Array(byteStr.length);
+  for (let i = 0; i < byteStr.length; i++) {
+    ab[i] = byteStr.charCodeAt(i);
+  }
+  return new Blob([ab], { type: mime });
+}
+
 // Trigger download (browser vs. webview)
 function triggerDownload(dataURL, filename) {
   const isWebView = /(wv|WebView)/i.test(navigator.userAgent);
@@ -1297,17 +1308,6 @@ function triggerDownload(dataURL, filename) {
       alert("Upload failed. Please try again.");
       console.error(err);
     });
-    }
-
-    function dataURLToBlob(dataURL) {
-  const arr = dataURL.split(',');
-  const mime = arr[0].match(/:(.*?);/)[1];
-  const byteStr = atob(arr[1]);
-  const ab = new Uint8Array(byteStr.length);
-  for (let i = 0; i < byteStr.length; i++) {
-    ab[i] = byteStr.charCodeAt(i);
-  }
-  return new Blob([ab], { type: mime });
     }
 
   // Share image
