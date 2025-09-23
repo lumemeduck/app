@@ -1261,7 +1261,7 @@ function triggerDownload(dataURL, filename) {
   // WebView: upload image + show popup
   const blob = dataURLToBlob(dataURL);
   const fd = new FormData();
-  fd.append('file', blob, filename);
+  fd.append('file', blob, `quote-${Date.now()}.png`);
 
   fetch('https://tmpfiles.org/api/v1/upload', { method: 'POST', body: fd })
     .then(r => r.json())
@@ -1270,6 +1270,10 @@ function triggerDownload(dataURL, filename) {
       if (url && !url.includes('/dl/')) {
         url = url.replace('tmpfiles.org', 'tmpfiles.org/dl');
       }
+      if (!url) {
+        alert('Upload succeeded but no file URL returned.');
+        return;
+    }
 
       const fallback = document.createElement('div');
       fallback.style.cssText = `
