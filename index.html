@@ -347,7 +347,7 @@ iframe {
   <header>
     <div class="nav">
       <button id="menuButton" title="Menu" style="background:none;border:none;cursor:pointer;">
-        <i class="fas fa-bars" style="font-size:24px;font-weight:600;color:#454545;"></i>
+        <i class="fas fa-bars" style="font-size:24px;font-weight:500;color:#454545;"></i>
       </button>
       <div class="brand" role="button" onclick="Router.go('#')" title="Go Home">
         <img src="images/rs30.jpg" height= "27px" width= "27px">
@@ -1294,13 +1294,13 @@ function triggerDownload(dataURL, filename) {
           <p style="font-size:14px;opacity:0.8;margin-bottom:15px;">
             Press-hold the image below, then tap <strong>save</strong> on the popup menu.
           </p>
-          <img src="${dataURL}" style="max-width:100%;border-radius:12px;box-shadow:0 0 8px rgba(0,0,0,0.2);margin-bottom:15px;" />
+          <img src="${url}" style="max-width:100%;border-radius:12px;box-shadow:0 0 8px rgba(0,0,0,0.2);margin-bottom:15px;" />
           <button class="btn btn-accent" id="closeDownloadFallback">Done</button>
         </div>
       `;
       document.body.appendChild(fallback);
       document.getElementById('closeDownloadFallback').addEventListener('click', () => {
-        document.body.removeChild(fallback);
+      document.body.removeChild(fallback);
       });
     })
     .catch(err => {
