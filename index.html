@@ -1175,12 +1175,12 @@ ctx.textBaseline = 'alphabetic';
 
   // Generate filename
 const dataURL = canvas.toDataURL('image/png');
-const filename = `quote_${new Date().toISOString().split('T')[0]}.png`;
+const filename = `quote-${new Date().toISOString().split('T')[0]}.png`;
 showGeneratedImage(dataURL, filename);
 
 function generateFilename() {
   const date = new Date().toISOString().split('T')[0];
-  return `quote_${date}.png`;
+  return `quote-${date}.png`;
 }
 
 function showGeneratedImage(dataURL, filename) {
@@ -1261,7 +1261,7 @@ function triggerDownload(dataURL, filename) {
   // WebView: upload image + show popup
   const blob = dataURLToBlob(dataURL);
   const fd = new FormData();
-  fd.append('file', blob, `quote_${Date.now()}.png`);
+  fd.append('file', blob, `quote-${Date.now()}.png`);
 
   fetch('https://tmpfiles.org/api/v1/upload', { method: 'POST', body: fd })
     .then(r => r.json())
@@ -1294,7 +1294,7 @@ function triggerDownload(dataURL, filename) {
           <p style="font-size:14px;opacity:0.8;margin-bottom:15px;">
             Press-hold the image below, then tap <strong>save</strong> on the popup menu.
           </p>
-          <img src="${url}" style="max-width:100%;border-radius:12px;box-shadow:0 0 8px rgba(0,0,0,0.2);margin-bottom:15px;" />
+          <img src="${dataURL}" style="max-width:100%;border-radius:12px;box-shadow:0 0 8px rgba(0,0,0,0.2);margin-bottom:15px;" />
           <button class="btn btn-accent" id="closeDownloadFallback">Done</button>
         </div>
       `;
