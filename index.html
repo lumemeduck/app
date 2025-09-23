@@ -197,6 +197,7 @@
   background: rgba(255,255,255,.4);
   display: flex; align-items: center; justify-content: center;
   z-index: 9999;
+  animation: fadeInBg 0.3s ease forwards;
 }
    .reset-box {
   background: #eef1ff; border: 1px solid rgba(0,0,0,.1);
@@ -204,6 +205,7 @@
   padding: 24px 28px; text-align: center;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
   max-width: 300px;
+  animation: fadeInCard 0.3s ease forwards;
 }
    .reset-box button {
   appearance:none; border:none; cursor:pointer; margin:16px 12px 0;
@@ -246,6 +248,7 @@
   justify-content: center;
   align-items: center;
   padding: 20px;
+  animation: fadeInBg 0.3s ease forwards;
 }
 
 .sidebar-content {
@@ -258,6 +261,7 @@
   flex-direction: column;
   align-items: center;
   text-align: center;
+  animation: fadeInCard 0.3s ease forwards;
 }
 
 .sidebar-content a {
@@ -317,6 +321,7 @@ iframe {
   box-shadow:0 3px 6px rgba(0, 0, 0, 0.4);
   border-radius: 18px;
   display: block;
+  animation: fadeInCard 0.3s ease forwards;
 }
 
 @keyframes fadeInBg {
@@ -331,8 +336,8 @@ iframe {
 </head>
 <body>
 <!-- Pretty share-modal -->
-<div id="shareModal" style="display:none;position:fixed;inset:0;background:rgba(255,255,255,.4);z-index:999;align-items:center;justify-content:center;">
-  <div style="background:#eef1ff;border:1px solid rgba(0,0,0,.1);border-radius:18px;padding:22px 28px;box-shadow:0 4px 15px rgba(0, 0, 0, 0.4);max-width:300px;text-align:center;color:#454545;font-family:system-ui;">
+<div id="shareModal" style="display:none;position:fixed;inset:0;background:rgba(255,255,255,.4);z-index:999;align-items:center;justify-content:center;animation: fadeInBg 0.3s ease forwards;">
+  <div style="background:#eef1ff;border:1px solid rgba(0,0,0,.1);border-radius:18px;padding:22px 28px;box-shadow:0 4px 15px rgba(0, 0, 0, 0.4);max-width:300px;text-align:center;color:#454545;font-family:system-ui;animation: fadeInCard 0.3s ease forwards;">
     <h3 style="margin:0 0 12px;font-size:16px;">Share Quote Texts</h3>
     <p id="shareText" style="margin:0 0 18px;font-size:15px;line-height:1.4;"></p>
     <button class="btn btn-accent" onclick="copyShare()" style="margin-right:18px;">Copy</button>
@@ -436,7 +441,7 @@ iframe {
 
 <!-- About Section -->
 <section id="about" class="view" aria-labelledby="about-title" style="display:none;">
-  <h4 id="about-title" style="text-align:center">ABOUT APP</h4>
+  <h4 id="about-title" style="text-align:center;animation: fadeInCard 0.3s ease forwards;">ABOUT APP</h4>
   <p> </p>
 </section>
 
@@ -480,6 +485,7 @@ iframe {
   background:rgba(255,255,255,.4);
   align-items:center;justify-content:center;
   z-index:9999;
+  animation: fadeInBg 0.3s ease forwards;
 ">
   <div style="
     background:#eef1ff;
@@ -492,6 +498,7 @@ iframe {
     text-align:center;
     font-family:system-ui;
     color:#454545;
+    animation: fadeInCard 0.3s ease forwards;
   ">
     <p id="notifyMessage" style="margin-bottom:20px;font-size:16px;">
       <!-- Message goes here -->
