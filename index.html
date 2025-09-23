@@ -1301,15 +1301,15 @@ function triggerDownload(dataURL, filename) {
   modal.className = 'reset-modal';
   modal.innerHTML = `
     <div class="reset-box">
-      <div style="font-size:16px;margin-bottom:12px;">Error Connections!</div>
+      <div style="font-size:16px;margin-bottom:12px;">Error Connection!</div>
       <p style="font-size:14px;margin:0 0 18px;line-height:1.4;">
         Pull down on your screen to refresh<br>page and try saving again.
       </p>
-      <button class="btn" onclick="document.getElementById('failModal').remove()">Ok</button>
+      <button class="btn-ok" onclick="document.getElementById('failModal').remove()">Ok</button>
     </div>
   `;
   document.body.appendChild(modal);
-  setTimeout(() => modal.remove(), 3000);
+  setTimeout(() => modal.remove(), 10000);
 });
 }
 
