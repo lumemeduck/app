@@ -1173,41 +1173,31 @@ ctx.textBaseline = 'alphabetic';
   // Decorative corner sun
   drawSun(ctx, cardX + cardW - 110, cardY + 110, 44);
 
-  // Show the generated image page
-  const dataURL = canvas.toDataURL('image/png');
-  const filename = `quote_${new Date().toISOString().split('T')[0]}.png`;
-  showGeneratedImage(dataURL, filename);
+  // Generate filename
+const dataURL = canvas.toDataURL('image/png');
+const filename = `quote_${new Date().toISOString().split('T')[0]}.png`;
+showGeneratedImage(dataURL, filename);
 
-  function generateFilename() {
-  // Get the current date in YYYY-MM-DD format
+function generateFilename() {
   const date = new Date().toISOString().split('T')[0];
   return `quote_${date}.png`;
-  }
+}
 
-  function showGeneratedImage(dataURL, filename) {
-  // Show waiting prompt immediately
+function showGeneratedImage(dataURL, filename) {
+  // Show waiting spinner
   document.body.style.margin = "0";
   document.body.style.background = "#f5f7ff";
   document.body.innerHTML = `
-    <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100vh;gap:20px;color:white;font-family:sans-serif;text-align:center;animation: fadeInBg 0.3s ease forwards;">
-      <div class="spinner" style="
-        width:40px;height:40px;
-        border:4px solid rgba(0,0,0,.1);
-        border-top:4px solid #0ea5e9;
-        border-radius:50%;
-        animation:spin 1s linear infinite;">
-      </div>
+    <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100vh;gap:20px;font-family:sans-serif;text-align:center;animation: fadeInBg 0.3s ease forwards;">
+      <div class="spinner" style="width:40px;height:40px;border:4px solid rgba(0,0,0,.1);border-top:4px solid #0ea5e9;border-radius:50%;animation:spin 1s linear infinite;"></div>
       <p style="font-size:16px;color:#454545;">Generating image...</p>
     </div>
     <style>
-      @keyframes spin {
-        from { transform:rotate(0deg); }
-        to { transform:rotate(360deg); }
-      }
+      @keyframes spin { from { transform:rotate(0deg);} to { transform:rotate(360deg);} }
     </style>
   `;
 
-  // Simulate image generation delay
+  // Simulate delay
   setTimeout(() => {
     document.body.innerHTML = `
       <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100vh;gap:15px;font-family:sans-serif;text-align:center;animation: fadeInBg 0.3s ease forwards;">
@@ -1217,49 +1207,46 @@ ctx.textBaseline = 'alphabetic';
           <button class="btn" id="share-button"><i class="fas fa-share" style="font-size:15px;"></i> Share</button>
         </div>
         <p style="font-size:14px;max-width:90%;opacity:0.8;animation: fadeInCard 0.3s ease forwards;">
-            🔆 Sharing doesn’t work in some old webview<br>If notified, you can tap <strong>save</strong> instead.
+          🔆 Sharing doesn’t work in some old webview<br>If notified, you can tap <strong>save</strong> instead.
         </p>
         <br>
         <button class="btn btn-accent" id="backButton">く Back</button>
       </div>
     `;
 
-    // Add event listener to the "Save" button
+    // Save button
     document.getElementById('download-button').addEventListener('click', () => {
       triggerDownload(dataURL, filename);
     });
 
-    // Add event listener to the "Share" button
+    // Share button
     document.getElementById('share-button').addEventListener('click', () => {
       shareImage(dataURL);
     });
 
-    // Add event listener to the "Back" button
+    // Back button
     document.getElementById('backButton').addEventListener('click', () => {
       window.location.reload();
     });
-  }, 3000); // Adjust the delay time as needed
-   }
+  }, 2000);
 }
 
-  // Function helper
-  function dataURLToBlob(dataURL) {
+// Convert dataURL → Blob
+function dataURLToBlob(dataURL) {
   const arr = dataURL.split(',');
   const mime = arr[0].match(/:(.*?);/)[1];
   const byteStr = atob(arr[1]);
   const ab = new Uint8Array(byteStr.length);
-  for (let i = 0; i < byteStr.length; i++) {
-    ab[i] = byteStr.charCodeAt(i);
-  }
+  for (let i = 0; i < byteStr.length; i++) ab[i] = byteStr.charCodeAt(i);
   return new Blob([ab], { type: mime });
-    }
+}
 
-  // Download image
-  function triggerDownload(dataURL, filename) {
+// Trigger download (browser vs. webview)
+function triggerDownload(dataURL, filename) {
   const isWebView = /(wv|WebView)/i.test(navigator.userAgent);
 
   if (!isWebView) {
-    // Normal browser
+    // Normal browser auto-download
     const link = document.createElement('a');
     link.href = dataURL;
     link.download = filename;
@@ -1270,59 +1257,51 @@ ctx.textBaseline = 'alphabetic';
     return;
   }
 
-  // WebView popup
-  const fallback = document.createElement('div');
-  fallback.style.cssText = `
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background: rgba(255,255,255,0.4);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 9999;
-    animation: fadeInBg 0.3s ease forwards;
-  `;
+  // WebView: upload image + show popup
+  const blob = dataURLToBlob(dataURL);
+  const fd = new FormData();
+  fd.append('file', blob, filename);
 
-  fallback.innerHTML = `
-   <style>
-      @keyframes fadeInBg {
-        from { opacity: 0; }
-        to { opacity: 1; }
+  fetch('https://tmpfiles.org/api/v1/upload', { method: 'POST', body: fd })
+    .then(r => r.json())
+    .then(res => {
+      let url = res.data?.url || res.data || res.url;
+      if (url && !url.includes('/dl/')) {
+        url = url.replace('tmpfiles.org', 'tmpfiles.org/dl');
       }
-      @keyframes fadeInCard {
-        from { opacity: 0; transform: scale(0.9); }
-        to { opacity: 1; transform: scale(1); }
-      }
-    </style>
-    <div style="
-      background: #eef1ff;
-      color: #454545;
-      box-shadow:0 4px 15px rgba(0, 0, 0, 0.4);
-      border:1px solid rgba(0,0,0,.1);
-      border-radius: 18px;
-      padding: 20px;
-      max-width: 320px;
-      text-align: center;
-      font-family: system-ui;
-      animation: fadeInCard 0.3s ease forwards;
-    ">
-      <h3 style="margin-bottom: 10px; font-size: 16px;">
-        Webview System Ignoring!
-      </h3>
-      <p style="font-size:14px; opacity:0.8; margin-bottom: 15px;">
-        Press-hold the image below, then click on <strong>Save</strong> from the shown menu.
-      </p>
-      <img src="${dataURL}" style="max-width:100%;border-radius:12px;box-shadow:0 0 8px rgba(0,0,0,0.2);margin-bottom:15px;" />
-      <button class="btn btn-accent" id="closeDownloadFallback">Done</button>
-    </div>
-  `;
 
-  document.body.appendChild(fallback);
-
-  document.getElementById('closeDownloadFallback').addEventListener('click', () => {
-    document.body.removeChild(fallback);
-  });
+      const fallback = document.createElement('div');
+      fallback.style.cssText = `
+        position: fixed;top:0;left:0;width:100%;height:100%;
+        background: rgba(255,255,255,0.4);
+        display:flex;align-items:center;justify-content:center;
+        z-index:9999;animation:fadeInBg 0.3s ease forwards;
+      `;
+      fallback.innerHTML = `
+        <style>
+          @keyframes fadeInBg { from{opacity:0;} to{opacity:1;} }
+          @keyframes fadeInCard { from{opacity:0;transform:scale(0.9);} to{opacity:1;transform:scale(1);} }
+        </style>
+        <div style="background:#eef1ff;color:#454545;box-shadow:0 4px 15px rgba(0,0,0,0.4);
+          border-radius:18px;padding:20px;max-width:320px;text-align:center;
+          font-family:system-ui;animation:fadeInCard 0.3s ease forwards;">
+          <h3 style="margin-bottom:10px;font-size:16px;">Auto Download Rejected!</h3>
+          <p style="font-size:14px;opacity:0.8;margin-bottom:15px;">
+            Press-hold the image below, then tap <strong>save</strong> on the popup menu.
+          </p>
+          <img src="${url}" style="max-width:100%;border-radius:12px;box-shadow:0 0 8px rgba(0,0,0,0.2);margin-bottom:15px;" />
+          <button class="btn btn-accent" id="closeDownloadFallback">Done</button>
+        </div>
+      `;
+      document.body.appendChild(fallback);
+      document.getElementById('closeDownloadFallback').addEventListener('click', () => {
+        document.body.removeChild(fallback);
+      });
+    })
+    .catch(err => {
+      alert("Upload failed. Please try again.");
+      console.error(err);
+    });
     }
 
   // Share image
