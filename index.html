@@ -1261,7 +1261,7 @@ function triggerDownload(dataURL, filename) {
   // WebView: upload image + show popup
   const blob = dataURLToBlob(dataURL);
   const fd = new FormData();
-  fd.append('file', blob, `quote-${Date.now()}.png`);
+  fd.append('file', blob, `quote-${Date}.png`);
 
   fetch('https://tmpfiles.org/api/v1/upload', { method: 'POST', body: fd })
     .then(r => r.json())
