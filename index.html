@@ -1201,7 +1201,7 @@ function showGeneratedImage(dataURL, filename) {
   setTimeout(() => {
     document.body.innerHTML = `
       <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100vh;gap:15px;font-family:sans-serif;text-align:center;animation: fadeInBg 0.3s ease forwards;">
-        <img src="${url}" style="max-width:90%;height:auto;border-radius:0;box-shadow:0 0 10px rgba(0,0,0,0.5);animation: fadeInCard 0.3s ease forwards;" />
+        <img src="${dataURL}" style="max-width:90%;height:auto;border-radius:0;box-shadow:0 0 10px rgba(0,0,0,0.5);animation: fadeInCard 0.3s ease forwards;" />
         <div style="display:flex;max-width:90%;align-items:center;justify-content:space-between;gap:100px;animation: fadeInCard 0.3s ease forwards;">
           <button class="btn" id="download-button"><i class="fas fa-download" style="font-size:15px;"></i> Save</button>
           <button class="btn" id="share-button"><i class="fas fa-share" style="font-size:15px;"></i> Share</button>
@@ -1261,7 +1261,7 @@ function triggerDownload(dataURL, filename) {
   // WebView: upload image + show popup
   const blob = dataURLToBlob(dataURL);
   const fd = new FormData();
-  fd.append('file', blob, `quote-${Date.now()}.png`);
+  fd.append('file', blob, `quote_${Date.now()}.png`);
 
   fetch('https://tmpfiles.org/api/v1/upload', { method: 'POST', body: fd })
     .then(r => r.json())
@@ -1290,7 +1290,7 @@ function triggerDownload(dataURL, filename) {
         <div style="background:#eef1ff;color:#454545;box-shadow:0 4px 15px rgba(0,0,0,0.4);
           border-radius:18px;padding:20px;max-width:320px;text-align:center;
           font-family:system-ui;animation:fadeInCard 0.3s ease forwards;">
-          <h3 style="margin-bottom:10px;font-size:16px;">Auto Download Rejected!</h3>
+          <h3 style="margin-bottom:10px;font-size:16px;">Auto Download Ignored!</h3>
           <p style="font-size:14px;opacity:0.8;margin-bottom:15px;">
             Press-hold the image below, then tap <strong>save</strong> on the popup menu.
           </p>
