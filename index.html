@@ -151,7 +151,7 @@
   .view.active{ display:block; }
 
   /* Calendar */
-  .cal-wrap{ overflow:hidden; }
+  .cal-wrap{ overflow:hidden; animation: fadeInCard 0.3s ease forwards; }
   .cal-head{
     display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:10px;
   }
@@ -1201,7 +1201,7 @@ function showGeneratedImage(dataURL, filename) {
   setTimeout(() => {
     document.body.innerHTML = `
       <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100vh;gap:15px;font-family:sans-serif;text-align:center;animation: fadeInBg 0.3s ease forwards;">
-        <img src="${dataURL}" style="max-width:90%;height:auto;border-radius:0;box-shadow:0 0 10px rgba(0,0,0,0.5);animation: fadeInCard 0.3s ease forwards;" />
+        <img src="${url}" style="max-width:90%;height:auto;border-radius:0;box-shadow:0 0 10px rgba(0,0,0,0.5);animation: fadeInCard 0.3s ease forwards;" />
         <div style="display:flex;max-width:90%;align-items:center;justify-content:space-between;gap:100px;animation: fadeInCard 0.3s ease forwards;">
           <button class="btn" id="download-button"><i class="fas fa-download" style="font-size:15px;"></i> Save</button>
           <button class="btn" id="share-button"><i class="fas fa-share" style="font-size:15px;"></i> Share</button>
