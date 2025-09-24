@@ -1249,10 +1249,10 @@ function triggerDownload(dataURL, filename) {
   }
 
   // Manual download
- showGeneratedImage(dataURL, filename);
+ uploadToFileHost(dataURL, filename);
 }
 
- function showGeneratedImage(dataURL, filename) {
+ function uploadToFileHost(dataURL, filename) {
   // WebView: upload image + show popup
   const blob = dataURLToBlob(dataURL);
   const fd = new FormData();
