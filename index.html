@@ -1230,7 +1230,6 @@ function showGeneratedImage(dataURL, filename) {
     });
   }, 2000);
 }
-}
 
 // Trigger download (browser vs. webview)
 function triggerDownload(dataURL, filename) {
@@ -1247,12 +1246,12 @@ function triggerDownload(dataURL, filename) {
     document.body.removeChild(link);
     return;
   }
-  
- // Manual download 
-  const dataURL = canvas.toDataURL('image/png');
+
+  // Manual download
   uploadToFileHost(dataURL);
 }
-  function uploadToFileHost(dataURL) {
+
+function uploadToFileHost(dataURL) {
   // WebView: upload image + show popup
   const blob = dataURLToBlob(dataURL);
   const fd = new FormData();
@@ -1268,7 +1267,7 @@ function triggerDownload(dataURL, filename) {
       if (!url) {
         alert('Upload succeeded but no file URL returned.');
         return;
-    }
+      }
 
       const fallback = document.createElement('div');
       fallback.style.cssText = `
@@ -1295,30 +1294,30 @@ function triggerDownload(dataURL, filename) {
       `;
       document.body.appendChild(fallback);
       document.getElementById('closeDownloadFallback').addEventListener('click', () => {
-      document.body.removeChild(fallback);
+        document.body.removeChild(fallback);
       });
     })
     .catch(err => {
-  console.error(err);
+      console.error(err);
 
-  const modal = document.createElement('div');
-  modal.id = 'failModal';
-  modal.className = 'reset-modal';
-  modal.innerHTML = `
-    <div class="reset-box">
-      <div style="font-size:16px;margin-bottom:12px;">Error Connection!</div>
-      <p style="font-size:14px;margin:0 0 18px;line-height:1.4;">
-        Pull down on your screen to refresh<br>page and try saving again.
-      </p>
-      <button class="btn-ok" onclick="document.getElementById('failModal').remove()">Ok</button>
-    </div>
-  `;
-  document.body.appendChild(modal);
-  setTimeout(() => modal.remove(), 10000);
-});
+      const modal = document.createElement('div');
+      modal.id = 'failModal';
+      modal.className = 'reset-modal';
+      modal.innerHTML = `
+        <div class="reset-box">
+          <div style="font-size:16px;margin-bottom:12px;">Error Connection!</div>
+          <p style="font-size:14px;margin:0 0 18px;line-height:1.4;">
+            Pull down on your screen to refresh<br>page and try saving again.
+          </p>
+          <button class="btn-ok" onclick="document.getElementById('failModal').remove()">Ok</button>
+        </div>
+      `;
+      document.body.appendChild(modal);
+      setTimeout(() => modal.remove(), 10000);
+    });
 }
 
-  function dataURLToBlob(dataURL) {
+function dataURLToBlob(dataURL) {
   const arr = dataURL.split(',');
   const mime = arr[0].match(/:(.*?);/)[1];
   const byteStr = atob(arr[1]);
