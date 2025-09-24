@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Rise & Shine - Daily Motivation</title>
+  <title>Rise & Shine</title>
   <meta charset="UTF-8">
   <meta name="google-site-verification" content="Jz3OIiXGeT_kcVZ8EcSgJyF2TMbT2FtBCQ5T-fkne1I" />
-  <meta name="description" content="Rise & Shine is a habit builder, packed with well curated quotes and exercises challenge for building daily habits with motivation and fitness; powered by the lumeme duck crypto project.">
-  <meta name="lumeme duck app" content="Rise & Shine - Daily Motivation">
+  <meta name="description" content="Rise & Shine is a habit builder, packed with well curated mind lifting quotes and fun exercises challenge for building daily habits with inspiration and fitness; powered by the lumeme duck crypto project.">
+  <meta name="lumeme duck app" content="Rise & Shine">
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <link rel="icon" type="image/jpg" href="images/rise-shine.jpg">
   <link rel="manifest" href="manifest.json">
@@ -1247,11 +1247,16 @@ function triggerDownload(dataURL, filename) {
     document.body.removeChild(link);
     return;
   }
-
+  
+ // Manual download 
+  const dataURL = canvas.toDataURL('image/png');
+  uploadToFileHost(dataURL);
+}
+  function uploadToFileHost(dataURL)
   // WebView: upload image + show popup
   const blob = dataURLToBlob(dataURL);
   const fd = new FormData();
-  fd.append('file', blob, `quote_${date}.png`);
+  fd.append('file', blob, `quote-${Date.now()}.png`);
 
   fetch('https://tmpfiles.org/api/v1/upload', { method: 'POST', body: fd })
     .then(r => r.json())
@@ -1284,7 +1289,7 @@ function triggerDownload(dataURL, filename) {
           <p style="font-size:14px;opacity:0.8;margin-bottom:15px;">
             Press-hold the image below, then tap <strong>save</strong> on the popup menu.
           </p>
-          <img src="${dataURL,filename}" style="max-width:100%;border-radius:12px;box-shadow:0 0 8px rgba(0,0,0,0.2);margin-bottom:15px;" />
+          <img src="${url}" style="max-width:100%;border-radius:12px;box-shadow:0 0 8px rgba(0,0,0,0.2);margin-bottom:15px;" />
           <button class="btn btn-accent" id="closeDownloadFallback">Done</button>
         </div>
       `;
