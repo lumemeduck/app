@@ -1298,6 +1298,7 @@ function triggerDownload(dataURL, filename) {
       document.body.removeChild(fallback);
       });
     })
+    }
     .catch(err => {
   console.error(err);
 
@@ -1316,7 +1317,6 @@ function triggerDownload(dataURL, filename) {
   document.body.appendChild(modal);
   setTimeout(() => modal.remove(), 10000);
 });
-}
 }
 
   function dataURLToBlob(dataURL) {
