@@ -1249,10 +1249,10 @@ function triggerDownload(dataURL, filename) {
   }
 
   // Manual download
- uploadToFileHost(dataURL, filename);
+ showGeneratedImage(dataURL, filename);
 }
 
- function uploadToFileHost(dataURL, filename) {
+ function showGeneratedImage(dataURL, filename) {
   // WebView: upload image + show popup
   const blob = dataURLToBlob(dataURL);
   const fd = new FormData();
@@ -1289,7 +1289,8 @@ function triggerDownload(dataURL, filename) {
           <p style="font-size:14px;opacity:0.8;margin-bottom:15px;">
             Press-hold the image below, then tap <strong>save</strong> on the popup menu.
           </p>
-          <img src="${url}" style="max-width:100%;border-radius:12px;box-shadow:0 0 8px rgba(0,0,0,0.2);margin-bottom:15px;" />
+          <a href="${url}" target="_blank" download="${filename}">
+          <img src="${dataURL}" alt="Generated" style="max-width:100%;border-radius:12px;box-shadow:0 0 8px rgba(0,0,0,0.2);margin-bottom:15px;" />
           <button class="btn btn-accent" id="closeDownloadFallback">Done</button>
         </div>
       `;
