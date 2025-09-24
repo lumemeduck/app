@@ -1284,7 +1284,7 @@ function triggerDownload(dataURL, filename) {
           <p style="font-size:14px;opacity:0.8;margin-bottom:15px;">
             Press-hold the image below, then tap <strong>save</strong> on the popup menu.
           </p>
-          <img src="${fileURL}" style="max-width:100%;border-radius:12px;box-shadow:0 0 8px rgba(0,0,0,0.2);margin-bottom:15px;" />
+          <img src="${dataURL,filename}" style="max-width:100%;border-radius:12px;box-shadow:0 0 8px rgba(0,0,0,0.2);margin-bottom:15px;" />
           <button class="btn btn-accent" id="closeDownloadFallback">Done</button>
         </div>
       `;
