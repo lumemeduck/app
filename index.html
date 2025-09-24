@@ -1254,9 +1254,9 @@ function triggerDownload(dataURL, filename) {
 
  function uploadToFileHost(dataURL, filename) {
   // WebView: upload image + show popup
-  const blob = dataURLToBlob(dataURL);
+  const blob = dataURLToBlob(dataURL, filename);
   const fd = new FormData();
-  fd.append('file', blob, `quote-${Date.now()}.png`);
+  fd.append('file', blob, `quote_${date}.png`);
 
   fetch('https://tmpfiles.org/api/v1/upload', { method: 'POST', body: fd })
     .then(r => r.json())
@@ -1318,7 +1318,7 @@ function triggerDownload(dataURL, filename) {
     });
 }
 
-function dataURLToBlob(dataURL) {
+function dataURLToBlob(dataURL, filename) {
   const arr = dataURL.split(',');
   const mime = arr[0].match(/:(.*?);/)[1];
   const byteStr = atob(arr[1]);
