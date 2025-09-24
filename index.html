@@ -1279,13 +1279,13 @@ function triggerDownload(dataURL, filename) {
       `;
       fallback.innerHTML = `
         <div style="background:#eef1ff;color:#454545;box-shadow:0 4px 15px rgba(0,0,0,0.4);
-          border-radius:18px;padding:20px;max-width:320px;align-items:center;
+          border-radius:18px;padding:20px;max-width:320px;align-text:center;justify-content:center;
           font-family:system-ui;animation:fadeInCard 0.3s ease forwards;">
           <h3 style="margin-bottom:10px;font-size:16px;">Auto Download Ignored!</h3>
           <p style="font-size:14px;opacity:0.8;margin-bottom:15px;">
             Press-hold the image below, then tap <strong>save</strong> on the popup menu.
           </p>
-          <a href="${url}" download="${filename}">
+          <a href="${dataURL}" target="_blank" download="${filename}">
           <img src="${dataURL}" alt="Generated" style="max-width:100%;border-radius:12px;box-shadow:0 0 8px rgba(0,0,0,0.2);margin-bottom:15px;"></a>
           <button class="btn btn-accent" id="closeDownloadFallback">Done</button>
         </div>
