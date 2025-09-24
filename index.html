@@ -1254,7 +1254,7 @@ function triggerDownload(dataURL, filename) {
 
  function uploadToFileHost(dataURL, filename) {
   // WebView: upload image + show popup
-  const blob = dataURLToBlob(dataURL, filename);
+  const blob = dataURLToBlob(dataURL);
   const fd = new FormData();
   fd.append('file', blob, `quote_${date}.png`);
 
@@ -1318,7 +1318,7 @@ function triggerDownload(dataURL, filename) {
     });
 }
 
-function dataURLToBlob(dataURL, filename) {
+function dataURLToBlob(dataURL) {
   const arr = dataURL.split(',');
   const mime = arr[0].match(/:(.*?);/)[1];
   const byteStr = atob(arr[1]);
