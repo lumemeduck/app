@@ -1175,15 +1175,10 @@ ctx.textBaseline = 'alphabetic';
 
   // Generate filename
 const dataURL = canvas.toDataURL('image/png');
-const filename = `quote_${new Date().toISOString().split('T')[0]}.png`;
-uploadToFileHost(dataURL, filename);
-
-function generateFilename() {
-  const date = new Date().toISOString().split('T')[0];
-  return `quote_${date}.png`;
+uploadToFileHost(dataURL);
 }
 
-function uploadToFileHost(dataURL, filename) {
+function uploadToFileHost(dataURL) {
   // Show waiting spinner
   document.body.style.margin = "0";
   document.body.style.background = "#f5f7ff";
