@@ -646,7 +646,7 @@ const QUOTES = [
   {t:"Every time you rise after falling, you redefine strength.", a:"LMD Quotes"},
   {t:"Greatness grows quietly through small, repeated acts.", a:"LMD Quotes"},
   {t:"Your inner fire is brighterVinebreSoftware than today’s struggle.", a:"LMD Quotes"},
-  {t:"If you want energy, create it through movement.", a:"LMD Quotes"},
+  {t:"If you want energy, create it through movement.", a:"Lumeme Duck"},
   {t:"Believe you can and you’re halfway there.", a:"Theodore Roosevelt"},
   {t:"I am not a product of my circumstances. I am a product of my decisions.", a:"Stephen R. Covey"},
   {t:"Opportunities don't happen, you create them.", a:"Chris Grosser"},
@@ -1166,9 +1166,9 @@ ctx.textAlign = 'start';
 ctx.textBaseline = 'alphabetic';
 
   // Footer mark
-  ctx.font = "600 22px system-ui, Segoe UI, Roboto, Arial";
+  ctx.font = "700 20px system-ui, Segoe UI, Roboto, Arial";
   ctx.fillStyle = "rgba(200,210,255,.9)";
-  ctx.fillText("🌐 Visit: app.lumemeduck.xyz", cardX + 40, cardY + cardH - 50);
+  ctx.fillText("🌐 app.lumemeduck.xyz", cardX + 40, cardY + cardH - 50);
 
   // Decorative corner sun
   drawSun(ctx, cardX + cardW - 110, cardY + 110, 44);
@@ -1276,7 +1276,7 @@ function triggerDownload(dataURL, filename) {
           font-family:system-ui;animation:fadeInCard 0.3s ease forwards;">
           <h3 style="margin-bottom:10px;font-size:16px;">System Isn't Responding!</h3>
           <p style="font-size:14px;opacity:0.8;margin-bottom:15px;">
-            Click on the image below to open it, then press-hold on the image to save.
+            Click on the image below to open externally, then press-hold on the image to save.
           </p>
           <a href="${url}" target="_blank" download="${filename}">
           <img src="${dataURL}" alt="Generated" style="max-width:100%;border-radius:12px;box-shadow:0 0 8px rgba(0,0,0,0.2);margin-bottom:15px;"></a>
