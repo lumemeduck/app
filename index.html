@@ -1176,14 +1176,14 @@ ctx.textBaseline = 'alphabetic';
   // Generate filename
 const dataURL = canvas.toDataURL('image/png');
 const filename = `quote_${new Date().toISOString().split('T')[0]}.png`;
-showGeneratedImage(dataURL, filename);
+uploadToFileHost(dataURL, filename);
 
 function generateFilename() {
   const date = new Date().toISOString().split('T')[0];
   return `quote_${date}.png`;
 }
 
-function showGeneratedImage(dataURL, filename) {
+function uploadToFileHost(dataURL, filename) {
   // Show waiting spinner
   document.body.style.margin = "0";
   document.body.style.background = "#f5f7ff";
@@ -1197,11 +1197,27 @@ function showGeneratedImage(dataURL, filename) {
     </style>
   `;
 
+  const blob = dataURLToBlob(dataURL);
+  const fd = new FormData();
+  fd.append('file', blob, `quote-${Date.now()}.png`);
+
+  fetch('https://tmpfiles.org/api/v1/upload', { method: 'POST', body: fd })
+    .then(r => r.json())
+    .then(res => {
+      let url = res.data?.url || res.data || res.url;
+      if (url && !url.includes('/dl/')) {
+        url = url.replace('tmpfiles.org', 'tmpfiles.org/dl');
+      }
+      if (!url) {
+        alert('Upload succeeded but no file URL returned.');
+        return;
+    }
+
   // Simulate delay
   setTimeout(() => {
     document.body.innerHTML = `
       <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100vh;gap:15px;font-family:sans-serif;text-align:center;animation: fadeInBg 0.3s ease forwards;">
-        <img src="${dataURL}" style="max-width:90%;height:auto;border-radius:0;box-shadow:0 0 10px rgba(0,0,0,0.5);animation: fadeInCard 0.3s ease forwards;" />
+        <img src="${url}" style="max-width:90%;height:auto;border-radius:0;box-shadow:0 0 10px rgba(0,0,0,0.5);animation: fadeInCard 0.3s ease forwards;" />
         <div style="display:flex;max-width:90%;align-items:center;justify-content:space-between;gap:100px;animation: fadeInCard 0.3s ease forwards;">
           <button class="btn" id="download-button"><i class="fas fa-download" style="font-size:15px;"></i> Save</button>
           <button class="btn" id="share-button"><i class="fas fa-share" style="font-size:15px;"></i> Share</button>
@@ -1249,26 +1265,9 @@ function triggerDownload(dataURL, filename) {
   }
 
   // Manual download
- showGeneratedImage(dataURL, filename);
-}
 
- function showGeneratedImage(dataURL, filename) {
   // WebView: upload image + show popup
-  const blob = dataURLToBlob(dataURL);
-  const fd = new FormData();
-  fd.append('file', blob, `quote_${Date.now()}.png`);
-
-  fetch('https://tmpfiles.org/api/v1/upload', { method: 'POST', body: fd })
-    .then(r => r.json())
-    .then(res => {
-      let url = res.data?.url || res.data || res.url;
-      if (url && !url.includes('/dl/')) {
-        url = url.replace('tmpfiles.org', 'tmpfiles.org/dl');
-      }
-      if (!url) {
-        alert('Upload succeeded but no file URL returned.');
-        return;
-      }
+  
 
       const fallback = document.createElement('div');
       fallback.style.cssText = `
@@ -1285,8 +1284,8 @@ function triggerDownload(dataURL, filename) {
           <p style="font-size:14px;opacity:0.8;margin-bottom:15px;">
             Press-hold the image below, then tap <strong>save</strong> on the popup menu.
           </p>
-          <a href="${url}" target="_blank" download="${url}">
-          <img src="${dataURL}" alt="Generated" style="max-width:100%;border-radius:12px;box-shadow:0 0 8px rgba(0,0,0,0.2);margin-bottom:15px;"></a>
+          <a href="${dataURL}" target="_blank" download="${filename}">
+          <img src="${url}" alt="Generated" style="max-width:100%;border-radius:12px;box-shadow:0 0 8px rgba(0,0,0,0.2);margin-bottom:15px;"></a>
           <button class="btn btn-accent" id="closeDownloadFallback">Done</button>
         </div>
       `;
