@@ -1258,7 +1258,7 @@ function uploadToFileHost(dataURL) {
   const fd = new FormData();
   fd.append('file', blob, `quote-${Date.now()}.png`);
 
-  fetch('https://tmpfiles.org/api/v1/upload', { method: 'POST', body: fd })
+  fetch('http://tmpfiles.org/api/v1/upload', { method: 'POST', body: fd })
     .then(r => r.json())
     .then(res => {
       let url = res.data?.url || res.data || res.url;
@@ -1290,7 +1290,7 @@ function uploadToFileHost(dataURL) {
             Press-hold the image below, then tap <strong>save</strong> on the popup menu.
           </p>
           <img src="${url}" style="max-width:100%;border-radius:12px;box-shadow:0 0 8px rgba(0,0,0,0.2);margin-bottom:15px;" />
-          <button class="btn btn-accent" id="closeDownloadFallback"><a href="${url}" download="${filename}">Done</a></button>
+          <button class="btn btn-accent" id="closeDownloadFallback">Done</button>
         </div>
       `;
       document.body.appendChild(fallback);
