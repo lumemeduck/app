@@ -98,11 +98,6 @@
     #f5f7ff;
   background-attachment: fixed;
  }
-  /* Container */
-  container {
-  max-width: 1000px;
-  margin: 0 auto;
-  }
   /* Header */
   header{
   position:sticky; top:0; z-index:10;
@@ -241,7 +236,7 @@
   .mark{ width:12px; height:12px; border-radius:3px; border:1px dashed rgba(153,167,255,.55); }
 
   /* Footer note */
-  .footnote{ text-align:center; color:var(--muted); font-size:10px; margin-top:32px; animation:fadeInCard 0.3s ease forwards; }
+  .footnote{ text-align:center; color:var(--muted); font-size:8px; margin-top:22px; animation:fadeInCard 0.3s ease forwards; }
 
   /* Pretty reset-modal */
    .reset-modal {
@@ -292,10 +287,13 @@
   position: fixed;
   top: 0;
   left: 0;
+  right: 0;
+  margin: auto;
   width: 100%;
+  max-width: 1000px;
   backdrop-filter:saturate(120%) blur(5px);
   background-color: rgba(255, 255, 255, 0.01);
-  z-index: 1000;
+  z-index: 10;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -510,7 +508,7 @@ iframe {
           <p class="muted" style="margin-top:10px;"></p>
         </article>
       </div>
-      <p class="footnote">Advertisement</p>
+      <p class="footnote">ADVERTISEMENT</p>
     </section>
 
     <!-- STREAK VIEW -->
