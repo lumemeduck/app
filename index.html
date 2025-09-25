@@ -102,8 +102,6 @@
   container {
   max-width: 1000px;
   margin: 0 auto;
-  background: #fff;
-  box-shadow: 0 0 20px rgba(0,0,0,0.05);
   }
   /* Header */
   header{
@@ -295,8 +293,6 @@
   top: 0;
   left: 0;
   width: 100%;
-  max-width: 1000px;
-  margin: 0 auto;
   backdrop-filter:saturate(120%) blur(5px);
   background-color: rgba(255, 255, 255, 0.01);
   z-index: 1000;
@@ -334,7 +330,6 @@
   position: fixed;
   bottom: 0;
   width: 100%;
-  box-shadow:0 4px 8px rgba(0, 0, 0, 0.4);
   border-top:1px solid rgba(0,0,0,.08);
   background-color: #eef1f9;
   display: flex;
@@ -354,6 +349,7 @@
   align-items: center;
   padding: 2px;
   width: 25%;
+  box-shadow:0 3px 6px rgba(0, 0, 0, 0.4);
 }
 
 .menu-item i {
@@ -370,7 +366,7 @@
 
 iframe {
   width: 100%;
-  height: 460px;
+  height: 500px;
   border: none;
   background: linear-gradient(180deg, rgba(255,255,255,.8), rgba(248,250,252,.8));
   border:1px solid rgba(0,0,0,.07);
@@ -395,6 +391,7 @@ iframe {
   <div class="loader"></div>
   <p>Please wait...</p>
 </div>
+  <container>
   <!-- Pretty share-modal -->
 <div id="shareModal" style="display:none;position:fixed;inset:0;background:rgba(255,255,255,.4);z-index:999;align-items:center;justify-content:center;animation: fadeInBg 0.3s ease forwards;">
   <div style="background:#eef1ff;border:1px solid rgba(0,0,0,.1);border-radius:18px;padding:22px 28px;box-shadow:0 4px 15px rgba(0, 0, 0, 0.4);max-width:300px;text-align:center;color:#454545;font-family:system-ui;animation: fadeInCard 0.3s ease forwards;">
@@ -578,7 +575,8 @@ iframe {
               
   <!-- Hidden canvas for image export -->
   <canvas id="exportCanvas" width="1080" height="1080" style="display:none;"></canvas>
-
+</container>
+              
   <script>
 /* ---------- Utilities & Storage ---------- */
 const STORAGE = {
