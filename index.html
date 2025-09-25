@@ -155,7 +155,7 @@
  .btn:active{ transform: translateY(0); }
  .btn-accent{ background: linear-gradient(180deg, #0ea5e9, #0284c7); color:#fff; }
  .btn-warn{ background: linear-gradient(180deg, #f59e0b, #d97706); color:#fff; }
-  main{ max-width:1000px; margin:22px auto; padding:0 18px 40px; bottom:0; top:0; border-radius:12px; box-shadow:0 4px 8px rgba(0, 0, 0, 0.4); }
+  main{ max-width:1000px; margin:22px auto; padding:0 18px 40px; }
   .grid{ 
     display:grid; grid-template-columns: 1fr; gap:20px;
   }
@@ -193,10 +193,10 @@
   .row .btn{ flex: 0 0 auto; }
 
   .challenge{
-    font-size:18px; line-height:1.4; font-weight:700; margin:8px 0 14px;
+    font-size:16px; line-height:1.4; font-weight:700; margin:8px 0 14px;
   }
   .status{
-    display:hidden; align-items:center; gap:8px; margin-top:10px; color:#22c55e; font-weight:700;
+    display:hidden; align-items:center; gap:8px; margin-top:10px; color:#22c55e; font-size:16px; font-weight:700;
   }
 
   /* Tabs (views) */
@@ -464,7 +464,7 @@ iframe {
     <span>Game</span>
   </button>
 </div>
- <main>
+
   <header>
     <div class="nav">
       <button id="menuButton" title="Menu" style="background:none;border:none;cursor:pointer;">
@@ -484,7 +484,8 @@ iframe {
       </div>
     </div>
   </header>
-   
+  
+   <main>
     <!-- HOME VIEW -->
     <section id="home" class="view active" aria-labelledby="home-title">
       <div class="grid">
@@ -498,7 +499,7 @@ iframe {
             <button type="button" class="btn" onclick="shareQuote()" title="Share quote text">Share</button>
             <button class="btn" id="btnSaveQuote" title="Save quote as image">Create image</button>
           </div>
-          <p class="muted" style="margin-top:10px;font-size:10px;text-align:center;">You can share quote as text or share quote as image</p>
+          <p class="muted" style="margin-top:10px;font-size:10px;text-align:center;"><i class="fa-info-circle" style="font-size:14px;"></i>You can share quote as text or share quote as image</p>
         </article>
 
         <!-- Exercise column -->
@@ -510,7 +511,7 @@ iframe {
             <button class="btn btn-accent" id="btnComplete" title="Mark today completed">Mark Completed</button>
           </div>
           <div class="status" id="completeStatus" style="text-align:center; justify-content:center; position:relative;" hidden="true">✔ Logged to your streak!</div>
-          <p class="muted" style="margin-top:10px; font-size:10px; text-align:center;">Tap on mark completed button after completing the challenge</p>
+          <p class="muted" style="margin-top:10px; font-size:10px; text-align:center;"><i class="fa-info-circle" style="font-size:14px;"></i>Tap on mark completed button after completing the challenge</p>
         </article>
       </div>
       <p class="footnote">ADVERTISEMENT</p>
