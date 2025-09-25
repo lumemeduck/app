@@ -16,6 +16,53 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Paytone One">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
+/* Fullscreen overlay */
+#preloader {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background:
+    radial-gradient(1200px 1200px at 110% -10%, rgba(148,163,184,.07), transparent 80%),
+    radial-gradient(900px 900px at -10% 120%, rgba(14,165,233,.10), transparent 80%),
+    #f5f7ff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  animation: fadeInBg 0.3s ease forwards;
+}
+
+/* Loader circle pulse */
+.loader {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: #0e95e9;
+  animation: pulse 1.2s ease-in-out infinite;
+  box-shadow: 0 0 0 0 rgba(14,165,233,0.4);
+}
+
+#preloader p {
+  margin-top: 20px;
+  font-size: 18px;
+  color: #0ea5e9;
+  font-family: Paytone One, sans-serif;
+  opacity: 0.9;
+  -webkit-text-stroke: 0.4px black;
+}
+
+/* Animations */
+@keyframes pulse {
+  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(14,165,233,0.4); }
+  70% { transform: scale(1); box-shadow: 0 0 0 20px rgba(14,165,233,0); }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(14,165,233,0); }
+}
+@keyframes fadeOut {
+  to { opacity: 0; visibility: hidden; }
+}
+  </style>
+  <style>
   :root{
     --bg:#f5f7ff;
     --card:#ffffff;
@@ -49,9 +96,15 @@
     radial-gradient(1200px 1200px at 110% -10%, rgba(148,163,184,.07), transparent 80%),
     radial-gradient(900px 900px at -10% 120%, rgba(14,165,233,.10), transparent 80%),
     #f5f7ff;
-  background-attachment: fixed; /* keeps gradient fixed while you scroll */
-}
-
+  background-attachment: fixed;
+ }
+  /* Container */
+  container {
+  max-width: 1000px;
+  margin: 0 auto;
+  background: #fff;
+  box-shadow: 0 0 20px rgba(0,0,0,0.05);
+  }
   /* Header */
   header{
   position:sticky; top:0; z-index:10;
@@ -189,7 +242,7 @@
   .ok{ width:12px; height:12px; border-radius:3px; background:rgba(102,229,181,.35); border:1px solid rgba(102,229,181,.55); }
   .mark{ width:12px; height:12px; border-radius:3px; border:1px dashed rgba(153,167,255,.55); }
 
-/* Footer note */
+  /* Footer note */
   .footnote{ text-align:center; color:var(--muted); font-size:12px; margin-top:32px; }
 
   /* Pretty reset-modal */
@@ -242,6 +295,8 @@
   top: 0;
   left: 0;
   width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
   backdrop-filter:saturate(120%) blur(5px);
   background-color: rgba(255, 255, 255, 0.01);
   z-index: 1000;
@@ -335,66 +390,12 @@ iframe {
 </style>
 </head>
 <body>
-  <!-- Preloader -->
+<!-- Preloader -->
 <div id="preloader">
   <div class="loader"></div>
   <p>Please wait...</p>
 </div>
-  <style>
-/* Fullscreen overlay */
-#preloader {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background:
-    radial-gradient(1200px 1200px at 110% -10%, rgba(148,163,184,.07), transparent 80%),
-    radial-gradient(900px 900px at -10% 120%, rgba(14,165,233,.10), transparent 80%),
-    #f5f7ff;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  z-index: 9999;
-  animation: fadeInBg 0.3s ease forwards;
-}
-
-/* Loader circle pulse */
-.loader {
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
-  background: #0e95e9;
-  animation: pulse 1.2s ease-in-out infinite;
-  box-shadow: 0 0 0 0 rgba(14,165,233,0.4);
-}
-
-#preloader p {
-  margin-top: 20px;
-  font-size: 18px;
-  color: #0ea5e9;
-  font-family: Paytone One, sans-serif;
-  opacity: 0.9;
-  -webkit-text-stroke: 0.4px black;
-}
-
-/* Animations */
-@keyframes pulse {
-  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(14,165,233,0.4); }
-  70% { transform: scale(1); box-shadow: 0 0 0 20px rgba(14,165,233,0); }
-  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(14,165,233,0); }
-}
-@keyframes fadeOut {
-  to { opacity: 0; visibility: hidden; }
-}
-  </style>
-  <script>
-window.addEventListener("load", () => {
-  const preloader = document.getElementById("preloader");
-  preloader.style.animation = "fadeOut 0.3s forwards";
-});
- </script>
-  
-<!-- Pretty share-modal -->
+  <!-- Pretty share-modal -->
 <div id="shareModal" style="display:none;position:fixed;inset:0;background:rgba(255,255,255,.4);z-index:999;align-items:center;justify-content:center;animation: fadeInBg 0.3s ease forwards;">
   <div style="background:#eef1ff;border:1px solid rgba(0,0,0,.1);border-radius:18px;padding:22px 28px;box-shadow:0 4px 15px rgba(0, 0, 0, 0.4);max-width:300px;text-align:center;color:#454545;font-family:system-ui;animation: fadeInCard 0.3s ease forwards;">
     <h3 style="margin:0 0 12px;font-size:16px;">Share Quote Texts</h3>
@@ -403,6 +404,63 @@ window.addEventListener("load", () => {
     <button class="btn btn-warn" onclick="closeShare()">Close</button>
   </div>
 </div>
+  <!-- Pop up menu -->
+  <div id="sidebar" class="sidebar" style="display:none;">
+  <div class="sidebar-content">
+    <a href="#" onclick="showSection('about'); closeSidebar();">About</a>
+    <a href="#" onclick="showSection('user-terms'); closeSidebar();">User terms</a>
+    <a href="#" onclick="showSection('privacy-policy'); closeSidebar();">Privacy policy</a>
+    <button class="btn btn-warn" onclick="closeSidebar()">Close</button>
+  </div>
+  </div>
+  <!-- Custom Modal -->
+<div id="notifyModal" style="
+  display:none;
+  position:fixed;top:0;left:0;width:100%;height:100%;
+  background:rgba(255,255,255,.4);
+  align-items:center;justify-content:center;
+  z-index:9999;
+  animation: fadeInBg 0.3s ease forwards;
+">
+  <div style="
+    background:#eef1ff;
+    padding:20px;
+    box-shadow:0 4px 15px rgba(0, 0, 0, 0.4);
+    border:1px solid rgba(0,0,0,.1);
+    border-radius:18px;
+    width:80%;
+    max-width:300px;
+    text-align:center;
+    font-family:system-ui;
+    color:#454545;
+    animation: fadeInCard 0.3s ease forwards;
+  ">
+    <p id="notifyMessage" style="margin-bottom:20px;font-size:16px;">
+      <!-- Message goes here -->
+    </p>
+    <button class="btn btn-accent" onclick="closeNotifyModal()">OK</button>
+  </div>
+</div>
+  <!-- Bottom Menu -->
+<div class="bottom-menu">
+  <button class="menu-item active" onclick="showSection('home')">
+    <i class="fas fa-home"></i>
+    <span>Home</span>
+  </button>
+  <button class="menu-item" onclick="showSection('streak')">
+    <i class="fas fa-chart-line"></i>
+    <span>Streak</span>
+  </button>
+  <button class="menu-item" onclick="showSection('trivia')">
+    <i class="fas fa-question-circle"></i>
+    <span>Trivia</span>
+  </button>
+  <button class="menu-item" onclick="showSection('game')">
+    <i class="fas fa-gamepad"></i>
+    <span>Game</span>
+  </button>
+</div>
+  
   <header>
     <div class="nav">
       <button id="menuButton" title="Menu" style="background:none;border:none;cursor:pointer;">
@@ -422,18 +480,8 @@ window.addEventListener("load", () => {
       </div>
     </div>
   </header>
-  <main>
-  <!-- Pop up menu -->
-  <div id="sidebar" class="sidebar" style="display:none;">
-  <div class="sidebar-content">
-    <a href="#" onclick="showSection('about'); closeSidebar();">About</a>
-    <a href="#" onclick="showSection('user-terms'); closeSidebar();">User terms</a>
-    <a href="#" onclick="showSection('privacy-policy'); closeSidebar();">Privacy policy</a>
-    <button class="btn btn-warn" onclick="closeSidebar()">Close</button>
-  </div>
-  </div>
 
-  
+  <main>
     <!-- HOME VIEW -->
     <section id="home" class="view active" aria-labelledby="home-title">
       <div class="grid">
@@ -463,7 +511,7 @@ window.addEventListener("load", () => {
         </article>
       </div>
 
-      <p class="footnote"></p>
+      <p class="footnote">Advertisement</p>
     </section>
 
     <!-- STREAK VIEW -->
@@ -524,59 +572,10 @@ window.addEventListener("load", () => {
  <article aria-live="polite" style="animation:fadeInCard 0.3s ease forwards;">
   <h4 id="privacy-policy-title" style="text-align:center">PRIVACY POLICY</h4>
   <p> </p>
- </article>
-</section>
-
-
-  <!-- Bottom Menu -->
-<div class="bottom-menu">
-  <button class="menu-item active" onclick="showSection('home')">
-    <i class="fas fa-home"></i>
-    <span>Home</span>
-  </button>
-  <button class="menu-item" onclick="showSection('streak')">
-    <i class="fas fa-chart-line"></i>
-    <span>Streak</span>
-  </button>
-  <button class="menu-item" onclick="showSection('trivia')">
-    <i class="fas fa-question-circle"></i>
-    <span>Trivia</span>
-  </button>
-  <button class="menu-item" onclick="showSection('game')">
-    <i class="fas fa-gamepad"></i>
-    <span>Game</span>
-  </button>
-</div>
+   </article>
+ </section>
 </main>
-  <!-- Custom Modal -->
-<div id="notifyModal" style="
-  display:none;
-  position:fixed;top:0;left:0;width:100%;height:100%;
-  background:rgba(255,255,255,.4);
-  align-items:center;justify-content:center;
-  z-index:9999;
-  animation: fadeInBg 0.3s ease forwards;
-">
-  <div style="
-    background:#eef1ff;
-    padding:20px;
-    box-shadow:0 4px 15px rgba(0, 0, 0, 0.4);
-    border:1px solid rgba(0,0,0,.1);
-    border-radius:18px;
-    width:80%;
-    max-width:300px;
-    text-align:center;
-    font-family:system-ui;
-    color:#454545;
-    animation: fadeInCard 0.3s ease forwards;
-  ">
-    <p id="notifyMessage" style="margin-bottom:20px;font-size:16px;">
-      <!-- Message goes here -->
-    </p>
-    <button class="btn btn-accent" onclick="closeNotifyModal()">OK</button>
-  </div>
-</div>
-  
+              
   <!-- Hidden canvas for image export -->
   <canvas id="exportCanvas" width="1080" height="1080" style="display:none;"></canvas>
 
@@ -1712,6 +1711,13 @@ function showNotifyModal(message) {
 function closeNotifyModal() {
   document.getElementById("notifyModal").style.display = "none";
 }
+</script>
+              
+<script>
+window.addEventListener("load", () => {
+  const preloader = document.getElementById("preloader");
+  preloader.style.animation = "fadeOut 0.3s forwards";
+});
 </script>
 </body>
 </html>
