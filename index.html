@@ -313,6 +313,17 @@
   color: #0e95e9;
 }
 
+iframe {
+  width: 100%;
+  height: 460px;
+  border: none;
+  background: linear-gradient(180deg, rgba(255,255,255,.8), rgba(248,250,252,.8));
+  border:1px solid rgba(0,0,0,.07);
+  box-shadow:0 3px 6px rgba(0, 0, 0, 0.4);
+  border-radius: 15px;
+  display: block;
+}
+
 @keyframes fadeInBg {
         from { opacity: 0; }
         to { opacity: 1; }
@@ -360,7 +371,7 @@
 #preloader p {
   margin-top: 20px;
   font-size: 18px;
-  color: #0e95e9;
+  color: #0ea5e9;
   font-family: Paytone One, sans-serif;
   opacity: 0.9;
   -webkit-text-stroke: 0.4px black;
@@ -477,7 +488,7 @@ window.addEventListener("load", () => {
 
     <!-- Trivia Section -->
   <section id="trivia" class="view" aria-labelledby="trivia-title">
-   <article class="card" aria-live="polite">
+   <article aria-live="polite" style="animation:fadeInCard 0.3s ease forwards;">
     <h3 id="trivia-title"></h3>
     <iframe seamless="seamless" allowtransparency="true" allowfullscreen="true" frameborder="0" src="https://lumemeduck.xyz/app/trivia/index.html"></iframe>
    </article>
@@ -485,7 +496,7 @@ window.addEventListener("load", () => {
 
    <!-- Game Section -->
   <section id="game" class="view" aria-labelledby="game-title">
-   <article class="card" aria-live="polite">
+   <article aria-live="polite" style="animation:fadeInCard 0.3s ease forwards;">
     <h3 id="game-title"></h3>
     <iframe seamless="seamless" allowtransparency="true" allowfullscreen="true" frameborder="0" src="https://games.e-droid.net/en/sheep-fight-appcreator24/index.html"></iframe>
    </article>
@@ -493,7 +504,7 @@ window.addEventListener("load", () => {
 
 <!-- About Section -->
 <section id="about" class="view" aria-labelledby="about-title" style="display:none;">
- <article aria-live="polite">
+ <article aria-live="polite" style="animation:fadeInCard 0.3s ease forwards;">
   <h4 id="about-title" style="text-align:center;">ABOUT APP</h4>
   <p> </p>
  </article>
@@ -501,7 +512,7 @@ window.addEventListener("load", () => {
 
 <!-- User Terms Section -->
 <section id="user-terms" class="view" aria-labelledby="user-terms-title" style="display:none;">
- <article aria-live="polite">
+ <article aria-live="polite" style="animation:fadeInCard 0.3s ease forwards;">
   <h4 id="user-terms-title" style="text-align:center">TERMS OF USE</h4>
   <p> </p>
  </article>
@@ -509,7 +520,7 @@ window.addEventListener("load", () => {
 
 <!-- Privacy Policy Section -->
 <section id="privacy-policy" class="view" aria-labelledby="privacy-policy-title" style="display:none;">
- <article aria-live="polite">
+ <article aria-live="polite" style="animation:fadeInCard 0.3s ease forwards;">
   <h4 id="privacy-policy-title" style="text-align:center">PRIVACY POLICY</h4>
   <p> </p>
  </article>
