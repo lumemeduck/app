@@ -155,7 +155,7 @@
  .btn:active{ transform: translateY(0); }
  .btn-accent{ background: linear-gradient(180deg, #0ea5e9, #0284c7); color:#fff; }
  .btn-warn{ background: linear-gradient(180deg, #f59e0b, #d97706); color:#fff; }
-  main{ max-width:1000px; margin:22px auto; padding:0 18px 40px; }
+  main{ max-width:1000px; margin:22px auto; padding:0 18px 40px; bottom:0; top:0; border-radius:12px; box-shadow:0 4px 8px rgba(0, 0, 0, 0.4); }
   .grid{ 
     display:grid; grid-template-columns: 1fr; gap:20px;
   }
@@ -184,7 +184,7 @@
 
   .quote{
     margin:8px 0 14px;
-    font-size:18px; line-height:1.35; font-weight:700;
+    font-size:16px; line-height:1.35; font-weight:700;
     letter-spacing:.2px;
   }
   .author{ color:rgb(75,85,99.9); font-size:12px; font-weight:400; margin-bottom:22px; }
@@ -374,12 +374,12 @@
 
 iframe {
   width: 100%;
-  height: 500px;
+  height: 490px;
   border: none;
   background: linear-gradient(180deg, rgba(255,255,255,.8), rgba(248,250,252,.8));
   border:1px solid rgba(0,0,0,.07);
   box-shadow:0 3px 6px rgba(0, 0, 0, 0.4);
-  border-radius: 15px;
+  border-radius: 18px;
   display: block;
 }
 
@@ -399,7 +399,6 @@ iframe {
   <div class="loader"></div>
   <p>Please wait...</p>
 </div>
-<container>
   <!-- Pretty share-modal -->
 <div id="shareModal" style="display:none;position:fixed;inset:0;background:rgba(255,255,255,.4);z-index:999;align-items:center;justify-content:center;animation: fadeInBg 0.3s ease forwards;">
   <div style="background:#eef1ff;border:1px solid rgba(0,0,0,.1);border-radius:18px;padding:22px 28px;box-shadow:0 4px 15px rgba(0, 0, 0, 0.4);max-width:300px;text-align:center;color:#454545;font-family:system-ui;animation: fadeInCard 0.3s ease forwards;">
@@ -465,7 +464,7 @@ iframe {
     <span>Game</span>
   </button>
 </div>
-  
+ <main>
   <header>
     <div class="nav">
       <button id="menuButton" title="Menu" style="background:none;border:none;cursor:pointer;">
@@ -485,34 +484,33 @@ iframe {
       </div>
     </div>
   </header>
-
-  <main>
+   
     <!-- HOME VIEW -->
     <section id="home" class="view active" aria-labelledby="home-title">
       <div class="grid">
         <!-- Quotes column -->
         <article class="card" aria-live="polite">
           <h2 id="home-title" style="align-items:center; justify-content:space-between; position:relative;">✨ Today's Motivation <span class="pill" id="quoteTag" style="align-items:center; justify-content:center; position:relative;">Today</span></h2>
-          <div id="quoteText" class="quote" style="align-items:center; justify-content:center; position:relative;">Loading…</div>
+          <div id="quoteText" class="quote" style="text-align:center; justify-content:center; position:relative;">Loading…</div>
           <div id="quoteAuthor" class="author" style="text-align:right; margin-right:20px"></div>
           <div class="row" style="align-items:center; justify-content:space-between; position:relative;">
             <button class="btn" id="btnNewQuote" title="Shuffle today's quote">More Quote</button>
             <button type="button" class="btn" onclick="shareQuote()" title="Share quote text">Share</button>
             <button class="btn" id="btnSaveQuote" title="Save quote as image">Create image</button>
           </div>
-          <p class="muted" style="margin-top:10px;"></p>
+          <p class="muted" style="margin-top:10px;font-size:10px;text-align:center;">You can share quote as text or share quote as image</p>
         </article>
 
         <!-- Exercise column -->
         <article class="card" aria-live="polite">
           <h2 style="align-items:center; justify-content:space-between; position:relative;">💪 Today's Challenge <span class="pill" id="challengeTag" style="align-items:center; justify-content:center; position:relative;">Today</span></h2>
-          <div id="challengeText" class="challenge" style="align-items:center; justify-content:center; position:relative;">Loading…</div>
+          <div id="challengeText" class="challenge" style="text-align:center; justify-content:center; position:relative;">Loading…</div>
           <div class="row" style="align-items:center; justify-content:space-between; position:relative;">
             <button class="btn" id="btnNewChallenge" title="Shuffle today’s challenge">More Challenge</button>
             <button class="btn btn-accent" id="btnComplete" title="Mark today completed">Mark Completed</button>
           </div>
-          <div class="status" id="completeStatus" style="align-items:center; justify-content:center; position:relative;" hidden="true">✔ Logged to your streak!</div>
-          <p class="muted" style="margin-top:10px; font-size:10px;">Tap on mark completed button after completing challenge</p>
+          <div class="status" id="completeStatus" style="text-align:center; justify-content:center; position:relative;" hidden="true">✔ Logged to your streak!</div>
+          <p class="muted" style="margin-top:10px; font-size:10px; text-align:center;">Tap on mark completed button after completing the challenge</p>
         </article>
       </div>
       <p class="footnote">ADVERTISEMENT</p>
@@ -579,11 +577,10 @@ iframe {
   <p> </p>
    </article>
  </section>
-</main>
               
   <!-- Hidden canvas for image export -->
   <canvas id="exportCanvas" width="1080" height="1080" style="display:none;"></canvas>
-</container>
+</main>
               
   <script>
 /* ---------- Utilities & Storage ---------- */
