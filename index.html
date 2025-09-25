@@ -241,7 +241,7 @@
   .mark{ width:12px; height:12px; border-radius:3px; border:1px dashed rgba(153,167,255,.55); }
 
   /* Footer note */
-  .footnote{ text-align:center; color:var(--muted); font-size:12px; margin-top:32px; }
+  .footnote{ text-align:center; color:var(--muted); font-size:10px; margin-top:32px; animation:fadeInCard 0.3s ease forwards; }
 
   /* Pretty reset-modal */
    .reset-modal {
@@ -336,6 +336,7 @@
   justify-content: space-around;
   padding: 8px 0;
   z-index: 1000;
+  box-shadow:0 4px 8px rgba(0, 0, 0, 0.4);
 }
 
 .menu-item {
@@ -349,7 +350,6 @@
   align-items: center;
   padding: 2px;
   width: 25%;
-  box-shadow:0 3px 6px rgba(0, 0, 0, 0.4);
 }
 
 .menu-item i {
@@ -391,7 +391,6 @@ iframe {
   <div class="loader"></div>
   <p>Please wait...</p>
 </div>
-  <container>
   <!-- Pretty share-modal -->
 <div id="shareModal" style="display:none;position:fixed;inset:0;background:rgba(255,255,255,.4);z-index:999;align-items:center;justify-content:center;animation: fadeInBg 0.3s ease forwards;">
   <div style="background:#eef1ff;border:1px solid rgba(0,0,0,.1);border-radius:18px;padding:22px 28px;box-shadow:0 4px 15px rgba(0, 0, 0, 0.4);max-width:300px;text-align:center;color:#454545;font-family:system-ui;animation: fadeInCard 0.3s ease forwards;">
@@ -402,6 +401,7 @@ iframe {
   </div>
 </div>
   <!-- Pop up menu -->
+  <container>
   <div id="sidebar" class="sidebar" style="display:none;">
   <div class="sidebar-content">
     <a href="#" onclick="showSection('about'); closeSidebar();">About</a>
@@ -410,6 +410,7 @@ iframe {
     <button class="btn btn-warn" onclick="closeSidebar()">Close</button>
   </div>
   </div>
+  </container>
   <!-- Custom Modal -->
 <div id="notifyModal" style="
   display:none;
@@ -439,6 +440,7 @@ iframe {
   </div>
 </div>
   <!-- Bottom Menu -->
+<container>
 <div class="bottom-menu">
   <button class="menu-item active" onclick="showSection('home')">
     <i class="fas fa-home"></i>
@@ -457,6 +459,7 @@ iframe {
     <span>Game</span>
   </button>
 </div>
+</container>
   
   <header>
     <div class="nav">
@@ -486,7 +489,7 @@ iframe {
         <article class="card" aria-live="polite">
           <h2 id="home-title">✨ Today's Motivation <span class="pill" id="quoteTag">Today</span></h2>
           <div id="quoteText" class="quote">Loading…</div>
-          <div id="quoteAuthor" class="author" style="text-align:right; margin-right:20px">LMD Quotes</div>
+          <div id="quoteAuthor" class="author" style="text-align:right; margin-right:20px"></div>
           <div class="row">
             <button class="btn" id="btnNewQuote" title="Shuffle today's quote">More Quote</button>
             <button type="button" class="btn" onclick="shareQuote()" title="Share quote text">Share</button>
@@ -507,7 +510,6 @@ iframe {
           <p class="muted" style="margin-top:10px;"></p>
         </article>
       </div>
-
       <p class="footnote">Advertisement</p>
     </section>
 
@@ -530,6 +532,7 @@ iframe {
           <span style="margin-left:8px;" class="mark"></span> marks <strong>today</strong>
         </div>
       </article>
+     <p class="footnote"></p>
     </section>
 
     <!-- Trivia Section -->
