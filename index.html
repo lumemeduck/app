@@ -329,13 +329,17 @@
 .bottom-menu {
   position: fixed;
   bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
   width: 100%;
+  max-width: 1000px;
   border-top:1px solid rgba(0,0,0,.08);
   background-color: #eef1f9;
   display: flex;
   justify-content: space-around;
   padding: 8px 0;
-  z-index: 1000;
+  z-index: 10;
   box-shadow:0 4px 8px rgba(0, 0, 0, 0.4);
 }
 
@@ -401,7 +405,6 @@ iframe {
   </div>
 </div>
   <!-- Pop up menu -->
-  <container>
   <div id="sidebar" class="sidebar" style="display:none;">
   <div class="sidebar-content">
     <a href="#" onclick="showSection('about'); closeSidebar();">About</a>
@@ -410,7 +413,6 @@ iframe {
     <button class="btn btn-warn" onclick="closeSidebar()">Close</button>
   </div>
   </div>
-  </container>
   <!-- Custom Modal -->
 <div id="notifyModal" style="
   display:none;
@@ -440,7 +442,6 @@ iframe {
   </div>
 </div>
   <!-- Bottom Menu -->
-<container>
 <div class="bottom-menu">
   <button class="menu-item active" onclick="showSection('home')">
     <i class="fas fa-home"></i>
@@ -459,7 +460,6 @@ iframe {
     <span>Game</span>
   </button>
 </div>
-</container>
   
   <header>
     <div class="nav">
