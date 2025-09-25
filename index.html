@@ -493,9 +493,9 @@ iframe {
         <!-- Quotes column -->
         <article class="card" aria-live="polite">
           <h2 id="home-title" style="align-items:center; justify-content:space-between; position:relative;">✨ Today's Motivation <span class="pill" id="quoteTag" style="align-items:center; justify-content:center; position:relative;">Today</span></h2>
-          <div id="quoteText" class="quote">Loading…</div>
+          <div id="quoteText" class="quote" style="align-items:center; justify-content:center; position:relative;">Loading…</div>
           <div id="quoteAuthor" class="author" style="text-align:right; margin-right:20px"></div>
-          <div class="row">
+          <div class="row" style="align-items:center; justify-content:space-between; position:relative;">
             <button class="btn" id="btnNewQuote" title="Shuffle today's quote">More Quote</button>
             <button type="button" class="btn" onclick="shareQuote()" title="Share quote text">Share</button>
             <button class="btn" id="btnSaveQuote" title="Save quote as image">Create image</button>
@@ -505,14 +505,14 @@ iframe {
 
         <!-- Exercise column -->
         <article class="card" aria-live="polite">
-          <h2>💪 Today's Challenge <span class="pill" id="challengeTag">Today</span></h2>
-          <div id="challengeText" class="challenge">Loading…</div>
-          <div class="row">
+          <h2 style="align-items:center; justify-content:space-between; position:relative;">💪 Today's Challenge <span class="pill" id="challengeTag" style="align-items:center; justify-content:center; position:relative;">Today</span></h2>
+          <div id="challengeText" class="challenge" style="align-items:center; justify-content:center; position:relative;">Loading…</div>
+          <div class="row" style="align-items:center; justify-content:space-between; position:relative;">
             <button class="btn" id="btnNewChallenge" title="Shuffle today’s challenge">More Challenge</button>
             <button class="btn btn-accent" id="btnComplete" title="Mark today completed">Mark Completed</button>
           </div>
-          <div class="status" id="completeStatus" hidden="true">✔ Logged to your streak!</div>
-          <p class="muted" style="margin-top:10px;"></p>
+          <div class="status" id="completeStatus" style="align-items:center; justify-content:center; position:relative;" hidden="true">✔ Logged to your streak!</div>
+          <p class="muted" style="margin-top:10px; font-size:10px;">Tap on mark completed button after completing challenge</p>
         </article>
       </div>
       <p class="footnote">ADVERTISEMENT</p>
