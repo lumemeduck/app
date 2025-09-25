@@ -60,7 +60,7 @@
   border-bottom:1px solid rgba(0,0,0,.06);
   }
   .nav{
-    max-width:1000px;
+    max-width:1024px;
     margin:0 auto;
     display:flex; align-items:center; justify-content:space-between;
     padding:12px 14px;
@@ -103,7 +103,7 @@
  .btn:active{ transform: translateY(0); }
  .btn-accent{ background: linear-gradient(180deg, #0ea5e9, #0284c7); color:#fff; }
  .btn-warn{ background: linear-gradient(180deg, #f59e0b, #d97706); color:#fff; }
-  main{ max-width:1000px; margin:22px auto; padding:0 18px 40px; }
+  main{ max-width:1024px; margin:22px auto; padding:0 18px 40px; }
   .grid{
     display:grid; grid-template-columns: 1fr; gap:20px;
   }
@@ -241,7 +241,7 @@
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
+  max-width: 1024px;
   backdrop-filter:saturate(120%) blur(5px);
   background-color: rgba(255, 255, 255, 0.01);
   z-index: 1000;
@@ -276,9 +276,9 @@
 }
 
 .bottom-menu {
-  position: fixed;
+  position: sticky;
   bottom: 0;
-  width: 100%;
+  max-width: 1024px;
   box-shadow:0 4px 8px rgba(0, 0, 0, 0.4);
   border-top:1px solid rgba(0,0,0,.08);
   background-color: #eef1f9;
