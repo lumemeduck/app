@@ -98,7 +98,7 @@
     #f5f7ff;
   background-attachment: fixed;
  }
-  container {
+  .container {
   max-width: 1000px;
   margin: auto;
   border-radius: 12px;
@@ -169,7 +169,6 @@
   border-radius: var(--radius);
   padding:18px; box-shadow:0 3px 6px rgba(0, 0, 0, 0.4);
   animation: fadeInCard 0.3s ease forwards;
-  align-items:center; justify-content:center; position:relative;
   }
   .card h2{
     margin:0 0 12px; font-size:18px; letter-spacing:.3px;
@@ -493,7 +492,7 @@ iframe {
       <div class="grid">
         <!-- Quotes column -->
         <article class="card" aria-live="polite">
-          <h2 id="home-title">✨ Today's Motivation <span class="pill" id="quoteTag">Today</span></h2>
+          <h2 id="home-title" style="align-items:center; justify-content:space-between; position:relative;">✨ Today's Motivation <span class="pill" id="quoteTag" style="align-items:center; justify-content:center; position:relative;">Today</span></h2>
           <div id="quoteText" class="quote">Loading…</div>
           <div id="quoteAuthor" class="author" style="text-align:right; margin-right:20px"></div>
           <div class="row">
