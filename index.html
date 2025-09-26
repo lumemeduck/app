@@ -347,7 +347,7 @@
   width: 100%;
   max-width: 800px;
   border-top:1px solid rgba(0,0,0,.08);
-  background-color: #eef1f9;
+  background-color: #f5f7ff;
   display: flex;
   justify-content: space-around;
   padding: 8px 0;
@@ -1272,7 +1272,7 @@ ctx.textBaseline = 'alphabetic';
   // Footer mark
   ctx.font = "700 20px system-ui, Segoe UI, Roboto, Arial";
   ctx.fillStyle = "rgba(200,210,255,.9)";
-  ctx.fillText("🌐 app.lumemeduck.xyz", cardX + 40, cardY + cardH - 50);
+  ctx.fillText("📲 app.lumemeduck.xyz", cardX + 40, cardY + cardH - 50);
 
   // Decorative corner sun
   drawSun(ctx, cardX + cardW - 110, cardY + 110, 44);
@@ -1316,7 +1316,6 @@ ctx.textBaseline = 'alphabetic';
         <br>
         <button class="btn btn-accent" id="backButton">く Back</button>
       </div>
-    </container>
     `;
     // Save button
     document.getElementById('download-button').addEventListener('click', () => {
@@ -1476,6 +1475,7 @@ function triggerDownload(dataURL, filename) {
         </p>
         <button class="btn btn-accent" id="closeFallback">OK</button>
       </div>
+     </container>
     `;
     document.body.appendChild(fallback);
     document.getElementById('closeFallback').addEventListener('click', () => {
