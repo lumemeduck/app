@@ -1,11 +1,11 @@
 {
   "name": "Rise & Shine",
-  "short_name": "Rise&Shine",
+  "short_name": "Rise & Shine",
   "description": "Daily motivational quotes and wellness challenges.",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#f5f7ff",
-  "theme_color": "#eef1f9",
+  "theme_color": "#f5f7ff",
   "orientation": "portrait",
   "icons": [
     {
