@@ -9,7 +9,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <link rel="icon" type="image/jpg" href="images/rise-shine.jpg">
   <link rel="manifest" href="manifest.json">
-  <meta name="theme-color" content="#f5f7ff">
+  <meta name="theme-color" content="#f1f4ff">
   <link rel="apple-touch-icon" href="icons/icon-192.png">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -24,7 +24,7 @@
   background:
     radial-gradient(1200px 1200px at 110% -10%, rgba(148,163,184,.07), transparent 80%),
     radial-gradient(900px 900px at -10% 120%, rgba(14,165,233,.10), transparent 80%),
-    #f5f7ff;
+    #f1f4ff;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -64,15 +64,15 @@
   </style>
   <style>
   :root{
-    --bg:#dadef0;
-    --card:#ffffff;
+    --bg:#f1f4ff;
+    --card: linear-gradient(180deg, rgba(255,255,255,.8), rgba(248,250,252,.8));
     --muted:#6b7280;
     --text:#454545;
     --accent:#0ea5e9;
     --accent-2:#6366f1;
     --warn:#f59e0b;
     --ok:#22c55e;
-    --ring: rgba(99,102,241,0.05);
+    --ring: rgba(99,102,241,0.07);
     --shadow: 0 10px 35px rgba(0,0,0,.1);
     --radius: 18px;
   }
@@ -93,7 +93,7 @@
   width: 100%;
   max-width: 800px;
   min-height: 100vh;
-  background: #dadef0;
+  background: #f1f4ff;
   display: block;
   flex-direction: column;
   box-shadow: 0 0 20px rgba(14,165,233,0.5);
@@ -106,14 +106,14 @@
   background:
     radial-gradient(1200px 1200px at 110% -10%, rgba(148,163,184,.07), transparent 80%),
     radial-gradient(900px 900px at -10% 120%, rgba(14,165,233,.10), transparent 80%),
-    #f5f7ff;
+    #f1f4ff;
   background-attachment: fixed;
  }
   /* Header */
   header{
   position:sticky; top:0; z-index:10;
   backdrop-filter:saturate(120%) blur(8px);
-  background: #dadef0;
+  background: #f1f4ff;
   border-bottom:1px solid rgba(255,255,255,.01);
   }
   .nav{
@@ -341,7 +341,7 @@
   width: 100%;
   max-width: 800px;
   border-top:1px solid rgba(255,255,255,.01);
-  background-color: #dadef0;
+  background-color: #f1f4ff;
   display: flex;
   justify-content: space-around;
   padding: 10px 0;
@@ -1285,7 +1285,7 @@ ctx.textBaseline = 'alphabetic';
   document.body.style.background = "#f5f7ff";
   document.body.innerHTML = `
   <container>
-    <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100vh;gap:20px;font-family:sans-serif;text-align:center;">
+    <div style="margin:0;display:flex;flex-direction:column;align-items:center;justify-content:center;height:100vh;gap:20px;font-family:sans-serif;text-align:center;">
       <div class="spinner" style="width:40px;height:40px;border:4px solid rgba(0,0,0,.1);border-top:4px solid #0ea5e9;border-radius:50%;animation:spin 1s linear infinite;"></div>
       <p style="font-size:16px;color:#454545;">Generating image...</p>
     </div>
@@ -1298,7 +1298,7 @@ ctx.textBaseline = 'alphabetic';
   setTimeout(() => {
     document.body.innerHTML = `
     <container>
-      <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100vh;gap:15px;font-family:sans-serif;text-align:center;animation: fadeInBg 0.3s ease forwards;">
+      <div style="margin:0;display:flex;flex-direction:column;align-items:center;justify-content:center;height:100vh;gap:15px;font-family:sans-serif;text-align:center;animation: fadeInBg 0.3s ease forwards;">
         <img src="${dataURL}" style="max-width:90%;height:auto;border-radius:0;box-shadow:0 0 10px rgba(0,0,0,0.5);animation: fadeInCard 0.3s ease forwards;" />
         <div style="display:flex;max-width:90%;align-items:center;justify-content:space-between;gap:100px;animation: fadeInCard 0.3s ease forwards;">
           <button class="btn" id="download-button"><i class="fas fa-download" style="font-size:15px;"></i> Save</button>
@@ -1425,8 +1425,8 @@ function triggerDownload(dataURL, filename) {
 
   if (navigator.canShare && navigator.canShare({ files: [file] })) {
     navigator.share({
-      title: 'Rise & Shine',
-      text: 'Check out this quote!',
+      title: 'Todays Quote',
+      text: 'Shared from Rise & Shine, check it out here: https://app.lumemeduck.xyz',
       files: [file]
     }).then(() => {
       console.log('Quote shared successfully!');
