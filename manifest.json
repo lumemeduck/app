@@ -4,10 +4,15 @@
   "description": "Daily motivational quotes and wellness challenges.",
   "start_url": "./index.html",
   "display": "standalone",
-  "background_color": "#f5f7ff",
-  "theme_color": "#f5f7ff",
+  "background_color": "#f1f4ff",
+  "theme_color": "#f1f4ff",
   "orientation": "portrait",
   "icons": [
+    {
+      "src": "icons/icon-180.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    },
     {
       "src": "icons/icon-192.png",
       "sizes": "192x192",
