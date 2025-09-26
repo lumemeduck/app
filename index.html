@@ -115,6 +115,7 @@
   backdrop-filter:saturate(120%) blur(8px);
   background: #f1f4ff;
   border-bottom:1px solid rgba(255,255,255,.01);
+  box-shadow:0 2px 4px rgba(0, 0, 0, 0.2);
   }
   .nav{
     max-width:800px;
@@ -169,9 +170,9 @@
 
   .card{
   background: linear-gradient(180deg, rgba(255,255,255,0.8), rgba(248,250,252,0.8));
-  border:1px solid rgba(0,0,0,.05);
+  border:1px solid rgba(0,0,0,.01);
   border-radius: var(--radius);
-  padding:18px;
+  padding:18px; box-shadow:0 2px 4px rgba(0,0,0,0.2);
   animation: fadeInCard 0.3s ease forwards;
   }
   .card h2{
@@ -340,6 +341,7 @@
   margin: auto;
   width: 100%;
   max-width: 800px;
+  box-shadow:0 2px 4px rgba(0, 0, 0, 0.2);
   border-top:1px solid rgba(255,255,255,.01);
   background-color: #f1f4ff;
   display: flex;
@@ -380,6 +382,7 @@ iframe {
   background: linear-gradient(180deg, rgba(255,255,255,.8), rgba(248,250,252,.8));
   border:1px solid rgba(255,255,255,.01);
   border-radius: 18px;
+  box-shadow:0 2px 4px rgba(0, 0, 0, 0.2);
   display: block;
 }
 
@@ -1285,7 +1288,7 @@ ctx.textBaseline = 'alphabetic';
   document.body.style.background = "#f5f7ff";
   document.body.innerHTML = `
   <container>
-    <div style="margin:auto;display:flex;flex-direction:column;align-items:center;justify-content:center;height:100vh;gap:20px;font-family:sans-serif;text-align:center;">
+    <div style="max-width:800px;margin:auto;display:flex;flex-direction:column;align-items:center;justify-content:center;height:100vh;gap:20px;font-family:sans-serif;text-align:center;">
       <div class="spinner" style="width:40px;height:40px;border:4px solid rgba(0,0,0,.1);border-top:4px solid #0ea5e9;border-radius:50%;animation:spin 1s linear infinite;"></div>
       <p style="font-size:16px;color:#454545;">Generating image...</p>
     </div>
@@ -1298,7 +1301,7 @@ ctx.textBaseline = 'alphabetic';
   setTimeout(() => {
     document.body.innerHTML = `
     <container>
-      <div style="margin:auto;display:flex;flex-direction:column;align-items:center;justify-content:center;height:100vh;gap:15px;font-family:sans-serif;text-align:center;animation: fadeInBg 0.3s ease forwards;">
+      <div style="max-width:800px;margin:auto;display:flex;flex-direction:column;align-items:center;justify-content:center;height:100vh;gap:15px;font-family:sans-serif;text-align:center;animation: fadeInBg 0.3s ease forwards;">
         <img src="${dataURL}" style="max-width:90%;height:auto;border-radius:0;box-shadow:0 0 10px rgba(0,0,0,0.5);animation: fadeInCard 0.3s ease forwards;" />
         <div style="display:flex;max-width:90%;align-items:center;justify-content:space-between;gap:100px;animation: fadeInCard 0.3s ease forwards;">
           <button class="btn" id="download-button"><i class="fas fa-download" style="font-size:15px;"></i> Save</button>
