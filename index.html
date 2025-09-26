@@ -98,12 +98,6 @@
     #f5f7ff;
   background-attachment: fixed;
  }
-  .container {
-  max-width: 1000px;
-  margin: auto;
-  border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.4);
-  }
   /* Header */
   header{
   position:sticky; top:0; z-index:10;
@@ -155,7 +149,7 @@
  .btn:active{ transform: translateY(0); }
  .btn-accent{ background: linear-gradient(180deg, #0ea5e9, #0284c7); color:#fff; }
  .btn-warn{ background: linear-gradient(180deg, #f59e0b, #d97706); color:#fff; }
-  main{ max-width:1000px; margin:22px auto; padding:0 18px 40px; }
+  main{ max-width:1000px; margin:22px auto; padding:0 18px 20px; }
   .grid{ 
     display:grid; grid-template-columns: 1fr; gap:20px;
   }
@@ -187,7 +181,7 @@
   }
   .author{ color:rgb(75,85,99.9); font-size:12px; font-weight:400; margin-bottom:22px; }
 
-  .row{ display:flex; gap:10px; flex-wrap:wrap; }
+  .row{ display:flex; gap:5px; flex-wrap:wrap; }
   .row .btn{ flex: 0 0 auto; }
 
   .challenge{
@@ -497,8 +491,7 @@ iframe {
             <button type="button" class="btn" onclick="shareQuote()" title="Share quote text">Share</button>
             <button class="btn" id="btnSaveQuote" title="Save quote as image">Create image</button>
           </div>
-          <br>
-          <p class="muted"></p>
+          <div class=""></div>
         </article>
 
         <!-- Exercise column -->
@@ -510,7 +503,7 @@ iframe {
             <button class="btn btn-accent" id="btnComplete" title="Mark today completed">Mark Completed</button>
           </div>
           <div class="status" id="completeStatus" style="text-align:center; justify-content:center; position:relative;" hidden="true">✔ Logged to your streak!</div>
-          <p class="muted"></p>
+          <div class=""></div>
         </article>
       </div>
       <div class="footnote">ADVERTISEMENT</div>
@@ -561,8 +554,8 @@ iframe {
  <article aria-live="polite" style="animation:fadeInCard 0.3s ease forwards;">
   <h4 id="about-title" style="text-align:center;">ABOUT APP</h4>
   <p>Rise & Shine is your daily boost of inspiration and discipline. 
-    Every morning, discover uplifting motivational quotes and fun exercise challenge designed to fuel your body and mind. 
-    Track your progress with a streak-based calendar that help you build fitness habits, stay consistent. 
+    Every morning, discover uplifting motivational quotes and fun exercise challenge designed to fuel your body and mind.</p> 
+    <p>Track your progress with a streak-based calendar that help you build fitness habits, stay consistent. 
     Whether you want to boost your confidence, stay positive, or commit to a fitness streak, Rise & Shine is here to guide you, one day at a time.</p>
 
 <p>✨ Features that keep you shining!</p>
