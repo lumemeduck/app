@@ -302,7 +302,7 @@
   max-width: 800px;
   backdrop-filter:saturate(120%) blur(5px);
   background-color: rgba(255, 255, 255, 0.01);
-  z-index: 99;
+  z-index: 999;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -341,8 +341,8 @@
   margin: auto;
   width: 100%;
   max-width: 800px;
-  box-shadow:0 3px 6px rgba(0,0,0,0.4);
-  border-top:1px solid rgba(0,0,0,0.1);
+  box-shadow:0 3px 6px rgba(255,255,255,.01);
+  border-top:1px solid rgba(255,255,255,.01);
   background-color: #f1f4ff;
   display: flex;
   justify-content: space-around;
@@ -482,7 +482,7 @@ iframe {
         <button id="btnReset" title="Reset all data" style="background:none;border:none;cursor:pointer;">
         <i class="fa fa-refresh" style="font-size:24px;font-weight:600;color:#f59e0b;"></i></button>
         <button id="notifyBell" style="background:none;border:none;cursor:pointer;">
-        <i id="bellIcon" class="fa-regular fa-bell" style="font-size:24px;font-weight:600;color:#454545;"></i>
+        <i id="bellIcon" class="fa-regular fa-bell" style="font-size:24px;font-weight:500;color:#454545;"></i>
         </button>
       </div>
     </div>
