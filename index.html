@@ -141,7 +141,7 @@
     mix-blend-mode:screen;
   }
   .title{
-    font-weight:800; letter-spacing:.2px; font-size:22px;
+    font-weight:700; letter-spacing:.2px; font-size:22px;
     display:flex; align-items:baseline; gap:8px;
   }
   .title small{ color:var(--muted); font-weight:600; font-size:12px; }
@@ -152,7 +152,7 @@
   padding:8px 10px; border-radius:10px;
   background:linear-gradient(180deg, #eef1ff, #f5f7ff);
   color:var(--text); font-weight:700; letter-spacing:.2px;
-  box-shadow:0 2px 4px rgba(0, 0, 0, 0.2);
+  box-shadow:0 2px 4px rgba(0,0,0,0.1);
   transition:.2s transform ease, .2s border-color ease, .2s background ease, .2s box-shadow ease;
   border:1px solid rgb(0,0,0,.05);
 }
@@ -172,7 +172,7 @@
   background: linear-gradient(180deg, rgba(255,255,255,0.8), rgba(248,250,252,0.8));
   border:1px solid rgba(0,0,0,.01);
   border-radius: var(--radius);
-  padding:18px; box-shadow:0 2px 4px rgba(0,0,0,0.2);
+  padding:18px; box-shadow:0 2px 4px solid #f1f4ff;
   animation: fadeInCard 0.3s ease forwards;
   }
   .card h2{
@@ -455,7 +455,7 @@ iframe {
     <span>Home</span>
   </button>
   <button class="menu-item" onclick="showSection('streak')">
-    <i class="fas fa-chart-line"></i>
+    <i class="fa-solid fa-calendar-check"></i>
     <span>Streak</span>
   </button>
   <button class="menu-item" onclick="showSection('trivia')">
@@ -471,7 +471,7 @@ iframe {
   <header>
     <div class="nav">
       <button id="menuButton" title="Menu" style="background:none;border:none;cursor:pointer;">
-        <i class="fas fa-bars" style="font-size:23px;font-weight:600;color:#454545;"></i>
+        <i class="fas fa-bars" style="font-size:24px;color:#454545;"></i>
       </button>
       <div class="brand" role="button" onclick="Router.go('#')" title="Go Home">
         <img src="images/rs30.jpg" height= "27px" width= "27px">
@@ -480,9 +480,9 @@ iframe {
       <div class="actions">
         <div type="" class="" id="btnProgress" tittle="View Streak Progress"></div>
         <button id="btnReset" title="Reset all data" style="background:none;border:none;cursor:pointer;">
-        <i class="fa fa-refresh" style="font-size:24px;font-weight:600;color:#f59e0b;"></i></button>
+        <i class="fa fa-refresh" style="font-size:24px;color:#f59e0b;"></i></button>
         <button id="notifyBell" style="background:none;border:none;cursor:pointer;">
-        <i id="bellIcon" class="fa-regular fa-bell" style="font-size:24px;font-weight:500;color:#454545;"></i>
+        <i id="bellIcon" class="fa-regular fa-bell" style="font-size:24px;color:#454545;"></i>
         </button>
       </div>
     </div>
