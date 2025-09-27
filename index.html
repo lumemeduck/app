@@ -121,7 +121,7 @@
     max-width:800px;
     margin:0 auto;
     display:flex; align-items:center; justify-content:space-between;
-    padding:12px 14px;
+    padding:14px 14px;
     gap:10px;
   }
   .brand{
@@ -328,6 +328,7 @@
   margin: 0 0 18px;
   line-height: 1.2;
   text-decoration: none;
+  cursor: none;
   color: #0e95e9;
   font-size: 18px;
   font-weight: 700;
@@ -346,7 +347,7 @@
   background-color: #f1f4ff;
   display: flex;
   justify-content: space-around;
-  padding: 10px 0;
+  padding: 12px 0;
   z-index: 10;
 }
 
@@ -355,7 +356,7 @@
   border: none;
   color: #454545;
   font-size: 16px;
-  cursor: pointer;
+  cursor: none;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1267,7 +1268,7 @@ ctx.textBaseline = 'alphabetic';
   // Footer mark
   ctx.font = "700 20px system-ui, Segoe UI, Roboto, Arial";
   ctx.fillStyle = "rgba(200,210,255,.9)";
-  ctx.fillText("📱☞ app.lumemeduck.xyz", cardX + 40, cardY + cardH - 50);
+  ctx.fillText("🌐 app.lumemeduck.xyz", cardX + 40, cardY + cardH - 50);
 
   // Decorative corner sun
   drawSun(ctx, cardX + cardW - 110, cardY + 110, 44);
@@ -1380,7 +1381,7 @@ function triggerDownload(dataURL, filename) {
           <p style="font-size:14px;opacity:0.8;margin-bottom:15px;">
             Click on the image below to open externally, then press-hold on the image to save.
           </p>
-          <a href="${url}" target="_blank" download="${filename}">
+          <a href="${url}" target="_blank" download="${filename}" style="cursor:none;">
           <img src="${dataURL}" alt="Generated" style="max-width:100%;border-radius:12px;box-shadow:0 0 8px rgba(0,0,0,0.2);margin-bottom:15px;"></a>
           <button class="btn btn-accent" id="closeDownloadFallback">Done</button>
         </div>
