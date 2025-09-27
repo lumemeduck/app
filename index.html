@@ -495,7 +495,7 @@ iframe {
       <div class="grid">
         <!-- Quotes column -->
         <article class="card" aria-live="polite">
-          <h2 id="home-title" style="align-items:center; justify-content:space-between; position:relative;"><i class="fa fa-wand-magic-sparkles" style="font-size:20px;color:#22c55e;"></i> Today's Motivation <span class="pill" id="quoteTag" style="align-items:center; justify-content:center; position:relative;">Today</span></h2>
+          <h2 id="home-title" style="align-items:center; justify-content:space-between; position:relative;"><i class="fa fa-wand-magic-sparkles" style="font-size:20px;color:#f1f4ff;"></i> Today's Motivation <span class="pill" id="quoteTag" style="align-items:center; justify-content:center; position:relative;">Today</span></h2>
           <div id="quoteText" class="quote" style="text-align:center; justify-content:center; position:relative;">Loading…</div>
           <div id="quoteAuthor" class="author" style="text-align:right; margin-right:30px"></div>
           <div class="row" style="align-items:center; justify-content:space-between; position:relative;">
@@ -508,7 +508,7 @@ iframe {
 
         <!-- Exercise column -->
         <article class="card" aria-live="polite">
-          <h2 style="align-items:center; justify-content:space-between; position:relative;"><i class="fa fa-bolt" style="font-size:24px;color:#22c55e;"></i> Today's Challenge <span class="pill" id="challengeTag" style="align-items:center; justify-content:center; position:relative;">Today</span></h2>
+          <h2 style="align-items:center; justify-content:space-between; position:relative;"><i class="fa fa-bolt" style="font-size:24px;color:#f1f4ff;"></i> Today's Challenge <span class="pill" id="challengeTag" style="align-items:center; justify-content:center; position:relative;">Today</span></h2>
           <div id="challengeText" class="challenge" style="text-align:center; justify-content:center; position:relative;">Loading…</div>
           <div class="row" style="align-items:center; justify-content:space-between; position:relative;">
             <button class="btn" id="btnNewChallenge" title="Shuffle today’s challenge">More Challenge</button>
@@ -1286,7 +1286,7 @@ ctx.textBaseline = 'alphabetic';
   function showGeneratedImage(dataURL, filename) {
   // Show waiting spinner
   document.body.style.margin = "0";
-  document.body.style.background = "#f5f7ff";
+  document.body.style.background = "#f1f4ff";
   document.body.innerHTML = `
   <container>
     <div style="max-width:800px;margin:0 auto;display:flex;flex-direction:column;align-items:center;justify-content:center;height:100vh;gap:20px;font-family:sans-serif;text-align:center;">
@@ -1304,17 +1304,16 @@ ctx.textBaseline = 'alphabetic';
     <container>
     <main>
       <article class="card" aria-live="polite" style="position:relative;margin:auto;width:auto;height:auto;display:flex;flex-direction:column;gap:20px;align-items:center;justify-content:center;text-align:center;font-family:sans-serif;animation:fadeInBg 0.3s ease forwards;">
-       <h3 style="margin-bottom:20px;font-size:18px;color:#22c55e;">✔ Image generated!</h3>
+       <h3 style="margin-bottom:30px;font-size:18px;color:#22c55e;">✔ Image generated!</h3>
         <img src="${dataURL}" style="width:100%;display:flex;align-items:center;justify-content:center;position:relative;border-radius:0;box-shadow:0 0 10px rgba(0,0,0,0.5);animation: fadeInCard 0.3s ease forwards;" />
         <div class="row" style="display:flex;width:90%;align-items:center;justify-content:space-between;position:relative;animation:fadeInCard 0.3s ease forwards;">
           <button class="btn" id="download-button"><i class="fas fa-download" style="font-size:15px;"></i> Save</button>
-          <button class="btn btn-warn" id="backButton">Close</button>
           <button class="btn" id="share-button"><i class="fas fa-share" style="font-size:15px;"></i> Share</button>
         </div>
         <p style="width:100%;font-size:14px;opacity:0.7;align-items:center;justify-content:center;position:relative;animation:fadeInCard 0.3s ease forwards;">
           🔆 Sharing doesn’t work in some old webview<br>If notified, you can tap <strong>save</strong> instead.
         </p>
-        <button class="btn btn-accent" id="backButton" style="margin-top:20px;">く Back</button>
+        <button class="btn btn-accent" id="backButton" style="margin-top:10px;">く Back</button>
       </article>
     `;
     // Save button
