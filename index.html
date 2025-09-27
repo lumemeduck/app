@@ -1302,7 +1302,7 @@ ctx.textBaseline = 'alphabetic';
   setTimeout(() => {
     document.body.innerHTML = `
     <container>
-      <div style="max-width:800px;margin:0 auto;display:flex;flex-direction:column;align-items:center;justify-content:center;height:100vh;gap:20px;font-family:sans-serif;text-align:center;animation: fadeInBg 0.3s ease forwards;">
+      <div class="card" style="max-width:800px;margin:0 auto;display:flex;align-items:center;justify-content:center;height:100vh;font-family:sans-serif;text-align:center;animation: fadeInBg 0.3s ease forwards;">
         <img src="${dataURL}" style="max-width:90%;height:auto;border-radius:0;box-shadow:0 0 10px rgba(0,0,0,0.5);animation: fadeInCard 0.3s ease forwards;" />
         <div class="row" style="align-items:center;justify-content:space-between;position:relative;animation:fadeInCard 0.3s ease forwards;">
           <button class="btn" id="download-button"><i class="fas fa-download" style="font-size:15px;"></i> Save</button>
