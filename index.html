@@ -1303,7 +1303,8 @@ ctx.textBaseline = 'alphabetic';
     document.body.innerHTML = `
     <container>
     <main>
-      <article class="card" aria-live="polite" style="display:block;align-items:center;justify-content:center;font-family:sans-serif;animation: fadeInBg 0.3s ease forwards;">
+      <article class="card" aria-live="polite" style="position:fixed;top:0;left:0;width:100%;height:100%;display:block;align-items:center;justify-content:center;font-family:sans-serif;animation:fadeInBg 0.3s ease forwards;">
+       <h3 style="margin-bottom:20px;font-size:16px;">Generated Image</h3>
         <img src="${dataURL}" style="display:flex;max-width:90%;border-radius:0;box-shadow:0 0 10px rgba(0,0,0,0.5);animation: fadeInCard 0.3s ease forwards;" />
         <div class="row" style="display:flex;max-width:90%;align-items:center;justify-content:space-between;position:relative;animation:fadeInCard 0.3s ease forwards;">
           <button class="btn" id="download-button"><i class="fas fa-download" style="font-size:15px;"></i> Save</button>
