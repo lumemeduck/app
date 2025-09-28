@@ -495,7 +495,7 @@ iframe {
       <div class="grid">
         <!-- Quotes column -->
         <article class="card" aria-live="polite">
-          <h2 id="home-title" style="align-items:center; justify-content:space-between; position:relative;"><i class="fa fa-wand-magic-sparkles" style="font-size:20px;color:#f1f4ff;"></i> Today's Motivation <span class="pill" id="quoteTag" style="align-items:center; justify-content:center; position:relative;">Today</span></h2>
+          <h2 id="home-title" style="align-items:center; justify-content:space-between; position:relative;"><i class="fa fa-wand-magic-sparkles" style="opacity:0.5;font-size:20px;color:#f59e0b;"></i> Today's Motivation <span class="pill" id="quoteTag" style="align-items:center; justify-content:center; position:relative;">Today</span></h2>
           <div id="quoteText" class="quote" style="text-align:center; justify-content:center; position:relative;">Loading…</div>
           <div id="quoteAuthor" class="author" style="text-align:right; margin-right:30px"></div>
           <div class="row" style="align-items:center; justify-content:space-between; position:relative;">
@@ -508,13 +508,13 @@ iframe {
 
         <!-- Exercise column -->
         <article class="card" aria-live="polite">
-          <h2 style="align-items:center; justify-content:space-between; position:relative;"><i class="fa fa-bolt" style="font-size:24px;color:#f1f4ff;"></i> Today's Challenge <span class="pill" id="challengeTag" style="align-items:center; justify-content:center; position:relative;">Today</span></h2>
+          <h2 style="align-items:center; justify-content:space-between; position:relative;"><i class="fa fa-bolt" style="opacity:0.5;font-size:24px;color:#f59e0b;"></i> Today's Challenge <span class="pill" id="challengeTag" style="align-items:center; justify-content:center; position:relative;">Today</span></h2>
           <div id="challengeText" class="challenge" style="text-align:center; justify-content:center; position:relative;">Loading…</div>
           <div class="row" style="align-items:center; justify-content:space-between; position:relative;">
             <button class="btn" id="btnNewChallenge" title="Shuffle today’s challenge">More Challenge</button>
             <button class="btn btn-accent" id="btnComplete" title="Mark today completed">Mark Completed</button>
           </div>
-          <div class="status" id="completeStatus" style="text-align:center; justify-content:center; position:relative;" hidden="true">✔ Logged to your streak!</div>
+          <div class="status" id="completeStatus" style="text-align:center; justify-content:center; position:relative;" hidden="true"><i class="fa fa-check" style="font-size:24px;color:#22c55e;"></i> Logged to your streak!</div>
           <div class=""></div>
         </article>
       </div>
@@ -1304,7 +1304,7 @@ ctx.textBaseline = 'alphabetic';
     <container>
     <main>
       <article class="card" aria-live="polite" style="position:relative;margin:auto;width:auto;height:auto;display:flex;flex-direction:column;gap:20px;align-items:center;justify-content:center;text-align:center;font-family:sans-serif;animation:fadeInBg 0.3s ease forwards;">
-       <h3 style="margin-top:10px;font-size:18px;color:#22c55e;">✔ Image generated!</h3>
+       <h3 style="margin-top:10px;font-size:18px;color:#22c55e;"><i class="fa fa-check" style="font-size:36px;color:#22c55e;"></i> Image generated!</h3>
         <img src="${dataURL}" style="width:100%;display:flex;align-items:center;justify-content:center;position:relative;border-radius:0;box-shadow:0 0 10px rgba(0,0,0,0.5);animation: fadeInCard 0.3s ease forwards;" />
         <div class="row" style="display:flex;width:90%;align-items:center;justify-content:space-between;position:relative;animation:fadeInCard 0.3s ease forwards;">
           <button class="btn" id="download-button"><i class="fas fa-download" style="font-size:15px;"></i> Save</button>
