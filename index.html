@@ -46,7 +46,7 @@
   color: #0e95e9;
   font-family: Paytone One, sans-serif;
   opacity: 1.0;
-  -webkit-text-stroke: 0.2px #454545;
+  -webkit-text-stroke: 0.2px black;
 }
 
 /* Animations */
@@ -512,7 +512,7 @@ iframe {
             <button class="btn" id="btnNewChallenge" title="Shuffle today’s challenge">More Challenge</button>
             <button class="btn btn-accent" id="btnComplete" title="Mark today completed">Mark Completed</button>
           </div>
-          <div class="status" id="completeStatus" style="text-align:center; justify-content:center; position:relative;" hidden="true"><i class="fas fa-check-square-o" style="font-size:18px;color:#22c55e;"></i> Logged to your streak!</div>
+          <div class="status" id="completeStatus" style="text-align:center; justify-content:center; position:relative;" hidden="true"><i class="fas fa-check-square-o" aria-hidden="true" style="font-size:18px;color:#22c55e;"></i> Logged to your streak!</div>
           <div class=""></div>
         </article>
       </div>
@@ -1309,7 +1309,7 @@ ctx.textBaseline = 'alphabetic';
     <container>
     <main>
       <article class="card" aria-live="polite" style="position:relative;margin:auto;width:auto;height:auto;display:flex;flex-direction:column;gap:20px;align-items:center;justify-content:center;text-align:center;font-family:sans-serif;animation:fadeInBg 0.3s ease forwards;">
-       <h3 style="margin-top:10px;font-size:18px;color:#0e95e9;"><i class="fas fa-check-square-o" style="font-size:22px;color:#22c55e;"></i> Image generated!</h3>
+       <h3 style="margin-top:10px;font-size:18px;color:#0e95e9;"><i class="fas fa-check-square-o" aria-hidden="true" style="font-size:22px;color:#22c55e;"></i> Image generated!</h3>
         <img src="${dataURL}" style="width:100%;display:flex;align-items:center;justify-content:center;position:relative;border-radius:0;box-shadow:0 0 10px rgba(0,0,0,0.5);animation: fadeInCard 0.3s ease forwards;" />
         <div class="row" style="display:flex;width:90%;align-items:center;justify-content:space-between;position:relative;animation:fadeInCard 0.3s ease forwards;">
           <button class="btn" id="download-button"><i class="fas fa-download" style="font-size:15px;"></i> Save</button>
