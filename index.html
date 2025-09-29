@@ -176,18 +176,6 @@
     margin:0 0 12px; font-size:18px; letter-spacing:.3px;
     display:flex; align-items:center; gap:10px;
   }
-  .advert{
-  width: 90%;
-  margin-top: 5px;
-  padding: 0;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(180deg, rgba(255,255,255,0.8), rgba(248,250,252,0.8));
-  border:1px solid rgba(99,102,241,0.10);
-  border-radius: 5px;
-  box-shadow:0 2px 4px rgba(99,102,241,0.25);
-  animation: fadeInCard 0.3s ease forwards;
-  }
   .muted{ color:var(--muted); }
   .pill{
     display:inline-flex; align-items:center; gap:8px;
@@ -404,14 +392,35 @@ iframe {
         from { opacity: 0; transform: scale(0.9); }
         to { opacity: 1; transform: scale(1); }
       }
+</style>
+<style>
+  .ad-container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 90%;
+    background: #fefefe;
+    border-top: 1px solid #ddd;
+    display: flex;
+    justify-content: center;
+    z-index: 9999;
+    padding: 6px 0;
+  }
 
-.advert-content {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  animation:fadeInCard 0.3s ease forwards;
-}
+  .ad-container .ad-slot {
+    max-width: 800px;
+    width: 90%;
+    text-align: center;
+  }
+
+  .ad-container img {
+    max-width: 90%;
+    height: auto;
+  }
+    
+  body {
+    padding-bottom: 80px;
+  }
 </style>
 </head>
 <body>
@@ -537,9 +546,11 @@ iframe {
         </article>
       </div>
       <div class="footnote">ADVERTISEMENT</div>
-      <div class="advert" aria-live="polite">
+      <div class="ad-container">
+      <div class="ad-slot">
         <a href="https://wipteetolu.net/4/7800106" target="_blank">
-        <img class="advert-content" src="images/monetag.png" style="width:100%;height:auto;" /></a>
+        <img src="images/monetag.png" alt="Ad"></a>
+      </div>
       </div>
     </section>
 
