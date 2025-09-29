@@ -518,9 +518,9 @@ iframe {
     </div>
   </header>
   
-   <main style="background-attachment:fixed;position:relative;">
+   <main style="background-attachment:fixed;">
     <!-- HOME VIEW -->
-    <section id="home" class="view active" aria-labelledby="home-title">
+    <section id="home" class="view active" aria-labelledby="home-title" style="background-attachment:fixed;">
       <div class="grid">
         <!-- Quotes column -->
         <article class="card" aria-live="polite">
@@ -614,7 +614,7 @@ iframe {
 <!-- About Section -->
 <section id="about" class="view" aria-labelledby="about-title" style="display:none;">
  <article aria-live="polite" style="animation:fadeInCard 0.3s ease forwards;">
-  <h4 id="about-title">ABOUT RISE & SHINE</h4>
+  <h4 id="about-title" style="text-align:center;">ABOUT RISE & SHINE</h4>
   <p>Rise & Shine is your daily boost of inspiration and discipline. 
     Every morning, discover uplifting motivational quotes and fun exercise challenge designed to fuel your body and mind.</p> 
     <p>Track your progress with a streak-based calendar that help you build fitness habits, stay consistent. 
@@ -643,7 +643,7 @@ iframe {
 <!-- User Terms Section -->
 <section id="user-terms" class="view" aria-labelledby="user-terms-title" style="display:none;">
  <article aria-live="polite" style="animation:fadeInCard 0.3s ease forwards;">
-  <h4 id="user-terms-title">TERMS OF USE</h4>
+  <h4 id="user-terms-title" style="text-align:center;">TERMS OF USE</h4>
   <p>Welcome to Rise & Shine (“the site/app”). By accessing or using this site/app, you agree to be bound by these terms of use. If you do not agree, please do not use the site/app.</p>
   <p><strong>Purpose of the site/app</strong></p>
  <p>Rise & Shine is designed to provide motivational content, daily challenges, and wellness tools to support personal growth and positivity.<br>
@@ -682,7 +682,7 @@ iframe {
 <!-- Privacy Policy Section -->
 <section id="privacy-policy" class="view" aria-labelledby="privacy-policy-title" style="display:none;">
  <article aria-live="polite" style="animation:fadeInCard 0.3s ease forwards;">
-  <h4 id="privacy-policy-title">PRIVACY POLICY</h4>
+  <h4 id="privacy-policy-title" style="text-align:center;">PRIVACY POLICY</h4>
 <p>Rise & Shine (“the site/app”, “we”, “our”, or “us”) values your privacy. This Privacy Policy explains how we collect, use, and protect your information when you use our site/app.</p>
 <p><strong>Information We Collect</strong></p>
 <p>We may collect the following types of information when you use the site/app:</p>
@@ -817,7 +817,7 @@ const QUOTES = [
   {t:"Hard things, done daily, make life easier.", a:"LMD Quotes"},
   {t:"You are a result of what you repeat.", a:"LMD Quotes"},
   {t:"Quietly improve. Loud results will speak later.", a:"LMD Quotes"},
-  {t:"You’re closer than your doubt suggests.", a:"LMD Quotes"},
+  {t:"You’re closer than your doubt suggests.", a:"Lumeme Duck"},
   {t:"In the middle of every difficulty lies opportunity.", a:"Albert Einstein"},
   {t:"Do what you can, with what you have, where you are.", a:"Theodore Roosevelt"},
   {t:"Success is not final, failure is not fatal: It is the courage to continue that counts.", a:"Winston Churchill"},
@@ -828,26 +828,26 @@ const QUOTES = [
   {t:"Fall seven times and stand up eight.", a:"Japanese Proverb"},
   {t:"Do not wait to strike till the iron is hot; but make it hot by striking.", a:"William Butler Yeats"},
   {t:"The best way to predict the future is to create it.", a:"Peter Drucker"},
-  {t:"Your tomorrow is built on the bricks of today’s effort.", a:"LMD Quotes"},
-  {t:"Growth begins where comfort ends—dare to step further.", a:"LMD Quotes"},
-  {t:"Rest when you must, but never quit on yourself.", a:"LMD Quotes"},
-  {t:"Strength isn’t measured by weight lifted, but by persistence kept.", a:"LMD Quotes"},
-  {t:"Dream big, start small, act daily.", a:"LMD Quotes"},
-  {t:"Challenges are proof that you’re moving forward.", a:"LMD Quotes"},
-  {t:"Every small victory is a promise of greater triumphs ahead.", a:"LMD Quotes"},
-  {t:"The best investment you’ll ever make is in your own discipline.", a:"LMD Quotes"},
-  {t:"Courage whispers louder than fear when you take the next step.", a:"LMD Quotes"},
-  {t:"Progress doesn’t shout—it quietly accumulates into greatness.", a:"LMD Quotes"},
-  {t:"Consistency is the silent architect of success.", a:"LMD Quotes"},
-  {t:"Your body listens when your mind decides.", a:"LMD Quotes"},
-  {t:"Keep watering your goals—they bloom with patience.", a:"LMD Quotes"},
-  {t:"Discomfort today is the foundation of tomorrow’s strength.", a:"LMD Quotes"},
-  {t:"The climb may be steep, but the view is worth every step.", a:"LMD Quotes"},
-  {t:"You are capable of far more than your doubts allow.", a:"LMD Quotes"},
-  {t:"Let your actions today inspire your future self.", a:"LMD Quotes"},
-  {t:"A disciplined morning creates a victorious day.", a:"LMD Quotes"},
-  {t:"When focus meets effort, progress is guaranteed.", a:"LMD Quotes"},
-  {t:"Your strength multiplies every time you refuse to give up.", a:"LMD Quotes"},
+  {t:"Your tomorrow is built on the bricks of today’s effort.", a:"Lumeme Duck"},
+  {t:"Growth begins where comfort ends—dare to step further.", a:"Lumeme Duck"},
+  {t:"Rest when you must, but never quit on yourself.", a:"Lumeme Duck"},
+  {t:"Strength isn’t measured by weight lifted, but by persistence kept.", a:"Lumeme Duck"},
+  {t:"Dream big, start small, act daily.", a:"Lumeme Duck"},
+  {t:"Challenges are proof that you’re moving forward.", a:"Lumeme Duck"},
+  {t:"Every small victory is a promise of greater triumphs ahead.", a:"Lumeme Duck"},
+  {t:"The best investment you’ll ever make is in your own discipline.", a:"Lumeme Duck"},
+  {t:"Courage whispers louder than fear when you take the next step.", a:"Lumeme Duck"},
+  {t:"Progress doesn’t shout—it quietly accumulates into greatness.", a:"Lumeme Duck"},
+  {t:"Consistency is the silent architect of success.", a:"Lumeme Duck"},
+  {t:"Your body listens when your mind decides.", a:"Lumeme Duck"},
+  {t:"Keep watering your goals—they bloom with patience.", a:"Lumeme Duck"},
+  {t:"Discomfort today is the foundation of tomorrow’s strength.", a:"Lumeme Duck"},
+  {t:"The climb may be steep, but the view is worth every step.", a:"Lumeme Duck"},
+  {t:"You are capable of far more than your doubts allow.", a:"Lumeme Duck"},
+  {t:"Let your actions today inspire your future self.", a:"Lumeme Duck"},
+  {t:"A disciplined morning creates a victorious day.", a:"Lumeme Duck"},
+  {t:"When focus meets effort, progress is guaranteed.", a:"Lumeme Duck"},
+  {t:"Your strength multiplies every time you refuse to give up.", a:"Lumeme Duck"},
   {t:"The only way to do great work is to love what you do.", a:"Steve Jobs"},
   {t:"Success usually comes to those who are too busy to be looking for it.", a:"Henry David Thoreau"},
   {t:"What you get by achieving your goals is not as important as what you become by achieving your goals.", a:"Zig Ziglar"},
@@ -858,25 +858,25 @@ const QUOTES = [
   {t:"Everything you’ve ever wanted is on the other side of fear.", a:"George Addair"},
   {t:"Limit your ‘always’ and your ‘nevers’.", a:"Amy Poehler"},
   {t:"Quality is not an act, it is a habit.", a:"Aristotle"},
-  {t:"Your body is a canvas—each healthy choice paints a masterpiece.", a:"LMD Quotes"},
-  {t:"Small habits today are the giant leaps of tomorrow.", a:"LMD Quotes"},
-  {t:"Strength grows when excuses shrink.", a:"LMD Quotes"},
-  {t:"No alarm clock rings louder than your own purpose.", a:"LMD Quotes"},
-  {t:"You are stronger than your last excuse.", a:"LMD Quotes"},
-  {t:"Move with intention—every step is progress.", a:"LMD Quotes"},
-  {t:"Discipline isn’t punishment, it’s freedom earned daily.", a:"LMD Quotes"},
-  {t:"Your dream body, mind, and life are shaped by today’s effort.", a:"LMD Quotes"},
-  {t:"When motivation fades, let discipline carry you.", a:"LMD Quotes"},
-  {t:"Consistency today becomes confidence tomorrow.", a:"LMD Quotes"},
-  {t:"Progress is not about speed—it’s about not stopping.", a:"LMD Quotes"},
-  {t:"Your future applauds the sweat you give today.", a:"LMD Quotes"},
-  {t:"Even slow progress beats standing still.", a:"LMD Quotes"},
-  {t:"A positive mind makes a powerful body.", a:"LMD Quotes"},
-  {t:"Your story is rewritten every time you refuse to quit.", a:"LMD Quotes"},
-  {t:"Effort compounds like interest—invest daily.", a:"LMD Quotes"},
-  {t:"Every time you rise after falling, you redefine strength.", a:"LMD Quotes"},
-  {t:"Greatness grows quietly through small, repeated acts.", a:"LMD Quotes"},
-  {t:"Your inner fire is brighterVinebreSoftware than today’s struggle.", a:"LMD Quotes"},
+  {t:"Your body is a canvas—each healthy choice paints a masterpiece.", a:"Lumeme Duck"},
+  {t:"Small habits today are the giant leaps of tomorrow.", a:"Lumeme Duck"},
+  {t:"Strength grows when excuses shrink.", a:"Lumeme Duck"},
+  {t:"No alarm clock rings louder than your own purpose.", a:"Lumeme Duck"},
+  {t:"You are stronger than your last excuse.", a:"Lumeme Duck"},
+  {t:"Move with intention—every step is progress.", a:"Lumeme Duck"},
+  {t:"Discipline isn’t punishment, it’s freedom earned daily.", a:"Lumeme Duck"},
+  {t:"Your dream body, mind, and life are shaped by today’s effort.", a:"Lumeme Duck"},
+  {t:"When motivation fades, let discipline carry you.", a:"Lumeme Duck"},
+  {t:"Consistency today becomes confidence tomorrow.", a:"Lumeme Duck"},
+  {t:"Progress is not about speed—it’s about not stopping.", a:"Lumeme Duck"},
+  {t:"Your future applauds the sweat you give today.", a:"Lumeme Duck"},
+  {t:"Even slow progress beats standing still.", a:"Lumeme Duck"},
+  {t:"A positive mind makes a powerful body.", a:"Lumeme Duck"},
+  {t:"Your story is rewritten every time you refuse to quit.", a:"Lumeme Duck"},
+  {t:"Effort compounds like interest—invest daily.", a:"Lumeme Duck"},
+  {t:"Every time you rise after falling, you redefine strength.", a:"Lumeme Duck"},
+  {t:"Greatness grows quietly through small, repeated acts.", a:"Lumeme Duck"},
+  {t:"Your inner fire is brighterVinebreSoftware than today’s struggle.", a:"Lumeme Duck"},
   {t:"If you want energy, create it through movement.", a:"Lumeme Duck"},
   {t:"Believe you can and you’re halfway there.", a:"Theodore Roosevelt"},
   {t:"I am not a product of my circumstances. I am a product of my decisions.", a:"Stephen R. Covey"},
