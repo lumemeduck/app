@@ -1440,10 +1440,13 @@ function triggerDownload(dataURL, filename) {
   const blob = dataURLToBlob(dataURL);
   const file = new File([blob], 'quote.png', { type: 'image/png' });
 
+  // Promo text as caption
+  const promoText = 'Shared from Rise & Shine ✨ Check it out here: https://app.lumemeduck.xyz';
+
   if (navigator.canShare && navigator.canShare({ files: [file] })) {
     navigator.share({
-      title: 'Todays Quote',
-      text: 'Shared from Rise & Shine, check it out here: https://app.lumemeduck.xyz',
+      title: 'Today\'s Quote',
+      text: promoText,
       files: [file]
     }).then(() => {
       console.log('Quote shared successfully!');
@@ -1482,13 +1485,11 @@ function triggerDownload(dataURL, filename) {
           Sharing Isn't Supported!
         </h3>
         <p style="font-size:14px; opacity:0.8; margin-bottom: 15px;">
-          System doesn’t support direct share<br>
-          save the image and share instead.
+          System doesn’t support direct share.<br>
+          Save the image and share instead.
         </p>
         <button class="btn btn-accent" id="closeFallback">OK</button>
       </div>
-      </main>
-     </container>
     `;
     document.body.appendChild(fallback);
     document.getElementById('closeFallback').addEventListener('click', () => {
