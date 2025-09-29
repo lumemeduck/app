@@ -403,7 +403,7 @@ iframe {
     justify-content: center;
     background: #fefefe;
     border: 1px solid rgba(99,102,241,0.10);
-    box-shadow: 0 2px 4px rgba(99,102,241,0.25);
+    box-shadow: 0 3px 6px rgba(99,102,241,0.25);
   }
 
   .ad-slot {
@@ -576,9 +576,10 @@ iframe {
         </div>
       </article>
      <div class="footnote">ADVERTISEMENT</div>
-     <div>
-       <a href="https://wipteetolu.net/4/7800106" target="_blank">
-       <img src="images/monetag.jpg" style="width:100%;display:flex;align-items:center;justify-content:center;position:relative;animation:fadeInCard 0.3s ease forwards;" /></a>
+     <div class="ad-container" aria-live="polite">
+       <div class="ad-slot">
+        <!-- advert here -->
+      </div>
      </div>
     </section>
 
@@ -589,6 +590,11 @@ iframe {
     <iframe seamless="seamless" allowtransparency="true" allowfullscreen="true" frameborder="0" src="https://lumemeduck.xyz/app/trivia/index.html"></iframe>
    </article>
    <div class="footnote">ADVERTISEMENT</div>
+    <div class="ad-container" aria-live="polite">
+       <div class="ad-slot">
+        <!-- advert here -->
+      </div>
+    </div>
   </section>
 
    <!-- Game Section -->
@@ -598,6 +604,11 @@ iframe {
     <iframe seamless="seamless" allowtransparency="true" allowfullscreen="true" frameborder="0" src="https://games.e-droid.net/en/sheep-fight-appcreator24/index.html"></iframe>
    </article>
    <div class="footnote">ADVERTISEMENT</div>
+    <div class="ad-container" aria-live="polite">
+       <div class="ad-slot">
+        <!-- advert here -->
+      </div>
+    </div>
   </section>
 
 <!-- About Section -->
@@ -1435,6 +1446,15 @@ ctx.textBaseline = 'alphabetic';
         </p>
         <button class="btn btn-accent" id="backButton" style="margin-bottom:10px;">く Back</button>
       </article>
+      <div class="footnote">ADVERTISEMENT</div>
+      <div class="ad-container" aria-live="polite">
+       <div class="ad-slot">
+        <a href="https://wipteetolu.net/4/7800106" target="_blank">
+        <img src="images/monetag.png" /></a>
+      </div>
+     </div>
+     </main>
+     <container>
     `;
     // Save button
     document.getElementById('download-button').addEventListener('click', () => {
