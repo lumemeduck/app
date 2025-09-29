@@ -392,6 +392,30 @@ iframe {
         from { opacity: 0; transform: scale(0.9); }
         to { opacity: 1; transform: scale(1); }
       }
+
+.ad-container {
+    width: 90%;
+    max-width: 800px;
+    margin: 20px auto;
+    margin-top: 5px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .ad-slot {
+    width: 100%;
+    display: flex;
+    text-align: center;
+    overflow: hidden;
+  }
+
+  .ad-slot img {
+    max-width: 100%;
+    display: flex;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
 </style>
 </head>
 <body>
@@ -517,33 +541,12 @@ iframe {
         </article>
       </div>
       <div class="footnote">ADVERTISEMENT</div>
-      <div class="ad-container">
+      <div class="ad-container" aria-live="polite">
        <div class="ad-slot">
         <a href="https://wipteetolu.net/4/7800106" target="_blank">
-        <img src="images/monetag.png" /></a>
+        <img class="ad-slot img" src="images/monetag.png" /></a>
       </div>
      </div>
-    <style>
-      .ad-container {
-    width: 90%;
-    max-width: 800px;
-    margin: 20px auto;
-    margin-top: 5px;
-    display: flex;
-    justify-content: center;
-  }
-  .ad-slot {
-    width: 100%;
-    text-align: center;
-    overflow: hidden;
-  }
-  .ad-slot img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(99,102,241,0.25);
-  }
-    </style>
     </section>
 
     <!-- STREAK VIEW -->
