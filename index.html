@@ -392,34 +392,27 @@ iframe {
         from { opacity: 0; transform: scale(0.9); }
         to { opacity: 1; transform: scale(1); }
       }
-</style>
-<style>
+    
   .ad-container {
-    position: fixed;
-    bottom: 0;
-    left: 0;
     width: 90%;
-    background: #fefefe;
-    border-top: 1px solid #ddd;
+    max-width: 800px;
+    margin: 20px auto;
+    margin-top: 5px;
     display: flex;
     justify-content: center;
-    z-index: 9999;
-    padding: 6px 0;
   }
 
-  .ad-container .ad-slot {
-    max-width: 800px;
-    width: 90%;
+  .ad-slot {
+    width: 100%;
     text-align: center;
+    overflow: hidden;
   }
 
-  .ad-container img {
-    max-width: 90%;
+  .ad-slot img {
+    max-width: 100%;
     height: auto;
-  }
-    
-  body {
-    padding-bottom: 80px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   }
 </style>
 </head>
