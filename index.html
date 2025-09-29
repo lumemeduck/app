@@ -242,7 +242,7 @@
   .mark{ width:12px; height:12px; border-radius:3px; border:1px dashed rgba(153,167,255,.55); }
 
   /* Footer note */
-  .footnote{ text-align:center; color:var(--muted); font-size:8px; margin-top:22px; animation:fadeInCard 0.3s ease forwards; }
+  .footnote{ text-align:center; color:var(--muted); font-size:8px; margin-top:22px; position:relative; animation:fadeInCard 0.3s ease forwards; }
 
   /* Pretty reset-modal */
    .reset-modal {
@@ -392,6 +392,20 @@ iframe {
         from { opacity: 0; transform: scale(0.9); }
         to { opacity: 1; transform: scale(1); }
       }
+
+advert {
+  width: 90%;
+  margin-top: 5px;
+  border: 1px solid rgba(99,102,241,0.10);
+  background: linear-gradient(180deg, rgba(255,255,255,.8), rgba(248,250,252,.8));
+  border-radius: 5px;
+  box-shadow:0 2px 4px rgba(99,102,241,0.25);
+  display: flex;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+  animation:fadeInCard 0.3s ease forwards;
+}
 </style>
 </head>
 <body>
@@ -517,9 +531,9 @@ iframe {
         </article>
       </div>
       <div class="footnote">ADVERTISEMENT</div>
-      <div>
+      <div class="advert" aria-live="polite">
         <a href="https://wipteetolu.net/4/7800106" target="_blank">
-        <img src="images/monetag.png" style="width:100%;display:flex;align-items:center;justify-content:center;position:relative;animation:fadeInCard 0.3s ease forwards;" /></a>
+        <img src="images/monetag.png" style="width:100%;height:auto;" /></a>
       </div>
     </section>
 
