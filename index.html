@@ -1967,6 +1967,13 @@ function showNotifyModal(message) {
 function closeNotifyModal() {
   document.getElementById("notifyModal").style.display = "none";
 }
+
+// Register SW
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.register("service-worker.js")
+      .then(() => console.log("Service Worker registered"))
+      .catch(err => console.error("Service Worker failed:", err));
+  }
 </script>
 </body>
 </html>
