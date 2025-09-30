@@ -1833,19 +1833,31 @@ showSection('home');
 const bell = document.getElementById("notifyBell");
 const bellIcon = document.getElementById("bellIcon");
 
+// Notify prompt elements
+const notifyPrompt = document.getElementById("notifyPrompt");
+const enableBtn = document.getElementById("enableNotifyBtn");
+const cancelBtn = document.getElementById("cancelNotifyBtn");
+
 // Update bell color
 function updateBellColor() {
   if (Notification.permission === "granted") {
-    bellIcon.style.color = "#0e95e9"; 
+    bellIcon.style.color = "#0e95e9";
   } else {
-    bellIcon.style.color = "#454545"; 
+    bellIcon.style.color = "#454545";
   }
 }
 
-// Ask for permission
-bell.addEventListener("click", async () => {
+// When bell is clicked
+bell.addEventListener("click", () => {
+  notifyPrompt.style.display = "flex";
+});
+
+// If user agrees
+enableBtn.addEventListener("click", async () => {
+  notifyPrompt.style.display = "none";
+
   if (!("Notification" in window)) {
-    showNotifyModal("System doesn't support daily motivation reminder settings!");
+    showNotifyModal("System doesn't support daily inspiration reminder settings!");
     return;
   }
 
@@ -1854,23 +1866,26 @@ bell.addEventListener("click", async () => {
     if (permission === "granted") {
       console.log("Notifications enabled");
       scheduleDailyNotification();
-    } else {
-      console.log("Notifications denied");
+      showLocalNotification("Rise & Shine", "Reminders enabled successfully!");
     }
   } else if (Notification.permission === "granted") {
-    // Already granted fires a test
-    showLocalNotification("Rise & Shine 🌞", "daily reminder is already allowed!");
+    showLocalNotification("Rise & Shine", "daily reminder is already allowed!");
   } else {
-    showNotifyModal("Daily motivation reminder is blocked in your system settings!");
+    showNotifyModal("Daily inspiration reminder is blocked in your system settings!");
   }
 
   updateBellColor();
 });
 
+// If user cancels
+cancelBtn.addEventListener("click", () => {
+  notifyPrompt.style.display = "none";
+});
+
 // Alert scheduler
 function scheduleDailyNotification() {
   setInterval(() => {
-    showLocalNotification("Rise & Shine 🌞", "your today's motivation is ready!");
+    showLocalNotification("Rise & Shine", "your today's motivation is ready!");
   }, 24 * 60 * 60 * 1000);
 }
 
