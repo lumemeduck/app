@@ -1832,8 +1832,6 @@ showSection('home');
 // Notification
 const bell = document.getElementById("notifyBell");
 const bellIcon = document.getElementById("bellIcon");
-
-// Notify prompt elements
 const notifyPrompt = document.getElementById("notifyPrompt");
 const enableBtn = document.getElementById("enableNotifyBtn");
 const cancelBtn = document.getElementById("cancelNotifyBtn");
@@ -1847,49 +1845,38 @@ function updateBellColor() {
   }
 }
 
-// When bell is clicked
+// Show prompt when bell clicked
 bell.addEventListener("click", () => {
   notifyPrompt.style.display = "flex";
 });
 
-// If user agrees
+// If user enables notifications
 enableBtn.addEventListener("click", async () => {
   notifyPrompt.style.display = "none";
 
   if (!("Notification" in window)) {
-    showNotifyModal("System doesn't support daily inspiration reminder settings!");
+    alert("System doesn't support daily reminders!");
     return;
   }
 
-  if (Notification.permission === "default") {
-    const permission = await Notification.requestPermission();
-    if (permission === "granted") {
-      console.log("Notifications enabled");
-      scheduleDailyNotification();
-      showLocalNotification("Rise & Shine", "Reminders enabled successfully!");
-    }
-  } else if (Notification.permission === "granted") {
-    showLocalNotification("Rise & Shine", "daily reminder is already allowed!");
+  const permission = await Notification.requestPermission();
+  if (permission === "granted") {
+    // Schedule alert in SW
+    scheduleNotificationsInSW();
+    showLocalNotification("Rise & Shine 🌞", "Daily reminders enabled!");
   } else {
-    showNotifyModal("Daily inspiration reminder is blocked in your system settings!");
+    alert("Notifications denied or blocked!");
   }
 
   updateBellColor();
 });
 
-// If user cancels
+// Cancel prompt
 cancelBtn.addEventListener("click", () => {
   notifyPrompt.style.display = "none";
 });
 
-// Alert scheduler
-function scheduleDailyNotification() {
-  setInterval(() => {
-    showLocalNotification("Rise & Shine", "your today's motivation is ready!");
-  }, 24 * 60 * 60 * 1000);
-}
-
-// Show notification
+// Show notification immediately
 function showLocalNotification(title, body) {
   if (Notification.permission === "granted") {
     new Notification(title, {
@@ -1899,8 +1886,77 @@ function showLocalNotification(title, body) {
   }
 }
 
-// Bell color remains
+// Schedule reminders
+function scheduleNotificationsInSW() {
+  if ("serviceWorker" in navigator && navigator.serviceWorker.controller) {
+    navigator.serviceWorker.controller.postMessage({
+      type: "SCHEDULE_NOTIFICATIONS"
+    });
+  }
+}
+
+// Init bell color
 updateBellColor();
+
+// Resilient trick
+if (Notification.permission === "granted") {
+  scheduleNotificationsInSW();
+    }
+
+// Service worker
+self.addEventListener("install", () => {
+  self.skipWaiting();
+});
+
+self.addEventListener("activate", () => {
+  clients.claim();
+});
+
+// Listener
+self.addEventListener("message", (event) => {
+  if (event.data && event.data.type === "SCHEDULE_NOTIFICATIONS") {
+    scheduleDailyReminders();
+  }
+});
+
+// Daily notifications
+function scheduleDailyReminders() {
+
+  if (self.reminderInterval) clearInterval(self.reminderInterval);
+
+  self.reminderInterval = setInterval(() => {
+    const now = new Date();
+    const hours = now.getHours();
+    const minutes = now.getMinutes();
+
+    // 9AM
+    if (hours === 9 && minutes === 0) {
+      self.registration.showNotification("Rise & Shine 🌞", {
+        body: "your today's motivation is ready!",
+        icon: "icons/icon-192.png",
+        badge: "icons/icon-72.png"
+      });
+    }
+
+    // 3PM
+    if (hours === 15 && minutes === 0) {
+      self.registration.showNotification("Don't break your streak ⚡", {
+        body: "your daily challenge is waiting for you! ⚡",
+        icon: "icons/icon-192.png",
+        badge: "icons/icon-72.png"
+      });
+    }
+
+    // 9PM
+    if (hours === 21 && minutes === 0) {
+      self.registration.showNotification("Rise & Shine 🔥", {
+        body: "Have you seen today's quote? 🔥",
+        icon: "icons/icon-192.png",
+        badge: "icons/icon-72.png"
+      });
+    }
+  }, 60 * 1000); // check every minute
+  }
 
 // Notify modal
 function showNotifyModal(message) {
