@@ -434,11 +434,20 @@ iframe {
   <container>
   <!-- Pretty share-modal -->
 <div id="shareModal" style="display:none;position:fixed;inset:0;background:rgba(255,255,255,.4);z-index:999;align-items:center;justify-content:center;animation: fadeInBg 0.3s ease forwards;">
-  <div style="background:#eef1ff;border:1px solid rgba(0,0,0,.1);border-radius:18px;padding:22px 28px;box-shadow:0 4px 15px rgba(0, 0, 0, 0.4);max-width:300px;text-align:center;color:#454545;font-family:system-ui;animation: fadeInCard 0.3s ease forwards;">
+  <div style="background:#eef1ff;border:1px solid rgba(0,0,0,.1);border-radius:18px;padding:22px 28px;box-shadow:0 4px 15px rgba(0, 0, 0, 0.4);max-width:300px;text-align:center;color:#454545;font-family:system-ui;animation:fadeInCard 0.3s ease forwards;">
     <h3 style="margin:0 0 12px;font-size:16px;">Share Quote Texts</h3>
     <p id="shareText" style="margin:0 0 18px;font-size:15px;line-height:1.4;"></p>
-    <button class="btn btn-accent" onclick="copyShare()" style="margin-right:18px;">Copy</button>
-    <button class="btn btn-warn" onclick="closeShare()">Close</button>
+    <button class="btn btn-warn" onclick="closeShare()" style="margin-right:18px;">Close</button>
+    <button class="btn btn-accent" onclick="copyShare()">Copy</button>
+  </div>
+</div>
+    <!-- Notify Permission Modal -->
+<div id="notifyPrompt" style="display:none;position:fixed;inset:0;background:rgba(255,255,255,.4);z-index:999;align-items:center;justify-content:center;animation: fadeInBg 0.3s ease forwards;">
+  <div style="background:#eef1ff;border:1px solid rgba(0,0,0,.1);border-radius:18px;padding:22px 28px;box-shadow:0 4px 15px rgba(0, 0, 0, 0.4);max-width:300px;text-align:center;color:#454545;font-family:system-ui;animation:fadeInCard 0.3s ease forwards;">
+    <h3 style="margin:0 0 12px;font-size:16px;">Stay Inspired Daily!</h3>
+    <p style="margin:0 0 18px;font-size:15px;line-height:1.4;">Enable system daily reminder notification so you never miss your daily dose of inspiration</p>
+    <button class="btn btn-warn" id="cancelNotifyBtn" style="margin-right:18px;">Later</button>
+    <button class="btn btn-accent" id="enableNotifyBtn">Allow</button>
   </div>
 </div>
   <!-- Pop up menu -->
@@ -450,7 +459,7 @@ iframe {
     <button class="btn btn-warn" onclick="closeSidebar()">Close</button>
   </div>
   </div>
-  <!-- Custom Modal -->
+  <!-- Notify unsupported Modal -->
 <div id="notifyModal" style="
   display:none;
   position:fixed;top:0;left:0;width:100%;height:100%;
