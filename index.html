@@ -1839,7 +1839,7 @@ const cancelBtn = document.getElementById("cancelNotifyBtn");
 // Update bell color
 function updateBellColor() {
   if (Notification.permission === "granted") {
-    bellIcon.style.color = "#22c55e";
+    bellIcon.style.color = "#0e95e9";
   } else {
     bellIcon.style.color = "#454545";
   }
@@ -1863,7 +1863,7 @@ enableBtn.addEventListener("click", async () => {
   if (permission === "granted") {
     // Schedule alert in SW
     scheduleNotificationsInSW();
-    showNotifyModal("Rise & Shine 🌞", "Daily reminders enabled!");
+    showNotifyModal("Daily reminder notification is already enabled!");
   } else {
     showNotifyModal("Daily inspiration reminder isn't allowed in your system setting!");
   }
