@@ -1855,7 +1855,7 @@ enableBtn.addEventListener("click", async () => {
   notifyPrompt.style.display = "none";
 
   if (!("Notification" in window)) {
-    alert("System doesn't support daily reminders!");
+    showNotifyModal("System doesn't support daily reminders!");
     return;
   }
 
@@ -1865,7 +1865,7 @@ enableBtn.addEventListener("click", async () => {
     scheduleNotificationsInSW();
     showLocalNotification("Rise & Shine 🌞", "Daily reminders enabled!");
   } else {
-    alert("Notifications denied or blocked!");
+    showNotifyModal("Daily inspiration reminder isn't allowed in your system setting!");
   }
 
   updateBellColor();
@@ -1932,7 +1932,7 @@ function scheduleDailyReminders() {
     // 9AM
     if (hours === 9 && minutes === 0) {
       self.registration.showNotification("Rise & Shine 🌞", {
-        body: "your today's motivation is ready!",
+        body: "your today's inspiration is ready!",
         icon: "icons/icon-192.png",
         badge: "icons/icon-72.png"
       });
@@ -1941,7 +1941,7 @@ function scheduleDailyReminders() {
     // 3PM
     if (hours === 15 && minutes === 0) {
       self.registration.showNotification("Don't break your streak ⚡", {
-        body: "your daily challenge is waiting for you! ⚡",
+        body: "your daily challenge is waiting for you!",
         icon: "icons/icon-192.png",
         badge: "icons/icon-72.png"
       });
@@ -1949,8 +1949,8 @@ function scheduleDailyReminders() {
 
     // 9PM
     if (hours === 21 && minutes === 0) {
-      self.registration.showNotification("Rise & Shine 🔥", {
-        body: "Have you seen today's quote? 🔥",
+      self.registration.showNotification("Rise & Shine", {
+        body: "have you seen today's quote? 🔥",
         icon: "icons/icon-192.png",
         badge: "icons/icon-72.png"
       });
