@@ -1929,8 +1929,85 @@ function closeNotifyModal() {
   document.getElementById("notifyModal").style.display = "none";
 }
 
-// Register SW
-  
+// Android prompt
+let deferredPrompt;
+window.addEventListener("beforeinstallprompt", (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+
+  if (!localStorage.getItem("pwaInstalled") && !localStorage.getItem("pwaDismissed")) {
+    showAndroidInstallPrompt();
+  }
+});
+
+function showAndroidInstallPrompt() {
+  const banner = document.createElement("div");
+  banner.innerHTML = `
+    <div style="position:fixed;bottom:20px;left:10px;right:10px;
+      background:#fff;border:1px solid #ccc;padding:12px;
+      border-radius:10px;box-shadow:0 4px 6px rgba(0,0,0,0.1);
+      font-size:14px;z-index:9999;text-align:center;">
+      🚀 Install <b>Rise & Shine</b> on your device
+      <br><br>
+      <button id="installBtn" style="padding:6px 12px;
+        background:#4CAF50;color:#fff;border:none;border-radius:6px;">Install</button>
+      <button id="dismissBtn" style="margin-left:8px;padding:6px 12px;
+        background:#ccc;border:none;border-radius:6px;">Later</button>
+    </div>
+  `;
+  document.body.appendChild(banner);
+
+  document.getElementById("installBtn").addEventListener("click", () => {
+    deferredPrompt.prompt();
+    deferredPrompt.userChoice.then(choice => {
+      if (choice.outcome === "accepted") {
+        console.log("User installed PWA");
+        localStorage.setItem("pwaInstalled", "true");
+      } else {
+        console.log("User dismissed install ❌");
+        localStorage.setItem("pwaDismissed", "false");
+      }
+      deferredPrompt = null;
+      banner.remove();
+    });
+  });
+
+  document.getElementById("dismissBtn").addEventListener("click", () => {
+    localStorage.setItem("pwaDismissed", "true");
+    banner.remove();
+  });
+}
+
+// iOS prompt
+function isIos() {
+  return /iphone|ipad|ipod/.test(window.navigator.userAgent.toLowerCase());
+}
+function isInStandaloneMode() {
+  return ("standalone" in window.navigator) && window.navigator.standalone;
+}
+
+if (isIos() && !isInStandaloneMode()) {
+  if (!localStorage.getItem("iosPromptDismissed")) {
+    const iosPrompt = document.createElement("div");
+    iosPrompt.innerHTML = `
+      <div style="position:fixed;bottom:20px;left:10px;right:10px;
+        background:#fff;border:1px solid #ccc;padding:12px;
+        border-radius:10px;box-shadow:0 4px 6px rgba(0,0,0,0.1);
+        font-size:14px;z-index:9999;text-align:center;">
+        📲 <b>Install Rise & Shine</b>: Tap 
+        <span style="font-size:18px;">⬆️</span> then "Add to Home Screen"
+        <button id="closeIosPrompt" 
+          style="margin-left:10px;padding:4px 8px;border:none;
+          border-radius:6px;background:#f5f5f5;">✖</button>
+      </div>
+    `;
+    document.body.appendChild(iosPrompt);
+    document.getElementById("closeIosPrompt").addEventListener("click", () => {
+      localStorage.setItem("iosPromptDismissed", "true");
+      iosPrompt.remove();
+    });
+  }
+    }
 </script>
 </body>
 </html>
