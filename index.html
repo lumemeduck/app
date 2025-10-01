@@ -1836,7 +1836,7 @@ const notifyPrompt = document.getElementById("notifyPrompt");
 const enableBtn = document.getElementById("enableNotifyBtn");
 const cancelBtn = document.getElementById("cancelNotifyBtn");
 
-// Update bell color
+// Bell color
 function updateBellColor() {
   if (Notification.permission === "granted") {
     bellIcon.style.color = "#0e95e9";
@@ -1845,118 +1845,79 @@ function updateBellColor() {
   }
 }
 
-// Show prompt when bell clicked
+// Bell click
 bell.addEventListener("click", () => {
   notifyPrompt.style.display = "flex";
 });
 
-// If user enables notifications
+// If enabled
 enableBtn.addEventListener("click", async () => {
   notifyPrompt.style.display = "none";
 
   if (!("Notification" in window)) {
-    showNotifyModal("System doesn't support daily reminders!");
+    showNotifyModal("System doesn't support daily reminders notification!");
     return;
   }
 
   const permission = await Notification.requestPermission();
   if (permission === "granted") {
-    // Schedule alert in SW
-    scheduleNotificationsInSW();
-    showNotifyModal("Daily reminder notification is already enabled!");
+    await scheduleNotificationsInSW();
+    showNotifyModal("Daily reminders notifications are already enabled!");
   } else {
-    showNotifyModal("Daily inspiration reminder isn't allowed in your system setting!");
+    showNotifyModal("Allow daily reminders notification in your system setting!");
   }
 
   updateBellColor();
 });
 
-// Cancel prompt
+// Cancel
 cancelBtn.addEventListener("click", () => {
   notifyPrompt.style.display = "none";
 });
 
-// Show notification immediately
+// Show alerts
 function showLocalNotification(title, body) {
   if (Notification.permission === "granted") {
     new Notification(title, {
-      body: body,
+      body,
       icon: "icons/icon-192.png"
     });
   }
 }
 
-// Schedule reminders
-function scheduleNotificationsInSW() {
-  if ("serviceWorker" in navigator && navigator.serviceWorker.controller) {
-    navigator.serviceWorker.controller.postMessage({
-      type: "SCHEDULE_NOTIFICATIONS"
-    });
+// Sync in SW
+async function scheduleNotificationsInSW() {
+  if ("serviceWorker" in navigator) {
+    const reg = await navigator.serviceWorker.ready;
+
+    // Background sync
+    if ("periodicSync" in reg) {
+      try {
+        await reg.periodicSync.register("rise-shine-reminder", {
+          minInterval: 60 * 60 * 1000
+        });
+        console.log("Periodic background sync registered.");
+      } catch (err) {
+        console.warn("Periodic sync registration failed:", err);
+      }
+    } else {
+      // Fallback
+      if (navigator.serviceWorker.controller) {
+        navigator.serviceWorker.controller.postMessage({
+          type: "SCHEDULE_NOTIFICATIONS"
+        });
+      }
+    }
   }
 }
 
 // Init bell color
 updateBellColor();
 
-// Resilient trick
+// Auto-reschedule
 if (Notification.permission === "granted") {
   scheduleNotificationsInSW();
     }
-
-// Service worker
-self.addEventListener("install", () => {
-  self.skipWaiting();
-});
-
-self.addEventListener("activate", () => {
-  clients.claim();
-});
-
-// Listener
-self.addEventListener("message", (event) => {
-  if (event.data && event.data.type === "SCHEDULE_NOTIFICATIONS") {
-    scheduleDailyReminders();
-  }
-});
-
-// Daily notifications
-function scheduleDailyReminders() {
-
-  if (self.reminderInterval) clearInterval(self.reminderInterval);
-
-  self.reminderInterval = setInterval(() => {
-    const now = new Date();
-    const hours = now.getHours();
-    const minutes = now.getMinutes();
-
-    // 9AM
-    if (hours === 9 && minutes === 0) {
-      self.registration.showNotification("Rise & Shine 🌞", {
-        body: "your today's inspiration is ready!",
-        icon: "icons/icon-192.png",
-        badge: "icons/icon-72.png"
-      });
-    }
-
-    // 3PM
-    if (hours === 15 && minutes === 0) {
-      self.registration.showNotification("Don't break your streak ⚡", {
-        body: "your daily challenge is waiting for you!",
-        icon: "icons/icon-192.png",
-        badge: "icons/icon-72.png"
-      });
-    }
-
-    // 9PM
-    if (hours === 21 && minutes === 0) {
-      self.registration.showNotification("Rise & Shine", {
-        body: "have you seen today's quote? 🔥",
-        icon: "icons/icon-192.png",
-        badge: "icons/icon-72.png"
-      });
-    }
-  }, 60 * 1000); // check every minute
-  }
 
 // Notify modal
 function showNotifyModal(message) {
@@ -1969,11 +1930,7 @@ function closeNotifyModal() {
 }
 
 // Register SW
-  if ("serviceWorker" in navigator) {
-    navigator.serviceWorker.register("service-worker.js")
-      .then(() => console.log("Service Worker registered"))
-      .catch(err => console.error("Service Worker failed:", err));
-  }
+  
 </script>
 </body>
 </html>
