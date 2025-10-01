@@ -1943,16 +1943,14 @@ window.addEventListener("beforeinstallprompt", (e) => {
 function showAndroidInstallPrompt() {
   const banner = document.createElement("div");
   banner.innerHTML = `
-    <div style="position:fixed;bottom:20px;left:10px;right:10px;
-      background:#fff;border:1px solid #ccc;padding:12px;
+    <div style="position:fixed;top:20px;left:10px;right:10px;
+      background:#eef1ff;border:1px solid #ccc;padding:12px;
       border-radius:10px;box-shadow:0 4px 6px rgba(0,0,0,0.1);
       font-size:14px;z-index:9999;text-align:center;">
-      🚀 Install <b>Rise & Shine</b> on your device
+      🚀 Install <b>Rise & Shine</b> web app on your device to for seamless use even when offline
       <br><br>
-      <button id="installBtn" style="padding:6px 12px;
-        background:#4CAF50;color:#fff;border:none;border-radius:6px;">Install</button>
-      <button id="dismissBtn" style="margin-left:8px;padding:6px 12px;
-        background:#ccc;border:none;border-radius:6px;">Later</button>
+      <button class="btn btn-accent" id="installBtn">Install</button>
+      <button id="dismissBtn" style="margin-left:18px;">Later</button>
     </div>
   `;
   document.body.appendChild(banner);
@@ -1963,9 +1961,10 @@ function showAndroidInstallPrompt() {
       if (choice.outcome === "accepted") {
         console.log("User installed PWA");
         localStorage.setItem("pwaInstalled", "true");
+        localStorage.removeItem("pwaDismissed"); // Reset pwaDismissed flag
       } else {
         console.log("User dismissed install ❌");
-        localStorage.setItem("pwaDismissed", "false");
+        localStorage.setItem("pwaDismissed", "true");
       }
       deferredPrompt = null;
       banner.remove();
