@@ -1,4 +1,4 @@
-const CACHE_NAME = "rise-shine-cache-v1";
+const CACHE_NAME = "rise-shine-cache-v2";
 const urlsToCache = [
   "./",
   "./index.html",
@@ -7,28 +7,33 @@ const urlsToCache = [
   "./icons/icon-512.png"
 ];
 
-// Install event
+// Update cache
 self.addEventListener("install", event => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then(cache => {
-      return cache.addAll(urlsToCache);
-    })
+    caches.open(CACHE_NAME).then(cache => cache.addAll(urlsToCache))
   );
+  self.skipWaiting();
 });
 
-// Fetch event
+self.addEventListener("activate", event => {
+  event.waitUntil(
+    caches.keys().then(keys =>
+      Promise.all(keys.filter(k => k !== CACHE_NAME).map(k => caches.delete(k)))
+    )
+  );
+  clients.claim();
+});
+
+// Fetch
 self.addEventListener("fetch", event => {
   event.respondWith(
-    caches.match(event.request).then(response => {
-      return response || fetch(event.request);
-    })
+    fetch(event.request).catch(() => caches.match(event.request))
   );
 });
 
-// === Notification Handling ===
+// Notification Click
 self.addEventListener("notificationclick", event => {
   event.notification.close();
-
   event.waitUntil(
     clients.matchAll({ type: "window", includeUncontrolled: true }).then(clientList => {
       for (const client of clientList) {
@@ -43,7 +48,7 @@ self.addEventListener("notificationclick", event => {
   );
 });
 
-// Register periodic sync
+// Background Sync
 self.addEventListener("periodicsync", event => {
   if (event.tag === "rise-shine-reminder") {
     event.waitUntil(sendDailyReminders());
@@ -51,26 +56,27 @@ self.addEventListener("periodicsync", event => {
 });
 
 // Fallback
-self.addEventListener("sync", event => {
-  if (event.tag === "rise-shine-reminder") {
-    event.waitUntil(sendDailyReminders());
+self.addEventListener("message", event => {
+  if (event.data && event.data.type === "SCHEDULE_NOTIFICATIONS") {
+    scheduleDailyRemindersFallback();
   }
 });
 
-// Trigger notifications
+// Notification
 async function sendDailyReminders() {
   const now = new Date();
   const hour = now.getHours();
+  const minutes = now.getMinutes();
 
-  // Fires
-  if (hour === 9) {
-    showNotification("Rise & Shine 🌞", "your today's motivation is ready!");
+  // Fire
+  if (hour === 9 && minutes === 0) {
+    showNotification("Rise & Shine 🌞", "your today's inspirational quote is ready!");
   }
-  if (hour === 15) {
+  if (hour === 15 && minutes === 0) {
     showNotification("Don't break your streak ⚡", "your daily challenge is waiting for you!");
   }
-  if (hour === 21) {
-    showNotification("Rise & Shine 💕", "Have you seen today's quote?");
+  if (hour === 21 && minutes === 0) {
+    showNotification("Rise & Shine 💕", "have you seen today's inspirational quote?");
   }
 }
 
@@ -78,6 +84,15 @@ function showNotification(title, body) {
   self.registration.showNotification(title, {
     body,
     icon: "icons/icon-192.png",
-    badge: "icons/icon-192.png"
+    badge: "icons/icon-72.png"
   });
 }
+
+// Fallback
+function scheduleDailyRemindersFallback() {
+  if (self.reminderInterval) clearInterval(self.reminderInterval);
+
+  self.reminderInterval = setInterval(() => {
+    sendDailyReminders();
+  }, 60 * 1000);
+    }
