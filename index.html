@@ -1943,8 +1943,9 @@ window.addEventListener("beforeinstallprompt", (e) => {
 function showAndroidInstallPrompt() {
   const banner = document.createElement("div");
   banner.innerHTML = `
-    <div style="position:fixed;top:20px;inset:0;justify-content:center;
-      background:#fefefe;border:1px solid #f1f4ff;padding:12px;align-items:center;
+  <center>
+    <div style="position:fixed;top:20px;left:10px;right:10px;align-items:center;
+      background:#fefefe;border:1px solid #ddd;padding:12px;justify-content:center;
       border-radius:10px;max-width:300px;box-shadow:0 4px 8px rgba(99,102,241,0.25);
       font-size:14px;z-index:9999;text-align:center;animation:fadeInBg 0.5s ease forwards;">
       Install <b>Rise & Shine</b> web app on your device to for seamless use even when offline
@@ -1954,6 +1955,7 @@ function showAndroidInstallPrompt() {
       <button id="installBtn" style="margin-left:18px;padding:5px 10px;
         background:#22c55e;color:#fff;border:none;border-radius:6px;">Install</button>
     </div>
+  </center>
   `;
   document.body.appendChild(banner);
 
