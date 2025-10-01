@@ -1,8 +1,10 @@
-const CACHE_NAME = "rise-shine-cache-v3";
+const CACHE_NAME = "rise-shine-cache-v4";
 const urlsToCache = [
   "./",
   "./index.html",
   "./manifest.json",
+  "./trivia/index.html",
+  "./images/rs30.jpg",
   "./icons/icon-72.png",
   "./icons/icon-192.png",
   "./icons/icon-512.png"
