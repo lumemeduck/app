@@ -1935,24 +1935,48 @@ window.addEventListener("beforeinstallprompt", (e) => {
   e.preventDefault();
   deferredPrompt = e;
 
-  if (!localStorage.getItem("pwaInstalled") && !localStorage.getItem("pwaDismissed")) {
+  // If not installed
+  if (!localStorage.getItem("pwaInstalled")) {
     showAndroidInstallPrompt();
   }
 });
 
 function showAndroidInstallPrompt() {
   const banner = document.createElement("div");
+  banner.setAttribute("id", "pwaBanner");
   banner.innerHTML = `
-    <div style="position:fixed;top:20px;left:10px;right:10px;align-items:center;
-      background:#fefefe;border:1px solid #ccc;padding:12px;justify-content:center;
-      border-radius:10px;max-width:300px;box-shadow:0 4px 6px rgba(99,102,241,0.25);
-      font-size:14px;z-index:9999;text-align:center;animation:fadeInBg 0.5s ease forwards;">
-      Install 📲 <b>Rise & Shine</b> web app on your device to for seamless use even when offline
+    <div style="
+      position:fixed;
+      top:20px;
+      left:50%;
+      transform:translateX(-50%);
+      background:#fefefe;
+      border:1px solid #ccc;
+      padding:12px;
+      border-radius:10px;
+      max-width:320px;
+      width:90%;
+      box-shadow:0 4px 6px rgba(99,102,241,0.25);
+      font-size:14px;
+      z-index:9999;
+      text-align:center;
+      animation:fadeInBg 0.5s ease forwards;">
+      📲 <b>Rise & Shine</b> works best when installed!  
       <br><br>
-      <button id="dismissBtn" style="margin-right:18px;padding:5px 10px;
-        background:#f59e0b;color:#fff;border:none;border-radius:6px;">Later</button>
-      <button id="installBtn" style="margin-left:18px;padding:5px 10px;
-        background:#22c55e;color:#fff;border:none;border-radius:6px;">Install</button>
+      <button id="dismissBtn" style="
+        margin-right:18px;
+        padding:5px 10px;
+        background:#f59e0b;
+        color:#fff;
+        border:none;
+        border-radius:6px;">Later</button>
+      <button id="installBtn" style="
+        margin-left:18px;
+        padding:5px 10px;
+        background:#22c55e;
+        color:#fff;
+        border:none;
+        border-radius:6px;">Install</button>
     </div>
   `;
   document.body.appendChild(banner);
@@ -1963,10 +1987,8 @@ function showAndroidInstallPrompt() {
       if (choice.outcome === "accepted") {
         console.log("User installed PWA");
         localStorage.setItem("pwaInstalled", "true");
-        localStorage.removeItem("pwaDismissed"); // Reset pwaDismissed flag
       } else {
-        console.log("User dismissed install ❌");
-        localStorage.setItem("pwaDismissed", "true");
+        console.log("❌ User dismissed install");
       }
       deferredPrompt = null;
       banner.remove();
@@ -1974,10 +1996,16 @@ function showAndroidInstallPrompt() {
   });
 
   document.getElementById("dismissBtn").addEventListener("click", () => {
-    localStorage.setItem("pwaDismissed", "true");
+    console.log("User tapped Later");
     banner.remove();
   });
 }
+
+// Detect
+window.addEventListener("appinstalled", () => {
+  console.log("PWA installed event fired");
+  localStorage.setItem("pwaInstalled", "true");
+});
 
 // iOS prompt
 function isIos() {
@@ -1988,27 +2016,38 @@ function isInStandaloneMode() {
 }
 
 if (isIos() && !isInStandaloneMode()) {
-  if (!localStorage.getItem("iosPromptDismissed")) {
-    const iosPrompt = document.createElement("div");
-    iosPrompt.innerHTML = `
-      <div style="position:fixed;top:20px;left:10px;right:10px;align-items:center;
-        background:#fefefe;border:1px solid #ccc;padding:12px;justify-content:center;
-        border-radius:10px;max-width:300;box-shadow:0 4px 6px rgba(99,102,241,0.25);
-        font-size:14px;z-index:9999;text-align:center;animation:fadeInBg 0.5s ease forwards;">
-        Install 📲 <b>Rise & Shine</b>: Tap 
-        <span style="font-size:18px;">⬆️</span> then "Add to Home Screen"
-        <button id="closeIosPrompt" 
-          style="margin-left:10px;padding:4px 8px;border:none;
-          border-radius:6px;background:#f59e0b;color:#fff;">✖</button>
-      </div>
-    `;
-    document.body.appendChild(iosPrompt);
-    document.getElementById("closeIosPrompt").addEventListener("click", () => {
-      localStorage.setItem("iosPromptDismissed", "true");
-      iosPrompt.remove();
-    });
+  const iosPrompt = document.createElement("div");
+  iosPrompt.innerHTML = `
+    <div style="
+      position:fixed;
+      top:20px;
+      left:50%;
+      transform:translateX(-50%);
+      background:#fff;
+      border:1px solid #ccc;
+      padding:12px;
+      border-radius:10px;
+      max-width:320px;
+      width:90%;
+      box-shadow:0 4px 6px rgba(99,102,241,0.25);
+      font-size:14px;
+      z-index:9999;
+      text-align:center;">
+      📲 Install <b>Rise & Shine</b>: Tap <span style="font-size:18px;">⬆️</span> then "Add to Home Screen"
+      <br><br>
+      <button id="closeIosPrompt" style="
+        padding:4px 10px;
+        border:none;
+        border-radius:6px;
+        background:#f59e0b;
+        color:#fff;">✖</button>
+    </div>
+  `;
+  document.body.appendChild(iosPrompt);
+  document.getElementById("closeIosPrompt").addEventListener("click", () => {
+    iosPrompt.remove();
+  });
   }
-    }
 </script>
 </body>
 </html>
