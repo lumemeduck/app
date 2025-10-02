@@ -112,9 +112,9 @@
   backdrop-filter:saturate(120%) blur(8px);
   background: #f1f4ff;
   border-bottom:1px solid rgba(99,102,241,0.10);
-  box-shadow:0 2px 4px rgba(99,102,241,0.15);
-  border-bottom-left-radius: 18px;
-  border-bottom-right-radius: 18px;
+  box-shadow: 0px 0px 4px 2px rgba(99,102,241,0.15);
+  border-bottom-left-radius: 23px;
+  border-bottom-right-radius: 23px;
   }
   .nav{
     max-width:800px;
@@ -256,7 +256,7 @@
 }
    .reset-box {
   background: #eef1ff; border: 1px solid rgba(0,0,0,.1);
-  color: #454545; font-family:system-ui; border-radius: 12px;
+  color: #002d5d; font-family:system-ui; border-radius: 12px;
   padding: 24px 28px; text-align: center;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
   max-width: 300px;
@@ -348,8 +348,8 @@
   display: flex;
   justify-content: space-around;
   padding: 10px 0;
-  border-top-left-radius: 18px;
-  border-top-right-radius: 18px;
+  border-top-left-radius: 23px;
+  border-top-right-radius: 23px;
   z-index: 10;
 }
 
@@ -385,7 +385,7 @@ iframe {
   background: linear-gradient(180deg, rgba(255,255,255,.8), rgba(248,250,252,.8));
   border:1px solid rgba(99,102,241,0.10);
   border-radius: 18px;
-  box-shadow:0 2px 4px rgba(99,102,241,0.25);
+  box-shadow: 0px 0px 4px 2px rgba(99,102,241,0.15);
   display: block;
 }
 
@@ -434,12 +434,12 @@ iframe {
 <!-- Preloader -->
 <div id="preloader">
   <div class="loader"></div>
-  <p></p>
+  <p>Please wait...</p>
 </div>
   <container>
   <!-- Pretty share-modal -->
 <div id="shareModal" style="display:none;position:fixed;inset:0;background:rgba(255,255,255,.4);z-index:999;align-items:center;justify-content:center;animation: fadeInBg 0.3s ease forwards;">
-  <div style="background:#eef1ff;border:1px solid rgba(0,0,0,.1);border-radius:18px;padding:22px 28px;box-shadow:0 4px 15px rgba(0, 0, 0, 0.4);max-width:300px;text-align:center;color:#454545;font-family:system-ui;animation:fadeInCard 0.3s ease forwards;">
+  <div style="background:#eef1ff;border:1px solid rgba(0,0,0,.1);border-radius:18px;padding:22px 28px;box-shadow:0 4px 15px rgba(0, 0, 0, 0.4);max-width:300px;text-align:center;color:#002d5d;font-family:system-ui;animation:fadeInCard 0.3s ease forwards;">
     <h3 style="margin:0 0 12px;font-size:16px;">Share Quote Texts</h3>
     <p id="shareText" style="margin:0 0 18px;font-size:15px;line-height:1.4;"></p>
     <button class="btn btn-warn" onclick="closeShare()" style="margin-right:23px;">Close</button>
@@ -448,7 +448,7 @@ iframe {
 </div>
     <!-- Notify Permission Modal -->
 <div id="notifyPrompt" style="display:none;position:fixed;inset:0;background:rgba(255,255,255,.4);z-index:999;align-items:center;justify-content:center;animation: fadeInBg 0.3s ease forwards;">
-  <div style="background:#eef1ff;border:1px solid rgba(0,0,0,.1);border-radius:18px;padding:22px 28px;box-shadow:0 4px 15px rgba(0, 0, 0, 0.4);max-width:300px;text-align:center;color:#454545;font-family:system-ui;animation:fadeInCard 0.3s ease forwards;">
+  <div style="background:#eef1ff;border:1px solid rgba(0,0,0,.1);border-radius:18px;padding:22px 28px;box-shadow:0 4px 15px rgba(0, 0, 0, 0.4);max-width:300px;text-align:center;color:#002d5d;font-family:system-ui;animation:fadeInCard 0.3s ease forwards;">
     <h3 style="margin:0 0 12px;font-size:16px;">Stay Inspired Daily!</h3>
     <p style="margin:0 0 18px;font-size:15px;line-height:1.4;">Enable daily reminders alerts so you never miss your daily dose of inspiration</p>
     <button class="btn btn-warn" id="cancelNotifyBtn" style="margin-right:23px;">Later</button>
@@ -483,7 +483,7 @@ iframe {
     max-width:300px;
     text-align:center;
     font-family:system-ui;
-    color:#454545;
+    color:#002d5d;
     animation: fadeInCard 0.3s ease forwards;
   ">
     <p id="notifyMessage" style="margin-bottom:20px;font-size:16px;">
@@ -514,8 +514,8 @@ iframe {
 
   <header>
     <div class="nav">
-      <button class="btn" id="menuButton" title="Menu" style="background:none;border:none;cursor:none;">
-        <i class="fas fa-bars" style="font-size:24px;color:#454545;"></i>
+      <button id="menuButton" title="Menu" style="background:none;border:none;cursor:none;">
+        <i class="fas fa-bars" style="font-size:24px;color:#002d5d;"></i>
       </button>
       <div class="brand" role="button" onclick="Router.go('#home')" title="Go Home">
         <img src="icons/icon-72.png" height= "24px" width= "24px">
@@ -523,10 +523,10 @@ iframe {
       </div>
       <div class="actions">
         <div type="" class="" id="btnProgress" tittle="View Streak Progress"></div>
-        <button class="btn" id="btnReset" title="Reset all data" style="background:none;border:none;cursor:none;">
+        <button id="btnReset" title="Reset all data" style="background:none;border:none;cursor:none;">
         <i class="fa fa-refresh" style="font-size:24px;color:#f59e0b;"></i></button>
-        <button class="btn" id="notifyBell" style="background:none;border:none;cursor:none;">
-        <i id="bellIcon" class="fa-regular fa-bell" style="font-size:24px;color:#454545;"></i>
+        <button id="notifyBell" style="background:none;border:none;cursor:none;">
+        <i id="bellIcon" class="fa-regular fa-bell" style="font-size:24px;color:#002d5d;"></i>
         </button>
       </div>
     </div>
@@ -1373,7 +1373,7 @@ function saveQuoteAsImage(){
   // Title/brand
   ctx.font = "bold 38px system-ui, Segoe UI, Roboto, Arial";
   ctx.fillStyle = "#eaf0ff";
-  ctx.fillText("LMD Quotes", cardX + 40, cardY + 70);
+  ctx.fillText("Today's Quote", cardX + 40, cardY + 70);
   ctx.font = "600 22px system-ui, Segoe UI, Roboto, Arial";
   ctx.fillStyle = "rgba(186,194,228,.85)";
   const dateStr = new Date().toLocaleDateString(undefined, { weekday:'short', month:'short', day:'numeric', year:'numeric' });
@@ -1436,7 +1436,7 @@ ctx.textBaseline = 'alphabetic';
   <container>
     <div style="max-width:800px;margin:0 auto;display:flex;flex-direction:column;align-items:center;justify-content:center;height:100vh;gap:20px;font-family:sans-serif;text-align:center;">
       <div class="spinner" style="width:40px;height:40px;border:4px solid rgba(0,0,0,.1);border-top:4px solid #0ea5e9;border-radius:50%;animation:spin 1s linear infinite;"></div>
-      <p style="font-size:16px;color:#454545;">Generating image...</p>
+      <p style="font-size:16px;color:#002d5d;">Generating image...</p>
     </div>
     <style>
       @keyframes spin { from { transform:rotate(0deg);} to { transform:rotate(360deg);} }
@@ -1455,7 +1455,7 @@ ctx.textBaseline = 'alphabetic';
           <button class="btn" id="download-button"><i class="fas fa-download" style="font-size:15px;"></i> Save</button>
           <button class="btn" id="share-button"><i class="fas fa-share" style="font-size:15px;"></i> Share</button>
         </div>
-        <p style="width:100%;font-size:14px;opacity:0.5;color:#6b7280;align-items:center;justify-content:center;position:relative;animation:fadeInCard 0.3s ease forwards;">
+        <p style="width:100%;font-size:14px;opacity:0.5;color:#002d5d;align-items:center;justify-content:center;position:relative;animation:fadeInCard 0.3s ease forwards;">
           🔆 Sharing doesn’t work in some old webview<br>If notified, you can tap <strong>save</strong> instead.
         </p>
         <button class="btn btn-accent" id="backButton" style="margin-bottom:10px;">く Back</button>
@@ -1529,7 +1529,7 @@ function triggerDownload(dataURL, filename) {
         z-index:9999;animation:fadeInBg 0.3s ease forwards;
       `;
       fallback.innerHTML = `
-        <div style="background:#eef1ff;color:#454545;box-shadow:0 4px 15px rgba(0,0,0,0.4);
+        <div style="background:#eef1ff;color:#002d5d;box-shadow:0 4px 15px rgba(0,0,0,0.4);
           border-radius:18px;padding:20px;max-width:320px;text-align:center;
           font-family:system-ui;animation:fadeInCard 0.3s ease forwards;">
           <h3 style="margin-bottom:10px;font-size:16px;">System Isn't Responding!</h3>
@@ -1612,7 +1612,7 @@ function triggerDownload(dataURL, filename) {
     fallback.innerHTML = `
       <div style="
         background: #eef1ff;
-        color: #454545;
+        color: #002d5d;
         box-shadow:0 4px 15px rgba(0, 0, 0, 0.4);
         border:1px solid rgba(0,0,0,.1);
         border-radius: 18px;
@@ -1846,7 +1846,7 @@ function updateBellColor() {
   if (Notification.permission === "granted") {
     bellIcon.style.color = "#0e95e9";
   } else {
-    bellIcon.style.color = "#454545";
+    bellIcon.style.color = "#002d5d";
   }
 }
 
