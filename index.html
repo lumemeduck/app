@@ -24,6 +24,9 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Paytone One">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <script type="text/javascript" async src="https://cdn.resources.wortise.com/sdk/web/web-sdk.js">
+    wortise.init('your asset key')
+  </script>
   <style>
 /* Fullscreen overlay */
 #preloader {
@@ -617,6 +620,7 @@ iframe {
     <div class="ad-container" aria-live="polite">
        <div class="ad-slot">
         <!-- advert here -->
+		<div id='wortise:BANNER_ID' style='min-width:320px;min-height:100px;'></div>
       </div>
     </div>
   </section>
