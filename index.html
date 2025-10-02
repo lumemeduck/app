@@ -2063,9 +2063,9 @@ if (isIos() && !isInStandaloneMode()) {
   }
   // Register SW
   if ("serviceWorker" in navigator) {
-  window.addEventListener("load", () => {
+  window.addEventListener("load", function() => {
     navigator.serviceWorker
-      .register("service-worker.js")
+      .register("/service-worker.js")
       .then(reg => console.log("Service Worker registered!", reg.scope))
       .catch(err => console.error("Service Worker registration failed!", err));
   });
