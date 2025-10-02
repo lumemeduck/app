@@ -1,7 +1,7 @@
 {
-  "name": "Rise & Shine",
-  "short_name": "Rise & Shine",
-  "description": "Daily motivational quotes and wellness challenges.",
+  "name": "LMD Quotes",
+  "short_name": "LMD Quotes",
+  "description": "Daily quotes and exercises challenge.",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#f1f4ff",
@@ -9,8 +9,8 @@
   "orientation": "portrait",
   "icons": [
     {
-      "src": "icons/icon-180.png",
-      "sizes": "180x180",
+      "src": "icons/icon-72.png",
+      "sizes": "72x72",
       "type": "image/png"
     },
     {
