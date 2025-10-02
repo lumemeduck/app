@@ -1,10 +1,9 @@
-const CACHE_NAME = "rise-shine-cache-v4";
+const CACHE_NAME = "lmd-quotes-cache-v5";
 const urlsToCache = [
   "./",
   "./index.html",
   "./manifest.json",
   "./trivia/index.html",
-  "./images/rs30.jpg",
   "./icons/icon-72.png",
   "./icons/icon-192.png",
   "./icons/icon-512.png"
@@ -53,7 +52,7 @@ self.addEventListener("notificationclick", event => {
 
 // Background Sync
 self.addEventListener("periodicsync", event => {
-  if (event.tag === "rise-shine-reminder") {
+  if (event.tag === "lmd-quotes-reminder") {
     event.waitUntil(sendDailyReminders());
   }
 });
@@ -73,13 +72,13 @@ async function sendDailyReminders() {
 
   // Fire
   if (hour === 9 && minutes === 0) {
-    showNotification("Rise & Shine 🌞", "your today's inspirational quote is ready!");
+    showNotification("Arise and shine 🌞", "today's quote is ready, check it out now!");
   }
   if (hour === 15 && minutes === 0) {
-    showNotification("Don't break your streak ⚡", "your daily challenge is waiting for you!");
+    showNotification("Don't break your streak ⚡", "complete today's challenge, it's simple!");
   }
   if (hour === 21 && minutes === 0) {
-    showNotification("Rise & Shine 💕", "have you seen today's inspirational quote?");
+    showNotification("Hello champ 😎", "have you seen today's quote? very interesting!");
   }
 }
 
