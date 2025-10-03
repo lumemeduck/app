@@ -500,7 +500,7 @@
       </button>
       <div class="brand" role="button" onclick="Router.go('#home')" title="Go Home">
         <img src="icons/icon-72.png" height= "28px" width= "28px">
-        <div class="title">Arise & Shine</div>
+        <div class="title">LMD Quotes</div>
       </div>
       <div class="actions">
         <div type="" class="" id="btnProgress" tittle="View Streak Progress"></div>
@@ -1395,9 +1395,9 @@ function saveQuoteAsImage(){
   ctx.stroke();
 
   // Title/brand
-  ctx.font = "bold 38px system-ui, Segoe UI, Roboto, Arial";
+  ctx.font = "bold 36px system-ui, Segoe UI, Roboto, Arial";
   ctx.fillStyle = "#eaf0ff";
-  ctx.fillText("Today's Quote", cardX + 40, cardY + 70);
+  ctx.fillText("LMD Quotes", cardX + 40, cardY + 70);
   ctx.font = "600 22px system-ui, Segoe UI, Roboto, Arial";
   ctx.fillStyle = "rgba(186,194,228,.85)";
   const dateStr = new Date().toLocaleDateString(undefined, { weekday:'short', month:'short', day:'numeric', year:'numeric' });
@@ -1406,7 +1406,7 @@ function saveQuoteAsImage(){
   // Quote
   const quote  = document.getElementById('quoteText').textContent.replace(/[“”]/g, '');
 const author = document.getElementById('quoteAuthor').textContent;
-ctx.font = '800 46px system-ui, Segoe UI, Roboto, Arial';
+ctx.font = '800 48px system-ui, Segoe UI, Roboto, Arial';
 ctx.fillStyle = '#eef1ff';
 ctx.textAlign = 'center';
 ctx.textBaseline = 'middle';
