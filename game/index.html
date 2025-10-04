@@ -241,13 +241,13 @@
         }
 
         @keyframes flashGreen {
-            0%, 100% { color: #22c55e; }
-            50% { color: #fefefe; }
+            0%, 100% { color: #22c55e; !important; }
+            50% { color: #fefefe; !important; }
         }
 
         @keyframes flashBlue {
-            0%, 100% { color: #0e95e9; }
-            50% { color: #fefefe; }
+            0%, 100% { color: #0e95e9; !important; }
+            50% { color: #fefefe; !important; }
         }
 
         .cell.win-highlight {
@@ -470,8 +470,12 @@
         highlightWinningCells('O');
         playSound('quackSound');
     } else if (message.includes('Draw')) {
-        cells.forEach(cell => cell.classList.add('draw-highlight'));
-        playSound('quackSound');
+    cells.forEach(cell => {
+        cell.classList.remove('draw-highlight');
+        void cell.offsetWidth;
+        cell.classList.add('draw-highlight');
+    });
+    document.getElementById("buzzSound").play();
     }
 
     setTimeout(() => {
@@ -523,11 +527,14 @@
     winningConditions.forEach(condition => {
         if (condition.every(index => gameBoard[index] === player)) {
             condition.forEach(i => {
-                document.querySelectorAll('.cell')[i].classList.add('win-highlight');
+                let cell = document.querySelectorAll('.cell')[i];
+                cell.classList.remove('win-highlight');
+                void cell.offsetWidth;
+                cell.classList.add('win-highlight');
             });
         }
     });
-}
+    }
 
     function playSound(id) {
     const sound = document.getElementById(id);
