@@ -99,7 +99,7 @@
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 10px;
-            margin-bottom: 10px;
+            margin-bottom: 20px;
             background: #f8f9fa;
             padding: 30px;
             border: rgba(99,102,241,0.05);
@@ -251,11 +251,11 @@
         }
 
         .win-highlight {
-            animation: flashGreenBorder 0.5s ease-in-out 3;
+            animation: flashGreenBorder 0.3s ease-in-out 2;
         }
 
         .draw-highlight {
-            animation: flashBlueBorder 0.5s ease-in-out 3;
+            animation: flashBlueBorder 0.3s ease-in-out 2;
         }
 </style>
 </head>
@@ -280,6 +280,8 @@
                 </div>
             </div>
 
+            <div class="turn-indicator" id="turnIndicator">Your turn, play</div>
+
             <div class="game-board" id="gameBoard">
                 <div class="cell" onclick="makeMove(0)"></div>
                 <div class="cell" onclick="makeMove(1)"></div>
@@ -291,8 +293,6 @@
                 <div class="cell" onclick="makeMove(7)"></div>
                 <div class="cell" onclick="makeMove(8)"></div>
             </div>
-
-            <div class="turn-indicator" id="turnIndicator">Your turn, play</div>
         </div>
     </div>
 
@@ -360,7 +360,7 @@
             currentPlayer = 'O';
             document.getElementById('turnIndicator').textContent = 'Lumemeduck\'s turn...';
             
-            setTimeout(computerMove, 800);
+            setTimeout(computerMove, 600);
         }
 
         function computerMove() {
@@ -484,7 +484,7 @@
             ? 'result-title win' 
             : 'result-title draw';
         document.getElementById('resultModal').style.display = 'flex';
-    }, 1000);
+    }, 800);
 
     // Disable all cells
     cells.forEach(cell => cell.classList.add('disabled'));
