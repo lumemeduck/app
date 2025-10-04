@@ -147,6 +147,14 @@
             font-weight: 500;
         }
 
+        .cell.win-highlight {
+            color: #22c55e !important;
+        }
+
+        .cell.draw-highlight {
+            color: #0e95e9 !important;
+        }
+
         .result-modal {
             display: none;
             position: fixed;
@@ -269,6 +277,11 @@
             <div class="turn-indicator" id="turnIndicator">Your turn, play</div>
         </div>
     </div>
+
+    <!-- Sound Modal -->
+    <audio id="huhSound" src="sounds/huh.mp3"></audio>
+    <audio id="quackSound" src="sounds/quack.mp3"></audio>
+    <audio id="buzzSound" src="sounds/buzz.mp3"></audio>
 
     <!-- Result Modal -->
     <div class="result-modal" id="resultModal">
@@ -428,16 +441,32 @@
         }
 
         function endGame(message) {
-            gameActive = false;
-            document.getElementById('resultTitle').textContent = message;
-            document.getElementById('resultTitle').className = message.includes('Win') ? 'result-title win' : 'result-title draw';
-            document.getElementById('resultModal').style.display = 'flex';
-            
-            // Disable all cells
-            document.querySelectorAll('.cell').forEach(cell => {
-                cell.classList.add('disabled');
-            });
-        }
+    gameActive = false;
+
+    let cells = document.querySelectorAll('.cell');
+
+    if (message === 'You Win!') {
+        highlightWinningCells('X');
+        playSound('huhSound');
+    } else if (message === 'Lumemeduck Wins!') {
+        highlightWinningCells('O');
+        playSound('quackSound');
+    } else if (message.includes('Draw')) {
+        cells.forEach(cell => cell.classList.add('draw-highlight'));
+        playSound('buzzSound');
+    }
+
+    setTimeout(() => {
+        document.getElementById('resultTitle').textContent = message;
+        document.getElementById('resultTitle').className = message.includes('Win') 
+            ? 'result-title win' 
+            : 'result-title draw';
+        document.getElementById('resultModal').style.display = 'flex';
+    }, 800);
+
+    // Disable all cells
+    cells.forEach(cell => cell.classList.add('disabled'));
+                    }
 
         function updateScore() {
             document.getElementById('playerScore').textContent = playerScore;
@@ -470,6 +499,25 @@
             
             document.getElementById('turnIndicator').textContent = 'Your turn, play!';
         }
+        
+        // Helper
+        function highlightWinningCells(player) {
+    winningConditions.forEach(condition => {
+        if (condition.every(index => gameBoard[index] === player)) {
+            condition.forEach(i => {
+                document.querySelectorAll('.cell')[i].classList.add('win-highlight');
+            });
+        }
+    });
+}
+
+function playSound(id) {
+    const sound = document.getElementById(id);
+    if (sound) {
+        sound.currentTime = 0;
+        sound.play().catch(e => console.log('Sound play error:', e));
+    }
+}
     </script>
 </body>
 </html>
