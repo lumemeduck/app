@@ -48,7 +48,7 @@
         }
 
         .start-button {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #0e95e9;
             color: white;
             border: none;
             padding: 15px 40px;
@@ -91,7 +91,7 @@
         .score-value {
             font-size: 2rem;
             font-weight: 700;
-            color: #667eea;
+            color: #0e95e9;
         }
 
         .game-board {
@@ -102,6 +102,8 @@
             background: #f8f9fa;
             padding: 20px;
             border-radius: 15px;
+            align-items: center;
+            justify-content: center;
         }
 
         .cell {
@@ -138,7 +140,7 @@
 
         .turn-indicator {
             font-size: 1.1rem;
-            color: #666;
+            color: #002d5d;
             margin-bottom: 20px;
             font-weight: 500;
         }
@@ -173,11 +175,11 @@
         }
 
         .result-title.win {
-            color: #28a745;
+            color: #22c55e;
         }
 
         .result-title.draw {
-            color: #ffc107;
+            color: #0e95e9;
         }
 
         .result-buttons {
@@ -188,7 +190,7 @@
         }
 
         .btn {
-            padding: 12px 24px;
+            padding: 6px 12px;
             border: none;
             border-radius: 25px;
             font-weight: 600;
@@ -198,7 +200,7 @@
         }
 
         .btn-primary {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #0e95e9;
             color: white;
         }
 
@@ -244,7 +246,7 @@
                     <div class="score-value" id="playerScore">0</div>
                 </div>
                 <div class="score">
-                    <div class="score-label">Lumemeduck (O)</div>
+                    <div class="score-label">LMD (O)</div>
                     <div class="score-value" id="computerScore">0</div>
                 </div>
             </div>
@@ -270,8 +272,8 @@
         <div class="result-content">
             <div class="result-title" id="resultTitle">You Win!</div>
             <div class="result-buttons">
-                <button class="btn btn-primary" onclick="playAgain()">Play Again</button>
-                <button class="btn btn-secondary" onclick="returnToStart()">Return</button>
+                <button class="btn btn-primary" onclick="playAgain()">Replay 😅</button>
+                <button class="btn btn-secondary" onclick="returnToStart()">Return 🙂</button>
             </div>
         </div>
     </div>
