@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Duck Tac Toe</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background: #fff;
+    margin: 0;
+    padding: 0;
+  }
+  #home, #game, #popup {
+    display: none;
+    margin-top: 50px;
+  }
+  #home.active, #game.active, #popup.active {
+    display: block;
+  }
+  button {
+    padding: 12px 24px;
+    font-size: 18px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    background: #007bff;
+    color: #fff;
+  }
+  #scoreboard {
+    font-size: 20px;
+    margin-bottom: 20px;
+  }
+  #board {
+    display: grid;
+    grid-template-columns: repeat(3, 100px);
+    grid-template-rows: repeat(3, 100px);
+    gap: 5px;
+    justify-content: center;
+    margin: 0 auto;
+  }
+  .cell {
+    background: #f9f9f9;
+    border: 2px solid #666;
+    font-size: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.3s;
+  }
+  .win-player {
+    animation: flashGreen 0.5s alternate 3;
+  }
+  .win-computer {
+    animation: flashRed 0.5s alternate 3;
+  }
+  @keyframes flashGreen {
+    from { background: #c8facc; }
+    to   { background: #f9f9f9; }
+  }
+  @keyframes flashRed {
+    from { background: #ffcccc; }
+    to   { background: #f9f9f9; }
+  }
+  #turn {
+    margin-top: 20px;
+    font-size: 18px;
+    color: #444;
+  }
+  #popup {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  #popupContent {
+    background: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+  }
+  #popupContent h2 {
+    margin-bottom: 20px;
+  }
+  #popupContent button {
+    margin: 10px;
+  }
+</style>
+</head>
+<body>
+<!-- Home Screen -->
+<div id="home" class="active">
+  <button onclick="startGame()">Tap to Start</button>
+</div>
+
+<!-- Game Screen -->
+<div id="game">
+  <div id="scoreboard">
+    <span>O: <span id="playerScore">0</span></span> &nbsp;&nbsp; 
+    <span>X: <span id="computerScore">0</span></span>
+  </div>
+  <div id="board"></div>
+  <div id="turn">Your turn, play</div>
+</div>
+
+<!-- Popup -->
+<div id="popup">
+  <div id="popupContent">
+    <h2 id="resultText"></h2>
+    <button onclick="playAgain()">Play Again</button>
+    <button onclick="returnHome()">Return</button>
+  </div>
+</div>
+<script>
+let board = ["","","","","","","","",""];
+let player = "O";
+let computer = "X";
+let playerScore = 0;
+let computerScore = 0;
+let gameActive = true;
+
+function startGame(){
+  document.getElementById("home").classList.remove("active");
+  document.getElementById("game").classList.add("active");
+  initBoard();
+}
+
+function initBoard(){
+  board = ["","","","","","","","",""];
+  gameActive = true;
+  document.getElementById("turn").innerText = "Your turn, play";
+  let boardDiv = document.getElementById("board");
+  boardDiv.innerHTML = "";
+  for(let i=0;i<9;i++){
+    let cell = document.createElement("div");
+    cell.classList.add("cell");
+    cell.dataset.index = i;
+    cell.addEventListener("click", onCellClick);
+    boardDiv.appendChild(cell);
+  }
+}
+
+function onCellClick(e){
+  let idx = e.target.dataset.index;
+  if(board[idx] !== "" || !gameActive) return;
+  makeMove(idx, player);
+  if(!gameActive) return;
+  setTimeout(computerMove, 500);
+}
+
+function makeMove(index, currentPlayer){
+  board[index] = currentPlayer;
+  document.querySelector(`[data-index='${index}']`).innerText = currentPlayer;
+  checkWinner();
+}
+
+function computerMove(){
+  let empty = board.map((v,i)=> v==="" ? i : null).filter(v=>v!==null);
+  if(empty.length === 0) return;
+
+  let smartPlay = Math.random() < 0.4; // 40% chance to play smart
+  let idx;
+
+  if(smartPlay){
+    idx = findBestMove(computer);
+    if(idx === null) idx = findBestMove(player);
+    if(idx === null) idx = empty[Math.floor(Math.random()*empty.length)];
+  } else {
+    idx = empty[Math.floor(Math.random()*empty.length)];
+  }
+
+  makeMove(idx, computer);
+}
+
+function findBestMove(symbol){
+  let wins = [
+    [0,1,2],[3,4,5],[6,7,8],
+    [0,3,6],[1,4,7],[2,5,8],
+    [0,4,8],[2,4,6]
+  ];
+  for(let combo of wins){
+    let [a,b,c] = combo;
+    if(board[a] === symbol && board[b] === symbol && board[c] === "") return c;
+    if(board[a] === symbol && board[c] === symbol && board[b] === "") return b;
+    if(board[b] === symbol && board[c] === symbol && board[a] === "") return a;
+  }
+  return null;
+}
+
+function checkWinner(){
+  let wins = [
+    [0,1,2],[3,4,5],[6,7,8],
+    [0,3,6],[1,4,7],[2,5,8],
+    [0,4,8],[2,4,6]
+  ];
+  for(let combo of wins){
+    let [a,b,c] = combo;
+    if(board[a] && board[a]===board[b] && board[a]===board[c]){
+      gameActive = false;
+      highlightWin(combo, board[a]);
+      setTimeout(() => {
+        if(board[a] === player){
+          playerScore++;
+          document.getElementById("playerScore").innerText = playerScore;
+          showPopup("You Win!");
+        } else {
+          computerScore++;
+          document.getElementById("computerScore").innerText = computerScore;
+          showPopup("You Lose!");
+        }
+      }, 1000); // wait for animation
+      return;
+    }
+  }
+  if(!board.includes("")){
+    gameActive = false;
+    setTimeout(() => showPopup("It's a Draw!"), 500);
+  }
+}
+
+function highlightWin(combo, winner){
+  combo.forEach(i=>{
+    let cell = document.querySelector(`[data-index='${i}']`);
+    cell.classList.add(winner===player ? "win-player" : "win-computer");
+  });
+}
+
+function showPopup(message){
+  document.getElementById("resultText").innerText = message;
+  document.getElementById("popup").classList.add("active");
+}
+
+function playAgain(){
+  document.getElementById("popup").classList.remove("active");
+  initBoard();
+}
+
+function returnHome(){
+  playerScore = 0;
+  computerScore = 0;
+  document.getElementById("playerScore").innerText = "0";
+  document.getElementById("computerScore").innerText = "0";
+  document.getElementById("popup").classList.remove("active");
+  document.getElementById("game").classList.remove("active");
+  document.getElementById("home").classList.add("active");
+}
+</script>
+</body>
+</html>
