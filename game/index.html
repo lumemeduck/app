@@ -1,255 +1,468 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Duck Tac Toe</title>
-<style>
-  body {
-    font-family: Arial, sans-serif;
-    text-align: center;
-    background: #fff;
-    margin: 0;
-    padding: 0;
-  }
-  #home, #game, #popup {
-    display: none;
-    margin-top: 50px;
-  }
-  #home.active, #game.active, #popup.active {
-    display: block;
-  }
-  button {
-    padding: 12px 24px;
-    font-size: 18px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    background: #007bff;
-    color: #fff;
-  }
-  #scoreboard {
-    font-size: 20px;
-    margin-bottom: 20px;
-  }
-  #board {
-    display: grid;
-    grid-template-columns: repeat(3, 100px);
-    grid-template-rows: repeat(3, 100px);
-    gap: 5px;
-    justify-content: center;
-    margin: 0 auto;
-  }
-  .cell {
-    background: #f9f9f9;
-    border: 2px solid #666;
-    font-size: 48px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    user-select: none;
-    transition: background 0.3s;
-  }
-  .win-player {
-    animation: flashGreen 0.5s alternate 3;
-  }
-  .win-computer {
-    animation: flashRed 0.5s alternate 3;
-  }
-  @keyframes flashGreen {
-    from { background: #c8facc; }
-    to   { background: #f9f9f9; }
-  }
-  @keyframes flashRed {
-    from { background: #ffcccc; }
-    to   { background: #f9f9f9; }
-  }
-  #turn {
-    margin-top: 20px;
-    font-size: 18px;
-    color: #444;
-  }
-  #popup {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background: rgba(0,0,0,0.6);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  #popupContent {
-    background: #fff;
-    padding: 30px;
-    border-radius: 10px;
-    text-align: center;
-  }
-  #popupContent h2 {
-    margin-bottom: 20px;
-  }
-  #popupContent button {
-    margin: 10px;
-  }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic-Tac-Toe</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #333;
+        }
+
+        .game-container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+        }
+
+        .start-screen {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .game-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #667eea;
+            margin-bottom: 20px;
+        }
+
+        .start-button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .start-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 30px rgba(102, 126, 234, 0.4);
+        }
+
+        .game-screen {
+            display: none;
+        }
+
+        .score-board {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 15px;
+        }
+
+        .score {
+            text-align: center;
+        }
+
+        .score-label {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        .score-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #667eea;
+        }
+
+        .game-board {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-bottom: 30px;
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 15px;
+        }
+
+        .cell {
+            width: 80px;
+            height: 80px;
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .cell:hover {
+            background: #f8f9fa;
+            border-color: #667eea;
+        }
+
+        .cell.x {
+            color: #667eea;
+        }
+
+        .cell.o {
+            color: #764ba2;
+        }
+
+        .cell.disabled {
+            cursor: not-allowed;
+        }
+
+        .turn-indicator {
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+
+        .result-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .result-content {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            max-width: 300px;
+            width: 90%;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .result-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .result-title.win {
+            color: #28a745;
+        }
+
+        .result-title.draw {
+            color: #ffc107;
+        }
+
+        .result-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease;
+        }
+    </style>
 </head>
 <body>
-<!-- Home Screen -->
-<div id="home" class="active">
-  <button onclick="startGame()">Tap to Start</button>
-</div>
+    <div class="game-container">
+        <!-- Start Screen -->
+        <div class="start-screen" id="startScreen">
+            <h1 class="game-title">Tic-Tac-Toe</h1>
+            <button class="start-button" onclick="startGame()">Tap to Start</button>
+        </div>
 
-<!-- Game Screen -->
-<div id="game">
-  <div id="scoreboard">
-    <span>O: <span id="playerScore">0</span></span> &nbsp;&nbsp; 
-    <span>X: <span id="computerScore">0</span></span>
-  </div>
-  <div id="board"></div>
-  <div id="turn">Your turn, play</div>
-</div>
+        <!-- Game Screen -->
+        <div class="game-screen" id="gameScreen">
+            <div class="score-board">
+                <div class="score">
+                    <div class="score-label">You (X)</div>
+                    <div class="score-value" id="playerScore">0</div>
+                </div>
+                <div class="score">
+                    <div class="score-label">Computer (O)</div>
+                    <div class="score-value" id="computerScore">0</div>
+                </div>
+            </div>
 
-<!-- Popup -->
-<div id="popup">
-  <div id="popupContent">
-    <h2 id="resultText"></h2>
-    <button onclick="playAgain()">Play Again</button>
-    <button onclick="returnHome()">Return</button>
-  </div>
-</div>
-<script>
-let board = ["","","","","","","","",""];
-let player = "O";
-let computer = "X";
-let playerScore = 0;
-let computerScore = 0;
-let gameActive = true;
+            <div class="game-board" id="gameBoard">
+                <div class="cell" onclick="makeMove(0)"></div>
+                <div class="cell" onclick="makeMove(1)"></div>
+                <div class="cell" onclick="makeMove(2)"></div>
+                <div class="cell" onclick="makeMove(3)"></div>
+                <div class="cell" onclick="makeMove(4)"></div>
+                <div class="cell" onclick="makeMove(5)"></div>
+                <div class="cell" onclick="makeMove(6)"></div>
+                <div class="cell" onclick="makeMove(7)"></div>
+                <div class="cell" onclick="makeMove(8)"></div>
+            </div>
 
-function startGame(){
-  document.getElementById("home").classList.remove("active");
-  document.getElementById("game").classList.add("active");
-  initBoard();
-}
+            <div class="turn-indicator" id="turnIndicator">Your turn, play</div>
+        </div>
+    </div>
 
-function initBoard(){
-  board = ["","","","","","","","",""];
-  gameActive = true;
-  document.getElementById("turn").innerText = "Your turn, play";
-  let boardDiv = document.getElementById("board");
-  boardDiv.innerHTML = "";
-  for(let i=0;i<9;i++){
-    let cell = document.createElement("div");
-    cell.classList.add("cell");
-    cell.dataset.index = i;
-    cell.addEventListener("click", onCellClick);
-    boardDiv.appendChild(cell);
-  }
-}
+    <!-- Result Modal -->
+    <div class="result-modal" id="resultModal">
+        <div class="result-content">
+            <div class="result-title" id="resultTitle">You Win!</div>
+            <div class="result-buttons">
+                <button class="btn btn-primary" onclick="playAgain()">Play Again</button>
+                <button class="btn btn-secondary" onclick="returnToStart()">Return</button>
+            </div>
+        </div>
+    </div>
 
-function onCellClick(e){
-  let idx = e.target.dataset.index;
-  if(board[idx] !== "" || !gameActive) return;
-  makeMove(idx, player);
-  if(!gameActive) return;
-  setTimeout(computerMove, 500);
-}
+    <script>
+        let gameBoard = ['', '', '', '', '', '', '', '', ''];
+        let currentPlayer = 'X';
+        let gameActive = true;
+        let playerScore = 0;
+        let computerScore = 0;
 
-function makeMove(index, currentPlayer){
-  board[index] = currentPlayer;
-  document.querySelector(`[data-index='${index}']`).innerText = currentPlayer;
-  checkWinner();
-}
+        const winningConditions = [
+            [0, 1, 2],
+            [3, 4, 5],
+            [6, 7, 8],
+            [0, 3, 6],
+            [1, 4, 7],
+            [2, 5, 8],
+            [0, 4, 8],
+            [2, 4, 6]
+        ];
 
-function computerMove(){
-  let empty = board.map((v,i)=> v==="" ? i : null).filter(v=>v!==null);
-  if(empty.length === 0) return;
-
-  let smartPlay = Math.random() < 0.4; // 40% chance to play smart
-  let idx;
-
-  if(smartPlay){
-    idx = findBestMove(computer);
-    if(idx === null) idx = findBestMove(player);
-    if(idx === null) idx = empty[Math.floor(Math.random()*empty.length)];
-  } else {
-    idx = empty[Math.floor(Math.random()*empty.length)];
-  }
-
-  makeMove(idx, computer);
-}
-
-function findBestMove(symbol){
-  let wins = [
-    [0,1,2],[3,4,5],[6,7,8],
-    [0,3,6],[1,4,7],[2,5,8],
-    [0,4,8],[2,4,6]
-  ];
-  for(let combo of wins){
-    let [a,b,c] = combo;
-    if(board[a] === symbol && board[b] === symbol && board[c] === "") return c;
-    if(board[a] === symbol && board[c] === symbol && board[b] === "") return b;
-    if(board[b] === symbol && board[c] === symbol && board[a] === "") return a;
-  }
-  return null;
-}
-
-function checkWinner(){
-  let wins = [
-    [0,1,2],[3,4,5],[6,7,8],
-    [0,3,6],[1,4,7],[2,5,8],
-    [0,4,8],[2,4,6]
-  ];
-  for(let combo of wins){
-    let [a,b,c] = combo;
-    if(board[a] && board[a]===board[b] && board[a]===board[c]){
-      gameActive = false;
-      highlightWin(combo, board[a]);
-      setTimeout(() => {
-        if(board[a] === player){
-          playerScore++;
-          document.getElementById("playerScore").innerText = playerScore;
-          showPopup("You Win!");
-        } else {
-          computerScore++;
-          document.getElementById("computerScore").innerText = computerScore;
-          showPopup("You Lose!");
+        function startGame() {
+            document.getElementById('startScreen').style.display = 'none';
+            document.getElementById('gameScreen').style.display = 'block';
+            document.getElementById('gameScreen').classList.add('fade-in');
+            resetGame();
         }
-      }, 1000); // wait for animation
-      return;
-    }
-  }
-  if(!board.includes("")){
-    gameActive = false;
-    setTimeout(() => showPopup("It's a Draw!"), 500);
-  }
-}
 
-function highlightWin(combo, winner){
-  combo.forEach(i=>{
-    let cell = document.querySelector(`[data-index='${i}']`);
-    cell.classList.add(winner===player ? "win-player" : "win-computer");
-  });
-}
+        function makeMove(index) {
+            if (gameBoard[index] !== '' || !gameActive || currentPlayer !== 'X') {
+                return;
+            }
 
-function showPopup(message){
-  document.getElementById("resultText").innerText = message;
-  document.getElementById("popup").classList.add("active");
-}
+            gameBoard[index] = 'X';
+            updateCell(index, 'X');
+            
+            if (checkWinner()) {
+                endGame('You Win!');
+                playerScore++;
+                updateScore();
+                return;
+            }
 
-function playAgain(){
-  document.getElementById("popup").classList.remove("active");
-  initBoard();
-}
+            if (checkDraw()) {
+                endGame('It\'s a Draw!');
+                return;
+            }
 
-function returnHome(){
-  playerScore = 0;
-  computerScore = 0;
-  document.getElementById("playerScore").innerText = "0";
-  document.getElementById("computerScore").innerText = "0";
-  document.getElementById("popup").classList.remove("active");
-  document.getElementById("game").classList.remove("active");
-  document.getElementById("home").classList.add("active");
-}
-</script>
+            currentPlayer = 'O';
+            document.getElementById('turnIndicator').textContent = 'Computer\'s turn...';
+            
+            setTimeout(computerMove, 500);
+        }
+
+        function computerMove() {
+            if (!gameActive) return;
+
+            const bestMove = getBestMove();
+            gameBoard[bestMove] = 'O';
+            updateCell(bestMove, 'O');
+
+            if (checkWinner()) {
+                endGame('Computer Wins!');
+                computerScore++;
+                updateScore();
+                return;
+            }
+
+            if (checkDraw()) {
+                endGame('It\'s a Draw!');
+                return;
+            }
+
+            currentPlayer = 'X';
+            document.getElementById('turnIndicator').textContent = 'Your turn, play';
+        }
+
+        function getBestMove() {
+            // Simple AI: Try to win, then block player, then take center, then random
+            
+            // Check if computer can win
+            for (let i = 0; i < 9; i++) {
+                if (gameBoard[i] === '') {
+                    gameBoard[i] = 'O';
+                    if (checkWinnerForPlayer('O')) {
+                        gameBoard[i] = '';
+                        return i;
+                    }
+                    gameBoard[i] = '';
+                }
+            }
+
+            // Check if player can win and block
+            for (let i = 0; i < 9; i++) {
+                if (gameBoard[i] === '') {
+                    gameBoard[i] = 'X';
+                    if (checkWinnerForPlayer('X')) {
+                        gameBoard[i] = '';
+                        return i;
+                    }
+                    gameBoard[i] = '';
+                }
+            }
+
+            // Take center if available
+            if (gameBoard[4] === '') {
+                return 4;
+            }
+
+            // Take corners
+            const corners = [0, 2, 6, 8];
+            const availableCorners = corners.filter(corner => gameBoard[corner] === '');
+            if (availableCorners.length > 0) {
+                return availableCorners[Math.floor(Math.random() * availableCorners.length)];
+            }
+
+            // Take any available space
+            const availableMoves = [];
+            for (let i = 0; i < 9; i++) {
+                if (gameBoard[i] === '') {
+                    availableMoves.push(i);
+                }
+            }
+            return availableMoves[Math.floor(Math.random() * availableMoves.length)];
+        }
+
+        function checkWinnerForPlayer(player) {
+            return winningConditions.some(condition => {
+                return condition.every(index => gameBoard[index] === player);
+            });
+        }
+
+        function checkWinner() {
+            return checkWinnerForPlayer(currentPlayer);
+        }
+
+        function checkDraw() {
+            return gameBoard.every(cell => cell !== '');
+        }
+
+        function updateCell(index, player) {
+            const cell = document.querySelectorAll('.cell')[index];
+            cell.textContent = player;
+            cell.classList.add(player.toLowerCase());
+            if (player === 'X') {
+                cell.classList.add('disabled');
+            }
+        }
+
+        function endGame(message) {
+            gameActive = false;
+            document.getElementById('resultTitle').textContent = message;
+            document.getElementById('resultTitle').className = message.includes('Win') ? 'result-title win' : 'result-title draw';
+            document.getElementById('resultModal').style.display = 'flex';
+            
+            // Disable all cells
+            document.querySelectorAll('.cell').forEach(cell => {
+                cell.classList.add('disabled');
+            });
+        }
+
+        function updateScore() {
+            document.getElementById('playerScore').textContent = playerScore;
+            document.getElementById('computerScore').textContent = computerScore;
+        }
+
+        function playAgain() {
+            document.getElementById('resultModal').style.display = 'none';
+            resetGame();
+        }
+
+        function returnToStart() {
+            document.getElementById('resultModal').style.display = 'none';
+            document.getElementById('gameScreen').style.display = 'none';
+            document.getElementById('startScreen').style.display = 'flex';
+            playerScore = 0;
+            computerScore = 0;
+            updateScore();
+        }
+
+        function resetGame() {
+            gameBoard = ['', '', '', '', '', '', '', '', ''];
+            currentPlayer = 'X';
+            gameActive = true;
+            
+            document.querySelectorAll('.cell').forEach(cell => {
+                cell.textContent = '';
+                cell.className = 'cell';
+            });
+            
+            document.getElementById('turnIndicator').textContent = 'Your turn, play';
+        }
+    </script>
 </body>
 </html>
