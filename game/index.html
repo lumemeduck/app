@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tic-Tac-Toe</title>
+    <title>Duc-Tac-Toe</title>
     <style>
         * {
             margin: 0;
@@ -27,6 +27,8 @@
             padding: 40px;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
             text-align: center;
+            align-items: center;
+            justify-content: center;
             max-width: 400px;
             width: 90%;
         }
@@ -230,7 +232,7 @@
     <div class="game-container">
         <!-- Start Screen -->
         <div class="start-screen" id="startScreen">
-            <h1 class="game-title">Tic-Tac-Toe</h1>
+            <h1 class="game-title">Duc-Tac-Toe</h1>
             <button class="start-button" onclick="startGame()">Tap to Start</button>
         </div>
 
@@ -242,7 +244,7 @@
                     <div class="score-value" id="playerScore">0</div>
                 </div>
                 <div class="score">
-                    <div class="score-label">Computer (O)</div>
+                    <div class="score-label">Lumemeduck (O)</div>
                     <div class="score-value" id="computerScore">0</div>
                 </div>
             </div>
@@ -320,9 +322,9 @@
             }
 
             currentPlayer = 'O';
-            document.getElementById('turnIndicator').textContent = 'Computer\'s turn...';
+            document.getElementById('turnIndicator').textContent = 'Lumemeduck\'s turn...';
             
-            setTimeout(computerMove, 500);
+            setTimeout(computerMove, 1000);
         }
 
         function computerMove() {
@@ -333,7 +335,7 @@
             updateCell(bestMove, 'O');
 
             if (checkWinner()) {
-                endGame('Computer Wins!');
+                endGame('Lumemeduck Wins!');
                 computerScore++;
                 updateScore();
                 return;
@@ -345,7 +347,7 @@
             }
 
             currentPlayer = 'X';
-            document.getElementById('turnIndicator').textContent = 'Your turn, play';
+            document.getElementById('turnIndicator').textContent = 'Your turn, play!';
         }
 
         function getBestMove() {
@@ -461,7 +463,7 @@
                 cell.className = 'cell';
             });
             
-            document.getElementById('turnIndicator').textContent = 'Your turn, play';
+            document.getElementById('turnIndicator').textContent = 'Your turn, play!';
         }
     </script>
 </body>
