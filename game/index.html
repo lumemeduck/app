@@ -360,7 +360,7 @@
             currentPlayer = 'O';
             document.getElementById('turnIndicator').textContent = 'Lumemeduck\'s turn...';
             
-            setTimeout(computerMove, 1000);
+            setTimeout(computerMove, 800);
         }
 
         function computerMove() {
@@ -480,7 +480,7 @@
             ? 'result-title win' 
             : 'result-title draw';
         document.getElementById('resultModal').style.display = 'flex';
-    }, 3000);
+    }, 1000);
 
     // Disable all cells
     cells.forEach(cell => cell.classList.add('disabled'));
