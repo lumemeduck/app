@@ -251,11 +251,11 @@
         }
 
         .cell.win-highlight {
-            animation: flashGreen 0.5s alternate 1;
+            animation: flashGreen 0.5s alternate 3;
         }
 
         .cell.draw-highlight {
-            animation: flashBlue 0.5s alternate 1;
+            animation: flashBlue 0.5s alternate 3;
         }
     </style>
 </head>
@@ -480,7 +480,7 @@
             ? 'result-title win' 
             : 'result-title draw';
         document.getElementById('resultModal').style.display = 'flex';
-    }, 1000);
+    }, 3000);
 
     // Disable all cells
     cells.forEach(cell => cell.classList.add('disabled'));
