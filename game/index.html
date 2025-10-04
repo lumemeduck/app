@@ -297,9 +297,9 @@
     </div>
 
     <!-- Sound Modal -->
-    <audio id="huhSound" src="sounds/huh.mp3"></audio>
-    <audio id="quackSound" src="sounds/quack.mp3"></audio>
-    <audio id="buzzSound" src="sounds/buzz.mp3"></audio>
+    <audio id="huhSound" src="sounds/huh.mp3" preload="auto"></audio>
+    <audio id="quackSound" src="sounds/quack.mp3" preload="auto"></audio>
+    <audio id="buzzSound" src="sounds/buzz.mp3" preload="auto"></audio>
 
     <!-- Result Modal -->
     <div class="result-modal" id="resultModal">
@@ -529,13 +529,19 @@
     });
 }
 
-function playSound(id) {
+    function playSound(id) {
     const sound = document.getElementById(id);
     if (sound) {
         sound.currentTime = 0;
-        sound.play().catch(e => console.log('Sound play error:', e));
+        // Force play after user action
+        sound.play().catch(err => {
+            console.warn("Autoplay blocked, unlocking on next user gesture:", err);
+            document.body.addEventListener('click', () => {
+                sound.play().catch(e => console.log("Still blocked:", e));
+            }, { once: true });
+        });
     }
-}
-    </script>
+    }
+</script>
 </body>
 </html>
