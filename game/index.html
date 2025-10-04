@@ -240,24 +240,24 @@
             animation: fadeIn 0.5s ease;
         }
 
-        @keyframes flashGreen {
-            0%, 100% { color: #22c55e; !important; }
-            50% { color: #fefefe; !important; }
+        @keyframes flashGreenBorder {
+            0%, 100% { border-color: #22c55e; }
+            50% { border-color: #e9ecef; }
         }
 
-        @keyframes flashBlue {
-            0%, 100% { color: #0e95e9; !important; }
-            50% { color: #fefefe; !important; }
+        @keyframes flashBlueBorder {
+            0%, 100% { border-color: #0e95e9; }
+            50% { border-color: #e9ecef; }
         }
 
         .win-highlight {
-            animation: flashGreen 0.5s ease-in-out 3;
+            animation: flashGreenBorder 0.5s ease-in-out 3;
         }
 
         .draw-highlight {
-            animation: flashBlue 0.5s ease-in-out 3;
+            animation: flashBlueBorder 0.5s ease-in-out 3;
         }
-    </style>
+</style>
 </head>
 <body>
     <div class="game-container">
@@ -484,7 +484,7 @@
             ? 'result-title win' 
             : 'result-title draw';
         document.getElementById('resultModal').style.display = 'flex';
-    }, 500);
+    }, 1000);
 
     // Disable all cells
     cells.forEach(cell => cell.classList.add('disabled'));
