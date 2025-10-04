@@ -239,6 +239,24 @@
         .fade-in {
             animation: fadeIn 0.5s ease;
         }
+
+        @keyframes flashGreen {
+            0%, 100% { color: #22c55e; }
+            50% { color: #fefefe; }
+        }
+
+        @keyframes flashBlue {
+            0%, 100% { color: #0e95e9; }
+            50% { color: #fefefe; }
+        }
+
+        .cell.win-highlight {
+            animation: flashGreen 0.5s alternate 3;
+        }
+
+        .cell.draw-highlight {
+            animation: flashBlue 0.5s alternate 3;
+        }
     </style>
 </head>
 <body>
@@ -462,7 +480,7 @@
             ? 'result-title win' 
             : 'result-title draw';
         document.getElementById('resultModal').style.display = 'flex';
-    }, 800);
+    }, 1000);
 
     // Disable all cells
     cells.forEach(cell => cell.classList.add('disabled'));
