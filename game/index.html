@@ -251,11 +251,11 @@
         }
 
         .cell.win-highlight {
-            animation: flashGreen 0.5s alternate 3;
+            animation: flashGreen 0.5s ease-in-out 3;
         }
 
         .cell.draw-highlight {
-            animation: flashBlue 0.5s alternate 3;
+            animation: flashBlue 0.5s ease-in-out 3;
         }
     </style>
 </head>
@@ -296,11 +296,6 @@
         </div>
     </div>
 
-    <!-- Sound Modal -->
-    <audio id="huhSound" src="sounds/huh.mp3" preload="auto"></audio>
-    <audio id="quackSound" src="sounds/quack.mp3" preload="auto"></audio>
-    <audio id="buzzSound" src="sounds/buzz.mp3" preload="auto"></audio>
-
     <!-- Result Modal -->
     <div class="result-modal" id="resultModal">
         <div class="result-content">
@@ -311,6 +306,11 @@
             </div>
         </div>
     </div>
+
+    <!-- Sound Modal -->
+    <audio id="huhSound" src="sounds/huh.mp3" preload="auto"></audio>
+    <audio id="quackSound" src="sounds/quack.mp3" preload="auto"></audio>
+    <audio id="buzzSound" src="sounds/buzz.mp3" preload="auto"></audio>
 
     <script>
         let gameBoard = ['', '', '', '', '', '', '', '', ''];
