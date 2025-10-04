@@ -471,7 +471,7 @@
         playSound('quackSound');
     } else if (message.includes('Draw')) {
         cells.forEach(cell => cell.classList.add('draw-highlight'));
-        playSound('buzzSound');
+        playSound('quackSound');
     }
 
     setTimeout(() => {
@@ -480,7 +480,7 @@
             ? 'result-title win' 
             : 'result-title draw';
         document.getElementById('resultModal').style.display = 'flex';
-    }, 1000);
+    }, 800);
 
     // Disable all cells
     cells.forEach(cell => cell.classList.add('disabled'));
