@@ -23,9 +23,9 @@
 
         .game-container {
             background: white;
-            border-radius: 20px;
-            padding: 40px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            border-radius: 18px;
+            padding: 20px;
+            box-shadow: 0 20px 40px rgba(99,102,241,0.10);
             text-align: center;
             align-items: center;
             justify-content: center;
@@ -57,12 +57,12 @@
             border-radius: 50px;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+            box-shadow: 0 10px 20px rgba(99,102,241,0.10);
         }
 
         .start-button:hover {
             transform: translateY(-2px);
-            box-shadow: 0 15px 30px rgba(102, 126, 234, 0.4);
+            box-shadow: 0 15px 30px rgba(99,102,241,0.12);
         }
 
         .game-screen {
@@ -84,7 +84,7 @@
 
         .score-label {
             font-size: 0.9rem;
-            color: #666;
+            color: #002d5d;
             margin-bottom: 5px;
         }
 
@@ -100,7 +100,7 @@
             gap: 10px;
             margin-bottom: 30px;
             background: #f8f9fa;
-            padding: 20px;
+            padding: 30px;
             border-radius: 15px;
             align-items: center;
             justify-content: center;
@@ -123,15 +123,15 @@
 
         .cell:hover {
             background: #f8f9fa;
-            border-color: #667eea;
+            border-color: #e9ecef;
         }
 
         .cell.x {
-            color: #667eea;
+            color: #002d5d;
         }
 
         .cell.o {
-            color: #764ba2;
+            color: #f59e0b;
         }
 
         .cell.disabled {
@@ -160,18 +160,18 @@
 
         .result-content {
             background: white;
-            padding: 40px;
-            border-radius: 20px;
+            padding: 20px;
+            border-radius: 18px;
             text-align: center;
-            max-width: 300px;
+            max-width: 280px;
             width: 90%;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 20px 40px rgba(99,102,241,0.10);
         }
 
         .result-title {
             font-size: 2rem;
             font-weight: 700;
-            margin-bottom: 20px;
+            margin-bottom: 40px;
         }
 
         .result-title.win {
@@ -184,15 +184,15 @@
 
         .result-buttons {
             display: flex;
-            gap: 15px;
+            gap: 30px;
             justify-content: center;
             margin-top: 30px;
         }
 
         .btn {
-            padding: 6px 12px;
+            padding: 10px 16px;
             border: none;
-            border-radius: 25px;
+            border-radius: 10px;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
@@ -205,13 +205,13 @@
         }
 
         .btn-secondary {
-            background: #6c757d;
+            background: #f59e0b;
             color: white;
         }
 
         .btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 10px 20px rgba(99,102,241,0.10);
         }
 
         @keyframes fadeIn {
@@ -272,8 +272,8 @@
         <div class="result-content">
             <div class="result-title" id="resultTitle">You Win!</div>
             <div class="result-buttons">
-                <button class="btn btn-primary" onclick="playAgain()">Replay 😅</button>
-                <button class="btn btn-secondary" onclick="returnToStart()">Return 🙂</button>
+                <button class="btn btn-primary" onclick="playAgain()">Replay</button>
+                <button class="btn btn-secondary" onclick="returnToStart()">Return</button>
             </div>
         </div>
     </div>
