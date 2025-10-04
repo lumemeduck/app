@@ -250,11 +250,11 @@
             50% { color: #fefefe; !important; }
         }
 
-        .cell.win-highlight {
+        .win-highlight {
             animation: flashGreen 0.5s ease-in-out 3;
         }
 
-        .cell.draw-highlight {
+        .draw-highlight {
             animation: flashBlue 0.5s ease-in-out 3;
         }
     </style>
@@ -484,7 +484,7 @@
             ? 'result-title win' 
             : 'result-title draw';
         document.getElementById('resultModal').style.display = 'flex';
-    }, 800);
+    }, 1500);
 
     // Disable all cells
     cells.forEach(cell => cell.classList.add('disabled'));
