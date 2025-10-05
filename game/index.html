@@ -577,16 +577,14 @@
     const confettis = [];
     const colors = ["#0e95e9", "#22c55e", "#f59e0b", "#f43f5e", "#6366f1"];
 
-    for (let i = 0; i < 120; i++) {
+    for (let i = 0; i < 150; i++) {
         confettis.push({
-            x: canvas.width / 2 + (Math.random() - 0.5) * 200,
-            y: canvas.height + Math.random() * 50,
-            r: Math.random() * 6 + 3,
+            x: Math.random() * canvas.width,
+            y: Math.random() * -canvas.height,
+            r: Math.random() * 6 + 4,
             color: colors[Math.floor(Math.random() * colors.length)],
-            speedY: Math.random() * 3 + 4,
-            speedX: (Math.random() - 0.5) * 4,
-            tilt: Math.random() * 10 - 5,
-            gravity: 0.15
+            speed: Math.random() * 3 + 2,
+            tilt: Math.random() * 10 - 5
         });
     }
 
@@ -595,7 +593,7 @@
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         confettis.forEach(c => {
             ctx.beginPath();
-            ctx.arc(c.x, c.y, c.r, 0, Math.PI * 2);
+            ctx.arc(c.x, c.y, c.r, 0, Math.PI * 2, false);
             ctx.fillStyle = c.color;
             ctx.fill();
         });
@@ -605,11 +603,9 @@
 
     function update() {
         confettis.forEach(c => {
-            c.y -= c.speedY;
-            c.x += c.speedX;
-            c.speedY -= c.gravity;
-            c.tilt += 0.2;
-            c.speedX *= 0.98; 
+            c.y += c.speed;
+            c.x += Math.sin(c.tilt / 5);
+            c.tilt += 0.5;
         });
     }
 
