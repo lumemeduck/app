@@ -595,7 +595,7 @@
             speedY: Math.sin(angle) * speed,
             rotation: Math.random() * 360,
             rotationSpeed: (Math.random() - 0.5) * 10,
-            gravity: 0.20,
+            gravity: 0.18,
             opacity: 1
         });
     }
@@ -622,7 +622,7 @@
             c.y += c.speedY;
             c.speedY += c.gravity * 0.3;
             c.rotation += c.rotationSpeed;
-            c.opacity -= 0.008;
+            c.opacity -= 0.01;
         });
     }
 
