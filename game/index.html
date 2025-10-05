@@ -485,20 +485,22 @@
     let cells = document.querySelectorAll('.cell');
 
     if (message === 'You Win!') {
-    highlightWinningCells('X');
-    document.getElementById("huhSound").play();
-    triggerConfetti();
+        highlightWinningCells('X');
+        document.getElementById("huhSound").play();
+        triggerConfetti();
     } else if (message === 'Lumemeduck Wins!') {
         highlightWinningCells('O');
         document.getElementById("quackSound").play();
     } else if (message.includes('Draw')) {
-    cells.forEach(cell => {
-        cell.classList.remove('draw-highlight');
-        void cell.offsetWidth;
-        cell.classList.add('draw-highlight');
-    });
-    document.getElementById("buzzSound").play();
+        cells.forEach(cell => {
+            cell.classList.remove('draw-highlight');
+            void cell.offsetWidth;
+            cell.classList.add('draw-highlight');
+        });
+        document.getElementById("buzzSound").play();
     }
+
+    cells.forEach(cell => cell.classList.add('disabled'));
 
     setTimeout(() => {
         document.getElementById('resultTitle').textContent = message;
@@ -506,12 +508,8 @@
             ? 'result-title win' 
             : 'result-title draw';
         document.getElementById('resultModal').style.display = 'flex';
-    }, 1500);
+    }, 800);
         }
-
-    // Disable all cells
-    cells.forEach(cell => cell.classList.add('disabled'));
-                    }
 
         function updateScore() {
             document.getElementById('playerScore').textContent = playerScore;
