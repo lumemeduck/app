@@ -108,29 +108,27 @@
 
         .game-board {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(3, minmax(70px, 100px));
             gap: 10px;
             margin: 0 auto;
             background: #f8f9fa;
-            padding: 15px 15px;
+            padding: 15px;
             border: rgba(99,102,241,0.05);
             border-radius: 12px;
-            align-items: center;
             justify-content: center;
+            align-items: center;
         }
 
         .cell {
-            width: 80px;
-            height: 80px;
+            aspect-ratio: 1 / 1;
+            width: 100%;
             background: #fefefe;
             border: 2px solid #e9ecef;
             border-radius: 8px;
             display: flex;
-            left:50%;
-            transform:translateX(-50%);
             align-items: center;
             justify-content: center;
-            font-size: 2rem;
+            font-size: clamp(1.5rem, 4vw, 2.2rem);
             font-weight: 700;
             cursor: none;
             transition: all 0.3s ease;
