@@ -482,17 +482,15 @@
 
         function endGame(message) {
     gameActive = false;
-
     let cells = document.querySelectorAll('.cell');
 
     if (message === 'You Win!') {
     highlightWinningCells('X');
     document.getElementById("huhSound").play();
     triggerConfetti();
-    }
     } else if (message === 'Lumemeduck Wins!') {
         highlightWinningCells('O');
-        playSound('quackSound');
+        document.getElementById("quackSound").play();
     } else if (message.includes('Draw')) {
     cells.forEach(cell => {
         cell.classList.remove('draw-highlight');
@@ -508,7 +506,8 @@
             ? 'result-title win' 
             : 'result-title draw';
         document.getElementById('resultModal').style.display = 'flex';
-    }, 800);
+    }, 1500);
+        }
 
     // Disable all cells
     cells.forEach(cell => cell.classList.add('disabled'));
@@ -548,13 +547,10 @@
         
         // Helper
         function highlightWinningCells(player) {
-    winningConditions.forEach(condition => {
+            winningConditions.forEach(condition => {
         if (condition.every(index => gameBoard[index] === player)) {
             condition.forEach(i => {
-                let cell = document.querySelectorAll('.cell')[i];
-                cell.classList.remove('win-highlight');
-                void cell.offsetWidth;
-                cell.classList.add('win-highlight');
+                document.querySelectorAll('.cell')[i].classList.add('win-highlight');
             });
         }
     });
