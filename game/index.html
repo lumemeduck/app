@@ -582,20 +582,20 @@
     const confettis = [];
     const colors = ["#facc15", "#fde047", "#22c55e", "#0ea5e9", "#f43f5e", "#a855f7"];
 
-    for (let i = 0; i < 180; i++) {
+    for (let i = 0; i < 160; i++) {
         const angle = Math.random() * Math.PI * 2;
-        const speed = Math.random() * 10 + 6;
+        const speed = Math.random() * 4 + 3;
         confettis.push({
             x: originX,
             y: originY,
-            w: Math.random() * 6 + 3,
-            h: Math.random() * 10 + 4,
+            w: Math.random() * 6 + 2,
+            h: Math.random() * 10 + 3,
             color: colors[Math.floor(Math.random() * colors.length)],
             speedX: Math.cos(angle) * speed,
             speedY: Math.sin(angle) * speed,
             rotation: Math.random() * 360,
-            rotationSpeed: (Math.random() - 0.5) * 15,
-            gravity: 0.3,
+            rotationSpeed: (Math.random() - 0.5) * 10,
+            gravity: 0.25,
             opacity: 1
         });
     }
@@ -620,9 +620,9 @@
         confettis.forEach(c => {
             c.x += c.speedX;
             c.y += c.speedY;
-            c.speedY += c.gravity;
+            c.speedY += c.gravity * 0.5;
             c.rotation += c.rotationSpeed;
-            c.opacity -= 0.015;
+            c.opacity -= 0.008;
         });
     }
 
@@ -631,8 +631,8 @@
     setTimeout(() => {
         cancelAnimationFrame(animationFrame);
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-    }, 2000);
-        }
+    }, 2200);
+    }
 </script>
 </body>
 </html>
