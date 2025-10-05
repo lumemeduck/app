@@ -267,6 +267,16 @@
         .draw-highlight {
             animation: flashBlueBorder 0.3s ease-in-out 2;
         }
+
+        #confettiCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 999;
+        }
 </style>
 </head>
 <body>
@@ -321,6 +331,8 @@
     <audio id="huhSound" src="sounds/huh.mp3" preload="auto"></audio>
     <audio id="quackSound" src="sounds/quack.mp3" preload="auto"></audio>
     <audio id="buzzSound" src="sounds/buzz.mp3" preload="auto"></audio>
+
+    <canvas id="confettiCanvas"></canvas>
 
     <script>
         let gameBoard = ['', '', '', '', '', '', '', '', ''];
@@ -474,8 +486,10 @@
     let cells = document.querySelectorAll('.cell');
 
     if (message === 'You Win!') {
-        highlightWinningCells('X');
-        playSound('huhSound');
+    highlightWinningCells('X');
+    document.getElementById("huhSound").play();
+    triggerConfetti();
+    }
     } else if (message === 'Lumemeduck Wins!') {
         highlightWinningCells('O');
         playSound('quackSound');
@@ -549,8 +563,8 @@
     function playSound(id) {
     const sound = document.getElementById(id);
     if (sound) {
-        sound.currentTime = 0;
-        // Force play after user action
+        sound.currentTime = 0
+        
         sound.play().catch(err => {
             console.warn("Autoplay blocked, unlocking on next user gesture:", err);
             document.body.addEventListener('click', () => {
@@ -559,6 +573,59 @@
         });
     }
     }
+        // Confetti 
+        function triggerConfetti() {
+    const canvas = document.getElementById("confettiCanvas");
+    const ctx = canvas.getContext("2d");
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const confettis = [];
+    const colors = ["#0e95e9", "#22c55e", "#f59e0b", "#f43f5e", "#6366f1"];
+
+    for (let i = 0; i < 120; i++) {
+        confettis.push({
+            x: canvas.width / 2 + (Math.random() - 0.5) * 200,
+            y: canvas.height + Math.random() * 50,
+            r: Math.random() * 6 + 3,
+            color: colors[Math.floor(Math.random() * colors.length)],
+            speedY: Math.random() * 3 + 4,
+            speedX: (Math.random() - 0.5) * 4,
+            tilt: Math.random() * 10 - 5,
+            gravity: 0.15
+        });
+    }
+
+    let animationFrame;
+    function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        confettis.forEach(c => {
+            ctx.beginPath();
+            ctx.arc(c.x, c.y, c.r, 0, Math.PI * 2);
+            ctx.fillStyle = c.color;
+            ctx.fill();
+        });
+        update();
+        animationFrame = requestAnimationFrame(draw);
+    }
+
+    function update() {
+        confettis.forEach(c => {
+            c.y -= c.speedY;
+            c.x += c.speedX;
+            c.speedY -= c.gravity;
+            c.tilt += 0.2;
+            c.speedX *= 0.98; 
+        });
+    }
+
+    draw();
+
+    setTimeout(() => {
+        cancelAnimationFrame(animationFrame);
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }, 1500);
+        }
 </script>
 </body>
 </html>
