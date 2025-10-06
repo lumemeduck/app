@@ -516,6 +516,30 @@ function adjustDuckAdaptation(result) {
     if (winRate < 0.3) duckAdaptLevel = Math.min(0.9, duckAdaptLevel + 0.1);
         }
 
+        // Conclusion
+        function checkWinnerForPlayer(player) {
+            return winningConditions.some(condition => {
+                return condition.every(index => gameBoard[index] === player);
+            });
+        }
+
+        function checkWinner() {
+            return checkWinnerForPlayer(currentPlayer);
+        }
+
+        function checkDraw() {
+            return gameBoard.every(cell => cell !== '');
+        }
+
+        function updateCell(index, player) {
+            const cell = document.querySelectorAll('.cell')[index];
+            cell.textContent = player;
+            cell.classList.add(player.toLowerCase());
+            if (player === 'X') {
+                cell.classList.add('disabled');
+            }
+        }
+
         // Sound tracking
         function endGame(message) {
     gameActive = false;
