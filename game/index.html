@@ -449,8 +449,8 @@ function getBestMove() {
     if (duckScoreMemory.length < 1) duckMood = 'smart';
     else if (duckScoreMemory.slice(-1)[0] === 'win' && diff >= 2) duckMood = 'dull';
     else if (diff <= -1) duckMood = 'smart';
-    else if (Math.random() > duckAdaptLevel) duckMood = 'dull';
-    else duckMood = 'smart';
+    else if (Math.random() > duckAdaptLevel) duckMood = 'smart';
+    else duckMood = 'dull';
 
     // Gather empty spots
     const availableMoves = [];
@@ -512,7 +512,7 @@ function adjustDuckAdaptation(result) {
     else duckAdaptLevel = Math.max(0.3, duckAdaptLevel - 0.05);
 
     // Maintain balance
-    if (winRate > 0.7) duckAdaptLevel = Math.max(0.3, duckAdaptLevel - 0.1);
+    if (winRate > 0.7) duckAdaptLevel = Math.max(0.4, duckAdaptLevel - 0.1);
     if (winRate < 0.3) duckAdaptLevel = Math.min(0.9, duckAdaptLevel + 0.1);
         }
 
