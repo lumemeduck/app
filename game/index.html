@@ -457,7 +457,7 @@ function getBestMove() {
     for (let i = 0; i < 9; i++) if (gameBoard[i] === '') availableMoves.push(i);
 
     // Fake-out chance
-    const fakeOutChance = 0.5;
+    const fakeOutChance = 0.8;
     const willFakeOut = Math.random() < fakeOutChance;
 
     if (duckMood === 'dull' || willFakeOut) {
