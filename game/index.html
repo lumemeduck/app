@@ -389,7 +389,7 @@
 let duckMood = 'smart';
 let gameRound = 0;
 let duckScoreMemory = [];
-let duckAdaptLevel = 0.5;
+let duckAdaptLevel = 0.6;
 
 function computerMove() {
     if (!gameActive) return;
@@ -397,13 +397,13 @@ function computerMove() {
     const bestMove = getBestMove();
 
     const indicator = document.getElementById('turnIndicator');
-    indicator.textContent = 'Lumemeduck, hmm... 🤔';
+    indicator.textContent = 'Hmm... 👀';
 
     // Thinking animation (animated dots)
     let dots = 0;
     const thinking = setInterval(() => {
         dots = (dots + 1) % 4;
-        indicator.textContent = 'Lumemeduck, hmm' + '.'.repeat(dots) + ' 🤔';
+        indicator.textContent = 'Hmm' + '.'.repeat(dots) + ' 🤔';
     }, 350);
 
     // Random thinking
@@ -411,7 +411,7 @@ function computerMove() {
 
     setTimeout(() => {
         clearInterval(thinking);
-        indicator.textContent = 'Great, got ya!';
+        indicator.textContent = 'Got ya!';
 
         // Delay naturaly
         setTimeout(() => {
@@ -436,7 +436,7 @@ function computerMove() {
 
             currentPlayer = 'X';
             indicator.textContent = 'Your turn, play!';
-        }, 400);
+        }, 500);
     }, thinkTime);
 }
 
@@ -447,8 +447,8 @@ function getBestMove() {
 
     // Adaptation mode
     if (duckScoreMemory.length < 1) duckMood = 'smart';
-    else if (duckScoreMemory.slice(-1)[0] === 'win' && diff >= 2) duckMood = 'dull';
-    else if (diff <= -1) duckMood = 'smart';
+    else if (duckScoreMemory.slice(-1)[0] === 'win' && diff >= 2) duckMood = 'smart';
+    else if (diff <= -1) duckMood = 'dull';
     else if (Math.random() > duckAdaptLevel) duckMood = 'dull';
     else duckMood = 'smart';
 
@@ -457,7 +457,7 @@ function getBestMove() {
     for (let i = 0; i < 9; i++) if (gameBoard[i] === '') availableMoves.push(i);
 
     // Fake-out chance
-    const fakeOutChance = 0.15;
+    const fakeOutChance = 0.3;
     const willFakeOut = Math.random() < fakeOutChance;
 
     if (duckMood === 'dull' || willFakeOut) {
@@ -508,12 +508,12 @@ function adjustDuckAdaptation(result) {
 
     // Adjust adaptiveness
     if (result === 'win') duckAdaptLevel = Math.min(0.9, duckAdaptLevel + 0.05);
-    else if (result === 'draw') duckAdaptLevel = Math.max(0.3, duckAdaptLevel - 0.02);
-    else duckAdaptLevel = Math.max(0.3, duckAdaptLevel - 0.05);
+    else if (result === 'draw') duckAdaptLevel = Math.max(0.4, duckAdaptLevel - 0.02);
+    else duckAdaptLevel = Math.max(0.4, duckAdaptLevel - 0.05);
 
     // Maintain balance
     if (winRate > 0.7) duckAdaptLevel = Math.max(0.4, duckAdaptLevel - 0.1);
-    if (winRate < 0.3) duckAdaptLevel = Math.min(0.9, duckAdaptLevel + 0.1);
+    if (winRate < 0.4) duckAdaptLevel = Math.min(0.9, duckAdaptLevel + 0.1);
         }
 
         // Conclusion
