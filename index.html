@@ -1471,7 +1471,8 @@ ctx.textBaseline = 'alphabetic';
   // Simulate delay
   setTimeout(() => {
     document.body.innerHTML = `
-	 <main style="position:fixed;background-attachment:fixed;">
+	<container style="position:fixed;background-attachment:fixed;">
+	 <main>
       <article class="card" aria-live="polite" style="position:relative;margin:auto;width:auto;height:auto;display:flex;flex-direction:column;gap:20px;align-items:center;justify-content:center;text-align:center;font-family:sans-serif;animation:fadeInBg 0.3s ease forwards;">
        <h3 style="margin-top:10px;font-size:18px;color:#22c55e;"><i class="fa fa-check" style="font-size:22px;color:#22c55e;"></i> Image generated!</h3>
         <img src="${dataURL}" style="width:100%;display:flex;align-items:center;justify-content:center;position:relative;border-radius:0;box-shadow:0 0 10px rgba(0,0,0,0.5);animation: fadeInCard 0.3s ease forwards;" />
