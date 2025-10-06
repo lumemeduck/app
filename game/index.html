@@ -389,7 +389,7 @@
 let duckMood = 'smart';
 let gameRound = 0;
 let duckScoreMemory = [];
-let duckAdaptLevel = 0.8;
+let duckAdaptLevel = 0.5;
 
 function computerMove() {
     if (!gameActive) return;
@@ -457,7 +457,7 @@ function getBestMove() {
     for (let i = 0; i < 9; i++) if (gameBoard[i] === '') availableMoves.push(i);
 
     // Fake-out chance
-    const fakeOutChance = 0.8;
+    const fakeOutChance = 0.15;
     const willFakeOut = Math.random() < fakeOutChance;
 
     if (duckMood === 'dull' || willFakeOut) {
@@ -508,12 +508,12 @@ function adjustDuckAdaptation(result) {
 
     // Adjust adaptiveness
     if (result === 'win') duckAdaptLevel = Math.min(0.9, duckAdaptLevel + 0.05);
-    else if (result === 'draw') duckAdaptLevel = Math.max(0.5, duckAdaptLevel - 0.02);
-    else duckAdaptLevel = Math.max(0.5, duckAdaptLevel - 0.05);
+    else if (result === 'draw') duckAdaptLevel = Math.max(0.3, duckAdaptLevel - 0.02);
+    else duckAdaptLevel = Math.max(0.3, duckAdaptLevel - 0.05);
 
     // Maintain balance
-    if (winRate > 0.9) duckAdaptLevel = Math.max(0.5, duckAdaptLevel - 0.1);
-    if (winRate < 0.5) duckAdaptLevel = Math.min(0.9, duckAdaptLevel + 0.1);
+    if (winRate > 0.7) duckAdaptLevel = Math.max(0.3, duckAdaptLevel - 0.1);
+    if (winRate < 0.3) duckAdaptLevel = Math.min(0.9, duckAdaptLevel + 0.1);
         }
 
         // Conclusion
