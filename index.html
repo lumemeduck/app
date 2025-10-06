@@ -769,6 +769,21 @@
   <!-- Hidden canvas for image export -->
   <canvas id="exportCanvas" width="1080" height="1080" style="display:none;"></canvas>
 </container>
+	
+  <script>
+    if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker
+      .register("service-worker.js")
+      .then(reg => {
+        console.log("Service Worker registered!", reg.scope);
+      })
+      .catch(err => {
+        console.error("Service Worker registration failed!", err);
+      });
+  });
+	}
+  </script>
               
   <script>
 /* ------ Preloader ------ */
@@ -2075,15 +2090,6 @@ if (isIos() && !isInStandaloneMode()) {
   document.body.appendChild(iosPrompt);
   document.getElementById("closeIosPrompt").addEventListener("click", () => {
     iosPrompt.remove();
-  });
-  }
-  // Register SW
-  if ("serviceWorker" in navigator) {
-  window.addEventListener("load", () => {
-    navigator.serviceWorker
-      .register("/service-worker.js")
-      .then(reg => console.log("Service Worker registered!", reg.scope))
-      .catch(err => console.error("Service Worker registration failed!", err));
   });
   }
 </script>
