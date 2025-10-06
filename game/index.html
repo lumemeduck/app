@@ -385,10 +385,36 @@
             setTimeout(computerMove, 600);
         }
 
-        function computerMove() {
-            if (!gameActive) return;
+        // Adaptive behavior
+let duckMood = 'smart';
+let gameRound = 0;
+let duckScoreMemory = [];
+let duckAdaptLevel = 0.5;
 
-            const bestMove = getBestMove();
+function computerMove() {
+    if (!gameActive) return;
+
+    const bestMove = getBestMove();
+
+    const indicator = document.getElementById('turnIndicator');
+    indicator.textContent = 'Lumemeduck, hmm... 🤔';
+
+    // Thinking animation (animated dots)
+    let dots = 0;
+    const thinking = setInterval(() => {
+        dots = (dots + 1) % 4;
+        indicator.textContent = 'Lumemeduck, hmm' + '.'.repeat(dots) + ' 🤔';
+    }, 350);
+
+    // Random thinking
+    const thinkTime = 800 + Math.random() * 600;
+
+    setTimeout(() => {
+        clearInterval(thinking);
+        indicator.textContent = 'Great, got ya!';
+
+        // Delay naturaly
+        setTimeout(() => {
             gameBoard[bestMove] = 'O';
             updateCell(bestMove, 'O');
 
@@ -396,90 +422,101 @@
                 endGame('Lumemeduck Wins!');
                 computerScore++;
                 updateScore();
+                duckScoreMemory.push('win');
+                adjustDuckAdaptation('win');
                 return;
             }
 
             if (checkDraw()) {
-                endGame('It\'s a Draw!');
+                endGame("It's a Draw!");
+                duckScoreMemory.push('draw');
+                adjustDuckAdaptation('draw');
                 return;
             }
 
             currentPlayer = 'X';
-            document.getElementById('turnIndicator').textContent = 'Your turn, play!';
+            indicator.textContent = 'Your turn, play!';
+        }, 400);
+    }, thinkTime);
+}
+
+function getBestMove() {
+    gameRound++;
+
+    const diff = computerScore - playerScore;
+
+    // Adaptation mode
+    if (duckScoreMemory.length < 1) duckMood = 'smart';
+    else if (duckScoreMemory.slice(-1)[0] === 'win' && diff >= 2) duckMood = 'dull';
+    else if (diff <= -1) duckMood = 'smart';
+    else if (Math.random() > duckAdaptLevel) duckMood = 'dull';
+    else duckMood = 'smart';
+
+    // Gather empty spots
+    const availableMoves = [];
+    for (let i = 0; i < 9; i++) if (gameBoard[i] === '') availableMoves.push(i);
+
+    // Fake-out chance
+    const fakeOutChance = 0.15;
+    const willFakeOut = Math.random() < fakeOutChance;
+
+    if (duckMood === 'dull' || willFakeOut) {
+        return availableMoves[Math.floor(Math.random() * availableMoves.length)];
+    }
+
+    // Try to win
+    for (let i = 0; i < 9; i++) {
+        if (gameBoard[i] === '') {
+            gameBoard[i] = 'O';
+            if (checkWinnerForPlayer('O')) {
+                gameBoard[i] = '';
+                return i;
+            }
+            gameBoard[i] = '';
+        }
+    }
+
+    // Try to block player
+    for (let i = 0; i < 9; i++) {
+        if (gameBoard[i] === '') {
+            gameBoard[i] = 'X';
+            if (checkWinnerForPlayer('X')) {
+                gameBoard[i] = '';
+                return i;
+            }
+            gameBoard[i] = '';
+        }
+    }
+
+    // Take center if available
+    if (gameBoard[4] === '') return 4;
+
+    // Take corner if available
+    const corners = [0, 2, 6, 8];
+    const availableCorners = corners.filter(c => gameBoard[c] === '');
+    if (availableCorners.length > 0)
+        return availableCorners[Math.floor(Math.random() * availableCorners.length)];
+
+    // Any open space
+    return availableMoves[Math.floor(Math.random() * availableMoves.length)];
+}
+
+// Adaptive tuning
+function adjustDuckAdaptation(result) {
+    const totalGames = playerScore + computerScore;
+    const winRate = computerScore / (totalGames || 1);
+
+    // Adjust adaptiveness
+    if (result === 'win') duckAdaptLevel = Math.min(0.9, duckAdaptLevel + 0.05);
+    else if (result === 'draw') duckAdaptLevel = Math.max(0.3, duckAdaptLevel - 0.02);
+    else duckAdaptLevel = Math.max(0.3, duckAdaptLevel - 0.05);
+
+    // Maintain balance
+    if (winRate > 0.7) duckAdaptLevel = Math.max(0.4, duckAdaptLevel - 0.1);
+    if (winRate < 0.3) duckAdaptLevel = Math.min(0.9, duckAdaptLevel + 0.1);
         }
 
-        function getBestMove() {
-            // Simple AI: Try to win, then block player, then take center, then random
-            
-            // Check if computer can win
-            for (let i = 0; i < 9; i++) {
-                if (gameBoard[i] === '') {
-                    gameBoard[i] = 'O';
-                    if (checkWinnerForPlayer('O')) {
-                        gameBoard[i] = '';
-                        return i;
-                    }
-                    gameBoard[i] = '';
-                }
-            }
-
-            // Check if player can win and block
-            for (let i = 0; i < 9; i++) {
-                if (gameBoard[i] === '') {
-                    gameBoard[i] = 'X';
-                    if (checkWinnerForPlayer('X')) {
-                        gameBoard[i] = '';
-                        return i;
-                    }
-                    gameBoard[i] = '';
-                }
-            }
-
-            // Take center if available
-            if (gameBoard[4] === '') {
-                return 4;
-            }
-
-            // Take corners
-            const corners = [0, 2, 6, 8];
-            const availableCorners = corners.filter(corner => gameBoard[corner] === '');
-            if (availableCorners.length > 0) {
-                return availableCorners[Math.floor(Math.random() * availableCorners.length)];
-            }
-
-            // Take any available space
-            const availableMoves = [];
-            for (let i = 0; i < 9; i++) {
-                if (gameBoard[i] === '') {
-                    availableMoves.push(i);
-                }
-            }
-            return availableMoves[Math.floor(Math.random() * availableMoves.length)];
-        }
-
-        function checkWinnerForPlayer(player) {
-            return winningConditions.some(condition => {
-                return condition.every(index => gameBoard[index] === player);
-            });
-        }
-
-        function checkWinner() {
-            return checkWinnerForPlayer(currentPlayer);
-        }
-
-        function checkDraw() {
-            return gameBoard.every(cell => cell !== '');
-        }
-
-        function updateCell(index, player) {
-            const cell = document.querySelectorAll('.cell')[index];
-            cell.textContent = player;
-            cell.classList.add(player.toLowerCase());
-            if (player === 'X') {
-                cell.classList.add('disabled');
-            }
-        }
-
+        // Sound tracking
         function endGame(message) {
     gameActive = false;
     let cells = document.querySelectorAll('.cell');
