@@ -625,7 +625,7 @@
   <section id="trivia" class="view" aria-labelledby="trivia-title">
    <article aria-live="polite" style="animation:fadeInCard 0.3s ease forwards;">
     <h3 id="trivia-title"></h3>
-    <iframe class="i-frame" seamless="seamless" allowtransparency="true" allowfullscreen="true" frameborder="0" src="https://app.lumemeduck.xyz/trivia/index.html"></iframe>
+    <iframe class="i-frame" seamless="seamless" allowtransparency="true" allowfullscreen="true" frameborder="0" src="trivia/index.html"></iframe>
    </article>
    <div class="footnote">ADVERTISEMENT</div>
     <div class="ad-container" aria-live="polite">
@@ -649,7 +649,7 @@
   <section id="game" class="view" aria-labelledby="game-title">
    <article aria-live="polite" style="animation:fadeInCard 0.3s ease forwards;">
     <h3 id="game-title"></h3>
-    <iframe class="i-frame" seamless="seamless" allowtransparency="true" allowfullscreen="true" frameborder="0" src="https://app.lumemeduck.xyz/game/index.html"></iframe>
+    <iframe class="i-frame" seamless="seamless" allowtransparency="true" allowfullscreen="true" frameborder="0" src="game/index.html"></iframe>
    </article>
    <div class="footnote">ADVERTISEMENT</div>
     <div class="ad-container">
@@ -2109,7 +2109,7 @@ if (isIos() && !isInStandaloneMode()) {
     if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {
     navigator.serviceWorker
-      .register("service-worker.js")
+      .register("/service-worker.js")
       .then(reg => {
         console.log("Service Worker registered!", reg.scope);
       })
