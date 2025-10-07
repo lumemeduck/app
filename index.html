@@ -428,6 +428,10 @@
 </style>
 </head>
 <body>
+<!-- Preloader -->
+<body onload="myFunction()">
+<div id="loader"></div>
+	
 <!-- Static fallback text for bots & no-JS browsers -->
 <noscript>
   <div style="padding:1rem;text-align:center;font-size:1rem;max-width:600px;margin:auto;">
@@ -436,9 +440,6 @@
     image creation.</p>
   </div>
 </noscript>
-<!-- Preloader -->
-<body onload="myFunction()">
-<div id="loader"></div>
 
 <container>
   <!-- Pretty share-modal -->
@@ -795,8 +796,19 @@
   <!-- Hidden canvas for image export -->
   <canvas id="exportCanvas" width="1080" height="1080" style="display:none;"></canvas>
 </container>
-	
+              
   <script>
+/* ------ Preloader ------ */
+var myVar;
+  function myFunction() {  
+    myVar = setTimeout(showPage, 0);
+  }
+  function showPage() { 
+    document.getElementById("loader").style.display = "none"; 
+    document.getElementById("loader").style.display = "none";
+  }
+
+/* ---- Service worker ---- */
     if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {
     navigator.serviceWorker
@@ -809,19 +821,7 @@
       });
   });
 	}
-  </script>
-              
-  <script>
-/* ------ Preloader ------ */
-var myVar;
-  function myFunction() {  
-    myVar = setTimeout(showPage, 0);
-  }
-  function showPage() { 
-    document.getElementById("loader").style.display = "none"; 
-    document.getElementById("loader").style.display = "none";
-  }
-    
+	
 /* ---------- Utilities & Storage ---------- */
 const STORAGE = {
   dailyKey: (prefix, date=new Date()) => {
