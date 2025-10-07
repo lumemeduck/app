@@ -1,4 +1,4 @@
-const CACHE_NAME = "lmd-quotes-cache-v6";
+const CACHE_NAME = "lmd-quotes-cache-v7";
 const urlsToCache = [
   "./",
   "./index.html",
@@ -14,7 +14,7 @@ const urlsToCache = [
   "./icons/icon-512.png"
 ];
 
-// Update cache
+// Install worker
 self.addEventListener("install", event => {
   event.waitUntil(
     caches.open(CACHE_NAME).then(cache => cache.addAll(urlsToCache))
@@ -29,77 +29,108 @@ self.addEventListener("activate", event => {
     )
   );
   clients.claim();
+
+  // Try local reminder
+  checkAndSendReminders();
 });
 
-// Fetch
+// Fetch handler
 self.addEventListener("fetch", event => {
   event.respondWith(
-    fetch(event.request).catch(() => caches.match(event.request))
+    fetch(event.request)
+      .then(response => response)
+      .catch(async () => {
+        const cached = await caches.match(event.request);
+        return cached || Response.error();
+      })
   );
 });
 
-// Notification Click
+// Notification click
 self.addEventListener("notificationclick", event => {
   event.notification.close();
   event.waitUntil(
-    clients.matchAll({ type: "window", includeUncontrolled: true }).then(clientList => {
-      for (const client of clientList) {
+    clients.matchAll({ type: "window", includeUncontrolled: true }).then(list => {
+      for (const client of list) {
         if (client.url.includes("app.lumemeduck.xyz") && "focus" in client) {
           return client.focus();
         }
       }
-      if (clients.openWindow) {
-        return clients.openWindow("https://app.lumemeduck.xyz");
-      }
+      if (clients.openWindow) return clients.openWindow("https://app.lumemeduck.xyz");
     })
   );
 });
 
-// Background Sync
+// Push notifications
+self.addEventListener("push", event => {
+  let data = {};
+  try {
+    data = event.data.json();
+  } catch {
+    data = { title: "LMD Quotes", body: event.data.text() };
+  }
+
+  const title = data.title || "Arise & Shine ☀️";
+  const options = {
+    body: data.body || "Today's inspirational quote is ready!",
+    icon: "icons/icon-192.png",
+    badge: "icons/icon-72.png",
+    data: data.data || {}
+  };
+
+  event.waitUntil(self.registration.showNotification(title, options));
+});
+
+// Background sync
 self.addEventListener("periodicsync", event => {
   if (event.tag === "lmd-quotes-reminder") {
-    event.waitUntil(sendDailyReminders());
+    event.waitUntil(checkAndSendReminders());
   }
 });
 
-// Fallback
+self.addEventListener("sync", event => {
+  if (event.tag === "lmd-quotes-reminder") {
+    event.waitUntil(checkAndSendReminders());
+  }
+});
+
+// Message handler
 self.addEventListener("message", event => {
   if (event.data && event.data.type === "SCHEDULE_NOTIFICATIONS") {
-    scheduleDailyRemindersFallback();
+    startLocalReminderFallback();
   }
 });
 
-// Notification
-async function sendDailyReminders() {
+// Local reminder
+async function checkAndSendReminders() {
   const now = new Date();
   const hour = now.getHours();
-  const minutes = now.getMinutes();
+  const minute = now.getMinutes();
 
-  // Fire
-  if (hour === 9 && minutes === 0) {
-    showNotification("Arise and shine 🌞", "today's quote is ready, check it out now!");
+  if (hour === 9 && minute === 0) {
+    showNotification("Arise and shine 🌞", "Today's quote is ready, check it out now!");
   }
-  if (hour === 15 && minutes === 0) {
-    showNotification("Don't break your streak ⚡", "complete today's challenge, it's simple!");
+  if (hour === 15 && minute === 0) {
+    showNotification("Don't break your streak ⚡", "Complete today's challenge, it's simple!");
   }
-  if (hour === 21 && minutes === 0) {
-    showNotification("Hello champ 😎", "have you seen today's quote? very interesting!");
+  if (hour === 21 && minute === 0) {
+    showNotification("Hello champ 😎", "Have you seen today's quote? Very interesting!");
   }
 }
 
 function showNotification(title, body) {
-  self.registration.showNotification(title, {
+  return self.registration.showNotification(title, {
     body,
     icon: "icons/icon-192.png",
     badge: "icons/icon-72.png"
   });
 }
 
-// Fallback
-function scheduleDailyRemindersFallback() {
+function startLocalReminderFallback() {
   if (self.reminderInterval) clearInterval(self.reminderInterval);
 
+  // Check every minute
   self.reminderInterval = setInterval(() => {
-    sendDailyReminders();
+    checkAndSendReminders();
   }, 60 * 1000);
-    }
+}
