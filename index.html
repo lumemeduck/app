@@ -522,7 +522,7 @@
         <i class="fas fa-bars" style="font-size:24px;color:#002d5d;"></i>
       </button>
       <div class="brand" role="button" onclick="Router.go('#home')" title="Go Home">
-        <img type="image/png" src="icons/icon-72.png" alt="logo" height= "28px" width= "28px">
+        <img src="icons/icon-72.png" alt="logo" height= "28px" width= "28px">
         <div class="title">LMD Quotes</div>
       </div>
       <div class="actions">
@@ -624,7 +624,7 @@
   <section id="trivia" class="view" aria-labelledby="trivia-title">
    <article aria-live="polite" style="animation:fadeInCard 0.3s ease forwards;">
     <h3 id="trivia-title"></h3>
-    <iframe class="i-frame" seamless="seamless" allowtransparency="true" allowfullscreen="true" frameborder="0" src="trivia/index.html/"></iframe>
+    <iframe class="i-frame" seamless="seamless" allowtransparency="true" allowfullscreen="true" frameborder="0" src="trivia/index.html"></iframe>
    </article>
    <div class="footnote">ADVERTISEMENT</div>
     <div class="ad-container" aria-live="polite">
@@ -648,7 +648,7 @@
   <section id="game" class="view" aria-labelledby="game-title">
    <article aria-live="polite" style="animation:fadeInCard 0.3s ease forwards;">
     <h3 id="game-title"></h3>
-    <iframe class="i-frame" seamless="seamless" allowtransparency="true" allowfullscreen="true" frameborder="0" src="game/index.html/"></iframe>
+    <iframe class="i-frame" seamless="seamless" allowtransparency="true" allowfullscreen="true" frameborder="0" src="game/index.html"></iframe>
    </article>
    <div class="footnote">ADVERTISEMENT</div>
     <div class="ad-container">
@@ -1501,21 +1501,21 @@ ctx.textBaseline = 'alphabetic';
 	 <main>
       <article class="card" aria-live="polite" style="position:relative;margin:auto;width:auto;height:auto;display:flex;flex-direction:column;gap:20px;align-items:center;justify-content:center;text-align:center;font-family:sans-serif;animation:fadeInBg 0.3s ease forwards;">
        <h3 style="margin-top:10px;font-size:18px;color:#22c55e;"><i class="fa fa-check" style="font-size:22px;color:#22c55e;"></i> Image generated!</h3>
-        <img type="image/png" src="${dataURL}" style="width:100%;display:flex;align-items:center;justify-content:center;position:relative;border-radius:0;box-shadow:0 0 10px rgba(0,0,0,0.5);animation: fadeInCard 0.3s ease forwards;" />
+        <img src="${dataURL}" alt="Generated" style="width:100%;display:flex;align-items:center;justify-content:center;position:relative;border-radius:0;box-shadow:0 0 10px rgba(0,0,0,0.5);animation: fadeInCard 0.3s ease forwards;" />
          <div class="row" style="display:flex;width:90%;align-items:center;justify-content:space-between;position:relative;animation:fadeInCard 0.3s ease forwards;">
-          <button type="button" class="btn" id="download-button"><i class="fas fa-download" style="font-size:15px;"></i> Save</button>
-          <button type="button" class="btn" id="share-button"><i class="fas fa-share" style="font-size:15px;"></i> Share</button>
+          <button class="btn" id="download-button"><i class="fas fa-download" style="font-size:15px;"></i> Save</button>
+          <button class="btn" id="share-button"><i class="fas fa-share" style="font-size:15px;"></i> Share</button>
         </div>
         <p style="width:100%;font-size:14px;opacity:0.5;color:#002d5d;align-items:center;justify-content:center;position:relative;animation:fadeInCard 0.3s ease forwards;">
           🔆 Sharing doesn’t work in some old webview<br>If notified, you can tap <strong>save</strong> instead.
         </p>
-        <button type="button" class="btn btn-accent" id="backButton" style="margin-bottom:10px;">く Back</button>
+        <button class="btn btn-accent" id="backButton" style="margin-bottom:10px;">く Back</button>
       </article>
       <div class="footnote">ADVERTISEMENT</div>
       <div class="ad-container" aria-live="polite">
        <div class="ad-slot">
 	   <a href="https://otieu.com/4/7800106" target="_blank" style="cursor:pointer;">
-	   <img type="image/png" src="images/monetag.png" alt="Advert" /></a>
+	   <img src="images/monetag.png" alt="Advert" /></a>
       </div>
      </div>
     </main>
@@ -1587,8 +1587,8 @@ function triggerDownload(dataURL, filename) {
             Click on the image below to open externally, then press-hold on the image to save.
           </p>
           <a href="${url}" target="_blank" download="${filename}" style="cursor:pointer;">
-          <img type="image/png" src="${dataURL}" alt="Generated" style="max-width:100%;border-radius:12px;box-shadow:0 0 8px rgba(0,0,0,0.2);margin-bottom:15px;"></a>
-          <button type="button" class="btn btn-accent" id="closeDownloadFallback">Done</button>
+          <img src="${dataURL}" alt="Generated" style="max-width:100%;border-radius:12px;box-shadow:0 0 8px rgba(0,0,0,0.2);margin-bottom:15px;"></a>
+          <button class="btn btn-accent" id="closeDownloadFallback">Done</button>
         </div>
       `;
       document.body.appendChild(fallback);
@@ -1607,7 +1607,7 @@ function triggerDownload(dataURL, filename) {
           <p style="font-size:14px;margin:0 0 18px;line-height:1.4;">
             Pull down on your screen to refresh<br>page and try saving again.
           </p>
-          <button type="button" class="btn-ok" onclick="document.getElementById('failModal').remove()">Ok</button>
+          <button class="btn-ok" onclick="document.getElementById('failModal').remove()">Ok</button>
         </div>
       `;
       document.body.appendChild(modal);
@@ -1679,7 +1679,7 @@ function triggerDownload(dataURL, filename) {
           System doesn’t support direct share.<br>
           Save the image and share instead.
         </p>
-        <button type="button" class="btn btn-accent" id="closeFallback">OK</button>
+        <button class="btn btn-accent" id="closeFallback">OK</button>
       </div>
     `;
     document.body.appendChild(fallback);
@@ -2018,14 +2018,14 @@ function showAndroidInstallPrompt() {
       animation:fadeInBg 0.5s ease forwards;">
       📥 <b>LMD Quotes</b> works best when installed!  
       <br><br>
-      <button type="button" id="dismissBtn" style="
+      <button id="dismissBtn" style="
         margin-right:15px;
         padding:5px 10px;
         background:#f59e0b;
         color:#fff;
         border:none;
         border-radius:7px;">Later</button>
-      <button type="button" id="installBtn" style="
+      <button id="installBtn" style="
         margin-left:15px;
         padding:5px 10px;
         background:#22c55e;
@@ -2090,7 +2090,7 @@ if (isIos() && !isInStandaloneMode()) {
       text-align:center;">
       📥 Install <b>LMD Quotes</b>: Tap <span style="font-size:18px;">⬆️</span> then "Add to Home Screen"
       <br><br>
-      <button type="button" id="closeIosPrompt" style="
+      <button id="closeIosPrompt" style="
         padding:4px 8px;
         border:none;
         border-radius:7px;
