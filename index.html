@@ -446,8 +446,8 @@
   <div style="background:#eef1ff;border:1px solid rgba(0,0,0,.1);border-radius:18px;padding:22px 28px;box-shadow:0 4px 15px rgba(0, 0, 0, 0.4);max-width:300px;text-align:center;color:#002d5d;font-family:system-ui;animation:fadeInCard 0.3s ease forwards;">
     <h3 style="margin:0 0 12px;font-size:16px;">Share Quote Texts</h3>
     <p id="shareText" style="margin:0 0 18px;font-size:15px;line-height:1.4;"></p>
-    <button class="btn btn-warn" onclick="closeShare()" style="margin-right:23px;">Close</button>
-    <button class="btn btn-accent" onclick="copyShare()">Copy</button>
+    <button type="button" class="btn btn-warn" onclick="closeShare()" style="margin-right:23px;">Close</button>
+    <button type="button" class="btn btn-accent" onclick="copyShare()">Copy</button>
   </div>
 </div>
     <!-- Notify Permission Modal -->
@@ -455,8 +455,8 @@
   <div style="background:#eef1ff;border:1px solid rgba(0,0,0,.1);border-radius:18px;padding:22px 28px;box-shadow:0 4px 15px rgba(0, 0, 0, 0.4);max-width:300px;text-align:center;color:#002d5d;font-family:system-ui;animation:fadeInCard 0.3s ease forwards;">
     <h3 style="margin:0 0 12px;font-size:16px;">Stay Inspired Daily!</h3>
     <p style="margin:0 0 18px;font-size:15px;line-height:1.4;">Enable daily reminders alerts so you never miss your daily dose of inspiration</p>
-    <button class="btn btn-warn" id="cancelNotifyBtn" style="margin-right:23px;">Later</button>
-    <button class="btn btn-accent" id="enableNotifyBtn">Allow</button>
+    <button type="button" class="btn btn-warn" id="cancelNotifyBtn" style="margin-right:23px;">Later</button>
+    <button type="button" class="btn btn-accent" id="enableNotifyBtn">Allow</button>
   </div>
 </div>
   <!-- Pop up menu -->
@@ -465,7 +465,7 @@
     <a href="#" onclick="showSection('about'); closeSidebar();">About</a>
     <a href="#" onclick="showSection('user-terms'); closeSidebar();">User terms</a>
     <a href="#" onclick="showSection('privacy-policy'); closeSidebar();">Privacy policy</a>
-    <button class="btn btn-warn" onclick="closeSidebar()">Close</button>
+    <button type="button" class="btn btn-warn" onclick="closeSidebar()">Close</button>
   </div>
   </div>
   <!-- Notify unsupported Modal -->
@@ -493,24 +493,24 @@
     <p id="notifyMessage" style="margin-bottom:20px;font-size:16px;">
       <!-- Message goes here -->
     </p>
-    <button class="btn btn-accent" onclick="closeNotifyModal()">OK</button>
+    <button type="button" class="btn btn-accent" onclick="closeNotifyModal()">OK</button>
   </div>
 </div>
   <!-- Bottom Menu -->
 <div class="bottom-menu">
-  <button class="menu-item active" onclick="showSection('home')">
+  <button type="button" class="menu-item active" onclick="showSection('home')">
     <i class="fas fa-home"></i>
     <span>Home</span>
   </button>
-  <button class="menu-item" onclick="showSection('streak')">
+  <button type="button" class="menu-item" onclick="showSection('streak')">
     <i class="fa-solid fa-calendar-check"></i>
     <span>Streak</span>
   </button>
-  <button class="menu-item" onclick="showSection('trivia')">
+  <button type="button" class="menu-item" onclick="showSection('trivia')">
     <i class="fas fa-question-circle"></i>
     <span>Trivia</span>
   </button>
-  <button class="menu-item" onclick="showSection('game')">
+  <button type="button" class="menu-item" onclick="showSection('game')">
     <i class="fas fa-gamepad"></i>
     <span>Game</span>
   </button>
@@ -518,18 +518,18 @@
 
   <header>
     <div class="nav">
-      <button id="menuButton" title="Menu" style="background:none;border:none;cursor:none;">
+      <button type="button" id="menuButton" title="Menu" style="background:none;border:none;cursor:none;">
         <i class="fas fa-bars" style="font-size:24px;color:#002d5d;"></i>
       </button>
       <div class="brand" role="button" onclick="Router.go('#home')" title="Go Home">
-        <img src="icons/icon-72.png" height= "28px" width= "28px">
+        <img type="image/png" src="icons/icon-72.png" alt="logo" height= "28px" width= "28px">
         <div class="title">LMD Quotes</div>
       </div>
       <div class="actions">
         <div type="" class="" id="btnProgress" tittle="View Streak Progress"></div>
-        <button id="btnReset" title="Reset all data" style="background:none;border:none;cursor:none;">
+        <button type="button" id="btnReset" title="Reset all data" style="background:none;border:none;cursor:none;">
         <i class="fa fa-refresh" style="font-size:24px;color:#f59e0b;"></i></button>
-        <button id="notifyBell" style="background:none;border:none;cursor:none;">
+        <button type="button" id="notifyBell" style="background:none;border:none;cursor:none;">
         <i id="bellIcon" class="fa-regular fa-bell" style="font-size:24px;color:#002d5d;"></i>
         </button>
       </div>
@@ -546,9 +546,9 @@
           <div id="quoteText" class="quote" style="text-align:center; justify-content:center; position:relative;">Loading…</div>
           <div id="quoteAuthor" class="author" style="text-align:right; margin-right:30px"></div>
           <div class="row" style="align-items:center; justify-content:space-between; position:relative;">
-            <button class="btn" id="btnNewQuote" title="Shuffle today's quote">More Quotes</button>
+            <button type="button" class="btn" id="btnNewQuote" title="Shuffle today's quote">More Quotes</button>
             <button type="button" class="btn" onclick="shareQuote()" title="Share quote text">Share</button>
-            <button class="btn" id="btnSaveQuote" title="Save quote as image">Create image</button>
+            <button type="button" class="btn" id="btnSaveQuote" title="Save quote as image">Create image</button>
           </div>
           <div class=""></div>
         </article>
@@ -558,8 +558,8 @@
           <h2 style="align-items:center; justify-content:space-between; position:relative;"><i class="fa fa-bolt" style="opacity:0.9;font-size:24px;color:#f59e0b;"></i> Today's Challenge <span class="pill" id="challengeTag" style="align-items:center; justify-content:center; position:relative;">Today</span></h2>
           <div id="challengeText" class="challenge" style="text-align:center; justify-content:center; position:relative;">Loading…</div>
           <div class="row" style="align-items:center; justify-content:space-between; position:relative;">
-            <button class="btn" id="btnNewChallenge" title="Shuffle today’s challenge">More Challenge</button>
-            <button class="btn btn-accent" id="btnComplete" title="Mark today completed">Mark Completed</button>
+            <button type="button" class="btn" id="btnNewChallenge" title="Shuffle today’s challenge">More Challenge</button>
+            <button type="button" class="btn btn-accent" id="btnComplete" title="Mark today completed">Mark Completed</button>
           </div>
           <div class="status" id="completeStatus" style="text-align:center; justify-content:center; position:relative;" hidden="true"><i class="fa fa-check" style="font-size:18px;color:#22c55e;"></i> Logged to your streak!</div>
           <div class=""></div>
@@ -589,9 +589,9 @@
         <div class="cal-head">
           <div class="cal-title" id="streak-title">🗓️ Streak Progress</div>
           <div class="cal-nav">
-            <button class="cal-btn" id="prevMonth" aria-label="Previous Month"><<</button>
-            <button class="cal-btn" id="todayBtn" aria-label="Jump to Current Month">Today</button>
-            <button class="cal-btn" id="nextMonth" aria-label="Next Month">>></button>
+            <button type="button" class="cal-btn" id="prevMonth" aria-label="Previous Month"><<</button>
+            <button type="button" class="cal-btn" id="todayBtn" aria-label="Jump to Current Month">Today</button>
+            <button type="button" class="cal-btn" id="nextMonth" aria-label="Next Month">>></button>
           </div>
         </div>
         <div id="calMeta" class="muted" style="margin:0 0 10px;"></div>
@@ -624,7 +624,7 @@
   <section id="trivia" class="view" aria-labelledby="trivia-title">
    <article aria-live="polite" style="animation:fadeInCard 0.3s ease forwards;">
     <h3 id="trivia-title"></h3>
-    <iframe class="i-frame" seamless="seamless" allowtransparency="true" allowfullscreen="true" frameborder="0" src="trivia/index.html"></iframe>
+    <iframe class="i-frame" seamless="seamless" allowtransparency="true" allowfullscreen="true" frameborder="0" src="trivia/index.html/"></iframe>
    </article>
    <div class="footnote">ADVERTISEMENT</div>
     <div class="ad-container" aria-live="polite">
@@ -648,7 +648,7 @@
   <section id="game" class="view" aria-labelledby="game-title">
    <article aria-live="polite" style="animation:fadeInCard 0.3s ease forwards;">
     <h3 id="game-title"></h3>
-    <iframe class="i-frame" seamless="seamless" allowtransparency="true" allowfullscreen="true" frameborder="0" src="game/index.html"></iframe>
+    <iframe class="i-frame" seamless="seamless" allowtransparency="true" allowfullscreen="true" frameborder="0" src="game/index.html/"></iframe>
    </article>
    <div class="footnote">ADVERTISEMENT</div>
     <div class="ad-container">
@@ -1501,21 +1501,21 @@ ctx.textBaseline = 'alphabetic';
 	 <main>
       <article class="card" aria-live="polite" style="position:relative;margin:auto;width:auto;height:auto;display:flex;flex-direction:column;gap:20px;align-items:center;justify-content:center;text-align:center;font-family:sans-serif;animation:fadeInBg 0.3s ease forwards;">
        <h3 style="margin-top:10px;font-size:18px;color:#22c55e;"><i class="fa fa-check" style="font-size:22px;color:#22c55e;"></i> Image generated!</h3>
-        <img src="${dataURL}" style="width:100%;display:flex;align-items:center;justify-content:center;position:relative;border-radius:0;box-shadow:0 0 10px rgba(0,0,0,0.5);animation: fadeInCard 0.3s ease forwards;" />
+        <img type="image/png" src="${dataURL}" style="width:100%;display:flex;align-items:center;justify-content:center;position:relative;border-radius:0;box-shadow:0 0 10px rgba(0,0,0,0.5);animation: fadeInCard 0.3s ease forwards;" />
          <div class="row" style="display:flex;width:90%;align-items:center;justify-content:space-between;position:relative;animation:fadeInCard 0.3s ease forwards;">
-          <button class="btn" id="download-button"><i class="fas fa-download" style="font-size:15px;"></i> Save</button>
-          <button class="btn" id="share-button"><i class="fas fa-share" style="font-size:15px;"></i> Share</button>
+          <button type="button" class="btn" id="download-button"><i class="fas fa-download" style="font-size:15px;"></i> Save</button>
+          <button type="button" class="btn" id="share-button"><i class="fas fa-share" style="font-size:15px;"></i> Share</button>
         </div>
         <p style="width:100%;font-size:14px;opacity:0.5;color:#002d5d;align-items:center;justify-content:center;position:relative;animation:fadeInCard 0.3s ease forwards;">
           🔆 Sharing doesn’t work in some old webview<br>If notified, you can tap <strong>save</strong> instead.
         </p>
-        <button class="btn btn-accent" id="backButton" style="margin-bottom:10px;">く Back</button>
+        <button type="button" class="btn btn-accent" id="backButton" style="margin-bottom:10px;">く Back</button>
       </article>
       <div class="footnote">ADVERTISEMENT</div>
       <div class="ad-container" aria-live="polite">
        <div class="ad-slot">
 	   <a href="https://otieu.com/4/7800106" target="_blank" style="cursor:pointer;">
-	   <img src="images/monetag.png" alt="Ad" /></a>
+	   <img type="image/png" src="images/monetag.png" alt="Advert" /></a>
       </div>
      </div>
     </main>
@@ -1587,8 +1587,8 @@ function triggerDownload(dataURL, filename) {
             Click on the image below to open externally, then press-hold on the image to save.
           </p>
           <a href="${url}" target="_blank" download="${filename}" style="cursor:pointer;">
-          <img src="${dataURL}" alt="Generated" style="max-width:100%;border-radius:12px;box-shadow:0 0 8px rgba(0,0,0,0.2);margin-bottom:15px;"></a>
-          <button class="btn btn-accent" id="closeDownloadFallback">Done</button>
+          <img type="image/png" src="${dataURL}" alt="Generated" style="max-width:100%;border-radius:12px;box-shadow:0 0 8px rgba(0,0,0,0.2);margin-bottom:15px;"></a>
+          <button type="button" class="btn btn-accent" id="closeDownloadFallback">Done</button>
         </div>
       `;
       document.body.appendChild(fallback);
@@ -1607,7 +1607,7 @@ function triggerDownload(dataURL, filename) {
           <p style="font-size:14px;margin:0 0 18px;line-height:1.4;">
             Pull down on your screen to refresh<br>page and try saving again.
           </p>
-          <button class="btn-ok" onclick="document.getElementById('failModal').remove()">Ok</button>
+          <button type="button" class="btn-ok" onclick="document.getElementById('failModal').remove()">Ok</button>
         </div>
       `;
       document.body.appendChild(modal);
@@ -1679,7 +1679,7 @@ function triggerDownload(dataURL, filename) {
           System doesn’t support direct share.<br>
           Save the image and share instead.
         </p>
-        <button class="btn btn-accent" id="closeFallback">OK</button>
+        <button type="button" class="btn btn-accent" id="closeFallback">OK</button>
       </div>
     `;
     document.body.appendChild(fallback);
@@ -2018,14 +2018,14 @@ function showAndroidInstallPrompt() {
       animation:fadeInBg 0.5s ease forwards;">
       📥 <b>LMD Quotes</b> works best when installed!  
       <br><br>
-      <button id="dismissBtn" style="
+      <button type="button" id="dismissBtn" style="
         margin-right:15px;
         padding:5px 10px;
         background:#f59e0b;
         color:#fff;
         border:none;
         border-radius:7px;">Later</button>
-      <button id="installBtn" style="
+      <button type="button" id="installBtn" style="
         margin-left:15px;
         padding:5px 10px;
         background:#22c55e;
@@ -2090,7 +2090,7 @@ if (isIos() && !isInStandaloneMode()) {
       text-align:center;">
       📥 Install <b>LMD Quotes</b>: Tap <span style="font-size:18px;">⬆️</span> then "Add to Home Screen"
       <br><br>
-      <button id="closeIosPrompt" style="
+      <button type="button" id="closeIosPrompt" style="
         padding:4px 8px;
         border:none;
         border-radius:7px;
@@ -2117,6 +2117,6 @@ if (isIos() && !isInStandaloneMode()) {
       });
   });
 	  }
-</script>
+  </script>
 </body>
 </html>
