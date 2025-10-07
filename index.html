@@ -807,20 +807,6 @@ var myVar;
     document.getElementById("loader").style.display = "none"; 
     document.getElementById("loader").style.display = "none";
   }
-
-/* ---- Service worker ---- */
-    if ("serviceWorker" in navigator) {
-  window.addEventListener("load", () => {
-    navigator.serviceWorker
-      .register("service-worker.js")
-      .then(reg => {
-        console.log("Service Worker registered!", reg.scope);
-      })
-      .catch(err => {
-        console.error("Service Worker registration failed!", err);
-      });
-  });
-	}
 	
 /* ---------- Utilities & Storage ---------- */
 const STORAGE = {
@@ -2118,6 +2104,20 @@ if (isIos() && !isInStandaloneMode()) {
     iosPrompt.remove();
   });
   }
+
+	  /* ---- Service worker ---- */
+    if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker
+      .register("service-worker.js")
+      .then(reg => {
+        console.log("Service Worker registered!", reg.scope);
+      })
+      .catch(err => {
+        console.error("Service Worker registration failed!", err);
+      });
+  });
+	  }
 </script>
 </body>
 </html>
