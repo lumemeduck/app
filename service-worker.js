@@ -1,9 +1,13 @@
-const CACHE_NAME = "lmd-quotes-cache-v3";
+const CACHE_NAME = "lmd-quotes-cache-v4";
 const urlsToCache = [
   "./",
   "./index.html",
   "./manifest.json",
   "./trivia/index.html",
+  "./game/index.html",
+  "./sounds/ehuh.mp3",
+  "./sounds/buzz.mp3",
+  "./sounds/quack.mp3",
   "./icons/icon-72.png",
   "./icons/icon-150.png",
   "./icons/icon-192.png",
