@@ -1,7 +1,7 @@
 {
   "name": "LMD Quotes",
   "short_name": "LMD Quotes",
-  "description": "Daily quotes and exercises challenge.",
+  "description": "Daily inspiration and exercise challenges.",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#f1f4ff",
@@ -25,3 +25,6 @@
     }
   ]
 }
+  {
+  "gcm_sender_id": "103953800507"
+  }
