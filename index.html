@@ -22,10 +22,12 @@
     "operatingSystem": "All"
     }
   </script>
-  <link rel="icon" type="image/png" href="icons/icon-192.png">
+  <link rel="icon" type="image/png" href="icons/icon-512.png">
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#f1f4ff">
-  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="icons/icon-72.png">
+  <link rel="apple-touch-icon" sizes="192x192" href="icons/icon-192.png">
+  <link rel="apple-touch-icon" sizes="512x512" href="icons/icon-512.png">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-title" content="LMD Quotes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -41,6 +43,11 @@
     gtag('js', new Date());
     gtag('config', 'G-V1C5DZTRMJ');
   </script>
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-messaging-compat.js"></script>
+  <script type="module" src="/index.html"></script>
+  <!-- Wortise SDK -->
   <script type="text/javascript" async src="https://cdn.resources.wortise.com/sdk/web/web-sdk.js">
     wortise.init('your asset key')
   </script>
@@ -2016,7 +2023,7 @@ function showAndroidInstallPrompt() {
         console.log("User installed PWA");
         localStorage.setItem("pwaInstalled", "true");
       } else {
-        console.log("❌ User dismissed install");
+        console.log("User dismissed install");
       }
       deferredPrompt = null;
       banner.remove();
@@ -2084,6 +2091,55 @@ if (isIos() && !isInStandaloneMode()) {
       .then(reg => console.log('SW registered!', reg.scope))
       .catch(err => console.error('SW registration failed!', err));
   }
+});
+
+   // Firebase
+  const firebaseConfig = {
+    apiKey: "AIzaSyDi1-Qxs-lt8ZNGUm5xW3sAr3QgK38OLI4",
+    authDomain: "lmd-quotes-app.firebaseapp.com",
+    projectId: "lmd-quotes-app",
+    storageBucket: "lmd-quotes-app.firebasestorage.app",
+    messagingSenderId: "37451708871",
+    appId: "1:37451708871:web:b0876517c898bc7d54c1e2"
+  };
+
+firebase.initializeApp(firebaseConfig);
+
+const messaging = firebase.messaging();
+navigator.serviceWorker
+  .register("/service-worker.js")
+  .then((registration) => {
+    messaging.useServiceWorker(registration);
+    console.log("SW ready for Firebase Messaging! ");
+
+    return Notification.requestPermission();
+  })
+  .then((permission) => {
+    if (permission === "granted") {
+      messaging
+        .getToken({
+          vapidKey: "BHDrm0tioscEdrcwKvG50hy2-ZjOkaUtLH3_3obWNpcsGnyG5nf7ccvVrHVz__zoNE4ggnsBqSN1k60GkQunr1w",
+        })
+        .then((currentToken) => {
+          if (currentToken) {
+            console.log("FCM Token :", currentToken);
+          } else {
+            console.warn("No FCM token received. Request permission again?");
+          }
+        })
+        .catch((err) => {
+          console.error("An error occurred while retrieving token. ", err);
+        });
+    } else {
+      console.warn("Notification permission denied!");
+    }
+  })
+  .catch((err) => {
+    console.error("Service worker registration or permission failed!", err);
+  });
+
+  messaging.onMessage((payload) => {
+  console.log("Message received in foreground: ", payload);
 });
 </script>
 </body>
