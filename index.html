@@ -22,10 +22,12 @@
     "operatingSystem": "All"
     }
   </script>
-  <link rel="icon" type="image/png" href="icons/icon-192.png">
+  <link rel="icon" type="image/png" href="icons/icon-512.png">
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#f1f4ff">
-  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="icons/icon-72.png">
+  <link rel="apple-touch-icon" sizes="192x192" href="icons/icon-192.png">
+  <link rel="apple-touch-icon" sizes="512x512" href="icons/icon-512.png">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-title" content="LMD Quotes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -2051,7 +2053,7 @@ function showAndroidInstallPrompt() {
         console.log("User installed PWA");
         localStorage.setItem("pwaInstalled", "true");
       } else {
-        console.log("❌ User dismissed install");
+        console.log("User dismissed install");
       }
       deferredPrompt = null;
       banner.remove();
