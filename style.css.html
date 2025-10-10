@@ -1,0 +1,2144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>LMD Quotes – Daily Motivation</title>
+  <meta name="description" content="Daily quotes and exercise challenges that inspire a better you. Stay positive, track streaks, and grow every day with lmd quotes powered by lumeme duck.">
+  <meta name="robots" content="index, follow">
+  <meta property="og:title" content="LMD Quotes – Daily Motivation">
+  <meta property="og:description" content="Daily inspirational quotes and exercise challenges.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://app.lumemeduck.xyz/">
+  <meta property="og:image" content="https://app.lumemeduck.xyz/icons/icon-512.png">
+  <script type="application/ld+json">
+    {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "LMD Quotes",
+    "url": "https://app.lumemeduck.xyz",
+    "description": "Daily inspirational quotes and exercise challenges.",
+    "applicationCategory": "Lifestyle",
+    "operatingSystem": "All"
+    }
+  </script>
+  <link rel="icon" type="image/png" href="icons/icon-512.png">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#f1f4ff">
+  <link rel="apple-touch-icon" sizes="512x512" href="icons/icon-512.png">
+  <link rel="apple-touch-icon" sizes="192x192" href="icons/icon-192.png">
+  <link rel="apple-touch-icon" sizes="100x100" href="icons/icon-72.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="LMD Quotes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/webfonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+  <script>(function(s){s.dataset.zone='9967011',s.src='https://groleegni.net/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-V1C5DZTRMJ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-V1C5DZTRMJ');
+  </script>
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-messaging-compat.js"></script>
+  <script type="module" src="/script.js"></script>
+  <!-- Wortise SDK -->
+  <script type="text/javascript" async src="https://cdn.resources.wortise.com/sdk/web/web-sdk.js">
+    wortise.init('your asset key')
+  </script>
+  <style>
+/* Fullscreen overlay */
+  #loader {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform:translateX(-50%);
+  z-index: 9999;
+  max-width: 800px;
+  min-height: 100vh;
+  background-attachment: fixed;
+  width: 100%;
+  overflow: visible;
+  background: #f1f4ff url('icons/icon-150.png') no-repeat center center;
+  }
+    
+/* Main body */
+  :root{
+    --bg:#f1f4ff;
+    --card:#ffffff;
+    --muted: rgba(0,45,93,0.8);
+    --text:#002d5d;
+    --accent:#0ea5e9;
+    --accent-2:#6366f1;
+    --warn:#f59e0b;
+    --ok:#22c55e;
+    --ring: rgba(99,102,241,0.08);
+    --shadow: 0 10px 35px rgba(0,0,0,.1);
+    --radius: 18px;
+  }
+
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0;
+    display: flex;
+    justify-content: center;
+    background: var(--bg);
+    color: var(--text);
+    font: 16px/1.45 system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji","Segoe UI Emoji";
+    animation: fadeInBg 0.3s ease forwards;
+  }
+    
+  container {
+  width: 100%;
+  max-width: 800px;
+  min-height: 100vh;
+  background: #f1f4ff;
+  display: block;
+  flex-direction: column;
+  box-shadow: 0px 0px 20px rgba(14,165,233,0.5);
+  position: relative;
+  margin: auto;
+  }
+
+  html, body {
+  min-height: 100vh;
+  background: #f1f4ff;
+  background-attachment: fixed;
+ }
+  /* Header */
+  header{
+  position:sticky; top:0; z-index:10;
+  backdrop-filter:saturate(120%) blur(8px);
+  background: #f1f4ff;
+  border-bottom:1px solid rgba(99,102,241,0.10);
+  box-shadow: 0px 0px 4px 2px rgba(99,102,241,0.15);
+  border-bottom-left-radius: 18px;
+  border-bottom-right-radius: 18px;
+  }
+  .nav{
+    max-width:800px;
+    margin:0 auto;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:16px 14px;
+    gap:10px;
+  }
+  .brand{
+    display:flex; align-items:center; gap:8px;
+  }
+  .logo{
+    width:20px; height:20px; border-radius:50%;
+    background: conic-gradient(from 210deg, #ffdd55, #ff8a00, #ffd86b, #fff2a1, #ffdd55);
+    box-shadow: 0 0 0 3px rgba(255, 221, 85, .15), inset 0 3px 12px rgba(0,0,0,.25);
+    position:relative;
+  }
+  .logo::after{
+    content:"";
+    position:absolute; inset:6px;
+    border-radius:50%;
+    background: radial-gradient(circle at 40% 30%, rgba(255,255,255,.8), rgba(255,255,255,0) 60%);
+    mix-blend-mode:screen;
+  }
+  .title{
+    font-weight:600; letter-spacing:.2px; font-size:22px;
+    display:flex; align-items:baseline; gap:8px;
+  }
+  .title small{ color:var(--muted); font-weight:600; font-size:12px; }
+
+  .actions{display:flex; gap:8px; align-items:center;}
+  .btn{
+  appearance:none; border:none; cursor:none;
+  padding:8px 10px; border-radius:10px;
+  background:linear-gradient(180deg, #eef1ff, #f5f7ff);
+  color:var(--text); font-weight:700; letter-spacing:.2px;
+  box-shadow:0 2px 4px rgba(0,0,0,.05);
+  transition:.2s transform ease, .2s border-color ease, .2s background ease, .2s box-shadow ease;
+  border:1px solid rgb(0,0,0,.05);
+}
+ .btn:hover{ transform: translateY(-1px); border-color: var(--ring); box-shadow: 0 12px 40px rgba(99,102,241,.14); }
+ .btn:active{ transform: translateY(0); }
+ .btn-accent{ background: linear-gradient(180deg, #0ea5e9, #0284c7); color:#fff; }
+ .btn-warn{ background: linear-gradient(180deg, #f59e0b, #d97706); color:#fff; }
+  main{ max-width:800px; margin:22px auto; padding:0 18px 40px; }
+  .grid{ 
+    display:grid; grid-template-columns: 1fr; gap:20px;
+  }
+  @media (min-width: 900px){
+    .grid{ grid-template-columns: 1fr; gap:20px; }
+  }
+
+  .card{
+  background: linear-gradient(180deg, rgba(255,255,255,0.8), rgba(248,250,252,0.8));
+  border:1px solid rgba(99,102,241,0.10);
+  border-radius: var(--radius);
+  padding:18px; box-shadow: 0px 0px 4px 2px rgba(99,102,241,0.15);
+  animation: fadeInCard 0.3s ease forwards;
+  }
+  .card h2{
+    margin:0 0 12px; font-size:18px; letter-spacing:.3px;
+    display:flex; align-items:center; gap:10px;
+  }
+  .muted{ color:var(--muted); }
+  .pill{
+    display:inline-flex; align-items:center; gap:8px;
+    padding:6px 10px; border-radius:999px;
+    background:rgba(153,167,255,.08); color:rgba(0,45,93,0.8); font-size:11px; font-weight:600;
+    border:1px solid rgba(153,167,255,.10);
+  }
+
+  .quote{
+    font-size:16px; line-height:1.4; font-weight:700; margin:8px 0 14px;
+  }
+  .author{ color:rgba(0,45,93,0.8); font-size:12px; font-weight:400; margin-bottom:22px; }
+
+  .row{ display:flex; gap:10px; flex-wrap:wrap; }
+  .row .btn{ flex: 0 0 auto; }
+
+  .challenge{
+    font-size:16px; line-height:1.4; font-weight:700; margin:8px 0 14px;
+  }
+  .status{
+    display:hidden; align-items:center; gap:8px; margin-top:20px; color:var(--ok); font-size:14px; font-weight:600;
+  }
+
+  /* Tabs (views) */
+  .view{ display:none; }
+  .view.active{ display:block; }
+
+  /* Calendar */
+  .cal-wrap{ overflow:hidden; animation: fadeInCard 0.3s ease forwards; }
+  .cal-head{
+    display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:10px;
+  }
+  .cal-title{ font-weight:800; letter-spacing:.3px; }
+  .cal-nav{ display:flex; gap:8px; }
+  .cal-btn{ padding:8px 10px; border-radius:10px; background:linear-gradient(180deg, #eef1ff, #f5f7ff); color:var(--text); cursor:none; 
+    box-shadow:0 2px 4px rgb(0,0,0,.05);
+    border:1px solid rgba(0,0,0,.05);
+    transition:.2s transform ease, .2s border-color ease, .2s background ease, .2s box-shadow ease;}
+   .cal-btn:hover{ transform: translateY(-1px); border-color: var(--ring); box-shadow: 0 12px 40px rgba(99,102,241,.14); }
+  .calendar{
+    display:grid; grid-template-columns: repeat(7, 1fr); gap:8px; padding:8px; border-radius:14px;
+    background: linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.00));
+    border:1px solid rgba(255,255,255,.07);
+  }
+  .dow, .day{
+    text-align:center; padding:10px 0; border-radius:12px;
+    border:1px dashed rgba(0,45,93,0.4);
+  }
+  .dow{ color:var(--muted); font-weight:800; border:none; padding:6px 0; }
+  .day{ min-height:38px; display:flex; align-items:center; justify-content:center; position:relative; }
+  .day.muted{ opacity:.35; }
+  .day .n{ position:absolute; top:6px; left:8px; font-size:12px; color:var(--muted); }
+  .day.done{
+  background:
+    radial-gradient(220px 60px at 50% -10%, rgba(34,197,94,.20), transparent 60%),
+    linear-gradient(180deg, rgba(34,197,94,.16), rgba(34,197,94,.02));
+  border:1px solid rgba(34,197,94,.45);
+  box-shadow: inset 0 0 30px rgba(34,197,94,.08);
+   }
+  .day.today{ outline: 2px dashed rgba(153,167,255,.55); outline-offset:2px; }
+  .legend{ display:flex; gap:10px; align-items:center; margin-top:12px; color:var(--muted); font-size:12px; }
+  .dot{ width:12px; height:12px; border-radius:3px; background:#eef1ff; border:1px dashed rgba(0,45,93,0.4); }
+  .ok{ width:12px; height:12px; border-radius:3px; background:rgba(102,229,181,.35); border:1px solid rgba(102,229,181,.55); }
+  .mark{ width:12px; height:12px; border-radius:3px; border:1px dashed rgba(153,167,255,.55); }
+
+  /* Footer note */
+  .footnote{ text-align:center; color:var(--muted); font-size:8px; margin-top:20px; position:relative; animation:fadeInCard 0.3s ease forwards; }
+
+  /* Pretty reset-modal */
+   .reset-modal {
+  position: fixed; inset: 0;
+  background: rgba(255,255,255,.4);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 9999;
+  animation: fadeInBg 0.3s ease forwards;
+}
+   .reset-box {
+  background: #eef1ff; border: 1px solid rgba(0,0,0,.1);
+  color: #002d5d; font-family:system-ui; border-radius: 12px;
+  padding: 24px 28px; text-align: center;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+  max-width: 300px;
+  animation: fadeInCard 0.3s ease forwards;
+}
+   .reset-box button {
+  appearance:none; border:none; cursor:none; margin:16px 12px 0;
+  padding:8px 10px; border-radius:10px;
+  color:var(--card); font-weight:700; letter-spacing:.2px;
+  box-shadow:0 2px 4px rgba(0,0,0,.05);
+  border:1px solid rgba(0,0,0,.05);
+  transition:.2s transform ease, .2s border-color ease, .2s background ease, .2s box-shadow ease;
+   }
+   .btn-ok {
+  appearance:none; border:none; cursor:none;
+  padding:8px 10px; border-radius:10px;
+  background: linear-gradient(180deg, #0ea5e9, #0284c7); color:#fff;
+  color:var(--card); font-weight:700; letter-spacing:.2px;
+  box-shadow:0 2px 4px rgba(0,0,0,.05);
+  border:1px solid rgba(0,0,0,.05);
+  transition:.2s transform ease, .2s border-color ease, .2s background ease, .2s box-shadow ease;
+   }
+   .btn-cancel {
+  appearance:none; border:none; cursor:none;
+  padding:8px 10px; border-radius:10px;
+  background: linear-gradient(180deg, #f59e0b, #d97706); color:#fff;
+  color:var(--card); font-weight:700; letter-spacing:.2px;
+  box-shadow:0 2px 4px rgba(0,0,0,.05);
+  border:1px solid rgba(0,0,0,.05);
+  transition:.2s transform ease, .2s border-color ease, .2s background ease, .2s box-shadow ease;
+   }
+   .btn-ok:hover { transform: translateY(-1px); border-color: var(--ring); box-shadow: 0 12px 40px rgba(99,102,241,.14); }
+   .btn-cancel:hover{ transform: translateY(-1px); border-color: var(--ring); box-shadow: 0 12px 40px rgba(99,102,241,.14); }
+    
+   .sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: 100%;
+  max-width: 800px;
+  backdrop-filter:saturate(120%) blur(5px);
+  background-color: rgba(255,255,255,0.01);
+  z-index: 999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  animation: fadeInBg 0.3s ease forwards;
+}
+
+.sidebar-content {
+  background-color: #eef1ff;
+  border: 1px solid rgb(0,0,0,.1);
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  animation: fadeInCard 0.3s ease forwards;
+}
+
+.sidebar-content a {
+  display: block;
+  margin: 0 0 18px;
+  line-height: 1.2;
+  text-decoration: none;
+  cursor: none;
+  color: #0e95e9;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.bottom-menu {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: 100%;
+  max-width: 800px;
+  backdrop-filter:saturate(120%) blur(8px);
+  box-shadow: 0px 0px 4px 2px rgba(99,102,241,0.15);
+  border-top:1px solid rgba(99,102,241,0.10);
+  background-color: #f1f4ff;
+  display: flex;
+  justify-content: space-around;
+  padding: 10px 0;
+  border-top-left-radius: 18px;
+  border-top-right-radius: 18px;
+  z-index: 10;
+}
+
+.menu-item {
+  background: none;
+  border: none;
+  color: #002d5d;
+  font-size: 16px;
+  cursor: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 5px;
+  width: 25%;
+}
+
+.menu-item i {
+  font-size: 23px;
+}
+
+.menu-item span {
+  font-size: 12px;
+}
+
+.menu-item.active {
+  color: #0e95e9;
+}
+
+.i-frame {
+  width: 100%;
+  height: 470px;
+  border: none;
+  background: linear-gradient(180deg, rgba(255,255,255,.8), rgba(248,250,252,.8));
+  border:1px solid rgba(99,102,241,0.10);
+  border-radius: 18px;
+  box-shadow: 0px 0px 4px 2px rgba(99,102,241,0.15);
+  display: block;
+}
+
+@keyframes fadeInBg {
+        from { opacity: 0; }
+        to { opacity: 1; }
+      }
+@keyframes fadeInCard {
+        from { opacity: 0; transform: scale(0.9); }
+        to { opacity: 1; transform: scale(1); }
+      }
+
+.ad-container {
+    width: 100%;
+	heigh: auto;
+    max-width: 800px;
+    margin: 20px auto;
+    margin-top: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fefefe;
+	overflow: hidden;
+    border: 1px solid rgba(99,102,241,0.12);
+  }
+
+  .ad-slot {
+    max-width: 100%;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .ad-slot img {
+    max-width: 100%;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+	overflow: hidden;
+  }
+</style>
+</head>
+<body>
+<!-- Preloader -->
+<body onload="myFunction()">
+<div id="loader"></div>
+	
+<!-- Static fallback text for bots & no-JS browsers -->
+<noscript>
+  <div style="padding:1rem;text-align:center;font-size:1rem;max-width:600px;margin:auto;">
+    <p><strong>LMD Quotes</strong> delivers daily inspirational quotes and simple exercises challenge to
+    help you stay positive. Enable JavaScript to experience full features like streak tracking and
+    image creation.</p>
+  </div>
+</noscript>
+
+<container>
+  <!-- Pretty share-modal -->
+<div id="shareModal" style="display:none;position:fixed;inset:0;background:rgba(255,255,255,.4);z-index:999;align-items:center;justify-content:center;animation: fadeInBg 0.3s ease forwards;">
+  <div style="background:#eef1ff;border:1px solid rgba(0,0,0,.1);border-radius:18px;padding:22px 28px;box-shadow:0 4px 15px rgba(0, 0, 0, 0.4);max-width:300px;text-align:center;color:#002d5d;font-family:system-ui;animation:fadeInCard 0.3s ease forwards;">
+    <h3 style="margin:0 0 12px;font-size:16px;">Share Quote Texts</h3>
+    <p id="shareText" style="margin:0 0 18px;font-size:15px;line-height:1.4;"></p>
+    <button type="button" class="btn btn-warn" onclick="closeShare()" style="margin-right:23px;">Close</button>
+    <button type="button" class="btn btn-accent" onclick="copyShare()">Copy</button>
+  </div>
+</div>
+    <!-- Notify Permission Modal -->
+<div id="notifyPrompt" style="display:none;position:fixed;inset:0;background:rgba(255,255,255,.4);z-index:999;align-items:center;justify-content:center;animation: fadeInBg 0.3s ease forwards;">
+  <div style="background:#eef1ff;border:1px solid rgba(0,0,0,.1);border-radius:18px;padding:22px 28px;box-shadow:0 4px 15px rgba(0, 0, 0, 0.4);max-width:300px;text-align:center;color:#002d5d;font-family:system-ui;animation:fadeInCard 0.3s ease forwards;">
+    <h3 style="margin:0 0 12px;font-size:16px;">Stay Inspired Daily!</h3>
+    <p style="margin:0 0 18px;font-size:15px;line-height:1.4;">Enable daily reminders alerts so you never miss your daily dose of inspiration</p>
+    <button type="button" class="btn btn-warn" id="cancelNotifyBtn" style="margin-right:23px;">Later</button>
+    <button type="button" class="btn btn-accent" id="enableNotifyBtn">Allow</button>
+  </div>
+</div>
+  <!-- Pop up menu -->
+  <div id="sidebar" class="sidebar" style="display:none;">
+  <div class="sidebar-content">
+    <a href="#" onclick="showSection('about'); closeSidebar();">About</a>
+    <a href="#" onclick="showSection('user-terms'); closeSidebar();">User terms</a>
+    <a href="#" onclick="showSection('privacy-policy'); closeSidebar();">Privacy policy</a>
+    <button type="button" class="btn btn-warn" onclick="closeSidebar()">Close</button>
+  </div>
+  </div>
+  <!-- Notify unsupported Modal -->
+<div id="notifyModal" style="
+  display:none;
+  position:fixed;top:0;left:0;width:100%;height:100%;
+  background:rgba(255,255,255,.4);
+  align-items:center;justify-content:center;
+  z-index:9999;
+  animation: fadeInBg 0.3s ease forwards;
+">
+  <div style="
+    background:#eef1ff;
+    padding:20px;
+    box-shadow:0 4px 15px rgba(0, 0, 0, 0.4);
+    border:1px solid rgba(0,0,0,.1);
+    border-radius:18px;
+    width:80%;
+    max-width:300px;
+    text-align:center;
+    font-family:system-ui;
+    color:#002d5d;
+    animation: fadeInCard 0.3s ease forwards;
+  ">
+    <p id="notifyMessage" style="margin-bottom:20px;font-size:16px;">
+      <!-- Message goes here -->
+    </p>
+    <button type="button" class="btn btn-accent" onclick="closeNotifyModal()">OK</button>
+  </div>
+</div>
+  <!-- Bottom Menu -->
+<div class="bottom-menu">
+  <button type="button" class="menu-item active" onclick="showSection('home')">
+    <i class="fas fa-home"></i>
+    <span>Home</span>
+  </button>
+  <button type="button" class="menu-item" onclick="showSection('streak')">
+    <i class="fa-solid fa-calendar-check"></i>
+    <span>Streak</span>
+  </button>
+  <button type="button" class="menu-item" onclick="showSection('trivia')">
+    <i class="fas fa-question-circle"></i>
+    <span>Trivia</span>
+  </button>
+  <button type="button" class="menu-item" onclick="showSection('game')">
+    <i class="fas fa-gamepad"></i>
+    <span>Game</span>
+  </button>
+</div>
+
+  <header>
+    <div class="nav">
+      <button type="button" id="menuButton" title="Menu" style="background:none;border:none;cursor:none;">
+        <i class="fas fa-bars" style="font-size:24px;color:#002d5d;"></i>
+      </button>
+      <div class="brand" role="button" onclick="Router.go('#home')" title="Go Home">
+        <img src="icons/icon-72.png" alt="logo" height= "28px" width= "28px">
+        <div class="title">LMD Quotes</div>
+      </div>
+      <div class="actions">
+        <div type="" class="" id="btnProgress" tittle="View Streak Progress"></div>
+        <button type="button" id="btnReset" title="Reset all data" style="background:none;border:none;cursor:none;">
+        <i class="fa fa-refresh" style="font-size:24px;color:#f59e0b;"></i></button>
+        <button type="button" id="notifyBell" style="background:none;border:none;cursor:none;">
+        <i id="bellIcon" class="fa-regular fa-bell" style="font-size:24px;color:#002d5d;"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+  
+   <main style="background-attachment:fixed;">
+    <!-- HOME VIEW -->
+    <section id="home" class="view active" aria-labelledby="home-title" style="background-attachment:fixed;">
+      <div class="grid">
+        <!-- Quotes column -->
+        <article class="card" aria-live="polite">
+          <h2 id="home-title" style="align-items:center; justify-content:space-between; position:relative;"><i class="fa fa-wand-magic-sparkles" style="opacity:0.9;font-size:20px;color:#22c55e;"></i> Today's Inspiration <span class="pill" id="quoteTag" style="align-items:center; justify-content:center; position:relative;">Today</span></h2>
+          <div id="quoteText" class="quote" style="text-align:center; justify-content:center; position:relative;">Loading…</div>
+          <div id="quoteAuthor" class="author" style="text-align:right; margin-right:30px"></div>
+          <div class="row" style="align-items:center; justify-content:space-between; position:relative;">
+            <button type="button" class="btn" id="btnNewQuote" title="Shuffle today's quote">More Quotes</button>
+            <button type="button" class="btn" onclick="shareQuote()" title="Share quote text">Share</button>
+            <button type="button" class="btn" id="btnSaveQuote" title="Save quote as image">Create image</button>
+          </div>
+          <div class=""></div>
+        </article>
+
+        <!-- Exercise column -->
+        <article class="card" aria-live="polite">
+          <h2 style="align-items:center; justify-content:space-between; position:relative;"><i class="fa fa-bolt" style="opacity:0.9;font-size:24px;color:#f59e0b;"></i> Today's Challenge <span class="pill" id="challengeTag" style="align-items:center; justify-content:center; position:relative;">Today</span></h2>
+          <div id="challengeText" class="challenge" style="text-align:center; justify-content:center; position:relative;">Loading…</div>
+          <div class="row" style="align-items:center; justify-content:space-between; position:relative;">
+            <button type="button" class="btn" id="btnNewChallenge" title="Shuffle today’s challenge">More Challenge</button>
+            <button type="button" class="btn btn-accent" id="btnComplete" title="Mark today completed">Mark Completed</button>
+          </div>
+          <div class="status" id="completeStatus" style="text-align:center; justify-content:center; position:relative;" hidden="true"><i class="fa fa-check" style="font-size:18px;color:#22c55e;"></i> Logged to your streak!</div>
+          <div class=""></div>
+        </article>
+      </div>
+      <div class="footnote"></div>
+      <div class="ad-container" aria-live="polite">
+       <div class="ad-slot">
+        <!-- advert here -->
+       </div>
+     </div>
+    </section>
+
+    <!-- STREAK VIEW -->
+    <section id="streak" class="view" aria-labelledby="streak-title">
+      <article class="card cal-wrap">
+        <div class="cal-head">
+          <div class="cal-title" id="streak-title">🗓️ Streak Progress</div>
+          <div class="cal-nav">
+            <button type="button" class="cal-btn" id="prevMonth" aria-label="Previous Month"><<</button>
+            <button type="button" class="cal-btn" id="todayBtn" aria-label="Jump to Current Month">Today</button>
+            <button type="button" class="cal-btn" id="nextMonth" aria-label="Next Month">>></button>
+          </div>
+        </div>
+        <div id="calMeta" class="muted" style="margin:0 0 10px;"></div>
+        <div class="calendar" id="calendar" role="grid"></div>
+        <div class="legend" style="align-items:center; justify-content:space-between; position:relative;">
+          <span class="dot"></span> Missed
+          <span class="ok"></span> Completed
+          <span style="margin-left:8px;" class="mark"></span> marks <strong>today</strong>
+        </div>
+    </article>
+     <div class="footnote"></div>
+      <div class="ad-container" aria-live="polite">
+       <div class="ad-slot">
+        <!-- advert here -->
+       </div>
+     </div>
+    </section>
+
+    <!-- Trivia Section -->
+  <section id="trivia" class="view" aria-labelledby="trivia-title">
+   <article aria-live="polite" style="animation:fadeInCard 0.3s ease forwards;">
+    <h3 id="trivia-title"></h3>
+    <iframe class="i-frame" seamless="seamless" allowtransparency="true" allowfullscreen="true" frameborder="0" src="trivia/index.html"></iframe>
+  </article>
+   <div class="footnote"></div>
+    <div class="ad-container" aria-live="polite">
+      <div class="ad-slot">
+        <!-- advert here -->
+      </div>
+    </div>
+  </section>
+
+   <!-- Game Section -->
+  <section id="game" class="view" aria-labelledby="game-title">
+   <article aria-live="polite" style="animation:fadeInCard 0.3s ease forwards;">
+    <h3 id="game-title"></h3>
+    <iframe class="i-frame" seamless="seamless" allowtransparency="true" allowfullscreen="true" frameborder="0" src="game/index.html"></iframe>
+   </article>
+   <div class="footnote"></div>
+    <div class="ad-container">
+       <div class="ad-slot">
+        <!-- advert here -->
+		<script type="text/javascript">
+	atOptions = {
+		'key' : '61df13b42414140d9f2c2ad47d5e4d2b',
+		'format' : 'iframe',
+		'height' : 50,
+		'width' : 320,
+		'params' : {}
+	};
+</script>
+<script type="text/javascript" src="//www.highperformanceformat.com/61df13b42414140d9f2c2ad47d5e4d2b/invoke.js"></script>
+      </div>
+    </div>
+  </section>
+
+<!-- About Section -->
+<section id="about" class="view" aria-labelledby="about-title" style="display:none;">
+ <article aria-live="polite" style="animation:fadeInCard 0.3s ease forwards;">
+  <h4 id="about-title" style="text-align:center;">ABOUT LMD QUOTES</h4>
+  <p>LMD Quotes is your best choice for motivation and fitness habits building. 
+    Every morning, discover uplifting inspirational quotes and fun exercises challenge designed to fuel your body and mind.</p> 
+    <p>Track your progress with a streak-based calendar that help you build positive habits, and stay consistent. 
+    Whether you want to boost your confidence, stay positive, or commit to a fitness streak, LMD Quotes is right here for you, one day at a time.</p>
+
+<p><strong>Features that keeps you shining.</strong></p>
+<ol>
+<li><strong>Daily Inspiration</strong> – Inspiring quotes, affirmations, and positive reminders to fuel your mornings.</li>
+<li><strong>Daily Exercise Challenges</strong> – Simple, effective activities to keep you active and consistent.</li>
+<li><strong>Streak Calendar</strong> – Track your progress with a clean and visual monthly streak tracker.</li>
+<li><strong>Save & Share Quotes</strong> – Download motivational quote images to keep or share with friends.</li>
+<li><strong>Habits & Progress Tracker</strong> – Stay disciplined, stay motivated, and watch your streak grow.</li>
+</ol>
+<p><strong>Why Choose LMD Quotes?</strong></p>
+<ul>
+<li>Build daily fitness habits and get inspired in one place.</li>
+<li>Stay consistent with your goals using a streak calendar.</li>
+<li>Boost mental wellness, positivity, and productivity.</li>
+<li>Transform your mornings into powerful, focused starts.</li>
+</ul>
+<p>LMD Quotes is more than just a quotes app; it is your personal coach for motivation, habits building, and self-improvement. Stay disciplined, grow daily, and shine brighter every day.</p>
+<p>Install LMD Quotes or add it to your home screen now and start your journey toward consistency, positivity, and success.</p>
+ </article>
+</section>
+
+<!-- User Terms Section -->
+<section id="user-terms" class="view" aria-labelledby="user-terms-title" style="display:none;">
+ <article aria-live="polite" style="animation:fadeInCard 0.3s ease forwards;">
+  <h4 id="user-terms-title" style="text-align:center;">TERMS OF USE</h4>
+  <p>Welcome to LMD Quotes (“the site/app”). By accessing or using this site/app, you agree to be bound by these terms of use. If you do not agree, please do not use the site/app.</p>
+  <p><strong>Purpose Of LMD Quotes</strong></p>
+ <p>LMD Quotes site/app is designed to provide daily inspirational quotes, and simple exercises tips to support personal growth and positivity.<br>
+  The site/app is for <strong>informational purposes only</strong> and is <strong>not a substitute for professional medical, fitness, or mental health advice</strong>.</p>
+ <p><strong>User Eligibility</strong></p>
+ <p>You must be at least 13 years old (or the minimum legal age in your country) to use the site/app.<br>
+   By using LMD Quotes ("site/app"), you confirm that you meet this requirement.</p>
+ <p><strong>User Responsibilities</strong></p>
+ <p>When using the site/app, you agree to:</p>
+ <ul>
+ <li>Use the site/app only for lawful purposes.</li>
+ <li>Not misuse, disrupt, or interfere with the site/app’s functionality.</li>
+ <li>Take full responsibility for your choices and actions based on the site/app’s content.</li>
+ </ul>
+ <p><strong>Intellectual Property</strong></p>
+ <p>All content in the site/app (app.lumemeduck.xyz), including text, graphics, logos, and designs, 
+   is the property of Lumeme Duck project or its licensors.<br>
+   You may not copy, distribute, or modify any content without prior written consent.</p>
+ <p><strong>Health Disclaimer</strong></p>
+ <p>LMD Quotes (site/app) may include fitness exercises tips, and motivational quotes.<br>
+   <strong>We are not health professionals</strong>.<br>
+   Always consult a qualified professional before starting any new exercise, diet, or mental wellness program. Your use of the site/app is at your own risk.</p>
+ <p><strong>Limitation of Liability</strong></p>
+ <p>LMD Quotes (app.lumemeduck.xyz) and its team are not responsible for any direct, indirect, or incidental damages resulting from your use of the site/app. 
+   The site/app is provided “as is” without warranties of any kind.</p>
+ <p><strong>User Terms Changes</strong></p>
+ <p>We may update these terms of use from time to time. Continued use of LMD Quotes (site/app) after updates means you accept the revised terms.</p>
+ <p><strong>User Access Termination</strong></p>
+ <p>We reserve the right to suspend or terminate access to the site/app if you violate these terms.</p>
+ <p><strong>Contact Support</strong></p>
+ <p>If you have any concerns with compliance to these terms, you can reach out to support team via: <a href="mailto:info@lumemeduck.xyz" style="text-decoration:none;color:#0ea5e9;">info@lumemeduck.xyz</a></p>
+ <p>This terms of use was last revised; September 29th, 2025.</p>
+ </article>
+</section>
+
+<!-- Privacy Policy Section -->
+<section id="privacy-policy" class="view" aria-labelledby="privacy-policy-title" style="display:none;">
+ <article aria-live="polite" style="animation:fadeInCard 0.3s ease forwards;">
+  <h4 id="privacy-policy-title" style="text-align:center;">PRIVACY POLICY</h4>
+<p>LMD Quotes (“the site/app”, “we”, “our”, or “us”) values your privacy. This Privacy Policy explains how we collect, use, and protect your information when you use our site/app.</p>
+<p><strong>Information We Collect</strong></p>
+<p>We may collect the following types of information when you use the site/app:</p>
+<ul>
+<li><strong>Personal information</strong> (if provided): such as your name or email address when you contact us directly.</li>
+<li><strong>Usage data</strong>: non-personal information like device type, interactions within the site/app, and site/app performance data.</li>
+<li><strong>Local data</strong>: exercise streaks, reminders (if supported/enabled), and personal progress stored on your device.</li>
+</ul>
+<p><strong>How We Use Information</strong></p>
+<p>We use collected information to:</p>
+<ul>
+<li>Provide, maintain, and improve the site/app.</li>
+<li>Send reminders or motivational notifications (if supported/enabled).</li>
+<li>Respond to user inquiries and support requests.</li>
+<li>Ensure security and prevent misuse of the site/app.</li>
+</ul>
+<p><strong>Data Storage & Security</strong></p>
+<p>User progress data (like streaks and reminders) is stored locally on their device and not shared with us.<br>
+  If we collect limited personal data (such as through support emails), we protect it with reasonable security practices.<br>
+  No method of transmission or storage is 100% secure, but we strive to safeguard your information.</p>
+<p><strong>Sharing Of Information</strong></p>
+<p>We do not sell or rent your personal data. We may share limited information only in these cases:</p>
+<ul>
+<li>With service providers who help us operate the site/app.</li>
+<li>If required by law, regulation, or legal process.</li>
+<li>To protect the safety, rights, or property of LMD Quotes and its users.</li>
+</ul>
+<p><strong>Advertising & Cookies</strong></p>
+<p>We may display ads served by third-party ad networks (for example, Google AdSense).<br>
+  These networks may use cookies to serve ads based on users' prior visits to our site or other websites.<br>
+  You may opt-out of ad personalization in your Google ad settings on your device.</p>
+<p><strong>Third-Party Services</strong></p>
+<p>The site/app may use/contain third-party services (such as analytics or ads).<br>
+  These services may collect information according to their own Privacy Policies.<br>
+  We recommend reviewing their policies as well.</p>
+<p><strong>Children’s Privacy</strong></p>
+<p>The site/app (LMD Quotes) is not directed at children under 13.<br>
+  We do not knowingly collect personal information from children.<br>
+  If you believe we have collected such data, please contact us immediately.</p>
+<p><strong>Your Choices</strong></p>
+<p>You may disable notifications or reminders in your device settings any time.<br>
+  You may delete the site/app any time, which also deletes local data from your device.</p>
+<p><strong>Privacy Policy Changes</strong></p>
+<p>We may change this privacy policy statement from time to time by updating this page.<br>
+  You should check this page from time to time to ensure that you agree with any changes.</p>
+<p><strong>Contact Support</strong></p>
+<p>If you have any question about this privacy policy statement, you can reach out to support team via: <a href="mailto:info@lumemeduck.xyz" style="text-decoration:none;color:#0ea5e9;">info@lumemeduck.xyz</a></p>
+<p>This policy statements was last revised; September 29th, 2025.</p>
+   </article>
+ </section>
+</main>
+              
+  <!-- Hidden canvas for image export -->
+  <canvas id="exportCanvas" width="1080" height="1080" style="display:none;"></canvas>
+</container>
+              
+  <script>
+/* ------ Preloader ------ */
+var myVar;
+  function myFunction() {  
+    myVar = setTimeout(showPage, 0);
+  }
+  function showPage() { 
+    document.getElementById("loader").style.display = "none"; 
+    document.getElementById("loader").style.display = "none";
+  }
+	
+/* ---------- Utilities & Storage ---------- */
+const STORAGE = {
+  dailyKey: (prefix, date=new Date()) => {
+    const y = date.getFullYear(), m = String(date.getMonth()+1).padStart(2,'0'), d = String(date.getDate()).padStart(2,'0');
+    return `${prefix}_${y}-${m}-${d}`;
+  },
+  set(k, v){ localStorage.setItem(k, JSON.stringify(v)); },
+  get(k, fallback=null){
+    try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : fallback; }
+    catch{ return fallback; }
+  },
+  remove(k){ localStorage.removeItem(k); },
+  clearAll(){
+    localStorage.removeItem('completedDays');
+    // Keep other keys generic wipe:
+    Object.keys(localStorage).forEach(k=>{
+      if(/^quote_\d{4}-\d{2}-\d{2}$/.test(k) || /^challenge_\d{4}-\d{2}-\d{2}$/.test(k)) localStorage.removeItem(k);
+    });
+  }
+};
+
+const DateUtil = {
+  ymd(d=new Date()){ return d.toISOString().slice(0,10); },
+  monthKey(y,m){ return `${y}-${String(m+1).padStart(2,'0')}`; }, // m 0-based
+  startOfMonth(y,m){ return new Date(y,m,1); },
+  daysInMonth(y,m){ return new Date(y, m+1, 0).getDate(); },
+  isToday(y,m,day){ const t=new Date(); return t.getFullYear()===y && t.getMonth()===m && t.getDate()===day; }
+};
+                   
+/* ---------- Datasets ---------- */
+const QUOTES = [
+  {t:"A year from now you may wish you had started today.", a:"Karen Lamb"},
+  {t:"You don’t have to be great to start, but you have to start to be great.", a:"Zig Ziglar"},
+  {t:"The way to get started is to quit talking and begin doing.", a:"Walt Disney"},
+  {t:"Doubt kills more dreams than failure ever will.", a:"Suzy Kassem"},
+  {t:"With the new day comes new strength and new thoughts.", a:"Eleanor Roosevelt"},
+  {t:"He who has a why to live can bear almost any how.", a:"Friedrich Nietzsche"},
+  {t:"A river cuts through rock not because of its power but because of its persistence.", a:"James N. Watkins"},
+  {t:"What lies behind us and what lies before us are tiny matters compared to what lies within us.", a:"Ralph Waldo Emerson"},
+  {t:"I attribute my success to this: I never gave or took any excuse.", a:"Florence Nightingale"},
+  {t:"If you want something you’ve never had, you must be willing to do something you’ve never done.", a:"Thomas Jefferson"},
+  {t:"Your potential is limitless when fueled by persistence.", a:"Lumeme Duck"},
+  {t:"Discipline is choosing your future over your feelings.", a:"Lumeme Duck"},
+  {t:"Each small victory is a spark toward transformation.", a:"Lumeme Duck"},
+  {t:"Don’t wait for energy—create it through action.", a:"Lumeme Duck"},
+  {t:"Your best investment is effort compounded daily.", a:"Lumeme Duck"},
+  {t:"Strength is silent but undeniable in those who keep going.", a:"Lumeme Duck"},
+  {t:"The gap between who you are and who you want to be is filled with habits.", a:"Lumeme Duck"},
+  {t:"Your resilience is proof that setbacks are temporary.", a:"Lumeme Duck"},
+  {t:"The most powerful motivation comes from honoring your own word.", a:"Lumeme Duck"},
+  {t:"Every sunrise is an invitation to rise stronger.", a:"Lumeme Duck"},
+  {t:"Patience today is progress in disguise.", a:"Lumeme Duck"},
+  {t:"Your sweat is a reminder that growth is happening.", a:"Lumeme Duck"},
+  {t:"Discipline feels heavy now but makes life lighter later.", a:"Lumeme Duck"},
+  {t:"The road to mastery is paved with repeated effort.", a:"Lumeme Duck"},
+  {t:"Your strength multiplies when your excuses divide.", a:"Lumeme Duck"},
+  {t:"Consistency is the true engine of transformation.", a:"Lumeme Duck"},
+  {t:"Your inner fire burns brighter with every challenge you accept.", a:"Lumeme Duck"},
+  {t:"Progress is built, not wished for—lay a brick today.", a:"Lumeme Duck"},
+  {t:"Excuses fade the moment you take action.", a:"Lumeme Duck"},
+  {t:"Keep walking—momentum grows step by step.", a:"Lumeme Duck"},
+  {t:"Every step forward is a victory over doubt. Keep grinding—your purpose lights the way.", a:"Lumeme Duck"},
+  {t:"Small daily wins compound into unstoppable momentum.", a:"Lumeme Duck"},
+  {t:"Discipline is self-respect in action.", a:"Lumeme Duck"},
+  {t:"You don’t need the perfect start—just the honest one.", a:"Lumeme Duck"},
+  {t:"Courage is a habit. Practice it in tiny reps.", a:"Lumeme Duck"},
+  {t:"When it feels heavy, it’s building you.", a:"Lumeme Duck"},
+  {t:"Consistency beats intensity when intensity doesn’t last.", a:"Lumeme Duck"},
+  {t:"Your future self is begging you to begin today.", a:"Lumeme Duck"},
+  {t:"Energy follows focus. Guard what you give attention to.", a:"Lumeme Duck"},
+  {t:"Progress loves patience. Keep showing up.", a:"Lumeme Duck"},
+  {t:"Storms grow roots and wings—choose which one to use today.", a:"Lumeme Duck"},
+  {t:"Hard things, done daily, make life easier.", a:"Lumeme Duck"},
+  {t:"You are a result of what you repeat.", a:"Lumeme Duck"},
+  {t:"Quietly improve. Loud results will speak later.", a:"Lumeme Duck"},
+  {t:"You’re closer than your doubt suggests.", a:"Lumeme Duck"},
+  {t:"In the middle of every difficulty lies opportunity.", a:"Albert Einstein"},
+  {t:"Do what you can, with what you have, where you are.", a:"Theodore Roosevelt"},
+  {t:"Success is not final, failure is not fatal: It is the courage to continue that counts.", a:"Winston Churchill"},
+  {t:"Don’t count the days, make the days count.", a:"Muhammad Ali"},
+  {t:"Happiness depends upon ourselves.", a:"Aristotle"},
+  {t:"It always seems impossible until it’s done.", a:"Nelson Mandela"},
+  {t:"Action is the foundational key to all success.", a:"Pablo Picasso"},
+  {t:"Fall seven times and stand up eight.", a:"Japanese Proverb"},
+  {t:"Do not wait to strike till the iron is hot; but make it hot by striking.", a:"William Butler Yeats"},
+  {t:"The best way to predict the future is to create it.", a:"Peter Drucker"},
+  {t:"Your tomorrow is built on the bricks of today’s effort.", a:"Lumeme Duck"},
+  {t:"Growth begins where comfort ends—dare to step further.", a:"Lumeme Duck"},
+  {t:"Rest when you must, but never quit on yourself.", a:"Lumeme Duck"},
+  {t:"Strength isn’t measured by weight lifted, but by persistence kept.", a:"Lumeme Duck"},
+  {t:"Dream big, start small, act daily.", a:"Lumeme Duck"},
+  {t:"Challenges are proof that you’re moving forward.", a:"Lumeme Duck"},
+  {t:"Every small victory is a promise of greater triumphs ahead.", a:"Lumeme Duck"},
+  {t:"The best investment you’ll ever make is in your own discipline.", a:"Lumeme Duck"},
+  {t:"Courage whispers louder than fear when you take the next step.", a:"Lumeme Duck"},
+  {t:"Progress doesn’t shout—it quietly accumulates into greatness.", a:"Lumeme Duck"},
+  {t:"Consistency is the silent architect of success.", a:"Lumeme Duck"},
+  {t:"Your body listens when your mind decides.", a:"Lumeme Duck"},
+  {t:"Keep watering your goals—they bloom with patience.", a:"Lumeme Duck"},
+  {t:"Discomfort today is the foundation of tomorrow’s strength.", a:"Lumeme Duck"},
+  {t:"The climb may be steep, but the view is worth every step.", a:"Lumeme Duck"},
+  {t:"You are capable of far more than your doubts allow.", a:"Lumeme Duck"},
+  {t:"Let your actions today inspire your future self.", a:"Lumeme Duck"},
+  {t:"A disciplined morning creates a victorious day.", a:"Lumeme Duck"},
+  {t:"When focus meets effort, progress is guaranteed.", a:"Lumeme Duck"},
+  {t:"Your strength multiplies every time you refuse to give up.", a:"Lumeme Duck"},
+  {t:"The only way to do great work is to love what you do.", a:"Steve Jobs"},
+  {t:"Success usually comes to those who are too busy to be looking for it.", a:"Henry David Thoreau"},
+  {t:"What you get by achieving your goals is not as important as what you become by achieving your goals.", a:"Zig Ziglar"},
+  {t:"Don’t let the fear of losing be greater than the excitement of winning.", a:"Robert Kiyosaki"},
+  {t:"Hardships often prepare ordinary people for an extraordinary destiny.", a:"C.S. Lewis"},
+  {t:"We are what we repeatedly do. Excellence, then, is not an act, but a habit.", a:"Aristotle"},
+  {t:"Act as if what you do makes a difference. It does.", a:"William James"},
+  {t:"Everything you’ve ever wanted is on the other side of fear.", a:"George Addair"},
+  {t:"Limit your ‘always’ and your ‘nevers’.", a:"Amy Poehler"},
+  {t:"Quality is not an act, it is a habit.", a:"Aristotle"},
+  {t:"Your body is a canvas—each healthy choice paints a masterpiece.", a:"Lumeme Duck"},
+  {t:"Small habits today are the giant leaps of tomorrow.", a:"Lumeme Duck"},
+  {t:"Strength grows when excuses shrink.", a:"Lumeme Duck"},
+  {t:"No alarm clock rings louder than your own purpose.", a:"Lumeme Duck"},
+  {t:"You are stronger than your last excuse.", a:"Lumeme Duck"},
+  {t:"Move with intention—every step is progress.", a:"Lumeme Duck"},
+  {t:"Discipline isn’t punishment, it’s freedom earned daily.", a:"Lumeme Duck"},
+  {t:"Your dream body, mind, and life are shaped by today’s effort.", a:"Lumeme Duck"},
+  {t:"When motivation fades, let discipline carry you.", a:"Lumeme Duck"},
+  {t:"Consistency today becomes confidence tomorrow.", a:"Lumeme Duck"},
+  {t:"Progress is not about speed—it’s about not stopping.", a:"Lumeme Duck"},
+  {t:"Your future applauds the sweat you give today.", a:"Lumeme Duck"},
+  {t:"Even slow progress beats standing still.", a:"Lumeme Duck"},
+  {t:"A positive mind makes a powerful body.", a:"Lumeme Duck"},
+  {t:"Your story is rewritten every time you refuse to quit.", a:"Lumeme Duck"},
+  {t:"Effort compounds like interest—invest daily.", a:"Lumeme Duck"},
+  {t:"Every time you rise after falling, you redefine strength.", a:"Lumeme Duck"},
+  {t:"Greatness grows quietly through small, repeated acts.", a:"Lumeme Duck"},
+  {t:"Your inner fire is brighterVinebreSoftware than today’s struggle.", a:"Lumeme Duck"},
+  {t:"If you want energy, create it through movement.", a:"Lumeme Duck"},
+  {t:"Believe you can and you’re halfway there.", a:"Theodore Roosevelt"},
+  {t:"I am not a product of my circumstances. I am a product of my decisions.", a:"Stephen R. Covey"},
+  {t:"Opportunities don't happen, you create them.", a:"Chris Grosser"},
+  {t:"Do not go where the path may lead, go instead where there is no path and leave a trail.", a:"Ralph Waldo Emerson"},
+  {t:"Dream big and dare to fail.", a:"Norman Vaughan"},
+  {t:"You miss 100% of the shots you don’t take.", a:"Wayne Gretzky"},
+  {t:"Success is walking from failure to failure with no loss of enthusiasm.", a:"Winston Churchill"},
+  {t:"The secret of getting ahead is getting started.", a:"Mark Twain"},
+  {t:"It does not matter how slowly you go as long as you do not stop.", a:"Confucius"},
+  {t:"Courage is grace under pressure.", a:"Ernest Hemingway"},
+  {t:"Every morning is a reset button—press it wisely.", a:"Lumeme Duck"},
+  {t:"Your discipline today is the bridge to your dream tomorrow.", a:"Lumeme Duck"},
+  {t:"Comfort zones never create champions.", a:"Lumeme Duck"},
+  {t:"Every rep is a vote for the person you want to become.", a:"Lumeme Duck"},
+  {t:"The body achieves what the mind believes.", a:"Lumeme Duck"},
+  {t:"Greatness is carved from ordinary days of effort.", a:"Lumeme Duck"},
+  {t:"Be stubborn about your goals, flexible with your methods.", a:"Lumeme Duck"},
+  {t:"Resting is not quitting—it’s recharging.", a:"Lumeme Duck"},
+  {t:"Your habits are the seeds; your life is the garden.", a:"Lumeme Duck"},
+  {t:"Show up for yourself even when no one is watching.", a:"Lumeme Duck"},
+  {t:"Momentum is built by choosing progress over perfection.", a:"Lumeme Duck"},
+  {t:"Your excuses grow weaker when your purpose grows stronger.", a:"Lumeme Duck"},
+  {t:"Patience is training in disguise—it strengthens the spirit.", a:"Lumeme Duck"},
+  {t:"Celebrate discipline, for it will one day celebrate you back.", a:"Lumeme Duck"},
+  {t:"Every small effort is a silent roar of resilience.", a:"Lumeme Duck"},
+  {t:"Strong mornings create victorious nights.", a:"Lumeme Duck"},
+  {t:"Your sweat is the proof of your persistence.", a:"Lumeme Duck"},
+  {t:"Nothing changes until you decide to.", a:"Lumeme Duck"},
+  {t:"A consistent step beats a giant leap that never happens.", a:"Lumeme Duck"},
+  {t:"Discipline is the art of keeping promises you made to yourself.", a:"Lumeme Duck"},
+  {t:"Keep your face always toward the sunshine—and shadows will fall behind you.", a:"Walt Whitman"},
+  {t:"It’s not whether you get knocked down, it’s whether you get up.", a:"Vince Lombardi"},
+  {t:"Don’t be pushed around by the fears in your mind. Be led by the dreams in your heart.", a:"Roy T. Bennett"},
+  {t:"I never dreamed about success. I worked for it.", a:"Estee Lauder"},
+  {t:"The man who moves a mountain begins by carrying away small stones.", a:"Confucius"},
+  {t:"Great things are done by a series of small things brought together.", a:"Vincent Van Gogh"},
+  {t:"Do one thing every day that scares you.", a:"Eleanor Roosevelt"},
+  {t:"Act the way you’d like to be and soon you’ll be the way you act.", a:"Leonard Cohen"},
+  {t:"If you want to lift yourself up, lift up someone else.", a:"Booker T. Washington"},
+  {t:"Energy and persistence conquer all things.", a:"Benjamin Franklin"},
+  {t:"Momentum grows when excuses shrink.", a:"Lumeme Duck"},
+  {t:"Sweat today, shine tomorrow.", a:"Lumeme Duck"},
+  {t:"Your mindset sets the pace for your body.", a:"Lumeme Duck"},
+  {t:"Each challenge is a doorway to hidden strength.", a:"Lumeme Duck"},
+  {t:"You don’t need perfect conditions—just a willing heart.", a:"Lumeme Duck"},
+  {t:"Discipline today, freedom tomorrow.", a:"Lumeme Duck"},
+  {t:"A step forward, no matter how small, still breaks the chain of doubt.", a:"Lumeme Duck"},
+  {t:"Your dreams need your effort more than your excuses.", a:"Lumeme Duck"},
+  {t:"Consistency is how ordinary becomes extraordinary.", a:"Lumeme Duck"},
+  {t:"Your purpose is louder than your fatigue.", a:"Lumeme Duck"},
+  {t:"Every rep you complete is a promise kept to yourself.", a:"Lumeme Duck"},
+  {t:"The climb is hard, but so is staying stuck.", a:"Lumeme Duck"},
+  {t:"Your body is built by decisions, not wishes.", a:"Lumeme Duck"},
+  {t:"Keep watering the seed, even when the soil looks dry.", a:"Lumeme Duck"},
+  {t:"Energy is created, not found—move to generate it.", a:"Lumeme Duck"},
+  {t:"Your persistence today becomes your pride tomorrow.", a:"Lumeme Duck"},
+  {t:"The mirror reflects effort more than excuses.", a:"Lumeme Duck"},
+  {t:"Small efforts multiplied daily equal unstoppable progress.", a:"Lumeme Duck"},
+  {t:"Your struggle today is your strength being sculpted.", a:"Lumeme Duck"},
+  {t:"Keep going—your best chapter is still unwritten.", a:"Lumeme Duck"},
+  {t:"Start where you are. Use what you have. Do what you can.", a:"Arthur Ashe"},
+  {t:"Don’t watch the clock; do what it does. Keep going.", a:"Sam Levenson"},
+  {t:"Opportunities multiply as they are seized.", a:"Sun Tzu"},
+  {t:"Turn your wounds into wisdom.", a:"Oprah Winfrey"},
+  {t:"Success is not in what you have, but who you are.", a:"Bo Bennett"},
+  {t:"Setting goals is the first step in turning the invisible into the visible.", a:"Tony Robbins"},
+  {t:"Keep going. Be all in.", a:"Bryan Hutchinson"},
+  {t:"Perseverance is not a long race; it is many short races one after the other.", a:"Walter Elliot"},
+  {t:"Don’t wait. The time will never be just right.", a:"Napoleon Hill"},
+  {t:"You cannot plow a field by turning it over in your mind.", a:"Gordon B. Hinckley"},
+  {t:"Your discipline is proof you believe in your future.", a:"Lumeme Duck"},
+  {t:"Strong days are built from strong choices.", a:"Lumeme Duck"},
+  {t:"Excuses weigh more than any workout ever will.", a:"Lumeme Duck"},
+  {t:"Your dreams deserve sweat, not hesitation.", a:"Lumeme Duck"},
+  {t:"Courage grows with every step you refuse to skip.", a:"Lumeme Duck"},
+  {t:"The grind today becomes the glow tomorrow.", a:"Lumeme Duck"},
+  {t:"Your focus is your superpower—guard it.", a:"Lumeme Duck"},
+  {t:"Every habit you build becomes a pillar of strength.", a:"Lumeme Duck"},
+  {t:"Your progress is fueled by what you repeat daily.", a:"Lumeme Duck"},
+  {t:"The hardest reps create the strongest version of you.", a:"Lumeme Duck"},
+  {t:"Discipline is simply remembering what you want most.", a:"Lumeme Duck"},
+  {t:"Tough days shape tougher people.", a:"Lumeme Duck"},
+  {t:"Your potential is waiting behind your persistence.", a:"Lumeme Duck"},
+  {t:"Action is the antidote to doubt.", a:"Lumeme Duck"},
+  {t:"Sweat is the ink with which victory is written.", a:"Lumeme Duck"},
+  {t:"Keep building—you’re closer to your breakthrough than you think.", a:"Lumeme Duck"},
+  {t:"Strength is borrowed from today’s effort, not tomorrow’s wish.", a:"Lumeme Duck"},
+  {t:"Momentum loves discipline—feed it daily.", a:"Lumeme Duck"},
+  {t:"Your consistency is your contract with success.", a:"Lumeme Duck"},
+  {t:"Keep moving—your energy multiplies in motion.", a:"Lumeme Duck"},
+];
+
+const CHALLENGES = [
+  "Walk outdoors for 30 minutes.",
+  "Do 2 sets of 20 sit-to-stands from a chair.",
+  "Stretch arms, legs, and back for 12 minutes.",
+  "Hold a gentle lunge stretch for 45s each side.",
+  "Perform 20 wall push-ups, 2 rounds.",
+  "March in place for 6 minutes.",
+  "Do 15 calf raises, 3 times.",
+  "Hold a shoulder stretch across the chest for 30s each side.",
+  "Perform 2 sets of 12 seated knee extensions.",
+  "Practice deep belly breathing for 10 minutes.",
+  "Do 3 sets of 15 squats.",
+  "Perform 3 sets of 15 alternating lunges.",
+  "Hold a plank for 60s, 3 times.",
+  "Do 3 rounds of 25 mountain climbers.",
+  "Perform 3 sets of 15 dips on a sturdy chair.",
+  "Complete 20 jump squats, repeat 3 rounds.",
+  "Do 3 sets of 20 bicycle crunches.",
+  "Hold a wall-sit for 90 seconds, 2 times.",
+  "Perform 3 rounds of 15 donkey kicks per leg.",
+  "Do 3 sets of 20 side leg lifts each side.",
+  "Do 3 sets of 25 burpees.",
+  "Perform 3 sets of 20 decline push-ups.",
+  "Complete 3 rounds of 20 jump lunges.",
+  "Hold a plank with alternating arm and leg lifts, 60s x 3.",
+  "Perform 3 sets of 20 pike push-ups.",
+  "Do 3 rounds of 30 mountain climbers fast-paced.",
+  "Sprint in place for 90s, rest, repeat 4 times.",
+  "Perform 3 sets of 20 Russian twists with weight.",
+  "Do 3 rounds of 15 single-leg squats each side.",
+  "Hold a handstand against a wall for 45s, 3 times.",
+  "Walk briskly for 20 minutes.",
+  "Do 3 sets of 15 squats.",
+  "Hold a 60-second plank for 3 sections.",
+  "Do 20 push-ups (break into 3 sets).",
+  "Stretch your full body for 10 minutes.",
+  "Do jumping jacks for 60 seconds 3 times.",
+  "Do 15 burpees (any pace).",
+  "Climb stairs for 10 minutes.",
+  "Do slow jog for 15 minutes.",
+  "Core circuit: do 20 crunches 3 times.",
+  "Do 20 glute bridges 3 times.",
+  "Wall-sit: do 45 seconds 3 times.",
+  "Do yoga flow for 15 minutes.",
+  "Do shadow boxing for 10 minutes.",
+  "Balance drill: do a single-leg stand for 60 seconds.",
+  "Take a 15-minute walk after meals.",
+  "Do 2 sets of 12 wall push-ups.",
+  "Stretch your arms and back for 8 minutes.",
+  "Perform 20 seated leg raises.",
+  "Hold a 30-second wall-sit, repeat 2 times.",
+  "Do 15 calf raises on each leg.",
+  "Practice deep breathing for 5 minutes.",
+  "Do 2 sets of 10 bodyweight squats.",
+  "Balance on one leg for 40 seconds each side.",
+  "Walk up and down stairs for 5 minutes.",
+  "Do 3 sets of 12 standard push-ups.",
+  "Perform 3 sets of 15 lunges (each leg).",
+  "Jump rope (or mimic rope jumps) for 3 minutes.",
+  "Do 3 rounds of 20 bicycle crunches.",
+  "Perform 2 sets of 10 tricep dips on a chair.",
+  "Hold a plank for 45 seconds, 3 times.",
+  "Do 3 sets of 12 glute bridges.",
+  "Perform 20 jump squats.",
+  "Shadow box with high intensity for 3 minutes.",
+  "Do 3 sets of 15 mountain climbers.",
+  "Perform 3 sets of 15 burpees.",
+  "Do 3 rounds of 20 push-up to side planks.",
+  "Hold a plank with shoulder taps for 60 seconds, 3 times.",
+  "Perform 3 sets of 12 pistol squats (use support if needed).",
+  "Complete 3 rounds of 25 jump lunges.",
+  "Do 2 sets of 15 V-ups.",
+  "Perform 3 rounds of 20 Russian twists.",
+  "Sprint in place at full effort for 45 seconds, rest 30s, repeat 5 times.",
+  "Hold a wall-sit for 90 seconds, repeat 3 times.",
+  "Do 3 rounds of 12 dive-bomber push-ups.",
+  "Walk in place for 10 minutes while listening to music.",
+  "Do 2 sets of 10 chair squats.",
+  "Stretch hamstrings and calves for 5 minutes.",
+  "Hold a seated twist stretch for 30 seconds each side.",
+  "Perform 15 standing side leg lifts each side.",
+  "Do 2 rounds of 12 shoulder rolls backward and forward.",
+  "March in place with high knees for 2 minutes.",
+  "Stand and touch your toes 15 times slowly.",
+  "Do 10 seated knee extensions per leg.",
+  "Practice mindful breathing for 10 minutes.",
+  "Perform 3 sets of 10 push-ups with knees or standard.",
+  "Do 3 rounds of 20 standing lunges.",
+  "Hold a side plank for 30 seconds each side, 3 times.",
+  "Do 2 sets of 15 reverse crunches.",
+  "Perform 3 sets of 12 step-ups on a chair or stair.",
+  "Do 20 sumo squats.",
+  "Complete 3 sets of 15 donkey kicks each leg.",
+  "Perform 3 rounds of 20 standing oblique crunches.",
+  "Do 2 minutes of jumping jacks, rest, repeat 2 times.",
+  "Hold a forearm plank for 60 seconds.",
+  "Perform 3 sets of 15 decline push-ups (feet elevated).",
+  "Do 3 rounds of 12 explosive jump squats.",
+  "Complete 20 burpees, rest, then repeat once.",
+  "Hold a plank while alternating leg lifts, 45 seconds x 3.",
+  "Perform 3 sets of 15 pike push-ups.",
+  "Do 3 rounds of 20 bicycle crunches at fast pace.",
+  "Sprint in place for 60 seconds, rest, repeat 3 times.",
+  "Perform 3 rounds of 15 side lunges each leg.",
+  "Do 3 sets of 12 single-leg glute bridges each side.",
+  "Hold a handstand against the wall for 20 seconds, repeat 3 times.",
+  "Walk outdoors for 20 minutes at a steady pace.",
+  "Perform 2 sets of 12 sit-to-stands from a chair.",
+  "Stretch your neck and shoulders for 5 minutes.",
+  "Do 10 standing calf raises per leg, 3 times.",
+  "Hold a standing quad stretch for 30 seconds each side.",
+  "Perform 15 gentle seated twists.",
+  "Climb stairs slowly for 8 minutes.",
+  "Do 2 sets of 12 wall push-ups.",
+  "March in place with arms swinging for 3 minutes.",
+  "Practice mindful body scan meditation for 8 minutes.",
+  "Perform 3 sets of 15 squats.",
+  "Do 3 sets of 12 alternating step-back lunges.",
+  "Hold a high plank for 45 seconds, repeat 3 times.",
+  "Perform 20 mountain climbers, 3 rounds.",
+  "Do 3 rounds of 12 dips on a sturdy chair.",
+  "Complete 15 glute bridges, 3 times.",
+  "Shadow box for 2 minutes, rest, repeat 3 rounds.",
+  "Do 3 sets of 15 side leg lifts each side.",
+  "Perform 20 bicycle crunches, 3 rounds.",
+  "Hold a wall-sit for 1 minute, repeat twice.",
+  "Perform 3 rounds of 20 burpees.",
+  "Do 3 sets of 15 decline push-ups.",
+  "Complete 25 jump squats, rest, repeat 2 times.",
+  "Hold a plank with alternating shoulder taps, 60s x 3.",
+  "Perform 3 sets of 20 jump lunges.",
+  "Do 3 rounds of 15 pike push-ups.",
+  "Sprint in place for 1 minute, rest, repeat 5 times.",
+  "Perform 3 sets of 20 Russian twists with a water bottle.",
+  "Hold a handstand against a wall for 30 seconds, 3 times.",
+  "Do 3 sets of 12 single-leg squats per side.",
+  "Walk outdoors for 25 minutes.",
+  "Do 2 sets of 15 sit-to-stands from a chair.",
+  "Stretch hamstrings and hips for 8 minutes.",
+  "Perform 15 standing calf raises, 3 times.",
+  "Hold a chest stretch against a wall, 30s each side.",
+  "Do 20 arm circles forward and backward.",
+  "March in place with high knees for 3 minutes.",
+  "Do 10 step-ups on a stair, each leg.",
+  "Hold a seated hamstring stretch for 45 seconds each side.",
+  "Practice mindful breathing for 8 minutes.",
+  "Perform 3 sets of 15 standard squats.",
+  "Do 3 sets of 12 push-ups.",
+  "Hold a plank for 60 seconds, 3 times.",
+  "Perform 3 sets of 20 alternating lunges.",
+  "Do 3 sets of 12 dips on a chair.",
+  "Complete 20 jump squats, rest, repeat twice.",
+  "Do 3 rounds of 15 side leg lifts each side.",
+  "Perform 3 sets of 20 crunches.",
+  "Do 3 sets of 15 glute bridges.",
+  "Hold a wall-sit for 75 seconds.",
+  "Do 3 rounds of 20 burpees.",
+  "Perform 3 sets of 15 decline push-ups (feet elevated).",
+  "Complete 3 sets of 20 jump lunges.",
+  "Hold a plank with shoulder taps for 60s, 3 times.",
+  "Perform 3 sets of 12 pike push-ups.",
+  "Do 3 rounds of 25 mountain climbers.",
+  "Sprint in place for 60s, rest, repeat 4 times.",
+  "Do 3 rounds of 20 Russian twists holding a bottle.",
+  "Perform 3 sets of 12 pistol squats each side (use support).",
+  "Hold a wall handstand for 30s, 3 times.",
+  "Take a 20-minute walk with deep breaths.",
+  "Perform 2 sets of 15 chair squats.",
+  "Stretch your shoulders and back for 10 minutes.",
+  "Hold a standing hamstring stretch for 40s each leg.",
+  "Do 2 sets of 12 seated knee raises.",
+  "Perform 15 wall push-ups, 2 rounds.",
+  "Walk in place for 5 minutes during TV breaks.",
+  "Hold a calf stretch for 30s each side, repeat twice.",
+  "Do 15 side leg lifts per leg.",
+  "Practice guided meditation for 10 minutes.",
+  "Do 3 sets of 12 regular push-ups.",
+  "Perform 3 sets of 20 lunges alternating legs.",
+  "Hold a side plank for 40s each side, repeat twice.",
+  "Do 3 rounds of 20 mountain climbers.",
+  "Perform 3 sets of 12 dips on a chair.",
+  "Complete 20 jump squats, repeat twice.",
+  "Do 3 sets of 15 bicycle crunches.",
+  "Hold a wall-sit for 80 seconds, 2 times.",
+  "Perform 3 rounds of 20 high knees.",
+  "Do 3 sets of 15 donkey kicks per leg.",
+  "Perform 3 sets of 20 burpees.",
+  "Do 3 rounds of 15 decline push-ups (feet raised).",
+  "Complete 3 sets of 20 jump lunges.",
+  "Hold a plank with alternating arm reach, 60s x 3.",
+  "Perform 3 sets of 15 pike push-ups.",
+  "Do 3 rounds of 25 bicycle crunches fast-paced.",
+  "Sprint in place for 90s, rest, repeat 3 times.",
+  "Perform 3 sets of 15 Russian twists with weight.",
+  "Do 3 rounds of 12 pistol squats each leg.",
+  "Hold a handstand against wall for 40s, 3 times."
+];
+
+/* ---------- Daily Selection (deterministic per day unless shuffled) ---------- */
+function pickDaily(keyPrefix, pool){
+  const key = STORAGE.dailyKey(keyPrefix);
+  let idx = STORAGE.get(key);
+  if (idx == null){
+    idx = Math.floor(Math.random() * pool.length);
+    STORAGE.set(key, idx);
+  }
+  return {key, idx};
+}
+
+/* ---------- App State & Router ---------- */
+const AppState = {
+  quoteIndex: 0,
+  challengeIndex: 0,
+  completedDays: STORAGE.get('completedDays', {}), // { "YYYY-MM": { "DD": true } }
+  viewMonth: (()=>{ const d=new Date(); return {y:d.getFullYear(), m:d.getMonth()}; })()
+};
+
+const Router = {
+  go(hash){ location.hash = hash; },
+  sync(){
+    const view = location.hash === '#streak' ? 'streak' : 'home';
+    document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+    document.getElementById(view).classList.add('active');
+    if (view === 'streak') renderCalendar();
+  }
+};
+
+/* ---------- Rendering: Home ---------- */
+function renderHome(){
+  const q = QUOTES[AppState.quoteIndex];
+  const c = CHALLENGES[AppState.challengeIndex];
+  document.getElementById('quoteText').textContent = q.t.replace(/[“”]/g, "");
+  document.getElementById('quoteAuthor').textContent = q.a && q.a !== "—" ? q.a : "";
+  document.getElementById('challengeText').textContent = c;
+
+  // Status if already completed today
+  const d = new Date();
+  const y = d.getFullYear(), m=d.getMonth(), day=d.getDate();
+  const mk = DateUtil.monthKey(y,m);
+  const done = !!(AppState.completedDays[mk] && AppState.completedDays[mk][String(day).padStart(2,'0')]);
+  const status = document.getElementById('completeStatus');
+  status.hidden = !done;
+
+  // Tag dates
+  const today = DateUtil.ymd();
+  document.getElementById('quoteTag').textContent = new Date().toLocaleDateString(undefined, { weekday:'short', month:'short', day:'numeric' });
+  document.getElementById('challengeTag').textContent = document.getElementById('quoteTag').textContent;
+}
+
+/* ---------- Calendar ---------- */
+function renderCalendar(){
+  const cal = document.getElementById('calendar');
+  cal.innerHTML = '';
+  const meta = document.getElementById('calMeta');
+
+  const {y,m} = AppState.viewMonth;
+  const monthName = new Date(y,m,1).toLocaleDateString(undefined, {month:'long', year:'numeric'});
+  meta.textContent = `Viewing ${monthName}`;
+
+  const dow = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+  dow.forEach(d=>{
+    const el = document.createElement('div');
+    el.className='dow';
+   el.setAttribute('role','columnheader');
+    el.textContent = d;
+    cal.appendChild(el);
+  });
+
+  const first = DateUtil.startOfMonth(y,m).getDay();
+  const days = DateUtil.daysInMonth(y,m);
+  const prevDays = (first + 7) % 7;
+
+  // Add blanks
+  for (let i=0;i<prevDays;i++){
+    const pad = document.createElement('div');
+    pad.className = 'day muted';
+    pad.setAttribute('role','gridcell');
+    cal.appendChild(pad);
+  }
+
+  const monthMap = AppState.completedDays[DateUtil.monthKey(y,m)] || {};
+
+  for (let d=1; d<=days; d++){
+    const el = document.createElement('div');
+    el.className = 'day';
+    el.setAttribute('role','gridcell');
+    if (DateUtil.isToday(y,m,d)) el.classList.add('today');
+
+    const n = document.createElement('div');
+    n.className = 'n';
+    n.textContent = d;
+    el.appendChild(n);
+
+    const dd = String(d).padStart(2,'0');
+    if (monthMap[dd]) el.classList.add('done');
+
+    cal.appendChild(el);
+  }
+}
+
+/* ---------- Actions ---------- */
+function shuffleQuoteForToday(){
+  const k = STORAGE.dailyKey('quote');
+  const next = Math.floor(Math.random() * QUOTES.length);
+  STORAGE.set(k, next);
+  AppState.quoteIndex = next;
+  renderHome();
+}
+  
+function shuffleChallengeForToday(){
+  const k = STORAGE.dailyKey('challenge');
+  const next = Math.floor(Math.random() * CHALLENGES.length);
+  STORAGE.set(k, next);
+  AppState.challengeIndex = next;
+  renderHome();
+}
+
+function markTodayCompleted(){
+  const d = new Date();
+  const y = d.getFullYear(), m=d.getMonth(), day=d.getDate();
+  const mk = DateUtil.monthKey(y,m);
+  if (!AppState.completedDays[mk]) AppState.completedDays[mk] = {};
+  AppState.completedDays[mk][String(day).padStart(2,'0')] = true;
+  STORAGE.set('completedDays', AppState.completedDays);
+  document.getElementById('completeStatus') .hidden = false;
+  renderCalendar();
+}
+
+function resetAll() {
+  // build modal
+  const modal = document.createElement('div');
+  modal.className = 'reset-modal';
+  modal.innerHTML = `
+    <div class="reset-box">
+      <div>Delete your tracked records?</div>
+      <button class="btn-ok" onclick="doReset()">Reset</button>
+      <button class="btn-cancel" onclick="closeReset()">Close</button>
+    </div>
+  `;
+  document.body.appendChild(modal);
+
+  // actual reset
+  window.doReset = () => {
+    localStorage.removeItem('completedDays');
+    localStorage.removeItem('quote_' + DateUtil.ymd());
+    localStorage.removeItem('challenge_' + DateUtil.ymd());
+    AppState.completedDays = {};
+    renderHome(); renderCalendar();
+    closeReset();
+  };
+  window.closeReset = () => modal.remove();
+}
+
+/* ---------- Quote Image Export ---------- */
+function saveQuoteAsImage(){
+  const canvas = document.getElementById('exportCanvas');
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width, H = canvas.height;
+
+  // Background gradient
+  const g1 = ctx.createLinearGradient(0,0,W,H);
+  g1.addColorStop(0, "#11152a");
+  g1.addColorStop(1, "#0b0e1d");
+  ctx.fillStyle = g1; ctx.fillRect(0,0,W,H);
+
+  const g2 = ctx.createRadialGradient(W*0.8, H*0.15, 40, W*0.8, H*0.15, 700);
+  g2.addColorStop(0, "rgba(102,229,181,0.35)");
+  g2.addColorStop(1, "rgba(102,229,181,0)");
+  ctx.fillStyle = g2; ctx.fillRect(0,0,W,H);
+
+  const g3 = ctx.createRadialGradient(W*0.1, H*0.85, 40, W*0.1, H*0.85, 700);
+  g3.addColorStop(0, "rgba(154,167,255,0.30)");
+  g3.addColorStop(1, "rgba(154,167,255,0)");
+  ctx.fillStyle = g3; ctx.fillRect(0,0,W,H);
+
+  // Card
+  const pad = 64;
+  const cardR = 32;
+  const cardX = pad, cardY = pad, cardW = W - pad*2, cardH = H - pad*2;
+  roundRect(ctx, cardX, cardY, cardW, cardH, cardR);
+  ctx.fillStyle = "rgba(255,255,255,0.04)";
+  ctx.fill();
+  ctx.strokeStyle = "rgba(255,255,255,0.10)";
+  ctx.lineWidth = 2;
+  ctx.stroke();
+
+  // Title/brand
+  ctx.font = "bold 36px system-ui, Segoe UI, Roboto, Arial";
+  ctx.fillStyle = "#eaf0ff";
+  ctx.fillText("LMD Quotes", cardX + 40, cardY + 70);
+  ctx.font = "600 22px system-ui, Segoe UI, Roboto, Arial";
+  ctx.fillStyle = "rgba(186,194,228,.85)";
+  const dateStr = new Date().toLocaleDateString(undefined, { weekday:'short', month:'short', day:'numeric', year:'numeric' });
+  ctx.fillText(dateStr, cardX + 40, cardY + 100);
+
+  // Quote
+  const quote  = document.getElementById('quoteText').textContent.replace(/[“”]/g, '');
+const author = document.getElementById('quoteAuthor').textContent;
+ctx.font = '800 46px system-ui, Segoe UI, Roboto, Arial';
+ctx.fillStyle = '#eef1ff';
+ctx.textAlign = 'center';
+ctx.textBaseline = 'middle';
+const quoteLines = wrapText(ctx, quote, cardW - 120);
+const authorLine = `— ${author}`;
+const totalHeight = (quoteLines.length * 58) + 70;  // +70 for author spacing
+const startY = cardY + cardH / 2 - totalHeight / 2 + 29;
+
+  // Quote lines
+quoteLines.forEach((line, i) => {
+  ctx.fillText(line, cardX + cardW / 2, startY + i * 58);
+});
+
+  // Author line
+ctx.font      = '600 30px system-ui';
+ctx.fillStyle = '#eef1ff';
+ctx.textAlign = 'right';               
+ctx.fillText(
+  authorLine,
+  cardX + cardW - 120,                  
+  startY + quoteLines.length * 58 + 32
+);
+
+// Reset alignments
+ctx.textAlign = 'start';
+ctx.textBaseline = 'alphabetic';
+
+  // Footer mark
+  ctx.font = "700 20px system-ui, Segoe UI, Roboto, Arial";
+  ctx.fillStyle = "rgba(200,210,255,.9)";
+  ctx.fillText("🌐 app.lumemeduck.xyz", cardX + 40, cardY + cardH - 50);
+
+  // Decorative corner sun
+  drawSun(ctx, cardX + cardW - 110, cardY + 110, 44);
+
+  // Generate filename
+  const dataURL = canvas.toDataURL('image/png');
+  const filename = `quote_${new Date().toISOString().split('T')[0]}.png`;
+  showGeneratedImage(dataURL, filename);
+
+  function generateFilename() {
+  const date = new Date().toISOString().split('T')[0];
+  return `quote_${Date.now()}.png`;
+  }
+
+  function showGeneratedImage(dataURL, filename) {
+  // Show waiting spinner
+  document.body.style.margin = "0";
+  document.body.style.background = "#f1f4ff";
+  document.body.innerHTML = `
+  <container>
+    <div style="max-width:800px;margin:0 auto;display:flex;flex-direction:column;align-items:center;justify-content:center;height:100vh;gap:20px;font-family:sans-serif;text-align:center;">
+      <div class="spinner" style="width:40px;height:40px;border:4px solid rgba(0,0,0,.1);border-top:4px solid #0ea5e9;border-radius:50%;animation:spin 1s linear infinite;"></div>
+      <p style="font-size:16px;color:#002d5d;">Generating image...</p>
+    </div>
+    <style>
+      @keyframes spin { from { transform:rotate(0deg);} to { transform:rotate(360deg);} }
+    </style>
+   </container>
+  `;
+  // Simulate delay
+  setTimeout(() => {
+    document.body.innerHTML = `
+	<container style="position:fixed;background-attachment:fixed;">
+	 <main>
+      <article class="card" aria-live="polite" style="position:relative;margin:auto;width:auto;display:flex;flex-direction:column;gap:20px;align-items:center;justify-content:center;text-align:center;font-family:sans-serif;animation:fadeInBg 0.3s ease forwards;">
+       <h3 style="font-size:18px;color:002d5d;"><i class="fa fa-check" style="font-size:22px;color:#22c55e;"></i> Image Generated!</h3>
+        <img src="${dataURL}" alt="Generated" style="width:100%;display:flex;align-items:center;justify-content:center;position:relative;border-radius:0;box-shadow:0 0 10px rgba(0,0,0,0.5);animation: fadeInCard 0.3s ease forwards;" />
+         <div class="row" style="display:flex;width:90%;align-items:center;justify-content:space-between;position:relative;animation:fadeInCard 0.3s ease forwards;">
+          <button class="btn" id="download-button"><i class="fas fa-download" style="font-size:15px;"></i> Save</button>
+          <button class="btn" id="share-button"><i class="fas fa-share" style="font-size:15px;"></i> Share</button>
+        </div>
+        <p style="width:100%;font-size:14px;opacity:0.5;color:#002d5d;align-items:center;justify-content:center;position:relative;animation:fadeInCard 0.3s ease forwards;">
+          🔆 <b>Share</b> doesn’t work in some web systems<br>If notified, you can tap <b>save</b> instead.
+        </p>
+        <button class="btn btn-accent" id="backButton" style="margin-bottom:10px;">く Back</button>
+      </article>
+      <div class="footnote"></div>
+      <div class="ad-container" aria-live="polite">
+       <div class="ad-slot">
+	   <a href="https://otieu.com/4/7800106" target="_blank" style="cursor:pointer;">
+	   <img src="images/monetag.png" alt="Advert" /></a>
+      </div>
+     </div>
+    </main>
+    `;
+    // Save button
+    document.getElementById('download-button').addEventListener('click', () => {
+      triggerDownload(dataURL, filename);
+    });
+    // Share button
+    document.getElementById('share-button').addEventListener('click', () => {
+      shareImage(dataURL);
+    });
+    // Back button
+    document.getElementById('backButton').addEventListener('click', () => {
+      window.location.reload();
+    });
+  }, 2000);
+}
+}
+    
+// Download (browser or webview)
+function triggerDownload(dataURL, filename) {
+  const isWebView = /(wv|WebView)/i.test(navigator.userAgent);
+  
+  if (!isWebView) {
+    // Normal browser auto-download
+    const link = document.createElement('a');
+    link.href = dataURL;
+    link.download = filename;
+    link.style.display = 'none';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    return;
+  }
+  // Manual download
+  showGeneratedImage(dataURL, filename);
+  }
+  function showGeneratedImage(dataURL, filename) {
+  // WebView: upload image + show popup
+   const blob = dataURLToBlob(dataURL);
+  const fd = new FormData();
+  fd.append('file', blob, `quote_${Date.now()}.png`);
+    
+  fetch('https://tmpfiles.org/api/v1/upload', { method: 'POST', body: fd })
+    .then(r => r.json())
+    .then(res => {
+      let url = res.data?.url || res.data || res.url;
+      if (url && !url.includes('/dl/')) {
+        url = url.replace('tmpfiles.org', 'tmpfiles.org/dl');
+      }
+      if (!url) {
+        alert('Upload succeeded but no file URL returned.');
+        return;
+    }
+      const fallback = document.createElement('div');
+      fallback.style.cssText = `
+        position: fixed;top:0;left:0;width:100%;height:100%;
+        background: rgba(255,255,255,0.4);
+        display:flex;align-items:center;justify-content:center;
+        z-index:9999;animation:fadeInBg 0.3s ease forwards;
+      `;
+      fallback.innerHTML = `
+        <div style="background:#eef1ff;color:#002d5d;box-shadow:0 4px 15px rgba(0,0,0,0.4);
+          border-radius:18px;padding:20px;max-width:320px;text-align:center;
+          font-family:system-ui;animation:fadeInCard 0.3s ease forwards;">
+          <h3 style="margin-bottom:10px;font-size:16px;">System Isn't Responding!</h3>
+          <p style="font-size:14px;opacity:0.8;margin-bottom:15px;">
+            Click on the image below to open externally, then press-hold on the image to save.
+          </p>
+          <a href="${url}" target="_blank" download="${filename}" style="cursor:pointer;">
+          <img src="${dataURL}" alt="Generated" style="max-width:100%;border-radius:12px;box-shadow:0 0 8px rgba(0,0,0,0.2);margin-bottom:15px;"></a>
+          <button class="btn btn-accent" id="closeDownloadFallback">Done</button>
+        </div>
+      `;
+      document.body.appendChild(fallback);
+      document.getElementById('closeDownloadFallback').addEventListener('click', () => {
+        document.body.removeChild(fallback);
+      });
+    })
+    .catch(err => {
+      console.error(err);
+      const modal = document.createElement('div');
+      modal.id = 'failModal';
+      modal.className = 'reset-modal';
+      modal.innerHTML = `
+        <div class="reset-box">
+          <div style="font-size:16px;margin-bottom:12px;">Connection Error!</div>
+          <p style="font-size:14px;margin:0 0 18px;line-height:1.4;">
+            Pull down on your screen to refresh<br>page and try saving again.
+          </p>
+          <button class="btn-ok" onclick="document.getElementById('failModal').remove()">Ok</button>
+        </div>
+      `;
+      document.body.appendChild(modal);
+      setTimeout(() => modal.remove(), 10000);
+    });
+  }
+    
+  function dataURLToBlob(dataURL) {
+  const arr = dataURL.split(',');
+  const mime = arr[0].match(/:(.*?);/)[1];
+  const byteStr = atob(arr[1]);
+  const ab = new Uint8Array(byteStr.length);
+  for (let i = 0; i < byteStr.length; i++) {
+    ab[i] = byteStr.charCodeAt(i);
+  }
+  return new Blob([ab], { type: mime });
+  }
+
+  // Share image
+  function shareImage(dataURL) {
+  const blob = dataURLToBlob(dataURL);
+  const file = new File([blob], 'quote.png', { type: 'image/png' });
+
+  // Promo text as caption
+  const promoText = 'Shared from Rise & Shine ✨ Check it out here: https://app.lumemeduck.xyz';
+
+  if (navigator.canShare && navigator.canShare({ files: [file] })) {
+    navigator.share({
+      title: 'Today\'s Quote',
+      text: promoText,
+      files: [file]
+    }).then(() => {
+      console.log('Quote shared successfully!');
+    }).catch(error => {
+      console.error('Failed to share quote:', error);
+    });
+  } else {
+    // Fallback popup
+    const fallback = document.createElement('div');
+    fallback.style.cssText = `
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(255,255,255,0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      animation: fadeInBg 0.3s ease forwards;
+    `;
+
+    fallback.innerHTML = `
+      <div style="
+        background: #eef1ff;
+        color: #002d5d;
+        box-shadow:0 4px 15px rgba(0, 0, 0, 0.4);
+        border:1px solid rgba(0,0,0,.1);
+        border-radius: 18px;
+        padding: 20px;
+        max-width: 300px;
+        text-align: center;
+        font-family: system-ui;
+        animation: fadeInCard 0.3s ease forwards;
+      ">
+        <h3 style="margin-bottom: 10px; font-size: 16px;">
+          Sharing Isn't Supported!
+        </h3>
+        <p style="font-size:14px; opacity:0.8; margin-bottom: 15px;">
+          System doesn’t support direct share.<br>
+          Save the image and share manually.
+        </p>
+        <button class="btn btn-accent" id="closeFallback">OK</button>
+      </div>
+    `;
+    document.body.appendChild(fallback);
+    document.getElementById('closeFallback').addEventListener('click', () => {
+      document.body.removeChild(fallback);
+    });
+  }
+  }
+
+  function roundRect(ctx, x, y, w, h, r){
+  const rr = Math.min(r, w/2, h/2);
+  ctx.beginPath();
+  ctx.moveTo(x+rr, y);
+  ctx.arcTo(x+w, y, x+w, y+h, rr);
+  ctx.arcTo(x+w, y+h, x, y+h, rr);
+  ctx.arcTo(x, y+h, x, y, rr);
+  ctx.arcTo(x, y, x+w, y, rr);
+  ctx.closePath();
+}
+
+  function wrapText(ctx, text, maxWidth){
+  const words = text.split(' ');
+  const lines = [];
+  let line = '';
+  for (let i=0;i<words.length;i++){
+    const test = line ? line + ' ' + words[i] : words[i];
+    const {width} = ctx.measureText(test);
+    if (width > maxWidth && line){
+      lines.push(line);
+      line = words[i];
+    } else {
+      line = test;
+    }
+  }
+  if (line) lines.push(line);
+  return lines;
+}
+
+function drawSun(ctx, x, y, r){
+  // core
+  const g = ctx.createRadialGradient(x, y, 5, x, y, r+28);
+  g.addColorStop(0, "#ffe084");
+  g.addColorStop(.6, "#ffbe55");
+  g.addColorStop(1, "rgba(255,190,85,0)");
+  ctx.fillStyle = g;
+  ctx.beginPath(); ctx.arc(x,y,r,0,Math.PI*2); ctx.fill();
+
+  // rays
+  ctx.save();
+  ctx.translate(x,y);
+  ctx.strokeStyle = "rgba(255, 224, 132, .65)";
+  ctx.lineWidth = 4;
+  for(let i=0;i<12;i++){
+    const a = (Math.PI*2) * (i/12);
+    const r1 = r + 10, r2 = r + 34;
+    ctx.beginPath();
+    ctx.moveTo(Math.cos(a)*r1, Math.sin(a)*r1);
+    ctx.lineTo(Math.cos(a)*r2, Math.sin(a)*r2);
+    ctx.stroke();
+  }
+  ctx.restore();
+}
+
+/* ---------- Init ---------- */
+function init(){
+  // Load today's quote and challenge
+  const q = pickDaily('quote', QUOTES);
+  const c = pickDaily('challenge', CHALLENGES);
+  AppState.quoteIndex = q.idx;
+  AppState.challengeIndex = c.idx;
+
+  // Bind header
+  document.getElementById('btnProgress').addEventListener('click', ()=>Router.go('#streak'));
+  document.getElementById('btnReset').addEventListener('click', resetAll);
+
+  // Bind home actions
+  document.getElementById('btnNewQuote').addEventListener('click', shuffleQuoteForToday);
+  document.getElementById('btnSaveQuote').addEventListener('click', saveQuoteAsImage);
+  document.getElementById('btnNewChallenge').addEventListener('click', shuffleChallengeForToday);
+  document.getElementById('btnComplete').addEventListener('click', markTodayCompleted);
+
+  // Bind calendar nav
+  document.getElementById('prevMonth').addEventListener('click', ()=>{
+    const {y,m} = AppState.viewMonth;
+    const d = new Date(y, m-1, 1);
+    AppState.viewMonth = {y:d.getFullYear(), m:d.getMonth()};
+    renderCalendar();
+  });
+  document.getElementById('nextMonth').addEventListener('click', ()=>{
+    const {y,m} = AppState.viewMonth;
+    const d = new Date(y, m+1, 1);
+    AppState.viewMonth = {y:d.getFullYear(), m:d.getMonth()};
+    renderCalendar();
+  });
+  document.getElementById('todayBtn').addEventListener('click', ()=>{
+    const d = new Date();
+    AppState.viewMonth = {y:d.getFullYear(), m:d.getMonth()};
+    renderCalendar();
+  });
+
+  // Router
+  window.addEventListener('hashchange', Router.sync);
+
+  // First render
+  renderHome();
+  renderCalendar();
+  Router.sync();
+}
+
+function shareQuote() {
+  const text = `"${document.getElementById('quoteText').textContent}" — ${document.getElementById('quoteAuthor').textContent}`;
+
+  if (navigator.share) {
+    navigator.share({ title: 'LMD Quotes', text });
+    return;
+  }
+
+  // Show modal
+  const modal  = document.getElementById('shareModal');
+  const output = document.getElementById('shareText');
+  output.textContent = text;
+  modal.style.display = 'flex';
+}
+
+function copyShare() {
+  const text = document.getElementById('shareText').textContent;
+  navigator.clipboard.writeText(text)
+    .then(() => {
+      // Tiny toast
+const toast = document.createElement('div');
+toast.textContent = '✔ Copied';
+toast.style.cssText =
+  'position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);' +
+  'background:#eef1ff;color:#22c55e;border:1px solid rgba(0,0,0,0.05);font-weight:bold;padding:8px 16px;' +
+  'border-radius:8px;z-index:9999;animation:fade 2.5s forwards;';
+document.body.appendChild(toast);
+
+// Remove after fade
+setTimeout(() => document.body.removeChild(toast), 2500);
+
+// Optional CSS keyframe
+const style = document.createElement('style');
+style.textContent = '@keyframes fade{0%{opacity:1}80%{opacity:1}100%{opacity:0}}';
+document.head.appendChild(style);
+      closeShare();
+    })
+    .catch(() => {
+      // last resort fallback for *very* old WebViews
+      const ta = document.createElement('textarea');
+      ta.value = text; ta.style.position='fixed'; ta.style.opacity=0;
+      document.body.appendChild(ta); ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+      alert('✔ Copied!');
+      closeShare();
+    });
+}
+
+function closeShare() {
+  document.getElementById('shareModal').style.display = 'none';
+}
+document.addEventListener('DOMContentLoaded', init);
+
+// Function to open the sidebar
+function openSidebar() {
+  document.getElementById('sidebar').style.display = 'flex';
+}
+
+// Function to close the sidebar
+function closeSidebar() {
+  document.getElementById('sidebar').style.display = 'none';
+}
+
+// Add event listener to the menu button
+document.getElementById('menuButton').addEventListener('click', openSidebar);
+
+// Function to show a specific section
+function showSection(sectionId) {
+  // Hide all sections
+  document.querySelectorAll('.view').forEach(section => {
+    section.style.display = 'none';
+  });
+
+  // Show the selected section
+  const section = document.getElementById(sectionId);
+  if (section) {
+    section.style.display = 'block';
+  }
+
+  // Remove active class from all menu items
+  document.querySelectorAll('.menu-item').forEach(item => {
+    item.classList.remove('active');
+  });
+
+  // Add active class to the clicked menu item
+  const clickedItem = document.querySelector(`.menu-item[onclick*="${sectionId}"]`);
+  if (clickedItem) {
+    clickedItem.classList.add('active');
+  }
+}
+
+// Home default
+showSection('home');
+
+// Notification
+const bell = document.getElementById("notifyBell");
+const bellIcon = document.getElementById("bellIcon");
+const notifyPrompt = document.getElementById("notifyPrompt");
+const enableBtn = document.getElementById("enableNotifyBtn");
+const cancelBtn = document.getElementById("cancelNotifyBtn");
+
+// Bell color
+function updateBellColor() {
+  if (Notification.permission === "granted") {
+    bellIcon.style.color = "#0e95e9";
+  } else {
+    bellIcon.style.color = "#002d5d";
+  }
+}
+
+// Bell click
+bell.addEventListener("click", () => {
+  notifyPrompt.style.display = "flex";
+});
+
+// If enabled
+enableBtn.addEventListener("click", async () => {
+  notifyPrompt.style.display = "none";
+
+  if (!("Notification" in window)) {
+    showNotifyModal("System doesn't support daily reminders settings!");
+    return;
+  }
+
+  const permission = await Notification.requestPermission();
+  if (permission === "granted") {
+    await scheduleNotificationsInSW();
+    showNotifyModal("Daily reminders notification are enabled!");
+  } else {
+    showNotifyModal("Daily reminders are blocked, allow them in your system settings!");
+  }
+
+  updateBellColor();
+});
+
+// Cancel
+cancelBtn.addEventListener("click", () => {
+  notifyPrompt.style.display = "none";
+});
+
+// Show alerts
+function showLocalNotification(title, body) {
+  if (Notification.permission === "granted") {
+    new Notification(title, {
+      body,
+      icon: "icons/icon-192.png",
+	  badge: "icons/icon-72.png"
+    });
+  }
+}
+
+// Sync in SW
+async function scheduleNotificationsInSW() {
+  if ("serviceWorker" in navigator) {
+    const reg = await navigator.serviceWorker.ready;
+
+    // Background sync
+    if ("periodicSync" in reg) {
+      try {
+        await reg.periodicSync.register("lmd-quotes-reminder", {
+          minInterval: 60 * 60 * 1000
+        });
+        console.log("Periodic background sync registered.");
+      } catch (err) {
+        console.warn("Periodic sync registration failed:", err);
+      }
+    } else {
+      // Fallback
+      if (navigator.serviceWorker.controller) {
+        navigator.serviceWorker.controller.postMessage({
+          type: "SCHEDULE_NOTIFICATIONS"
+        });
+      }
+    }
+  }
+}
+
+// Init bell color
+updateBellColor();
+
+// Auto-reschedule
+if (Notification.permission === "granted") {
+  scheduleNotificationsInSW();
+    }
+
+// Notify modal
+function showNotifyModal(message) {
+  document.getElementById("notifyMessage").innerText = message;
+  document.getElementById("notifyModal").style.display = "flex";
+}
+
+function closeNotifyModal() {
+  document.getElementById("notifyModal").style.display = "none";
+}
+
+// Android prompt
+let deferredPrompt;
+window.addEventListener("beforeinstallprompt", (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+
+  // If not installed
+  if (!localStorage.getItem("pwaInstalled")) {
+    showAndroidInstallPrompt();
+  }
+});
+
+function showAndroidInstallPrompt() {
+  const banner = document.createElement("div");
+  banner.setAttribute("id", "pwaBanner");
+  banner.innerHTML = `
+    <div style="
+      position:fixed;
+      top:20px;
+      left:50%;
+      transform:translateX(-50%);
+      background:#fefefe;
+      border:1px solid rgba(99,102,241,0.10);
+      padding:12px;
+      border-radius:14px;
+      max-width:320px;
+      width:90%;
+      box-shadow:0 2px 4px rgba(99,102,241,0.25);
+      font-size:15px;
+      z-index:9999;
+      text-align:center;
+      animation:fadeInBg 0.5s ease forwards;">
+      📥 <b>LMD Quotes</b> works best when installed!  
+      <br><br>
+      <button id="dismissBtn" style="
+        margin-right:15px;
+        padding:5px 10px;
+        background:#f59e0b;
+        color:#fff;
+        border:none;
+        border-radius:7px;">Later</button>
+      <button id="installBtn" style="
+        margin-left:15px;
+        padding:5px 10px;
+        background:#22c55e;
+        color:#fff;
+        border:none;
+        border-radius:7px;">Install</button>
+    </div>
+  `;
+  document.body.appendChild(banner);
+
+  document.getElementById("installBtn").addEventListener("click", () => {
+    deferredPrompt.prompt();
+    deferredPrompt.userChoice.then(choice => {
+      if (choice.outcome === "accepted") {
+        console.log("User installed PWA");
+        localStorage.setItem("pwaInstalled", "true");
+      } else {
+        console.log("User dismissed install");
+      }
+      deferredPrompt = null;
+      banner.remove();
+    });
+  });
+
+  document.getElementById("dismissBtn").addEventListener("click", () => {
+    console.log("User tapped Later");
+    banner.remove();
+  });
+}
+
+// Detect
+window.addEventListener("appinstalled", () => {
+  console.log("PWA installed event fired");
+  localStorage.setItem("pwaInstalled", "true");
+});
+
+// iOS prompt
+function isIos() {
+  return /iphone|ipad|ipod/.test(window.navigator.userAgent.toLowerCase());
+}
+function isInStandaloneMode() {
+  return ("standalone" in window.navigator) && window.navigator.standalone;
+}
+
+if (isIos() && !isInStandaloneMode()) {
+  const iosPrompt = document.createElement("div");
+  iosPrompt.innerHTML = `
+    <div style="
+      position:fixed;
+      top:20px;
+      left:50%;
+      transform:translateX(-50%);
+      background:#fff;
+      border:1px solid rgba(99,102,241,0.10);
+      padding:12px;
+      border-radius:14px;
+      max-width:320px;
+      width:90%;
+      box-shadow:0 2px 4px rgba(99,102,241,0.25);
+      font-size:15px;
+      z-index:9999;
+      text-align:center;">
+      📥 Install <b>LMD Quotes</b>: Tap <span style="font-size:18px;">⬆️</span> then "Add to Home Screen"
+      <br><br>
+      <button id="closeIosPrompt" style="
+        padding:4px 8px;
+        border:none;
+        border-radius:7px;
+        background:#f59e0b;
+        color:#fff;">✖</button>
+    </div>
+  `;
+  document.body.appendChild(iosPrompt);
+  document.getElementById("closeIosPrompt").addEventListener("click", () => {
+    iosPrompt.remove();
+  });
+  }
+
+	  // Service worker
+    window.addEventListener('load', () => {
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/service-worker.js')
+      .then(reg => console.log('SW registered successfully!', reg.scope))
+      .catch(err => console.error('SW registration failed!', err));
+  }
+});
+
+   // Firebase Cloud Messaging
+const firebaseConfig = {
+  apiKey: "AIzaSyDi1-Qxs-lt8ZNGUm5xW3sAr3QgK38OLI4",
+  authDomain: "lmd-quotes-app.firebaseapp.com",
+  projectId: "lmd-quotes-app",
+  storageBucket: "lmd-quotes-app.firebasestorage.app",
+  messagingSenderId: "37451708871",
+  appId: "1:37451708871:web:b0876517c898bc7d54c1e2"
+};
+
+firebase.initializeApp(firebaseConfig);
+
+const messaging = firebase.messaging();
+navigator.serviceWorker
+  .register("/service-worker.js")
+  .then((registration) => {
+    console.log("SW ready for Firebase Messaging! ✓");
+
+    return Notification.requestPermission().then((permission) => {
+      if (permission === "granted") {
+        return messaging.getToken({
+          vapidKey: "BHDrm0tioscEdrcwKvG50hy2-ZjOkaUtLH3_3obWNpcsGnyG5nf7ccvVrHVz__zoNE4ggnsBqSN1k60GkQunr1w",
+          serviceWorkerRegistration: registration
+        });
+      } else {
+        console.warn("Notification permission denied!");
+        return null;
+      }
+    });
+  })
+  .then((currentToken) => {
+    if (currentToken) {
+      console.log("FCM Token:", currentToken);
+    } else {
+      console.warn("No FCM token received. Request permission again?");
+    }
+  })
+  .catch((err) => {
+    console.error("Service worker registration or permission failed!", err);
+  });
+
+messaging.onMessage((payload) => {
+  console.log("Message received in foreground: ", payload);
+});
+</script>
+</body>
+</html>
