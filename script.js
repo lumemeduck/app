@@ -1238,7 +1238,7 @@ function showAndroidInstallPrompt() {
   `;
   document.body.appendChild(banner);
 
-  document.getElementById("installBtn").addEventListener("DOMContentLoaded","click", () => {
+  document.getElementById("installBtn").addEventListener("click", () => {
     deferredPrompt.prompt();
     deferredPrompt.userChoice.then(choice => {
       if (choice.outcome === "accepted") {
@@ -1252,7 +1252,7 @@ function showAndroidInstallPrompt() {
     });
   });
 
-  document.getElementById("dismissBtn").addEventListener("DOMContentLoaded","click", () => {
+  document.getElementById("dismissBtn").addEventListener("click", () => {
     console.log("User tapped Later");
     banner.remove();
   });
