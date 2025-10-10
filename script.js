@@ -1015,7 +1015,7 @@ toast.textContent = '✔ Copied';
 toast.style.cssText =
   'position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);' +
   'background:#eef1ff;color:#22c55e;border:1px solid rgba(0,0,0,0.05);font-weight:bold;padding:8px 16px;' +
-  'border-radius:8px;z-index:999;animation:fade 2.5s forwards;';
+  'border-radius:8px;z-index:9999;animation:fade 2.5s forwards;';
 document.body.appendChild(toast);
 
 // Remove after fade
@@ -1215,7 +1215,7 @@ function showAndroidInstallPrompt() {
       width:90%;
       box-shadow:0 2px 4px rgba(99,102,241,0.25);
       font-size:15px;
-      z-index:999;
+      z-index:9999;
       text-align:center;
       animation:fadeInBg 0.5s ease forwards;">
       📥 <b>LMD Quotes</b> works best when installed!  
@@ -1288,7 +1288,7 @@ if (isIos() && !isInStandaloneMode()) {
       width:90%;
       box-shadow:0 2px 4px rgba(99,102,241,0.25);
       font-size:15px;
-      z-index:999;
+      z-index:9999;
       text-align:center;">
       📥 Install <b>LMD Quotes</b>: Tap <span style="font-size:18px;">⬆️</span> then "Add to Home Screen"
       <br><br>
