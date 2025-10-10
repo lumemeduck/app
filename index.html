@@ -35,7 +35,7 @@
   <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/webfonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
   <script>(function(s){s.dataset.zone='9967011',s.src='https://groleegni.net/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-V1C5DZTRMJ"></script>
   <script>
@@ -52,397 +52,13 @@
   <script type="text/javascript" async src="https://cdn.resources.wortise.com/sdk/web/web-sdk.js">
     wortise.init('your asset key')
   </script>
-  <style>
-/* Fullscreen overlay */
-  #loader {
-  position: fixed;
-  top: 0;
-  left: 50%;
-  transform:translateX(-50%);
-  z-index: 9999;
-  max-width: 800px;
-  min-height: 100vh;
-  background-attachment: fixed;
-  width: 100%;
-  overflow: visible;
-  background: #f1f4ff url('icons/icon-150.png') no-repeat center center;
-  }
-    
-/* Main body */
-  :root{
-    --bg:#f1f4ff;
-    --card:#ffffff;
-    --muted: rgba(0,45,93,0.8);
-    --text:#002d5d;
-    --accent:#0ea5e9;
-    --accent-2:#6366f1;
-    --warn:#f59e0b;
-    --ok:#22c55e;
-    --ring: rgba(99,102,241,0.08);
-    --shadow: 0 10px 35px rgba(0,0,0,.1);
-    --radius: 18px;
-  }
-
-  *{box-sizing:border-box}
-  html,body{height:100%}
-  body{
-    margin:0;
-    display: flex;
-    justify-content: center;
-    background: var(--bg);
-    color: var(--text);
-    font: 16px/1.45 system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji","Segoe UI Emoji";
-    animation: fadeInBg 0.3s ease forwards;
-  }
-    
-  container {
-  width: 100%;
-  max-width: 800px;
-  min-height: 100vh;
-  background: #f1f4ff;
-  display: block;
-  flex-direction: column;
-  box-shadow: 0px 0px 20px rgba(14,165,233,0.5);
-  position: relative;
-  margin: auto;
-  }
-
-  html, body {
-  min-height: 100vh;
-  background: #f1f4ff;
-  background-attachment: fixed;
- }
-  /* Header */
-  header{
-  position:sticky; top:0; z-index:10;
-  backdrop-filter:saturate(120%) blur(8px);
-  background: #f1f4ff;
-  border-bottom:1px solid rgba(99,102,241,0.10);
-  box-shadow: 0px 0px 4px 2px rgba(99,102,241,0.15);
-  border-bottom-left-radius: 18px;
-  border-bottom-right-radius: 18px;
-  }
-  .nav{
-    max-width:800px;
-    margin:0 auto;
-    display:flex; align-items:center; justify-content:space-between;
-    padding:16px 14px;
-    gap:10px;
-  }
-  .brand{
-    display:flex; align-items:center; gap:8px;
-  }
-  .logo{
-    width:20px; height:20px; border-radius:50%;
-    background: conic-gradient(from 210deg, #ffdd55, #ff8a00, #ffd86b, #fff2a1, #ffdd55);
-    box-shadow: 0 0 0 3px rgba(255, 221, 85, .15), inset 0 3px 12px rgba(0,0,0,.25);
-    position:relative;
-  }
-  .logo::after{
-    content:"";
-    position:absolute; inset:6px;
-    border-radius:50%;
-    background: radial-gradient(circle at 40% 30%, rgba(255,255,255,.8), rgba(255,255,255,0) 60%);
-    mix-blend-mode:screen;
-  }
-  .title{
-    font-weight:600; letter-spacing:.2px; font-size:22px;
-    display:flex; align-items:baseline; gap:8px;
-  }
-  .title small{ color:var(--muted); font-weight:600; font-size:12px; }
-
-  .actions{display:flex; gap:8px; align-items:center;}
-  .btn{
-  appearance:none; border:none; cursor:none;
-  padding:8px 10px; border-radius:10px;
-  background:linear-gradient(180deg, #eef1ff, #f5f7ff);
-  color:var(--text); font-weight:700; letter-spacing:.2px;
-  box-shadow:0 2px 4px rgba(0,0,0,.05);
-  transition:.2s transform ease, .2s border-color ease, .2s background ease, .2s box-shadow ease;
-  border:1px solid rgb(0,0,0,.05);
-}
- .btn:hover{ transform: translateY(-1px); border-color: var(--ring); box-shadow: 0 12px 40px rgba(99,102,241,.14); }
- .btn:active{ transform: translateY(0); }
- .btn-accent{ background: linear-gradient(180deg, #0ea5e9, #0284c7); color:#fff; }
- .btn-warn{ background: linear-gradient(180deg, #f59e0b, #d97706); color:#fff; }
-  main{ max-width:800px; margin:22px auto; padding:0 18px 40px; }
-  .grid{ 
-    display:grid; grid-template-columns: 1fr; gap:20px;
-  }
-  @media (min-width: 900px){
-    .grid{ grid-template-columns: 1fr; gap:20px; }
-  }
-
-  .card{
-  background: linear-gradient(180deg, rgba(255,255,255,0.8), rgba(248,250,252,0.8));
-  border:1px solid rgba(99,102,241,0.10);
-  border-radius: var(--radius);
-  padding:18px; box-shadow: 0px 0px 4px 2px rgba(99,102,241,0.15);
-  animation: fadeInCard 0.3s ease forwards;
-  }
-  .card h2{
-    margin:0 0 12px; font-size:18px; letter-spacing:.3px;
-    display:flex; align-items:center; gap:10px;
-  }
-  .muted{ color:var(--muted); }
-  .pill{
-    display:inline-flex; align-items:center; gap:8px;
-    padding:6px 10px; border-radius:999px;
-    background:rgba(153,167,255,.08); color:rgba(0,45,93,0.8); font-size:11px; font-weight:600;
-    border:1px solid rgba(153,167,255,.10);
-  }
-
-  .quote{
-    font-size:16px; line-height:1.4; font-weight:700; margin:8px 0 14px;
-  }
-  .author{ color:rgba(0,45,93,0.8); font-size:12px; font-weight:400; margin-bottom:22px; }
-
-  .row{ display:flex; gap:10px; flex-wrap:wrap; }
-  .row .btn{ flex: 0 0 auto; }
-
-  .challenge{
-    font-size:16px; line-height:1.4; font-weight:700; margin:8px 0 14px;
-  }
-  .status{
-    display:hidden; align-items:center; gap:8px; margin-top:20px; color:var(--ok); font-size:14px; font-weight:600;
-  }
-
-  /* Tabs (views) */
-  .view{ display:none; }
-  .view.active{ display:block; }
-
-  /* Calendar */
-  .cal-wrap{ overflow:hidden; animation: fadeInCard 0.3s ease forwards; }
-  .cal-head{
-    display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:10px;
-  }
-  .cal-title{ font-weight:800; letter-spacing:.3px; }
-  .cal-nav{ display:flex; gap:8px; }
-  .cal-btn{ padding:8px 10px; border-radius:10px; background:linear-gradient(180deg, #eef1ff, #f5f7ff); color:var(--text); cursor:none; 
-    box-shadow:0 2px 4px rgb(0,0,0,.05);
-    border:1px solid rgba(0,0,0,.05);
-    transition:.2s transform ease, .2s border-color ease, .2s background ease, .2s box-shadow ease;}
-   .cal-btn:hover{ transform: translateY(-1px); border-color: var(--ring); box-shadow: 0 12px 40px rgba(99,102,241,.14); }
-  .calendar{
-    display:grid; grid-template-columns: repeat(7, 1fr); gap:8px; padding:8px; border-radius:14px;
-    background: linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.00));
-    border:1px solid rgba(255,255,255,.07);
-  }
-  .dow, .day{
-    text-align:center; padding:10px 0; border-radius:12px;
-    border:1px dashed rgba(0,45,93,0.4);
-  }
-  .dow{ color:var(--muted); font-weight:800; border:none; padding:6px 0; }
-  .day{ min-height:38px; display:flex; align-items:center; justify-content:center; position:relative; }
-  .day.muted{ opacity:.35; }
-  .day .n{ position:absolute; top:6px; left:8px; font-size:12px; color:var(--muted); }
-  .day.done{
-  background:
-    radial-gradient(220px 60px at 50% -10%, rgba(34,197,94,.20), transparent 60%),
-    linear-gradient(180deg, rgba(34,197,94,.16), rgba(34,197,94,.02));
-  border:1px solid rgba(34,197,94,.45);
-  box-shadow: inset 0 0 30px rgba(34,197,94,.08);
-   }
-  .day.today{ outline: 2px dashed rgba(153,167,255,.55); outline-offset:2px; }
-  .legend{ display:flex; gap:10px; align-items:center; margin-top:12px; color:var(--muted); font-size:12px; }
-  .dot{ width:12px; height:12px; border-radius:3px; background:#eef1ff; border:1px dashed rgba(0,45,93,0.4); }
-  .ok{ width:12px; height:12px; border-radius:3px; background:rgba(102,229,181,.35); border:1px solid rgba(102,229,181,.55); }
-  .mark{ width:12px; height:12px; border-radius:3px; border:1px dashed rgba(153,167,255,.55); }
-
-  /* Footer note */
-  .footnote{ text-align:center; color:var(--muted); font-size:8px; margin-top:20px; position:relative; animation:fadeInCard 0.3s ease forwards; }
-
-  /* Pretty reset-modal */
-   .reset-modal {
-  position: fixed; inset: 0;
-  background: rgba(255,255,255,.4);
-  display: flex; align-items: center; justify-content: center;
-  z-index: 9999;
-  animation: fadeInBg 0.3s ease forwards;
-}
-   .reset-box {
-  background: #eef1ff; border: 1px solid rgba(0,0,0,.1);
-  color: #002d5d; font-family:system-ui; border-radius: 12px;
-  padding: 24px 28px; text-align: center;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
-  max-width: 300px;
-  animation: fadeInCard 0.3s ease forwards;
-}
-   .reset-box button {
-  appearance:none; border:none; cursor:none; margin:16px 12px 0;
-  padding:8px 10px; border-radius:10px;
-  color:var(--card); font-weight:700; letter-spacing:.2px;
-  box-shadow:0 2px 4px rgba(0,0,0,.05);
-  border:1px solid rgba(0,0,0,.05);
-  transition:.2s transform ease, .2s border-color ease, .2s background ease, .2s box-shadow ease;
-   }
-   .btn-ok {
-  appearance:none; border:none; cursor:none;
-  padding:8px 10px; border-radius:10px;
-  background: linear-gradient(180deg, #0ea5e9, #0284c7); color:#fff;
-  color:var(--card); font-weight:700; letter-spacing:.2px;
-  box-shadow:0 2px 4px rgba(0,0,0,.05);
-  border:1px solid rgba(0,0,0,.05);
-  transition:.2s transform ease, .2s border-color ease, .2s background ease, .2s box-shadow ease;
-   }
-   .btn-cancel {
-  appearance:none; border:none; cursor:none;
-  padding:8px 10px; border-radius:10px;
-  background: linear-gradient(180deg, #f59e0b, #d97706); color:#fff;
-  color:var(--card); font-weight:700; letter-spacing:.2px;
-  box-shadow:0 2px 4px rgba(0,0,0,.05);
-  border:1px solid rgba(0,0,0,.05);
-  transition:.2s transform ease, .2s border-color ease, .2s background ease, .2s box-shadow ease;
-   }
-   .btn-ok:hover { transform: translateY(-1px); border-color: var(--ring); box-shadow: 0 12px 40px rgba(99,102,241,.14); }
-   .btn-cancel:hover{ transform: translateY(-1px); border-color: var(--ring); box-shadow: 0 12px 40px rgba(99,102,241,.14); }
-    
-   .sidebar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  margin: auto;
-  width: 100%;
-  max-width: 800px;
-  backdrop-filter:saturate(120%) blur(5px);
-  background-color: rgba(255,255,255,0.01);
-  z-index: 999;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
-  animation: fadeInBg 0.3s ease forwards;
-}
-
-.sidebar-content {
-  background-color: #eef1ff;
-  border: 1px solid rgb(0,0,0,.1);
-  border-radius: 16px;
-  padding: 20px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  animation: fadeInCard 0.3s ease forwards;
-}
-
-.sidebar-content a {
-  display: block;
-  margin: 0 0 18px;
-  line-height: 1.2;
-  text-decoration: none;
-  cursor: none;
-  color: #0e95e9;
-  font-size: 18px;
-  font-weight: 700;
-}
-
-.bottom-menu {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  margin: auto;
-  width: 100%;
-  max-width: 800px;
-  backdrop-filter:saturate(120%) blur(8px);
-  box-shadow: 0px 0px 4px 2px rgba(99,102,241,0.15);
-  border-top:1px solid rgba(99,102,241,0.10);
-  background-color: #f1f4ff;
-  display: flex;
-  justify-content: space-around;
-  padding: 10px 0;
-  border-top-left-radius: 18px;
-  border-top-right-radius: 18px;
-  z-index: 10;
-}
-
-.menu-item {
-  background: none;
-  border: none;
-  color: #002d5d;
-  font-size: 16px;
-  cursor: none;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 5px;
-  width: 25%;
-}
-
-.menu-item i {
-  font-size: 23px;
-}
-
-.menu-item span {
-  font-size: 12px;
-}
-
-.menu-item.active {
-  color: #0e95e9;
-}
-
-.i-frame {
-  width: 100%;
-  height: 470px;
-  border: none;
-  background: linear-gradient(180deg, rgba(255,255,255,.8), rgba(248,250,252,.8));
-  border:1px solid rgba(99,102,241,0.10);
-  border-radius: 18px;
-  box-shadow: 0px 0px 4px 2px rgba(99,102,241,0.15);
-  display: block;
-}
-
-@keyframes fadeInBg {
-        from { opacity: 0; }
-        to { opacity: 1; }
-      }
-@keyframes fadeInCard {
-        from { opacity: 0; transform: scale(0.9); }
-        to { opacity: 1; transform: scale(1); }
-      }
-
-.ad-container {
-    width: 100%;
-	heigh: auto;
-    max-width: 800px;
-    margin: 20px auto;
-    margin-top: 4px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #fefefe;
-	overflow: hidden;
-    border: 1px solid rgba(99,102,241,0.12);
-  }
-
-  .ad-slot {
-    max-width: 100%;
-    display: flex;
-    text-align: center;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-  }
-
-  .ad-slot img {
-    max-width: 100%;
-    display: flex;
-    text-align: center;
-    align-items: center;
-    justify-content: center;
-	overflow: hidden;
-  }
-</style>
 </head>
 <body>
 <!-- Preloader -->
 <body onload="myFunction()">
 <div id="loader"></div>
 	
-<!-- Static fallback text for bots & no-JS browsers -->
+<!-- Text for bots & no-JS browsers -->
 <noscript>
   <div style="padding:1rem;text-align:center;font-size:1rem;max-width:600px;margin:auto;">
     <p><strong>LMD Quotes</strong> delivers daily inspirational quotes and simple exercises challenge to
@@ -452,81 +68,6 @@
 </noscript>
 
 <container>
-  <!-- Pretty share-modal -->
-<div id="shareModal" style="display:none;position:fixed;inset:0;background:rgba(255,255,255,.4);z-index:999;align-items:center;justify-content:center;animation: fadeInBg 0.3s ease forwards;">
-  <div style="background:#eef1ff;border:1px solid rgba(0,0,0,.1);border-radius:18px;padding:22px 28px;box-shadow:0 4px 15px rgba(0, 0, 0, 0.4);max-width:300px;text-align:center;color:#002d5d;font-family:system-ui;animation:fadeInCard 0.3s ease forwards;">
-    <h3 style="margin:0 0 12px;font-size:16px;">Share Quote Texts</h3>
-    <p id="shareText" style="margin:0 0 18px;font-size:15px;line-height:1.4;"></p>
-    <button type="button" class="btn btn-warn" onclick="closeShare()" style="margin-right:23px;">Close</button>
-    <button type="button" class="btn btn-accent" onclick="copyShare()">Copy</button>
-  </div>
-</div>
-    <!-- Notify Permission Modal -->
-<div id="notifyPrompt" style="display:none;position:fixed;inset:0;background:rgba(255,255,255,.4);z-index:999;align-items:center;justify-content:center;animation: fadeInBg 0.3s ease forwards;">
-  <div style="background:#eef1ff;border:1px solid rgba(0,0,0,.1);border-radius:18px;padding:22px 28px;box-shadow:0 4px 15px rgba(0, 0, 0, 0.4);max-width:300px;text-align:center;color:#002d5d;font-family:system-ui;animation:fadeInCard 0.3s ease forwards;">
-    <h3 style="margin:0 0 12px;font-size:16px;">Stay Inspired Daily!</h3>
-    <p style="margin:0 0 18px;font-size:15px;line-height:1.4;">Enable daily reminders alerts so you never miss your daily dose of inspiration</p>
-    <button type="button" class="btn btn-warn" id="cancelNotifyBtn" style="margin-right:23px;">Later</button>
-    <button type="button" class="btn btn-accent" id="enableNotifyBtn">Allow</button>
-  </div>
-</div>
-  <!-- Pop up menu -->
-  <div id="sidebar" class="sidebar" style="display:none;">
-  <div class="sidebar-content">
-    <a href="#" onclick="showSection('about'); closeSidebar();">About</a>
-    <a href="#" onclick="showSection('user-terms'); closeSidebar();">User terms</a>
-    <a href="#" onclick="showSection('privacy-policy'); closeSidebar();">Privacy policy</a>
-    <button type="button" class="btn btn-warn" onclick="closeSidebar()">Close</button>
-  </div>
-  </div>
-  <!-- Notify unsupported Modal -->
-<div id="notifyModal" style="
-  display:none;
-  position:fixed;top:0;left:0;width:100%;height:100%;
-  background:rgba(255,255,255,.4);
-  align-items:center;justify-content:center;
-  z-index:9999;
-  animation: fadeInBg 0.3s ease forwards;
-">
-  <div style="
-    background:#eef1ff;
-    padding:20px;
-    box-shadow:0 4px 15px rgba(0, 0, 0, 0.4);
-    border:1px solid rgba(0,0,0,.1);
-    border-radius:18px;
-    width:80%;
-    max-width:300px;
-    text-align:center;
-    font-family:system-ui;
-    color:#002d5d;
-    animation: fadeInCard 0.3s ease forwards;
-  ">
-    <p id="notifyMessage" style="margin-bottom:20px;font-size:16px;">
-      <!-- Message goes here -->
-    </p>
-    <button type="button" class="btn btn-accent" onclick="closeNotifyModal()">OK</button>
-  </div>
-</div>
-  <!-- Bottom Menu -->
-<div class="bottom-menu">
-  <button type="button" class="menu-item active" onclick="showSection('home')">
-    <i class="fas fa-home"></i>
-    <span>Home</span>
-  </button>
-  <button type="button" class="menu-item" onclick="showSection('streak')">
-    <i class="fa-solid fa-calendar-check"></i>
-    <span>Streak</span>
-  </button>
-  <button type="button" class="menu-item" onclick="showSection('trivia')">
-    <i class="fas fa-question-circle"></i>
-    <span>Trivia</span>
-  </button>
-  <button type="button" class="menu-item" onclick="showSection('game')">
-    <i class="fas fa-gamepad"></i>
-    <span>Game</span>
-  </button>
-</div>
-
   <header>
     <div class="nav">
       <button type="button" id="menuButton" title="Menu" style="background:none;border:none;cursor:none;">
@@ -602,7 +143,7 @@
           <span class="ok"></span> Completed
           <span style="margin-left:8px;" class="mark"></span> marks <strong>today</strong>
         </div>
-    </article>
+      </article>
      <div class="footnote"></div>
       <div class="ad-container" aria-live="polite">
        <div class="ad-slot">
@@ -772,12 +313,92 @@
    </article>
  </section>
 </main>
+
+<!-- Pop up menu -->
+ <div id="sidebar" class="sidebar" style="display:none;">
+  <div class="sidebar-content">
+    <a href="#" onclick="showSection('about'); closeSidebar();">About</a>
+    <a href="#" onclick="showSection('user-terms'); closeSidebar();">User terms</a>
+    <a href="#" onclick="showSection('privacy-policy'); closeSidebar();">Privacy policy</a>
+    <button type="button" class="btn btn-warn" onclick="closeSidebar()">Close</button>
+   </div>
+  </div>
+	
+<!-- Bottom Menu -->
+<div class="bottom-menu">
+  <button type="button" class="menu-item active" onclick="showSection('home')">
+    <i class="fas fa-home"></i>
+    <span>Home</span>
+  </button>
+  <button type="button" class="menu-item" onclick="showSection('streak')">
+    <i class="fa-solid fa-calendar-check"></i>
+    <span>Streak</span>
+  </button>
+  <button type="button" class="menu-item" onclick="showSection('trivia')">
+    <i class="fas fa-question-circle"></i>
+    <span>Trivia</span>
+  </button>
+  <button type="button" class="menu-item" onclick="showSection('game')">
+    <i class="fas fa-gamepad"></i>
+    <span>Game</span>
+  </button>
+</div>
+	
+<!-- Pretty share-modal -->
+<div id="shareModal" style="display:none;position:fixed;inset:0;background:rgba(255,255,255,.4);z-index:999;align-items:center;justify-content:center;animation: fadeInBg 0.3s ease forwards;">
+  <div style="background:#eef1ff;border:1px solid rgba(0,0,0,.1);border-radius:18px;padding:22px 28px;box-shadow:0 4px 15px rgba(0, 0, 0, 0.4);max-width:300px;text-align:center;color:#002d5d;font-family:system-ui;animation:fadeInCard 0.3s ease forwards;">
+    <h3 style="margin:0 0 12px;font-size:16px;">Share Quote Texts</h3>
+    <p id="shareText" style="margin:0 0 18px;font-size:15px;line-height:1.4;"></p>
+    <button type="button" class="btn btn-warn" onclick="closeShare()" style="margin-right:23px;">Close</button>
+    <button type="button" class="btn btn-accent" onclick="copyShare()">Copy</button>
+  </div>
+</div>
+	
+<!-- Notify Permission Modal -->
+<div id="notifyPrompt" style="display:none;position:fixed;inset:0;background:rgba(255,255,255,.4);z-index:999;align-items:center;justify-content:center;animation: fadeInBg 0.3s ease forwards;">
+  <div style="background:#eef1ff;border:1px solid rgba(0,0,0,.1);border-radius:18px;padding:22px 28px;box-shadow:0 4px 15px rgba(0, 0, 0, 0.4);max-width:300px;text-align:center;color:#002d5d;font-family:system-ui;animation:fadeInCard 0.3s ease forwards;">
+    <h3 style="margin:0 0 12px;font-size:16px;">Stay Inspired Daily!</h3>
+    <p style="margin:0 0 18px;font-size:15px;line-height:1.4;">Enable daily reminders alerts so you never miss your daily dose of inspiration</p>
+    <button type="button" class="btn btn-warn" id="cancelNotifyBtn" style="margin-right:23px;">Later</button>
+    <button type="button" class="btn btn-accent" id="enableNotifyBtn">Allow</button>
+  </div>
+</div>
+  
+<!-- Notify unsupported Modal -->
+<div id="notifyModal" style="
+  display:none;
+  position:fixed;top:0;left:0;width:100%;height:100%;
+  background:rgba(255,255,255,.4);
+  align-items:center;justify-content:center;
+  z-index:9999;
+  animation: fadeInBg 0.3s ease forwards;
+">
+  <div style="
+    background:#eef1ff;
+    padding:20px;
+    box-shadow:0 4px 15px rgba(0, 0, 0, 0.4);
+    border:1px solid rgba(0,0,0,.1);
+    border-radius:18px;
+    width:80%;
+    max-width:300px;
+    text-align:center;
+    font-family:system-ui;
+    color:#002d5d;
+    animation: fadeInCard 0.3s ease forwards;
+  ">
+    <p id="notifyMessage" style="margin-bottom:20px;font-size:16px;"></p>
+    <button type="button" class="btn btn-accent" onclick="closeNotifyModal()">OK</button>
+  </div>
+</div>
               
-  <!-- Hidden canvas for image export -->
-  <canvas id="exportCanvas" width="1080" height="1080" style="display:none;"></canvas>
+<!-- Hidden canvas for image export -->
+<canvas id="exportCanvas" width="1080" height="1080" style="display:none;"></canvas>
+<script src="script.js"></script>
 </container>
+</body>
+</html>
               
-  <script>
+  
 /* ------ Preloader ------ */
 var myVar;
   function myFunction() {  
