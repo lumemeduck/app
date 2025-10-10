@@ -1136,7 +1136,7 @@ function showLocalNotification(title, body) {
   if (Notification.permission === "granted") {
     new Notification(title, {
       body,
-      icon: "icons/icon-192.png",
+      icon: "icons/icon-192.png"
 	  badge: "icons/icon-72.png"
     });
   }
@@ -1215,7 +1215,7 @@ function showAndroidInstallPrompt() {
       width:90%;
       box-shadow:0 2px 4px rgba(99,102,241,0.25);
       font-size:15px;
-      z-index:9999;
+      z-index:999;
       text-align:center;
       animation:fadeInBg 0.5s ease forwards;">
       📥 <b>LMD Quotes</b> works best when installed!  
@@ -1238,7 +1238,7 @@ function showAndroidInstallPrompt() {
   `;
   document.body.appendChild(banner);
 
-  document.getElementById("installBtn").addEventListener("click", () => {
+  document.getElementById("installBtn").addEventListener("DOMContentLoaded","click", () => {
     deferredPrompt.prompt();
     deferredPrompt.userChoice.then(choice => {
       if (choice.outcome === "accepted") {
@@ -1252,7 +1252,7 @@ function showAndroidInstallPrompt() {
     });
   });
 
-  document.getElementById("dismissBtn").addEventListener("click", () => {
+  document.getElementById("dismissBtn").addEventListener("DOMContentLoaded","click", () => {
     console.log("User tapped Later");
     banner.remove();
   });
@@ -1288,7 +1288,7 @@ if (isIos() && !isInStandaloneMode()) {
       width:90%;
       box-shadow:0 2px 4px rgba(99,102,241,0.25);
       font-size:15px;
-      z-index:9999;
+      z-index:999;
       text-align:center;">
       📥 Install <b>LMD Quotes</b>: Tap <span style="font-size:18px;">⬆️</span> then "Add to Home Screen"
       <br><br>
