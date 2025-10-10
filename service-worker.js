@@ -1,4 +1,4 @@
-const CACHE_NAME = "lmd-quotes-cache-v7";
+const CACHE_NAME = "lmd-quotes-cache-v8";
 const urlsToCache = [
   "./",
   "./index.html",
@@ -8,10 +8,10 @@ const urlsToCache = [
   "./sounds/ehuh.mp3",
   "./sounds/buzz.mp3",
   "./sounds/quack.mp3",
-  "./icons/icon-72.png",
-  "./icons/icon-150.png",
+  "./icons/icon-512.png",
   "./icons/icon-192.png",
-  "./icons/icon-512.png"
+  "./icons/icon-72.png",
+  "./icons/icon-150.png"
 ];
 
 // Install worker
