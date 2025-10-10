@@ -1015,7 +1015,7 @@ toast.textContent = '✔ Copied';
 toast.style.cssText =
   'position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);' +
   'background:#eef1ff;color:#22c55e;border:1px solid rgba(0,0,0,0.05);font-weight:bold;padding:8px 16px;' +
-  'border-radius:8px;z-index:9999;animation:fade 2.5s forwards;';
+  'border-radius:8px;z-index:999;animation:fade 2.5s forwards;';
 document.body.appendChild(toast);
 
 // Remove after fade
@@ -1136,7 +1136,7 @@ function showLocalNotification(title, body) {
   if (Notification.permission === "granted") {
     new Notification(title, {
       body,
-      icon: "icons/icon-192.png"
+      icon: "icons/icon-192.png",
 	  badge: "icons/icon-72.png"
     });
   }
