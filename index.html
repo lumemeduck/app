@@ -1862,12 +1862,11 @@ function showSection(sectionId) {
 // Home default
 showSection('home');
 
-// Notification
-const bell = document.getElementById("notifyBell");
-const bellIcon = document.getElementById("bellIcon");
+// Notifications + PWA Prompts
 const notifyPrompt = document.getElementById("notifyPrompt");
 const enableBtn = document.getElementById("enableNotifyBtn");
 const cancelBtn = document.getElementById("cancelNotifyBtn");
+const bellIcon = document.getElementById("bellIcon");
 
 // Bell color
 function updateBellColor() {
@@ -1878,53 +1877,21 @@ function updateBellColor() {
   }
 }
 
-// Bell click
-bell.addEventListener("click", () => {
-  notifyPrompt.style.display = "flex";
-});
-
-// If enabled
-enableBtn.addEventListener("click", async () => {
-  notifyPrompt.style.display = "none";
-
-  if (!("Notification" in window)) {
-    showNotifyModal("System doesn't support daily reminders settings!");
-    return;
-  }
-
-  const permission = await Notification.requestPermission();
-  if (permission === "granted") {
-    await scheduleNotificationsInSW();
-    showNotifyModal("Daily reminders notification are enabled!");
-  } else {
-    showNotifyModal("Daily reminders are blocked, allow them in your system settings!");
-  }
-
-  updateBellColor();
-});
-
-// Cancel
-cancelBtn.addEventListener("click", () => {
-  notifyPrompt.style.display = "none";
-});
-
 // Show alerts
 function showLocalNotification(title, body) {
   if (Notification.permission === "granted") {
     new Notification(title, {
       body,
       icon: "icons/icon-192.png",
-	  badge: "icons/icon-72.png"
+      badge: "icons/icon-72.png"
     });
   }
 }
 
-// Sync in SW
+// Schedule reminders in SW
 async function scheduleNotificationsInSW() {
   if ("serviceWorker" in navigator) {
     const reg = await navigator.serviceWorker.ready;
-
-    // Background sync
     if ("periodicSync" in reg) {
       try {
         await reg.periodicSync.register("lmd-quotes-reminder", {
@@ -1934,50 +1901,124 @@ async function scheduleNotificationsInSW() {
       } catch (err) {
         console.warn("Periodic sync registration failed:", err);
       }
-    } else {
-      // Fallback
-      if (navigator.serviceWorker.controller) {
-        navigator.serviceWorker.controller.postMessage({
-          type: "SCHEDULE_NOTIFICATIONS"
-        });
-      }
+    } else if (navigator.serviceWorker.controller) {
+      navigator.serviceWorker.controller.postMessage({
+        type: "SCHEDULE_NOTIFICATIONS"
+      });
     }
   }
 }
-
-// Init bell color
-updateBellColor();
-
-// Auto-reschedule
-if (Notification.permission === "granted") {
-  scheduleNotificationsInSW();
-    }
 
 // Notify modal
 function showNotifyModal(message) {
   document.getElementById("notifyMessage").innerText = message;
   document.getElementById("notifyModal").style.display = "flex";
 }
-
 function closeNotifyModal() {
   document.getElementById("notifyModal").style.display = "none";
 }
 
-// Android prompt
+// Notification flow
+const COOLDOWN = 24 * 60 * 60 * 1000;
+
+function shouldShowNotifyPrompt() {
+  const last = localStorage.getItem("notifyLaterTime");
+  return (
+    Notification.permission !== "granted" &&
+    (!last || Date.now() - parseInt(last, 10) > COOLDOWN)
+  );
+}
+
+async function handleNotifyAllow() {
+  notifyPrompt.style.display = "none";
+
+  if (!("Notification" in window)) {
+    showNotifyModal("System doesn't support daily reminders settings!");
+    return;
+  }
+
+  const permission = await Notification.requestPermission();
+  if (permission === "granted") {
+    // Local push
+    await scheduleNotificationsInSW();
+
+    // FCM push
+    try {
+      const registration = await navigator.serviceWorker.register("/service-worker.js");
+      console.log("✓ SW ready for firebase messaging!");
+
+      const app = firebase.initializeApp({
+        apiKey: "AIzaSyDi1-Qxs-lt8ZNGUm5xW3sAr3QgK38OLI4",
+        authDomain: "lmd-quotes-app.firebaseapp.com",
+        projectId: "lmd-quotes-app",
+        storageBucket: "lmd-quotes-app.firebasestorage.app",
+        messagingSenderId: "37451708871",
+        appId: "1:37451708871:web:b0876517c898bc7d54c1e2"
+      });
+
+      const messaging = firebase.messaging(app);
+      const token = await messaging.getToken({
+        vapidKey:
+          "BHDrm0tioscEdrcwKvG50hy2-ZjOkaUtLH3_3obWNpcsGnyG5nf7ccvVrHVz__zoNE4ggnsBqSN1k60GkQunr1w",
+        serviceWorkerRegistration: registration
+      });
+
+      if (token) {
+        console.log("✓ FCM Token:", token);
+        // send to fcf
+      }
+
+      messaging.onMessage((payload) => {
+        console.log("Message received in foreground:", payload);
+      });
+    } catch (err) {
+      console.error("Firebase messaging setup failed:", err);
+    }
+
+    showNotifyModal("Daily reminders and push notifications are enabled!");
+  } else {
+    showNotifyModal("Notifications are blocked, allow them in sytem settings.");
+  }
+
+  updateBellColor();
+}
+
+function handleNotifyLater() {
+  notifyPrompt.style.display = "none";
+  localStorage.setItem("notifyLaterTime", Date.now().toString());
+}
+
+// Attach
+enableBtn.onclick = handleNotifyAllow;
+cancelBtn.onclick = handleNotifyLater;
+
+// Auto prompt
+window.addEventListener("load", () => {
+  updateBellColor();
+  if (shouldShowNotifyPrompt()) {
+    notifyPrompt.style.display = "flex";
+  } else if (Notification.permission === "granted") {
+    scheduleNotificationsInSW();
+  }
+});
+
+// Android Install Prompt
 let deferredPrompt;
 window.addEventListener("beforeinstallprompt", (e) => {
   e.preventDefault();
   deferredPrompt = e;
 
-  // If not installed
-  if (!localStorage.getItem("pwaInstalled")) {
-    showAndroidInstallPrompt();
-  }
+  const last = localStorage.getItem("pwaLaterTime");
+  const showNow =
+    !localStorage.getItem("pwaInstalled") &&
+    (!last || Date.now() - parseInt(last, 10) > COOLDOWN);
+
+  if (showNow) showAndroidInstallPrompt();
 });
 
 function showAndroidInstallPrompt() {
   const banner = document.createElement("div");
-  banner.setAttribute("id", "pwaBanner");
+  banner.id = "pwaBanner";
   banner.innerHTML = `
     <div style="
       position:fixed;
@@ -2017,7 +2058,7 @@ function showAndroidInstallPrompt() {
 
   document.getElementById("installBtn").addEventListener("click", () => {
     deferredPrompt.prompt();
-    deferredPrompt.userChoice.then(choice => {
+    deferredPrompt.userChoice.then((choice) => {
       if (choice.outcome === "accepted") {
         console.log("User installed PWA");
         localStorage.setItem("pwaInstalled", "true");
@@ -2031,22 +2072,23 @@ function showAndroidInstallPrompt() {
 
   document.getElementById("dismissBtn").addEventListener("click", () => {
     console.log("User tapped Later");
+    localStorage.setItem("pwaLaterTime", Date.now().toString());
     banner.remove();
   });
-}
+});
 
-// Detect
+// Detect installation
 window.addEventListener("appinstalled", () => {
   console.log("PWA installed event fired");
   localStorage.setItem("pwaInstalled", "true");
 });
 
-// iOS prompt
+// iOS Prompt
 function isIos() {
   return /iphone|ipad|ipod/.test(window.navigator.userAgent.toLowerCase());
 }
 function isInStandaloneMode() {
-  return ("standalone" in window.navigator) && window.navigator.standalone;
+  return "standalone" in window.navigator && window.navigator.standalone;
 }
 
 if (isIos() && !isInStandaloneMode()) {
@@ -2078,63 +2120,19 @@ if (isIos() && !isInStandaloneMode()) {
     </div>
   `;
   document.body.appendChild(iosPrompt);
-  document.getElementById("closeIosPrompt").addEventListener("click", () => {
-    iosPrompt.remove();
-  });
+  document
+    .getElementById("closeIosPrompt")
+    .addEventListener("click", () => iosPrompt.remove());
+}
+
+// Service Worker
+window.addEventListener("load", () => {
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker
+      .register("/service-worker.js")
+      .then((reg) => console.log("SW registered successfully!", reg.scope))
+      .catch((err) => console.error("SW registration failed!", err));
   }
-
-	  // Service worker
-    window.addEventListener('load', () => {
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('/service-worker.js')
-      .then(reg => console.log('SW registered successfully!', reg.scope))
-      .catch(err => console.error('SW registration failed!', err));
-  }
-});
-
-   // Firebase Cloud Messaging
-const firebaseConfig = {
-  apiKey: "AIzaSyDi1-Qxs-lt8ZNGUm5xW3sAr3QgK38OLI4",
-  authDomain: "lmd-quotes-app.firebaseapp.com",
-  projectId: "lmd-quotes-app",
-  storageBucket: "lmd-quotes-app.firebasestorage.app",
-  messagingSenderId: "37451708871",
-  appId: "1:37451708871:web:b0876517c898bc7d54c1e2"
-};
-
-firebase.initializeApp(firebaseConfig);
-
-const messaging = firebase.messaging();
-navigator.serviceWorker
-  .register("/service-worker.js")
-  .then((registration) => {
-    console.log("SW ready for Firebase Messaging! ✓");
-
-    return Notification.requestPermission().then((permission) => {
-      if (permission === "granted") {
-        return messaging.getToken({
-          vapidKey: "BHDrm0tioscEdrcwKvG50hy2-ZjOkaUtLH3_3obWNpcsGnyG5nf7ccvVrHVz__zoNE4ggnsBqSN1k60GkQunr1w",
-          serviceWorkerRegistration: registration
-        });
-      } else {
-        console.warn("Notification permission denied!");
-        return null;
-      }
-    });
-  })
-  .then((currentToken) => {
-    if (currentToken) {
-      console.log("FCM Token:", currentToken);
-    } else {
-      console.warn("No FCM token received. Request permission again?");
-    }
-  })
-  .catch((err) => {
-    console.error("Service worker registration or permission failed!", err);
-  });
-
-messaging.onMessage((payload) => {
-  console.log("Message received in foreground: ", payload);
 });
 </script>
 </body>
