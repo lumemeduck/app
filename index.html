@@ -434,7 +434,6 @@
   }
 </style>
 </head>
-<body>
 <!-- Preloader -->
 <body onload="myFunction()">
 <div id="loader"></div>
@@ -2076,6 +2075,7 @@ function showAndroidInstallPrompt() {
     localStorage.setItem("pwaLaterTime", Date.now().toString());
     banner.remove();
   });
+});
 
 // Detect installation
 window.addEventListener("appinstalled", () => {
@@ -2134,6 +2134,7 @@ window.addEventListener("load", () => {
       .catch((err) => console.error("SW registration failed!", err));
   }
 });
+
 </script>
 </body>
 </html>
