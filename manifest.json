@@ -2,15 +2,15 @@
   "name": "LMD Quotes",
   "short_name": "LMD Quotes",
   "description": "Daily inspiration and exercise challenges.",
-  "start_url": "/",
+  "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#f1f4ff",
   "theme_color": "#f1f4ff",
   "orientation": "portrait",
   "icons": [
     {
-      "src": "icons/icon-512.png",
-      "sizes": "512x512",
+      "src": "icons/icon-72.png",
+      "sizes": "72x72",
       "type": "image/png"
     },
     {
@@ -19,8 +19,8 @@
       "type": "image/png"
     },
     {
-      "src": "icons/icon-72.png",
-      "sizes": "100x100",
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
       "type": "image/png"
     }
   ],
