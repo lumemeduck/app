@@ -774,7 +774,15 @@
   <canvas id="exportCanvas" width="1080" height="1080" style="display:none;"></canvas>
 </container>
               
-<script>
+ <script>
+/* ------ Preloader ------ */
+var myVar;
+function myFunction() {  
+  myVar = setTimeout(showPage, 0);
+}
+function showPage() { 
+  document.getElementById("loader").style.display = "none"; 
+}
 /* ---------- Utilities & Storage ---------- */
 const STORAGE = {
   dailyKey: (prefix, date=new Date()) => {
@@ -1851,15 +1859,6 @@ function showSection(sectionId) {
 
 // Home default
 showSection('home');
-
-// Preloader
-var myVar;
-function myFunction() {  
-  myVar = setTimeout(showPage, 0);
-}
-function showPage() { 
-  document.getElementById("loader").style.display = "none"; 
-}
 
 // Notifications + PWA Prompts
 const notifyPrompt = document.getElementById("notifyPrompt");
