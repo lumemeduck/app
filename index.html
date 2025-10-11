@@ -1862,6 +1862,15 @@ function showSection(sectionId) {
 // Home default
 showSection('home');
 
+// Preloader
+var myVar;
+function myFunction() {  
+  myVar = setTimeout(showPage, 0);
+}
+function showPage() { 
+  document.getElementById("loader").style.display = "none"; 
+}
+
 // Notifications + PWA Prompts
 const notifyPrompt = document.getElementById("notifyPrompt");
 const enableBtn = document.getElementById("enableNotifyBtn");
