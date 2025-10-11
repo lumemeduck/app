@@ -541,6 +541,9 @@ function adjustDuckAdaptation(result) {
         }
 
         // Sound tracking
+        let gameCount = 0;
+        const adFrequency = 3;
+        
         function endGame(message) {
     gameActive = false;
     let cells = document.querySelectorAll('.cell');
@@ -569,6 +572,10 @@ function adjustDuckAdaptation(result) {
             ? 'result-title win' 
             : 'result-title draw';
         document.getElementById('resultModal').style.display = 'flex';
+        gameCount++;
+        if (gameCount % adFrequency === 0) {
+            showMonetagAd();
+        }
     }, 800);
         }
 
@@ -694,6 +701,23 @@ function adjustDuckAdaptation(result) {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
     }, 2500);
     }
+</script>
+
+<!-- Monetag Interstitial Ad -->
+<script src="https://alwingulla.com/88/tag.min.js" data-zone="9967011" async data-cfasync="false"></script>
+<script>
+function showMonetagAd() {
+  try {
+    if (typeof _Monetag !== "undefined" && _Monetag.interstitial) {
+      _Monetag.interstitial.show();
+      console.log("Monetag interstitial triggered after 3 games");
+    } else {
+      console.log("Monetag not ready yet, skipping this round");
+    }
+  } catch (e) {
+    console.warn("Monetag ad error:", e);
+  }
+}
 </script>
 </body>
 </html>
