@@ -111,23 +111,29 @@
  }
   /* Header */
   header{
-  position:sticky; top:0; z-index:10;
+  position:sticky;
+  top:0;
+  z-index:10;
   backdrop-filter:saturate(120%) blur(8px);
   background: #f1f4ff;
-  border-bottom:1px solid rgba(99,102,241,0.15);
-  box-shadow: inset 0px 4px 2px rgba(99,102,241,0.10);
+  border-bottom:1px solid rgba(99,102,241,0.10);
+  box-shadow: 0px 0px 4px 2px rgba(99,102,241,0.15);
   border-bottom-left-radius: 18px;
   border-bottom-right-radius: 18px;
   }
   .nav{
     max-width:800px;
     margin:0 auto;
-    display:flex; align-items:center; justify-content:space-between;
+    display:flex;
+	align-items:center;
+	justify-content:space-between;
     padding:14px 14px;
     gap:10px;
   }
   .brand{
-    display:flex; align-items:center; gap:8px;
+    display:flex;
+	align-items:center;
+	gap:8px;
   }
   .logo{
     width:20px; height:20px; border-radius:50%;
@@ -346,7 +352,7 @@
   width: 100%;
   max-width: 800px;
   backdrop-filter:saturate(120%) blur(8px);
-  box-shadow: inset 0px 0px 4px 2px rgba(99,102,241,0.15);
+  box-shadow: 0px 0px 4px 2px rgba(99,102,241,0.15);
   border-top:1px solid rgba(99,102,241,0.10);
   background-color: #f1f4ff;
   display: flex;
@@ -390,7 +396,7 @@
   background: linear-gradient(180deg, rgba(255,255,255,.8), rgba(248,250,252,.8));
   border:1px solid rgba(99,102,241,0.15);
   border-radius: 18px;
-  box-shadow: inset 0px 0px 4px 2px rgba(99,102,241,0.25);
+  box-shadow: inset 0px 0px 4px 2px rgba(99,102,241,0.10);
   display: block;
 }
 
@@ -412,9 +418,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #fefefe;
+    background: #f1f4ff;
 	overflow: hidden;
-    border: 1px solid rgba(99,102,241,0.12);
+    border: none
   }
 
   .ad-slot {
@@ -527,7 +533,7 @@
 
   <header>
     <div class="nav">
-      <button type="button" class="btn" id="menuButton" title="Menu" style="background:none;border:none;cursor:none;">
+      <button type="button" id="menuButton" title="Menu" style="background:none;border:none;cursor:none;">
         <i class="fas fa-bars" style="font-size:24px;color:#002d5d;"></i>
       </button>
       <div class="brand" role="button" onclick="Router.go('#home')" title="Go Home">
@@ -537,7 +543,7 @@
       <div class="actions">
         <div type="" class="" id="btnProgress" tittle="View Streak Progress"></div>
         <div type="" id="notifyBell" style="background:none;border:none;cursor:none;"><i id="bellIcon"></i></div>
-		<button type="button" class="btn" id="btnReset" title="Reset all data" style="background:none;border:none;cursor:none;">
+		<button type="button" id="btnReset" title="Reset all data" style="background:none;border:none;cursor:none;">
         <i class="fa fa-refresh" style="font-size:24px;color:#f59e0b;"></i></button>
       </div>
     </div>
