@@ -57,7 +57,7 @@
   top: 0;
   left: 50%;
   transform:translateX(-50%);
-  z-index: 9999;
+  z-index: 10000;
   max-width: 800px;
   min-height: 100vh;
   background-attachment: fixed;
@@ -115,16 +115,16 @@
   position:sticky; top:0; z-index:10;
   backdrop-filter:saturate(120%) blur(8px);
   background: #f1f4ff;
-  border-bottom:1px solid rgba(99,102,241,0.10);
-  box-shadow: 0px 0px 4px 2px rgba(99,102,241,0.15);
-  border-bottom-left-radius: 18px;
-  border-bottom-right-radius: 18px;
+  border-bottom:1px solid rgba(99,102,241,0.0);
+  box-shadow: 0px 0px 4px 2px rgba(99,102,241,0.0);
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
   }
   .nav{
     max-width:800px;
     margin:0 auto;
     display:flex; align-items:center; justify-content:space-between;
-    padding:16px 14px;
+    padding:14px 14px;
     gap:10px;
   }
   .brand{
@@ -435,7 +435,6 @@
   }
 </style>
 </head>
-<body>
 <!-- Preloader -->
 <body onload="myFunction()">
 <div id="loader"></div>
@@ -452,7 +451,7 @@
 <container>
   <!-- Pretty share-modal -->
 <div id="shareModal" style="display:none;position:fixed;inset:0;background:rgba(255,255,255,.4);z-index:999;align-items:center;justify-content:center;animation: fadeInBg 0.3s ease forwards;">
-  <div style="background:#eef1ff;border:1px solid rgba(0,0,0,.1);border-radius:18px;padding:22px 28px;box-shadow:0 4px 15px rgba(0, 0, 0, 0.4);max-width:300px;text-align:center;color:#002d5d;font-family:system-ui;animation:fadeInCard 0.3s ease forwards;">
+  <div style="background:#eef1ff;border:1px solid rgba(0,0,0,.1);border-radius:18px;padding:18px 24px;box-shadow:0 4px 15px rgba(0, 0, 0, 0.4);max-width:280px;text-align:center;color:#002d5d;font-family:system-ui;animation:fadeInCard 0.3s ease forwards;">
     <h3 style="margin:0 0 12px;font-size:16px;">Share Quote Texts</h3>
     <p id="shareText" style="margin:0 0 18px;font-size:15px;line-height:1.4;"></p>
     <button type="button" class="btn btn-warn" onclick="closeShare()" style="margin-right:23px;">Close</button>
@@ -460,8 +459,8 @@
   </div>
 </div>
     <!-- Notify Permission Modal -->
-<div id="notifyPrompt" style="display:none;position:fixed;inset:0;background:rgba(255,255,255,.4);z-index:999;align-items:center;justify-content:center;animation: fadeInBg 0.3s ease forwards;">
-  <div style="background:#eef1ff;border:1px solid rgba(0,0,0,.1);border-radius:18px;padding:22px 28px;box-shadow:0 4px 15px rgba(0, 0, 0, 0.4);max-width:300px;text-align:center;color:#002d5d;font-family:system-ui;animation:fadeInCard 0.3s ease forwards;">
+<div id="notifyPrompt" style="display:none;position:fixed;inset:0;background:rgba(255,255,255,.4);z-index:999;align-items:center;justify-content:center;animation: fadeInBg 1.0s ease forwards;">
+  <div style="background:#eef1ff;border:1px solid rgba(0,0,0,.1);border-radius:18px;padding:18px 24px;box-shadow:0 4px 15px rgba(0, 0, 0, 0.4);max-width:280px;text-align:center;color:#002d5d;font-family:system-ui;animation:fadeInCard 1.0s ease forwards;">
     <h3 style="margin:0 0 12px;font-size:16px;">Stay Inspired Daily!</h3>
     <p style="margin:0 0 18px;font-size:15px;line-height:1.4;">Enable daily reminders alerts so you never miss your daily dose of inspiration</p>
     <button type="button" class="btn btn-warn" id="cancelNotifyBtn" style="margin-right:23px;">Later</button>
@@ -488,12 +487,12 @@
 ">
   <div style="
     background:#eef1ff;
-    padding:20px;
+    padding:18px;
     box-shadow:0 4px 15px rgba(0, 0, 0, 0.4);
     border:1px solid rgba(0,0,0,.1);
     border-radius:18px;
     width:80%;
-    max-width:300px;
+    max-width:280px;
     text-align:center;
     font-family:system-ui;
     color:#002d5d;
@@ -527,7 +526,7 @@
 
   <header>
     <div class="nav">
-      <button type="button" id="menuButton" title="Menu" style="background:none;border:none;cursor:none;">
+      <button type="button" class="btn" id="menuButton" title="Menu" style="background:none;border:none;cursor:none;">
         <i class="fas fa-bars" style="font-size:24px;color:#002d5d;"></i>
       </button>
       <div class="brand" role="button" onclick="Router.go('#home')" title="Go Home">
@@ -536,11 +535,9 @@
       </div>
       <div class="actions">
         <div type="" class="" id="btnProgress" tittle="View Streak Progress"></div>
-        <button type="button" id="btnReset" title="Reset all data" style="background:none;border:none;cursor:none;">
+        <div type="" id="notifyBell" style="background:none;border:none;cursor:none;"><i id="bellIcon"></i></div>
+		<button type="button" class="btn" id="btnReset" title="Reset all data" style="background:none;border:none;cursor:none;">
         <i class="fa fa-refresh" style="font-size:24px;color:#f59e0b;"></i></button>
-        <button type="button" id="notifyBell" style="background:none;border:none;cursor:none;">
-        <i id="bellIcon" class="fa-regular fa-bell" style="font-size:24px;color:#002d5d;"></i>
-        </button>
       </div>
     </div>
   </header>
@@ -775,17 +772,18 @@
   <canvas id="exportCanvas" width="1080" height="1080" style="display:none;"></canvas>
 </container>
               
-  <script>
+ <script>
 /* ------ Preloader ------ */
 var myVar;
-  function myFunction() {  
-    myVar = setTimeout(showPage, 0);
-  }
-  function showPage() { 
-    document.getElementById("loader").style.display = "none"; 
-    document.getElementById("loader").style.display = "none";
-  }
-	
+function myFunction() {  
+  myVar = setTimeout(showPage, 0);
+}
+function showPage() { 
+  document.getElementById("loader").style.display = "none"; 
+}
+ </script>
+ 
+ <script>
 /* ---------- Utilities & Storage ---------- */
 const STORAGE = {
   dailyKey: (prefix, date=new Date()) => {
@@ -1863,12 +1861,11 @@ function showSection(sectionId) {
 // Home default
 showSection('home');
 
-// Notification
-const bell = document.getElementById("notifyBell");
-const bellIcon = document.getElementById("bellIcon");
+// Notifications + PWA Prompts
 const notifyPrompt = document.getElementById("notifyPrompt");
 const enableBtn = document.getElementById("enableNotifyBtn");
 const cancelBtn = document.getElementById("cancelNotifyBtn");
+const bellIcon = document.getElementById("bellIcon");
 
 // Bell color
 function updateBellColor() {
@@ -1879,53 +1876,21 @@ function updateBellColor() {
   }
 }
 
-// Bell click
-bell.addEventListener("click", () => {
-  notifyPrompt.style.display = "flex";
-});
-
-// If enabled
-enableBtn.addEventListener("click", async () => {
-  notifyPrompt.style.display = "none";
-
-  if (!("Notification" in window)) {
-    showNotifyModal("System doesn't support daily reminders settings!");
-    return;
-  }
-
-  const permission = await Notification.requestPermission();
-  if (permission === "granted") {
-    await scheduleNotificationsInSW();
-    showNotifyModal("Daily reminders notification are enabled!");
-  } else {
-    showNotifyModal("Daily reminders are blocked, allow them in your system settings!");
-  }
-
-  updateBellColor();
-});
-
-// Cancel
-cancelBtn.addEventListener("click", () => {
-  notifyPrompt.style.display = "none";
-});
-
 // Show alerts
 function showLocalNotification(title, body) {
   if (Notification.permission === "granted") {
     new Notification(title, {
       body,
       icon: "icons/icon-192.png",
-	  badge: "icons/icon-72.png"
+      badge: "icons/icon-72.png"
     });
   }
 }
 
-// Sync in SW
+// Schedule reminders in SW
 async function scheduleNotificationsInSW() {
   if ("serviceWorker" in navigator) {
     const reg = await navigator.serviceWorker.ready;
-
-    // Background sync
     if ("periodicSync" in reg) {
       try {
         await reg.periodicSync.register("lmd-quotes-reminder", {
@@ -1935,50 +1900,124 @@ async function scheduleNotificationsInSW() {
       } catch (err) {
         console.warn("Periodic sync registration failed:", err);
       }
-    } else {
-      // Fallback
-      if (navigator.serviceWorker.controller) {
-        navigator.serviceWorker.controller.postMessage({
-          type: "SCHEDULE_NOTIFICATIONS"
-        });
-      }
+    } else if (navigator.serviceWorker.controller) {
+      navigator.serviceWorker.controller.postMessage({
+        type: "SCHEDULE_NOTIFICATIONS"
+      });
     }
   }
 }
-
-// Init bell color
-updateBellColor();
-
-// Auto-reschedule
-if (Notification.permission === "granted") {
-  scheduleNotificationsInSW();
-    }
 
 // Notify modal
 function showNotifyModal(message) {
   document.getElementById("notifyMessage").innerText = message;
   document.getElementById("notifyModal").style.display = "flex";
 }
-
 function closeNotifyModal() {
   document.getElementById("notifyModal").style.display = "none";
 }
 
-// Android prompt
+// Notification flow
+const COOLDOWN = 24 * 60 * 60 * 1000;
+
+function shouldShowNotifyPrompt() {
+  const last = localStorage.getItem("notifyLaterTime");
+  return (
+    Notification.permission !== "granted" &&
+    (!last || Date.now() - parseInt(last, 10) > COOLDOWN)
+  );
+}
+
+async function handleNotifyAllow() {
+  notifyPrompt.style.display = "none";
+
+  if (!("Notification" in window)) {
+    showNotifyModal("System doesn't support daily reminders settings!");
+    return;
+  }
+
+  const permission = await Notification.requestPermission();
+  if (permission === "granted") {
+    // Local push
+    await scheduleNotificationsInSW();
+
+    // FCM push
+    try {
+      const registration = await navigator.serviceWorker.register("/service-worker.js");
+      console.log("✓ SW ready for firebase messaging!");
+
+      const app = firebase.initializeApp({
+        apiKey: "AIzaSyDi1-Qxs-lt8ZNGUm5xW3sAr3QgK38OLI4",
+        authDomain: "lmd-quotes-app.firebaseapp.com",
+        projectId: "lmd-quotes-app",
+        storageBucket: "lmd-quotes-app.firebasestorage.app",
+        messagingSenderId: "37451708871",
+        appId: "1:37451708871:web:b0876517c898bc7d54c1e2"
+      });
+
+      const messaging = firebase.messaging(app);
+      const token = await messaging.getToken({
+        vapidKey:
+          "BHDrm0tioscEdrcwKvG50hy2-ZjOkaUtLH3_3obWNpcsGnyG5nf7ccvVrHVz__zoNE4ggnsBqSN1k60GkQunr1w",
+        serviceWorkerRegistration: registration
+      });
+
+      if (token) {
+        console.log("✓ FCM Token:", token);
+        // send to fcf
+      }
+
+      messaging.onMessage((payload) => {
+        console.log("Message received in foreground:", payload);
+      });
+    } catch (err) {
+      console.error("Firebase messaging setup failed:", err);
+    }
+
+    showNotifyModal("Daily reminders and push notifications are enabled!");
+  } else {
+    showNotifyModal("Notifications are blocked, allow them in sytem settings.");
+  }
+
+  updateBellColor();
+}
+
+function handleNotifyLater() {
+  notifyPrompt.style.display = "none";
+  localStorage.setItem("notifyLaterTime", Date.now().toString());
+}
+
+// Attach
+enableBtn.onclick = handleNotifyAllow;
+cancelBtn.onclick = handleNotifyLater;
+
+// Auto prompt
+window.addEventListener("load", () => {
+  updateBellColor();
+  if (shouldShowNotifyPrompt()) {
+    notifyPrompt.style.display = "flex";
+  } else if (Notification.permission === "granted") {
+    scheduleNotificationsInSW();
+  }
+});
+
+// Android Install Prompt
 let deferredPrompt;
 window.addEventListener("beforeinstallprompt", (e) => {
   e.preventDefault();
   deferredPrompt = e;
 
-  // If not installed
-  if (!localStorage.getItem("pwaInstalled")) {
-    showAndroidInstallPrompt();
-  }
+  const last = localStorage.getItem("pwaLaterTime");
+  const showNow =
+    !localStorage.getItem("pwaInstalled") &&
+    (!last || Date.now() - parseInt(last, 10) > COOLDOWN);
+
+  if (showNow) showAndroidInstallPrompt();
 });
 
 function showAndroidInstallPrompt() {
   const banner = document.createElement("div");
-  banner.setAttribute("id", "pwaBanner");
+  banner.id = "pwaBanner";
   banner.innerHTML = `
     <div style="
       position:fixed;
@@ -1995,7 +2034,7 @@ function showAndroidInstallPrompt() {
       font-size:15px;
       z-index:9999;
       text-align:center;
-      animation:fadeInBg 0.5s ease forwards;">
+      animation:fadeInBg 1.0s ease forwards;">
       📥 <b>LMD Quotes</b> works best when installed!  
       <br><br>
       <button id="dismissBtn" style="
@@ -2018,7 +2057,7 @@ function showAndroidInstallPrompt() {
 
   document.getElementById("installBtn").addEventListener("click", () => {
     deferredPrompt.prompt();
-    deferredPrompt.userChoice.then(choice => {
+    deferredPrompt.userChoice.then((choice) => {
       if (choice.outcome === "accepted") {
         console.log("User installed PWA");
         localStorage.setItem("pwaInstalled", "true");
@@ -2032,22 +2071,23 @@ function showAndroidInstallPrompt() {
 
   document.getElementById("dismissBtn").addEventListener("click", () => {
     console.log("User tapped Later");
+    localStorage.setItem("pwaLaterTime", Date.now().toString());
     banner.remove();
   });
 }
 
-// Detect
+// Detect installation
 window.addEventListener("appinstalled", () => {
   console.log("PWA installed event fired");
   localStorage.setItem("pwaInstalled", "true");
 });
 
-// iOS prompt
+// iOS Prompt
 function isIos() {
   return /iphone|ipad|ipod/.test(window.navigator.userAgent.toLowerCase());
 }
 function isInStandaloneMode() {
-  return ("standalone" in window.navigator) && window.navigator.standalone;
+  return "standalone" in window.navigator && window.navigator.standalone;
 }
 
 if (isIos() && !isInStandaloneMode()) {
@@ -2067,7 +2107,8 @@ if (isIos() && !isInStandaloneMode()) {
       box-shadow:0 2px 4px rgba(99,102,241,0.25);
       font-size:15px;
       z-index:9999;
-      text-align:center;">
+      text-align:center;
+	  animation:fadeInBg 1.0s ease forwards;">
       📥 Install <b>LMD Quotes</b>: Tap <span style="font-size:18px;">⬆️</span> then "Add to Home Screen"
       <br><br>
       <button id="closeIosPrompt" style="
@@ -2079,64 +2120,21 @@ if (isIos() && !isInStandaloneMode()) {
     </div>
   `;
   document.body.appendChild(iosPrompt);
-  document.getElementById("closeIosPrompt").addEventListener("click", () => {
-    iosPrompt.remove();
-  });
-  }
+  document
+    .getElementById("closeIosPrompt")
+    .addEventListener("click", () => iosPrompt.remove());
+}
 
-	  // Service worker
-    window.addEventListener('load', () => {
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('/service-worker.js')
-      .then(reg => console.log('SW registered successfully!', reg.scope))
-      .catch(err => console.error('SW registration failed!', err));
+// Service Worker
+window.addEventListener("load", () => {
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker
+      .register("/service-worker.js")
+      .then((reg) => console.log("SW registered successfully!", reg.scope))
+      .catch((err) => console.error("SW registration failed!", err));
   }
 });
 
-   // Firebase Cloud Messaging
-const firebaseConfig = {
-  apiKey: "AIzaSyDi1-Qxs-lt8ZNGUm5xW3sAr3QgK38OLI4",
-  authDomain: "lmd-quotes-app.firebaseapp.com",
-  projectId: "lmd-quotes-app",
-  storageBucket: "lmd-quotes-app.firebasestorage.app",
-  messagingSenderId: "37451708871",
-  appId: "1:37451708871:web:b0876517c898bc7d54c1e2"
-};
-
-firebase.initializeApp(firebaseConfig);
-
-const messaging = firebase.messaging();
-navigator.serviceWorker
-  .register("/service-worker.js")
-  .then((registration) => {
-    console.log("SW ready for Firebase Messaging! ✓");
-
-    return Notification.requestPermission().then((permission) => {
-      if (permission === "granted") {
-        return messaging.getToken({
-          vapidKey: "BHDrm0tioscEdrcwKvG50hy2-ZjOkaUtLH3_3obWNpcsGnyG5nf7ccvVrHVz__zoNE4ggnsBqSN1k60GkQunr1w",
-          serviceWorkerRegistration: registration
-        });
-      } else {
-        console.warn("Notification permission denied!");
-        return null;
-      }
-    });
-  })
-  .then((currentToken) => {
-    if (currentToken) {
-      console.log("FCM Token:", currentToken);
-    } else {
-      console.warn("No FCM token received. Request permission again?");
-    }
-  })
-  .catch((err) => {
-    console.error("Service worker registration or permission failed!", err);
-  });
-
-messaging.onMessage((payload) => {
-  console.log("Message received in foreground: ", payload);
-});
 </script>
 </body>
 </html>
