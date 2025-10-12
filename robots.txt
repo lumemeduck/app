@@ -13,5 +13,6 @@ Disallow: /offline.html
 
 Allow: /ads.txt
 Allow: /site.webmanifest
+Allow: /pages/
 
 Sitemap: https://app.lumemeduck.xyz/sitemap.xml
