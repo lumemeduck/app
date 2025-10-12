@@ -11,21 +11,21 @@
   </url>
 
   <url>
-    <loc>https://app.lumemeduck.xyz/about</loc>
+    <loc>https://app.lumemeduck.xyz/pages/about.html</loc>
     <lastmod>2025-10-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
 
   <url>
-    <loc>https://app.lumemeduck.xyz/user-terms</loc>
+    <loc>https://app.lumemeduck.xyz/pages/user-terms.html</loc>
     <lastmod>2025-10-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
 
   <url>
-    <loc>https://app.lumemeduck.xyz/privacy-policy</loc>
+    <loc>https://app.lumemeduck.xyz/pages/privacy-policy.html</loc>
     <lastmod>2025-10-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
