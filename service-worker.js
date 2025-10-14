@@ -1,4 +1,4 @@
-const CACHE_NAME = "lmd-quotes-cache-v9";
+const CACHE_NAME = "lmd-quotes-cache-v10";
 const urlsToCache = [
   "./",
   "./index.html",
@@ -66,12 +66,12 @@ self.addEventListener("push", event => {
   try {
     data = event.data.json();
   } catch {
-    data = { title: "LMD Quotes", body: event.data.text() };
+    data = { title: "LMD Quotes ✨", body: event.data.text() };
   }
 
-  const title = data.title || "Arise & Shine ☀️";
+  const title = data.title || "Good morning champ! 🌞";
   const options = {
-    body: data.body || "Today's inspirational quote is ready!",
+    body: data.body || "Your today's inspirational quote and exercise challenge awaits!",
     icon: "icons/icon-192.png",
     badge: "icons/icon-72.png",
     data: data.data || {}
