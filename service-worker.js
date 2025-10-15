@@ -69,7 +69,7 @@ self.addEventListener("push", event => {
     data = { title: "LMD Quotes ✨", body: event.data.text() };
   }
 
-  const title = data.title || "Good morning champ! 🌞";
+  const title = data.title || "GM Champ! 🌞";
   const options = {
     body: data.body || "Your today's inspirational quote and exercise challenge awaits!",
     icon: "icons/icon-192.png",
