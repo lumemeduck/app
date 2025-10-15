@@ -24,7 +24,9 @@
   </script>
   <link rel="icon" type="image/png" href="icons/icon-512.png">
   <link rel="manifest" href="/manifest.json">
-  <meta name="theme-color" content="#f1f4ff">
+  <meta name="theme-color" content="#f1f4ff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#f1f4ff" media="(prefers-color-scheme: dark)">
+  <meta name="color-scheme" content="light dark">
   <link rel="apple-touch-icon" sizes="512x512" href="icons/icon-512.png">
   <link rel="apple-touch-icon" sizes="192x192" href="icons/icon-192.png">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -49,7 +51,6 @@
     
 /* Main body */
   :root{
-	color-scheme: #f1f4ff;
     --bg:#f1f4ff;
     --card:#ffffff;
     --muted: rgba(0,45,93,0.8);
@@ -64,8 +65,14 @@
   }
 
   *{box-sizing:border-box}
-  html,body{height:100%}
-  body{
+  html,body {
+	height:100%;
+	min-height: 100vh;
+    background-color: #f1f4ff;
+	color-scheme: light;
+    background-attachment: fixed;
+ }
+  body {
     margin:0;
     display: flex;
     justify-content: center;
@@ -87,11 +94,6 @@
   margin: auto;
   }
 
-  html, body {
-  min-height: 100vh;
-  background: #f1f4ff;
-  background-attachment: fixed;
- }
   /* Header */
   header{
   position:sticky;
@@ -424,53 +426,6 @@
     justify-content: center;
 	overflow: hidden;
   }
-
-   @media (prefers-color-scheme: dark) {
-  :root{
-	color-scheme: #f1f4ff;
-    --bg:#f1f4ff;
-    --card:#ffffff;
-    --muted: rgba(0,45,93,0.8);
-    --text:#002d5d;
-    --accent:#0ea5e9;
-    --accent-2:#6366f1;
-    --warn:#f59e0b;
-    --ok:#22c55e;
-    --ring: rgba(99,102,241,0.08);
-    --shadow: 0 10px 35px rgba(0,0,0,.1);
-    --radius: 18px;
-  }
-
-   *{box-sizing:border-box}
-  html,body{height:100%}
-  body{
-    margin:0;
-    display: flex;
-    justify-content: center;
-    background: var(--bg);
-    color: var(--text);
-    font: 16px/1.45 system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji","Segoe UI Emoji";
-    animation: fadeInBg 0.3s ease forwards;
-  }
-    
-  container {
-  width: 100%;
-  max-width: 800px;
-  min-height: 100vh;
-  background: #f1f4ff;
-  display: block;
-  flex-direction: column;
-  box-shadow: 0px 0px 20px rgba(14,165,233,0.5);
-  position: relative;
-  margin: auto;
-  }
-
-  html, body {
-  min-height: 100vh;
-  background: #f1f4ff;
-  background-attachment: fixed;
-	  }
-}
 </style>
    <!-- Firebase SDK -->
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
