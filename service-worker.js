@@ -1,4 +1,4 @@
-const CACHE_NAME = "lmd-quotes-cache-v10";
+const CACHE_NAME = "lmd-quotes-cache-v11";
 const urlsToCache = [
   "./",
   "./index.html",
