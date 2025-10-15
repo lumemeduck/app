@@ -34,21 +34,6 @@
   <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/webfonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <script>(function(s){s.dataset.zone='9967011',s.src='https://groleegni.net/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-V1C5DZTRMJ"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-V1C5DZTRMJ');
-  </script>
-  <!-- Firebase SDK -->
-  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-messaging-compat.js"></script>
-  <!-- Wortise SDK -->
-  <script type="text/javascript" async src="https://cdn.resources.wortise.com/sdk/web/web-sdk.js">
-    wortise.init('your asset key')
-  </script>
   <style>
 /* Fullscreen overlay */
   #loader {
@@ -438,7 +423,70 @@
     justify-content: center;
 	overflow: hidden;
   }
+
+  @media (prefers-color-scheme: dark) {
+   :root{
+    --bg:#f1f4ff;
+    --card:#ffffff;
+    --muted: rgba(0,45,93,0.8);
+    --text:#002d5d;
+    --accent:#0ea5e9;
+    --accent-2:#6366f1;
+    --warn:#f59e0b;
+    --ok:#22c55e;
+    --ring: rgba(99,102,241,0.08);
+    --shadow: 0 10px 35px rgba(0,0,0,.1);
+    --radius: 18px;
+  }
+
+   *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0;
+    display: flex;
+    justify-content: center;
+    background: var(--bg);
+    color: var(--text);
+    font: 16px/1.45 system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji","Segoe UI Emoji";
+    animation: fadeInBg 0.3s ease forwards;
+  }
+    
+  container {
+  width: 100%;
+  max-width: 800px;
+  min-height: 100vh;
+  background: #f1f4ff;
+  display: block;
+  flex-direction: column;
+  box-shadow: 0px 0px 20px rgba(14,165,233,0.5);
+  position: relative;
+  margin: auto;
+  }
+
+  html, body {
+  min-height: 100vh;
+  background: #f1f4ff;
+  background-attachment: fixed;
+	  }
+}
 </style>
+   <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-messaging-compat.js"></script>
+  <!-- Wortise SDK -->
+  <script type="text/javascript" async src="https://cdn.resources.wortise.com/sdk/web/web-sdk.js">
+    wortise.init('your asset key')
+  </script>
+  <!-- Monetag SDK -->
+  <script>(function(s){s.dataset.zone='9967011',s.src='https://groleegni.net/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
+  <!-- Gtag Manager -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-V1C5DZTRMJ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-V1C5DZTRMJ');
+  </script>
 </head>
 <!-- Preloader -->
 <body onload="myFunction()">
