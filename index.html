@@ -25,7 +25,7 @@
   <link rel="icon" type="image/png" href="icons/icon-512.png">
   <meta name="theme-color" content="#f1f4ff" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#f1f4ff" media="(prefers-color-scheme: dark)">
-  <meta name="color-scheme" content="light dark">
+  <meta name="color-scheme" content="light">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-title" content="LMD Quotes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -782,7 +782,14 @@ function showPage() {
   document.getElementById("loader").style.display = "none"; 
 }
  </script>
- 
+
+ <script>
+	document.addEventListener("DOMContentLoaded", () => {
+  const themeMeta = document.querySelector('meta[name="theme-color"]');
+  if (themeMeta) themeMeta.setAttribute("content", "#f1f4ff");
+});
+ </script>
+	
  <script>
 /* ---------- Utilities & Storage ---------- */
 const STORAGE = {
