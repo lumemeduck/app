@@ -44,9 +44,11 @@
   left: 0;
   z-index: 1000;
   height: 100%;
+  min-height: 100vh;
   width: 100%;
   overflow: visible;
   background: #f1f4ff url('icons/icon-72.png') no-repeat center center;
+  background-attachment: fixed;
   }
     
 /* Main body */
@@ -772,8 +774,7 @@
   <canvas id="exportCanvas" width="1080" height="1080" style="display:none;"></canvas>
 </container>
               
- <script>
-/* ------ Preloader ------ */
+<script>
 var myVar;
 function myFunction() {  
   myVar = setTimeout(showPage, 0);
@@ -781,13 +782,6 @@ function myFunction() {
 function showPage() { 
   document.getElementById("loader").style.display = "none"; 
 }
- </script>
-
- <script>
-	document.addEventListener("DOMContentLoaded", () => {
-  const themeMeta = document.querySelector('meta[name="theme-color"]');
-  if (themeMeta) themeMeta.setAttribute("content", "#f1f4ff");
-});
  </script>
 	
  <script>
