@@ -23,9 +23,9 @@
     }
   </script>
   <link rel="icon" type="image/png" href="icons/icon-512.png">
-  <meta name="theme-color" content="#f1f4ff" media="(prefers-color-scheme: light)">
-  <meta name="theme-color" content="#f1f4ff" media="(prefers-color-scheme: dark)">
-  <meta name="color-scheme" content="light">
+  <meta name="color-scheme" content="#f1f4ff" media="(prefers-color-scheme: light)">
+  <meta name="color-scheme" content="#f1f4ff" media="(prefers-color-scheme: dark)">
+  <meta name="color-scheme" content="#f1f4ff">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-title" content="LMD Quotes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -44,11 +44,9 @@
   left: 0;
   z-index: 1000;
   height: 100%;
-  min-height: 100vh;
   width: 100%;
   overflow: visible;
   background: #f1f4ff url('icons/icon-72.png') no-repeat center center;
-  background-attachment: fixed;
   }
     
 /* Main body */
@@ -71,7 +69,7 @@
 	height:100%;
 	min-height: 100vh;
     background-color: #f1f4ff;
-	color-scheme: light;
+	color-scheme: #f1f4ff;
     background-attachment: fixed;
  }
   body {
@@ -1475,11 +1473,11 @@ ctx.textBaseline = 'alphabetic';
   // Simulate delay
   setTimeout(() => {
     document.body.innerHTML = `
-	<container style="position:relative;align-items:center;justify-content:center;background-attachment:fixed;">
+	<container style="position:fixed;background-attachment:fixed;">
 	 <main style="align-items:center;justify-content:center;">
-      <article class="card" aria-live="polite" style="position:relative;margin:auto;width:auto;display:flex;flex-direction:column;gap:20px;align-items:center;justify-content:center;text-align:center;font-family:sans-serif;animation:fadeInBg 0.3s ease forwards;">
+      <div class="card" style="position:relative;margin:auto;width:auto;display:flex;flex-direction:column;gap:20px;align-items:center;justify-content:center;text-align:center;font-family:sans-serif;animation:fadeInBg 0.3s ease forwards;">
        <h3 style="font-size:18px;color:002d5d;"><i class="fa fa-check" style="font-size:22px;color:#22c55e;"></i> Image Generated!</h3>
-        <img src="${dataURL}" alt="Generated" style="width:100%;display:flex;align-items:center;justify-content:center;position:relative;border-radius:0;box-shadow:0 0 10px rgba(0,0,0,0.5);animation: fadeInCard 0.3s ease forwards;" />
+        <img src="${dataURL}" alt="Generated" style="width:100%;display:flex;align-items:center;justify-content:center;position:relative;border-radius:12;box-shadow:0 0 10px rgba(0,0,0,0.5);animation: fadeInCard 0.3s ease forwards;" />
          <div class="row" style="display:flex;width:90%;align-items:center;justify-content:space-between;position:relative;animation:fadeInCard 0.3s ease forwards;">
           <button class="btn" id="download-button"><i class="fas fa-download" style="font-size:15px;"></i> Save</button>
 		  <button class="btn btn-accent" id="backButton">< Back</button>
@@ -1488,7 +1486,7 @@ ctx.textBaseline = 'alphabetic';
         <p style="width:100%;margin-bottom:10px;font-size:14px;opacity:0.5;color:#002d5d;align-items:center;justify-content:center;position:relative;animation:fadeInCard 0.3s ease forwards;">
           💖 <b>save</b> to device or <b>share</b> to socials 💝
         </p>
-      </article>
+      </div>
       <div class="footnote"></div>
       <div class="ad-container" aria-live="polite">
        <div class="ad-slot">
