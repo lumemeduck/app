@@ -23,9 +23,7 @@
     }
   </script>
   <link rel="icon" type="image/png" href="icons/icon-512.png">
-  <meta name="color-scheme" content="#f1f4ff" media="(prefers-color-scheme: light)">
-  <meta name="color-scheme" content="#f1f4ff" media="(prefers-color-scheme: dark)">
-  <meta name="color-scheme" content="#f1f4ff">
+  <meta name="theme-color" content="#f1f4ff">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-title" content="LMD Quotes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -69,9 +67,9 @@
 	height:100%;
 	min-height: 100vh;
     background-color: #f1f4ff;
-	color-scheme: #f1f4ff;
     background-attachment: fixed;
  }
+	  
   body {
     margin:0;
     display: flex;
@@ -1474,7 +1472,7 @@ ctx.textBaseline = 'alphabetic';
   setTimeout(() => {
     document.body.innerHTML = `
 	<container style="position:fixed;background-attachment:fixed;">
-	 <main style="align-items:center;justify-content:center;">
+	 <main style="display:flex;align-items:center;justify-content:center;gap:30px;">
       <div class="card" style="position:relative;margin:auto;width:auto;display:flex;flex-direction:column;gap:20px;align-items:center;justify-content:center;text-align:center;font-family:sans-serif;animation:fadeInBg 0.3s ease forwards;">
        <h3 style="font-size:18px;color:002d5d;"><i class="fa fa-check" style="font-size:22px;color:#22c55e;"></i> Image Generated!</h3>
         <img src="${dataURL}" alt="Generated" style="width:100%;display:flex;align-items:center;justify-content:center;position:relative;border-radius:12;box-shadow:0 0 10px rgba(0,0,0,0.5);animation: fadeInCard 0.3s ease forwards;" />
