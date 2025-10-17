@@ -1472,10 +1472,10 @@ ctx.textBaseline = 'alphabetic';
   setTimeout(() => {
     document.body.innerHTML = `
 	<container style="position:fixed;background-attachment:fixed;">
-	 <main style="top:40px;align-items:center;justify-content:center;">
+	 <main>
       <div class="card" style="position:relative;margin:auto;width:auto;display:flex;flex-direction:column;gap:20px;align-items:center;justify-content:center;text-align:center;font-family:sans-serif;animation:fadeInBg 0.3s ease forwards;">
        <h3 style="font-size:18px;color:002d5d;"><i class="fa fa-check" style="font-size:22px;color:#22c55e;"></i> Image Generated!</h3>
-        <img src="${dataURL}" alt="Generated" style="width:100%;display:flex;align-items:center;justify-content:center;position:relative;border-radius:12px;box-shadow:0 0 10px rgba(0,0,0,0.5);animation: fadeInCard 0.3s ease forwards;" />
+        <img src="${dataURL}" alt="Generated" style="width:100%;display:flex;align-items:center;justify-content:center;position:relative;box-shadow:0 0 10px rgba(0,0,0,0.5);animation: fadeInCard 0.3s ease forwards;" />
          <div class="row" style="display:flex;width:90%;align-items:center;justify-content:space-between;position:relative;animation:fadeInCard 0.3s ease forwards;">
           <button class="btn" id="download-button"><i class="fas fa-download" style="font-size:15px;"></i> Save</button>
 		  <button class="btn btn-accent" id="backButton">< Back</button>
