@@ -1,10 +1,9 @@
-const CACHE_NAME = "lmd-quotes-cache-v8";
+const CACHE_NAME = "lmd-quotes-cache-v11";
 const urlsToCache = [
   "./",
   "./index.html",
   "./manifest.json",
   "./trivia/index.html",
-  "./game/index.html",
   "./sounds/ehuh.mp3",
   "./sounds/buzz.mp3",
   "./sounds/quack.mp3",
@@ -67,12 +66,12 @@ self.addEventListener("push", event => {
   try {
     data = event.data.json();
   } catch {
-    data = { title: "LMD Quotes", body: event.data.text() };
+    data = { title: "LMD Quotes ✨", body: event.data.text() };
   }
 
-  const title = data.title || "Arise & Shine ☀️";
+  const title = data.title || "GM Champ! 🌞";
   const options = {
-    body: data.body || "Today's inspirational quote is ready!",
+    body: data.body || "Your today's inspirational quote and exercise challenge awaits!",
     icon: "icons/icon-192.png",
     badge: "icons/icon-72.png",
     data: data.data || {}

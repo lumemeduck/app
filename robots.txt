@@ -1,0 +1,18 @@
+User-agent: *
+Allow: /
+
+Disallow: /service-worker.js
+Disallow: /firebase-messaging-sw.js
+Disallow: /manifest.json
+Disallow: /sw.js
+Disallow: /icons/
+Disallow: /scripts/
+Disallow: /assets/
+Disallow: /images/temp/
+Disallow: /offline.html
+
+Allow: /ads.txt
+Allow: /site.webmanifest
+Allow: /pages/
+
+Sitemap: https://app.lumemeduck.xyz/sitemap.xml

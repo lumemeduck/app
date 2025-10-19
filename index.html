@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>LMD Quotes – Daily Motivation</title>
-  <meta name="description" content="Daily quotes and exercise challenges that inspire a better you. Stay positive, track streaks, and grow every day with lmd quotes powered by lumeme duck.">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>LMD Quotes - Inspiration daily</title>
+  <meta name="description" content="Daily quotes and exercise challenges that inspire a better you. Stay positive, track streaks, and grow every day with lmd quotes.">
   <meta name="robots" content="index, follow">
   <meta property="og:title" content="LMD Quotes – Daily Motivation">
   <meta property="og:description" content="Daily inspirational quotes and exercise challenges.">
@@ -23,46 +23,28 @@
     }
   </script>
   <link rel="icon" type="image/png" href="icons/icon-512.png">
-  <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#f1f4ff">
-  <link rel="apple-touch-icon" sizes="512x512" href="icons/icon-512.png">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-title" content="LMD Quotes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <link rel="manifest" href="/manifest.json">
+  <link rel="apple-touch-icon" sizes="512x512" href="icons/icon-512.png">
+  <link rel="apple-touch-icon" sizes="192x192" href="icons/icon-192.png">
   <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
   <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/webfonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
-  <script>(function(s){s.dataset.zone='9967011',s.src='https://groleegni.net/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-V1C5DZTRMJ"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-V1C5DZTRMJ');
-  </script>
-  <!-- Firebase SDK -->
-  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-messaging-compat.js"></script>
-  <!-- Wortise SDK -->
-  <script type="text/javascript" async src="https://cdn.resources.wortise.com/sdk/web/web-sdk.js">
-    wortise.init('your asset key')
-  </script>
   <style>
 /* Fullscreen overlay */
   #loader {
   position: fixed;
   top: 0;
-  left: 50%;
-  transform:translateX(-50%);
-  z-index: 10000;
-  max-width: 800px;
-  min-height: 100vh;
-  background-attachment: fixed;
+  left: 0;
+  z-index: 1000;
+  height: 100%;
   width: 100%;
   overflow: visible;
-  background: #f1f4ff url('icons/icon-150.png') no-repeat center center;
+  background: #f1f4ff url('icons/icon-72.png') no-repeat center center;
   }
     
 /* Main body */
@@ -81,8 +63,14 @@
   }
 
   *{box-sizing:border-box}
-  html,body{height:100%}
-  body{
+  html,body {
+	height:100%;
+	min-height: 100vh;
+    background-color: #f1f4ff;
+    background-attachment: fixed;
+ }
+	  
+  body {
     margin:0;
     display: flex;
     justify-content: center;
@@ -104,30 +92,31 @@
   margin: auto;
   }
 
-  html, body {
-  min-height: 100vh;
-  background: #f1f4ff;
-  background-attachment: fixed;
- }
   /* Header */
   header{
-  position:sticky; top:0; z-index:10;
+  position:sticky;
+  top:0;
+  z-index:10;
   backdrop-filter:saturate(120%) blur(8px);
   background: #f1f4ff;
-  border-bottom:1px solid rgba(99,102,241,0.0);
-  box-shadow: 0px 0px 4px 2px rgba(99,102,241,0.0);
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
+  border-bottom:1px solid rgba(99,102,241,0.15);
+  box-shadow: 0px 0px 4px 2px rgba(99,102,241,0.13);
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
   }
   .nav{
     max-width:800px;
     margin:0 auto;
-    display:flex; align-items:center; justify-content:space-between;
-    padding:14px 14px;
+    display:flex;
+	align-items:center;
+	justify-content:space-between;
+    padding:16px 14px;
     gap:10px;
   }
   .brand{
-    display:flex; align-items:center; gap:8px;
+    display:flex;
+	align-items:center;
+	gap:8px;
   }
   .logo{
     width:20px; height:20px; border-radius:50%;
@@ -172,9 +161,10 @@
 
   .card{
   background: linear-gradient(180deg, rgba(255,255,255,0.8), rgba(248,250,252,0.8));
-  border:1px solid rgba(99,102,241,0.10);
+  border:1px solid rgba(99,102,241,0.15);
   border-radius: var(--radius);
-  padding:18px; box-shadow: 0px 0px 4px 2px rgba(99,102,241,0.15);
+  padding:18px; 
+  box-shadow: inset 0px 0px 4px 2px rgba(99,102,241,0.10);
   animation: fadeInCard 0.3s ease forwards;
   }
   .card h2{
@@ -346,11 +336,11 @@
   max-width: 800px;
   backdrop-filter:saturate(120%) blur(8px);
   box-shadow: 0px 0px 4px 2px rgba(99,102,241,0.15);
-  border-top:1px solid rgba(99,102,241,0.10);
+  border-top:1px solid rgba(99,102,241,0.15);
   background-color: #f1f4ff;
   display: flex;
   justify-content: space-around;
-  padding: 10px 0;
+  padding: 12px 0;
   border-top-left-radius: 18px;
   border-top-right-radius: 18px;
   z-index: 10;
@@ -365,7 +355,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 5px;
+  padding: 2px;
   width: 25%;
 }
 
@@ -375,6 +365,7 @@
 
 .menu-item span {
   font-size: 12px;
+  margin-bottom: 20px;
 }
 
 .menu-item.active {
@@ -383,12 +374,13 @@
 
 .i-frame {
   width: 100%;
-  height: 470px;
+  height: 500px;
   border: none;
+  padding: 6px;
   background: linear-gradient(180deg, rgba(255,255,255,.8), rgba(248,250,252,.8));
-  border:1px solid rgba(99,102,241,0.10);
+  border:1px solid rgba(99,102,241,0.15);
   border-radius: 18px;
-  box-shadow: 0px 0px 4px 2px rgba(99,102,241,0.15);
+  box-shadow: inset 0px 0px 4px 2px rgba(99,102,241,0.10);
   display: block;
 }
 
@@ -410,9 +402,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #fefefe;
+    background: #f1f4ff;
 	overflow: hidden;
-    border: 1px solid rgba(99,102,241,0.12);
+    border: none
   }
 
   .ad-slot {
@@ -433,6 +425,23 @@
 	overflow: hidden;
   }
 </style>
+   <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-messaging-compat.js"></script>
+  <!-- Wortise SDK -->
+  <script type="text/javascript" async src="https://cdn.resources.wortise.com/sdk/web/web-sdk.js">
+    wortise.init('your asset key')
+  </script>
+  <!-- Monetag SDK -->
+  <script>(function(s){s.dataset.zone='9967011',s.src='https://groleegni.net/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
+  <!-- Gtag Manager -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-V1C5DZTRMJ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-V1C5DZTRMJ');
+  </script>
 </head>
 <!-- Preloader -->
 <body onload="myFunction()">
@@ -460,8 +469,8 @@
     <!-- Notify Permission Modal -->
 <div id="notifyPrompt" style="display:none;position:fixed;inset:0;background:rgba(255,255,255,.4);z-index:999;align-items:center;justify-content:center;animation: fadeInBg 1.0s ease forwards;">
   <div style="background:#eef1ff;border:1px solid rgba(0,0,0,.1);border-radius:18px;padding:18px 24px;box-shadow:0 4px 15px rgba(0, 0, 0, 0.4);max-width:280px;text-align:center;color:#002d5d;font-family:system-ui;animation:fadeInCard 1.0s ease forwards;">
-    <h3 style="margin:0 0 12px;font-size:16px;">Stay Inspired Daily!</h3>
-    <p style="margin:0 0 18px;font-size:15px;line-height:1.4;">Enable daily reminders alerts so you never miss your daily dose of inspiration</p>
+    <h3 style="margin:0 0 12px;font-size:16px;">Stay Motivated Daily!</h3>
+    <p style="margin:0 0 18px;font-size:15px;line-height:1.4;">Enable daily reminders so you never miss your daily dose of inspiration!</p>
     <button type="button" class="btn btn-warn" id="cancelNotifyBtn" style="margin-right:23px;">Later</button>
     <button type="button" class="btn btn-accent" id="enableNotifyBtn">Allow</button>
   </div>
@@ -525,17 +534,17 @@
 
   <header>
     <div class="nav">
-      <button type="button" class="btn" id="menuButton" title="Menu" style="background:none;border:none;cursor:none;">
+      <button type="button" id="menuButton" title="Menu" style="background:none;border:none;cursor:none;">
         <i class="fas fa-bars" style="font-size:24px;color:#002d5d;"></i>
       </button>
       <div class="brand" role="button" onclick="Router.go('#home')" title="Go Home">
-        <img src="icons/icon-72.png" alt="logo" height= "28px" width= "28px">
+        <img src="icons/icon-72.png" alt="logo" height= "26px" width= "26px">
         <div class="title">LMD Quotes</div>
       </div>
       <div class="actions">
         <div type="" class="" id="btnProgress" tittle="View Streak Progress"></div>
         <div type="" id="notifyBell" style="background:none;border:none;cursor:none;"><i id="bellIcon"></i></div>
-		<button type="button" class="btn" id="btnReset" title="Reset all data" style="background:none;border:none;cursor:none;">
+		<button type="button" id="btnReset" title="Reset all data" style="background:none;border:none;cursor:none;">
         <i class="fa fa-refresh" style="font-size:24px;color:#f59e0b;"></i></button>
       </div>
     </div>
@@ -547,7 +556,7 @@
       <div class="grid">
         <!-- Quotes column -->
         <article class="card" aria-live="polite">
-          <h2 id="home-title" style="align-items:center; justify-content:space-between; position:relative;"><i class="fa fa-wand-magic-sparkles" style="opacity:0.9;font-size:20px;color:#22c55e;"></i> Today's Inspiration <span class="pill" id="quoteTag" style="align-items:center; justify-content:center; position:relative;">Today</span></h2>
+          <h2 id="home-title" style="align-items:center; justify-content:space-between; position:relative;"><i class="fa fa-wand-magic-sparkles" style="opacity:0.9;font-size:20px;color:#0e95e9;"></i> Today's Inspiration <span class="pill" id="quoteTag" style="align-items:center; justify-content:center; position:relative;">Today</span></h2>
           <div id="quoteText" class="quote" style="text-align:center; justify-content:center; position:relative;">Loading…</div>
           <div id="quoteAuthor" class="author" style="text-align:right; margin-right:30px"></div>
           <div class="row" style="align-items:center; justify-content:space-between; position:relative;">
@@ -609,7 +618,7 @@
   <section id="trivia" class="view" aria-labelledby="trivia-title">
    <article aria-live="polite" style="animation:fadeInCard 0.3s ease forwards;">
     <h3 id="trivia-title"></h3>
-    <iframe class="i-frame" seamless="seamless" allowtransparency="true" allowfullscreen="true" frameborder="0" src="trivia/index.html"></iframe>
+    <iframe class="i-frame" seamless="seamless" allowtransparency="true" allowfullscreen="true" frameborder="0" src="https://app.lumemeduck.xyz/pages/trivia"></iframe>
   </article>
    <div class="footnote"></div>
     <div class="ad-container" aria-live="polite">
@@ -623,22 +632,12 @@
   <section id="game" class="view" aria-labelledby="game-title">
    <article aria-live="polite" style="animation:fadeInCard 0.3s ease forwards;">
     <h3 id="game-title"></h3>
-    <iframe class="i-frame" seamless="seamless" allowtransparency="true" allowfullscreen="true" frameborder="0" src="game/index.html"></iframe>
+    <iframe class="i-frame" seamless="seamless" allowtransparency="true" allowfullscreen="true" frameborder="0" src="https://game.lumemeduck.xyz"></iframe>
    </article>
    <div class="footnote"></div>
-    <div class="ad-container">
+     <div class="ad-container">
        <div class="ad-slot">
         <!-- advert here -->
-		<script type="text/javascript">
-	atOptions = {
-		'key' : '61df13b42414140d9f2c2ad47d5e4d2b',
-		'format' : 'iframe',
-		'height' : 50,
-		'width' : 320,
-		'params' : {}
-	};
-</script>
-<script type="text/javascript" src="//www.highperformanceformat.com/61df13b42414140d9f2c2ad47d5e4d2b/invoke.js"></script>
       </div>
     </div>
   </section>
@@ -653,13 +652,13 @@
     Whether you want to boost your confidence, stay positive, or commit to a fitness streak, LMD Quotes is right here for you, one day at a time.</p>
 
 <p><strong>Features that keeps you shining.</strong></p>
-<ol>
+<ul>
 <li><strong>Daily Inspiration</strong> – Inspiring quotes, affirmations, and positive reminders to fuel your mornings.</li>
 <li><strong>Daily Exercise Challenges</strong> – Simple, effective activities to keep you active and consistent.</li>
 <li><strong>Streak Calendar</strong> – Track your progress with a clean and visual monthly streak tracker.</li>
 <li><strong>Save & Share Quotes</strong> – Download motivational quote images to keep or share with friends.</li>
 <li><strong>Habits & Progress Tracker</strong> – Stay disciplined, stay motivated, and watch your streak grow.</li>
-</ol>
+</ul>
 <p><strong>Why Choose LMD Quotes?</strong></p>
 <ul>
 <li>Build daily fitness habits and get inspired in one place.</li>
@@ -668,7 +667,7 @@
 <li>Transform your mornings into powerful, focused starts.</li>
 </ul>
 <p>LMD Quotes is more than just a quotes app; it is your personal coach for motivation, habits building, and self-improvement. Stay disciplined, grow daily, and shine brighter every day.</p>
-<p>Install LMD Quotes or add it to your home screen now and start your journey toward consistency, positivity, and success.</p>
+<p>Install LMD Quotes or add it to your home screen now and start your journey toward consistency, positivity, and success.</p><br><p></p>
  </article>
 </section>
 
@@ -707,7 +706,7 @@
  <p>We reserve the right to suspend or terminate access to the site/app if you violate these terms.</p>
  <p><strong>Contact Support</strong></p>
  <p>If you have any concerns with compliance to these terms, you can reach out to support team via: <a href="mailto:info@lumemeduck.xyz" style="text-decoration:none;color:#0ea5e9;">info@lumemeduck.xyz</a></p>
- <p>This terms of use was last revised; September 29th, 2025.</p>
+ <p>This terms of use was last revised; September 29th, 2025.</p><br><p></p>
  </article>
 </section>
 
@@ -762,7 +761,7 @@
   You should check this page from time to time to ensure that you agree with any changes.</p>
 <p><strong>Contact Support</strong></p>
 <p>If you have any question about this privacy policy statement, you can reach out to support team via: <a href="mailto:info@lumemeduck.xyz" style="text-decoration:none;color:#0ea5e9;">info@lumemeduck.xyz</a></p>
-<p>This policy statements was last revised; September 29th, 2025.</p>
+<p>This policy statements was last revised; September 29th, 2025.</p><br><p></p>
    </article>
  </section>
 </main>
@@ -771,8 +770,7 @@
   <canvas id="exportCanvas" width="1080" height="1080" style="display:none;"></canvas>
 </container>
               
- <script>
-/* ------ Preloader ------ */
+<script>
 var myVar;
 function myFunction() {  
   myVar = setTimeout(showPage, 0);
@@ -781,7 +779,7 @@ function showPage() {
   document.getElementById("loader").style.display = "none"; 
 }
  </script>
- 
+	
  <script>
 /* ---------- Utilities & Storage ---------- */
 const STORAGE = {
@@ -1475,23 +1473,23 @@ ctx.textBaseline = 'alphabetic';
     document.body.innerHTML = `
 	<container style="position:fixed;background-attachment:fixed;">
 	 <main>
-      <article class="card" aria-live="polite" style="position:relative;margin:auto;width:auto;display:flex;flex-direction:column;gap:20px;align-items:center;justify-content:center;text-align:center;font-family:sans-serif;animation:fadeInBg 0.3s ease forwards;">
+      <div class="card" style="position:relative;margin:auto;width:auto;display:flex;flex-direction:column;gap:20px;align-items:center;justify-content:center;text-align:center;font-family:sans-serif;animation:fadeInBg 0.3s ease forwards;">
        <h3 style="font-size:18px;color:002d5d;"><i class="fa fa-check" style="font-size:22px;color:#22c55e;"></i> Image Generated!</h3>
-        <img src="${dataURL}" alt="Generated" style="width:100%;display:flex;align-items:center;justify-content:center;position:relative;border-radius:0;box-shadow:0 0 10px rgba(0,0,0,0.5);animation: fadeInCard 0.3s ease forwards;" />
+        <img src="${dataURL}" alt="Generated" style="width:100%;display:flex;align-items:center;justify-content:center;position:relative;box-shadow:0 0 10px rgba(0,0,0,0.5);animation: fadeInCard 0.3s ease forwards;" />
          <div class="row" style="display:flex;width:90%;align-items:center;justify-content:space-between;position:relative;animation:fadeInCard 0.3s ease forwards;">
           <button class="btn" id="download-button"><i class="fas fa-download" style="font-size:15px;"></i> Save</button>
           <button class="btn" id="share-button"><i class="fas fa-share" style="font-size:15px;"></i> Share</button>
         </div>
         <p style="width:100%;font-size:14px;opacity:0.5;color:#002d5d;align-items:center;justify-content:center;position:relative;animation:fadeInCard 0.3s ease forwards;">
-          🔆 <b>Share</b> doesn’t work in some web systems<br>If notified, you can tap <b>save</b> instead.
+          💖 <b>save</b> to device or <b>share</b> to socials 💝
         </p>
-        <button class="btn btn-accent" id="backButton" style="margin-bottom:10px;">く Back</button>
-      </article>
+		<button class="btn btn-accent" id="backButton" style="margin-bottom:10px;">く Back</button>
+      </div><br>
       <div class="footnote"></div>
       <div class="ad-container" aria-live="polite">
        <div class="ad-slot">
 	   <a href="https://otieu.com/4/7800106" target="_blank" style="cursor:pointer;">
-	   <img src="images/monetag.png" alt="Advert" /></a>
+	   <img src="icons/monetag.gif" alt="Advert" /></a>
       </div>
      </div>
     </main>
@@ -2028,8 +2026,27 @@ async function handleNotifyAllow() {
         }
       } else {
         console.warn("⚠️ No FCM token received from Firebase!");
-      }
+        // send to fcf
+		  try {
+        const response = await fetch("https://lmd-fcm.chrisoteme.workers.dev/register", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ token })
+        });
 
+        if (response.ok) {
+          console.log("✓ Token successfully registered with LMD FCM Worker!");
+        } else {
+          console.warn("⚠️ Token registration failed:", response.status);
+        }
+      } catch (err) {
+        console.error("⚠️ Failed to contact LMD Worker:", err);
+      }
+    } else {
+      console.warn("⚠️ No FCM token received from Firebase!");
+	  }
+
+		// Foreground
       messaging.onMessage((payload) => {
         console.log("Message received in foreground:", payload);
       });
@@ -2042,6 +2059,9 @@ async function handleNotifyAllow() {
     showNotifyModal(
       "Notifications are blocked. Please allow them in your system settings."
     );
+    showNotifyModal("Daily reminder notifications are enabled!");
+  } else {
+    showNotifyModal("Notifications are blocked, allow them in sytem settings!");
   }
 
   updateBellColor();
@@ -2193,14 +2213,14 @@ if (isIos() && !isInStandaloneMode()) {
       z-index:9999;
       text-align:center;
 	  animation:fadeInBg 1.0s ease forwards;">
-      📥 Install <b>LMD Quotes</b>: Tap <span style="font-size:18px;">⬆️</span> then "Add to Home Screen"
+      📥 <b>LMD Quotes</b> works best if you: Tap <span style="font-size:18px;">⬆️</span> then "Add to Home Screen"
       <br><br>
       <button id="closeIosPrompt" style="
         padding:4px 8px;
         border:none;
         border-radius:7px;
         background:#f59e0b;
-        color:#fff;">✖</button>
+        color:#ffffff">Close</button>
     </div>
   `;
   document.body.appendChild(iosPrompt);
