@@ -2063,8 +2063,26 @@ window.addEventListener("load", () => {
   if (shouldShowNotifyPrompt()) {
     notifyPrompt.style.display = "flex";
   } else if (Notification.permission === "granted") {
-    scheduleNotificationsInSW();
+  scheduleNotificationsInSW();
+}
+
+// Auto prompt for WebViews
+if (isWebView()) {
+  console.log("✓ WebView detected! auto-triggering notification setup.");
+  if (shouldShowNotifyPrompt()) {
+    notifyPrompt.style.display = "flex";
+  } else {
+    try {
+      Notification.requestPermission().then((perm) => {
+        if (perm === "granted") {
+          handleNotifyAllow();
+        }
+      });
+    } catch (e) {
+      console.warn("WebView auto permission request skipped!", e);
+    }
   }
+}
 });
     
 // Android Install Prompt
