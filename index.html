@@ -1866,6 +1866,18 @@ const enableBtn = document.getElementById("enableNotifyBtn");
 const cancelBtn = document.getElementById("cancelNotifyBtn");
 const bellIcon = document.getElementById("bellIcon");
 
+// Detect WebView environment
+function isWebView() {
+  const ua = navigator.userAgent || navigator.vendor || window.opera;
+  const isAndroidWebView =
+    /\bwv\b/.test(ua) ||
+    /Android.*Version\/[\d.]+.*Chrome\/[.0-9]* Mobile/.test(ua);
+  const isiOSWebView =
+    (window.webkit && window.webkit.messageHandlers) ||
+    /\b(iPhone|iPod|iPad).*AppleWebKit(?!.*Safari)/i.test(ua);
+  return isAndroidWebView || isiOSWebView;
+}
+
 // Bell color
 function updateBellColor() {
   if (Notification.permission === "granted") {
@@ -1875,7 +1887,7 @@ function updateBellColor() {
   }
 }
 
-// Show alerts
+// Show local browser notification
 function showLocalNotification(title, body) {
   if (Notification.permission === "granted") {
     new Notification(title, {
@@ -1886,14 +1898,14 @@ function showLocalNotification(title, body) {
   }
 }
 
-// Schedule reminders in SW
+// Schedule reminders in Service Worker
 async function scheduleNotificationsInSW() {
   if ("serviceWorker" in navigator) {
     const reg = await navigator.serviceWorker.ready;
     if ("periodicSync" in reg) {
       try {
         await reg.periodicSync.register("lmd-quotes-reminder", {
-          minInterval: 60 * 60 * 1000
+          minInterval: 60 * 60 * 1000 // hourly fallback
         });
         console.log("Periodic background sync registered.");
       } catch (err) {
@@ -1907,7 +1919,7 @@ async function scheduleNotificationsInSW() {
   }
 }
 
-// Notify modal
+// Notify modal control
 function showNotifyModal(message) {
   document.getElementById("notifyMessage").innerText = message;
   document.getElementById("notifyModal").style.display = "flex";
@@ -1916,8 +1928,8 @@ function closeNotifyModal() {
   document.getElementById("notifyModal").style.display = "none";
 }
 
-// Notification flow
-const COOLDOWN = 24 * 60 * 60 * 1000;
+// Prompt cooldown
+const COOLDOWN = 24 * 60 * 60 * 1000; // 24h
 
 function shouldShowNotifyPrompt() {
   const last = localStorage.getItem("notifyLaterTime");
@@ -1927,23 +1939,57 @@ function shouldShowNotifyPrompt() {
   );
 }
 
+// Allow button handler
 async function handleNotifyAllow() {
   notifyPrompt.style.display = "none";
 
   if (!("Notification" in window)) {
-    showNotifyModal("System doesn't support daily reminders settings!");
+    showNotifyModal("System doesn't support daily reminder notifications!");
     return;
   }
 
+  // Handle WebView separately
+  if (isWebView()) {
+    try {
+      if (window.appilix && window.appilix.postMessage) {
+        window.appilix.postMessage(
+          JSON.stringify({ type: "enable_notifications" })
+        );
+        showNotifyModal("Notifications are handled by your app. ✅");
+        return;
+      } else if (
+        window.AndroidInterface &&
+        typeof window.AndroidInterface.enableNotifications === "function"
+      ) {
+        window.AndroidInterface.enableNotifications();
+        showNotifyModal("Notifications are handled by your app. ✅");
+        return;
+      } else {
+        console.warn("⚠️ WebView detected but no bridge found.");
+        showNotifyModal(
+          "This version of the app doesn’t support direct notifications yet."
+        );
+        return;
+      }
+    } catch (e) {
+      console.error("WebView bridge error:", e);
+      showNotifyModal(
+        "Notification setup failed in this environment. Try using your browser."
+      );
+      return;
+    }
+  }
+
+  // Browser or PWA path
   const permission = await Notification.requestPermission();
   if (permission === "granted") {
-    // Local push
     await scheduleNotificationsInSW();
 
-    // FCM push
     try {
-      const registration = await navigator.serviceWorker.register("/service-worker.js");
-      console.log("✓ SW ready for firebase messaging!");
+      const registration = await navigator.serviceWorker.register(
+        "/service-worker.js"
+      );
+      console.log("✓ SW ready for Firebase messaging!");
 
       const app = firebase.initializeApp({
         apiKey: "AIzaSyDi1-Qxs-lt8ZNGUm5xW3sAr3QgK38OLI4",
@@ -1963,7 +2009,25 @@ async function handleNotifyAllow() {
 
       if (token) {
         console.log("✓ FCM Token:", token);
-        // send to fcf
+        try {
+          const response = await fetch(
+            "https://lmd-fcm.chrisoteme.workers.dev/register",
+            {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ token })
+            }
+          );
+          if (response.ok) {
+            console.log("✓ Token stored in Cloudflare Worker!");
+          } else {
+            console.warn("⚠️ Worker token registration failed:", response.status);
+          }
+        } catch (err) {
+          console.error("⚠️ Failed contacting LMD Worker:", err);
+        }
+      } else {
+        console.warn("⚠️ No FCM token received from Firebase!");
       }
 
       messaging.onMessage((payload) => {
@@ -1973,24 +2037,27 @@ async function handleNotifyAllow() {
       console.error("Firebase messaging setup failed:", err);
     }
 
-    showNotifyModal("Daily reminders and push notifications are enabled!");
+    showNotifyModal("Daily reminder notifications are enabled! ✨");
   } else {
-    showNotifyModal("Notifications are blocked, allow them in sytem settings.");
+    showNotifyModal(
+      "Notifications are blocked. Please allow them in your system settings."
+    );
   }
 
   updateBellColor();
 }
 
+// Later button handler
 function handleNotifyLater() {
   notifyPrompt.style.display = "none";
   localStorage.setItem("notifyLaterTime", Date.now().toString());
 }
 
-// Attach
+// Attach buttons
 enableBtn.onclick = handleNotifyAllow;
 cancelBtn.onclick = handleNotifyLater;
 
-// Auto prompt
+// Auto-prompt on load
 window.addEventListener("load", () => {
   updateBellColor();
   if (shouldShowNotifyPrompt()) {
@@ -1999,7 +2066,7 @@ window.addEventListener("load", () => {
     scheduleNotificationsInSW();
   }
 });
-
+    
 // Android Install Prompt
 let deferredPrompt;
 window.addEventListener("beforeinstallprompt", (e) => {
@@ -2134,6 +2201,137 @@ window.addEventListener("load", () => {
   }
 });
 
+// Save & Share handler
+document.addEventListener("DOMContentLoaded", () => {
+
+  // Detect WebView environment
+  const isWebView = (() => {
+    const ua = navigator.userAgent.toLowerCase();
+    return (
+      ua.includes("wv") || ua.includes("appilix") ||
+      ua.includes("webview") || window.appilix ||
+      (window.ReactNativeWebView !== undefined)
+    );
+  })();
+
+  // Inline home share button
+  function patchInlineShareButton() {
+    const inlineBtn = document.querySelector('button[onclick*="shareQuote"]');
+    if (!inlineBtn) return console.warn("⚠️ Inline shareQuote() button not found");
+    if (typeof shareQuote !== "function") return console.warn("⚠️ shareQuote() not defined yet");
+
+    inlineBtn.addEventListener("click", async (e) => {
+      e.preventDefault();
+      try {
+        const quoteText = `"${document.getElementById('quoteText').textContent}" — ${document.getElementById('quoteAuthor').textContent}`;
+
+        if (navigator.share) {
+          await navigator.share({ title: "LMD Quotes", text: quoteText });
+        } 
+        else if (isWebView && window.appilix) {
+          appilix.postMessage(JSON.stringify({
+            type: 'init_silent_download_and_share',
+            props: { file_url: '', save_as: 'quote.txt', waiting_msg: quoteText }
+          }));
+        } 
+        else if (isWebView && window.ReactNativeWebView) {
+          window.ReactNativeWebView.postMessage(JSON.stringify({
+            action: "share",
+            text: quoteText
+          }));
+        } 
+        else {
+          shareQuote();
+        }
+      } catch (err) {
+        console.error("Error handling inline share:", err);
+      }
+    });
+
+    console.log("✓ Inline Share Button patched successfully");
+  }
+
+  // Loading wait
+  patchInlineShareButton();
+  setTimeout(patchInlineShareButton, 1500);
+
+  // Save & Share handler
+  const imgShareBtn = document.getElementById("share-button");
+  const imgDownloadBtn = document.getElementById("download-button");
+
+  function getQuoteImage() {
+    return document.querySelector(".card img")?.src || null;
+  }
+
+  // Share image
+  async function shareImage() {
+    const imgSrc = getQuoteImage();
+    if (!imgSrc) return alert("No quote image found");
+
+    try {
+      const blob = await fetch(imgSrc).then(r => r.blob());
+      const file = new File([blob], `LMD-${Date.now()}.png`, { type: blob.type });
+
+      if (navigator.canShare && navigator.canShare({ files: [file] })) {
+        await navigator.share({
+          files: [file],
+          title: "LMD Quotes",
+          text: "Your daily dose of motivation 🌞"
+        });
+      } 
+      else if (isWebView && window.appilix) {
+        appilix.postMessage(JSON.stringify({
+          type: 'init_silent_download_and_share',
+          props: { file_url: imgSrc, save_as: `LMD-${Date.now()}.png`, waiting_msg: 'Preparing image...' }
+        }));
+      } 
+      else if (isWebView && window.ReactNativeWebView) {
+        window.ReactNativeWebView.postMessage(JSON.stringify({
+          action: "shareImage",
+          url: imgSrc
+        }));
+      } 
+      else if (navigator.share) {
+        await navigator.share({ title: "LMD Quotes", text: "Motivate your day with LMD Quotes!", url: window.location.href });
+      } 
+      else {
+        const a = document.createElement("a");
+        a.href = URL.createObjectURL(blob);
+        a.download = `LMD-${Date.now()}.png`;
+        a.click();
+        alert("Image downloaded ✓ (sharing not supported!)");
+      }
+
+      console.log("✓ Image shared or downloaded successfully");
+    } catch (err) {
+      console.error("Image share failed!", err);
+    }
+  }
+
+  // Download image
+  async function downloadImage() {
+    const imgSrc = getQuoteImage();
+    if (!imgSrc) return alert("No image to download");
+    try {
+      const blob = await fetch(imgSrc).then(r => r.blob());
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `LMD-${Date.now()}.png`;
+      a.click();
+      URL.revokeObjectURL(url);
+      console.log("✓ Quote image downloaded");
+    } catch (err) {
+      console.error("Download failed:", err);
+    }
+  }
+
+  if (imgShareBtn) imgShareBtn.addEventListener("click", shareImage);
+  if (imgDownloadBtn) imgDownloadBtn.addEventListener("click", downloadImage);
+
+  console.log("🚀 LMD Universal Share Handler active for Browser + WebView");
+});
+	
 </script>
 </body>
 </html>
