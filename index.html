@@ -1858,13 +1858,13 @@ function showSection(sectionId) {
 // Home default
 showSection('home');
 
-// Notifications + PWA Prompts
+// Notifications & PWA Prompts
 const notifyPrompt = document.getElementById("notifyPrompt");
 const enableBtn = document.getElementById("enableNotifyBtn");
 const cancelBtn = document.getElementById("cancelNotifyBtn");
 const bellIcon = document.getElementById("bellIcon");
 
-// Detect WebView environment
+// Detect WebView
 function isWebView() {
   const ua = navigator.userAgent || navigator.vendor || window.opera;
   const isAndroidWebView =
@@ -1917,7 +1917,7 @@ async function scheduleNotificationsInSW() {
   }
 }
 
-// Notify modal control
+// Notify modal
 function showNotifyModal(message) {
   document.getElementById("notifyMessage").innerText = message;
   document.getElementById("notifyModal").style.display = "flex";
@@ -1946,7 +1946,7 @@ async function handleNotifyAllow() {
     return;
   }
 
-  // Handle WebView separately
+  // Webviews handler
   if (isWebView()) {
     try {
       if (window.appilix && window.appilix.postMessage) {
@@ -2026,27 +2026,8 @@ async function handleNotifyAllow() {
         }
       } else {
         console.warn("⚠️ No FCM token received from Firebase!");
-        // send to fcf
-		  try {
-        const response = await fetch("https://lmd-fcm.chrisoteme.workers.dev/register", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ token })
-        });
-
-        if (response.ok) {
-          console.log("✓ Token successfully registered with LMD FCM Worker!");
-        } else {
-          console.warn("⚠️ Token registration failed:", response.status);
-        }
-      } catch (err) {
-        console.error("⚠️ Failed to contact LMD Worker:", err);
       }
-    } else {
-      console.warn("⚠️ No FCM token received from Firebase!");
-	  }
 
-		// Foreground
       messaging.onMessage((payload) => {
         console.log("Message received in foreground:", payload);
       });
@@ -2059,9 +2040,6 @@ async function handleNotifyAllow() {
     showNotifyModal(
       "Notifications are blocked. Please allow them in your system settings."
     );
-    showNotifyModal("Daily reminder notifications are enabled!");
-  } else {
-    showNotifyModal("Notifications are blocked, allow them in sytem settings!");
   }
 
   updateBellColor();
@@ -2080,29 +2058,30 @@ cancelBtn.onclick = handleNotifyLater;
 // Auto-prompt on load
 window.addEventListener("load", () => {
   updateBellColor();
+
   if (shouldShowNotifyPrompt()) {
     notifyPrompt.style.display = "flex";
   } else if (Notification.permission === "granted") {
-  scheduleNotificationsInSW();
-}
+    scheduleNotificationsInSW();
+  }
 
-// Auto prompt for WebViews
-if (isWebView()) {
-  console.log("✓ WebView detected! auto-triggering notification setup.");
-  if (shouldShowNotifyPrompt()) {
-    notifyPrompt.style.display = "flex";
-  } else {
-    try {
-      Notification.requestPermission().then((perm) => {
-        if (perm === "granted") {
-          handleNotifyAllow();
-        }
-      });
-    } catch (e) {
-      console.warn("WebView auto permission request skipped!", e);
+  // Auto prompt for WebViews
+  if (isWebView()) {
+    console.log("✓ WebView detected! auto-triggering notification setup.");
+    if (shouldShowNotifyPrompt()) {
+      notifyPrompt.style.display = "flex";
+    } else {
+      try {
+        Notification.requestPermission().then((perm) => {
+          if (perm === "granted") {
+            handleNotifyAllow();
+          }
+        });
+      } catch (e) {
+        console.warn("WebView auto permission request skipped!", e);
+      }
     }
   }
-}
 });
     
 // Android Install Prompt
@@ -2237,10 +2216,7 @@ window.addEventListener("load", () => {
       .then((reg) => console.log("SW registered successfully!", reg.scope))
       .catch((err) => console.error("SW registration failed!", err));
   }
-});
-
-// Save & Share handler
-	 
+}); 
 </script>
 </body>
 </html>
