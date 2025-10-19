@@ -1864,18 +1864,6 @@ const enableBtn = document.getElementById("enableNotifyBtn");
 const cancelBtn = document.getElementById("cancelNotifyBtn");
 const bellIcon = document.getElementById("bellIcon");
 
-// Detect WebView
-function isWebView() {
-  const ua = navigator.userAgent || navigator.vendor || window.opera;
-  const isAndroidWebView =
-    /\bwv\b/.test(ua) ||
-    /Android.*Version\/[\d.]+.*Chrome\/[.0-9]* Mobile/.test(ua);
-  const isiOSWebView =
-    (window.webkit && window.webkit.messageHandlers) ||
-    /\b(iPhone|iPod|iPad).*AppleWebKit(?!.*Safari)/i.test(ua);
-  return isAndroidWebView || isiOSWebView;
-}
-
 // Bell color
 function updateBellColor() {
   if (Notification.permission === "granted") {
@@ -1885,7 +1873,7 @@ function updateBellColor() {
   }
 }
 
-// Show local browser notification
+// Show alerts
 function showLocalNotification(title, body) {
   if (Notification.permission === "granted") {
     new Notification(title, {
@@ -1896,14 +1884,14 @@ function showLocalNotification(title, body) {
   }
 }
 
-// Schedule reminders in Service Worker
+// Schedule reminders in SW
 async function scheduleNotificationsInSW() {
   if ("serviceWorker" in navigator) {
     const reg = await navigator.serviceWorker.ready;
     if ("periodicSync" in reg) {
       try {
         await reg.periodicSync.register("lmd-quotes-reminder", {
-          minInterval: 60 * 60 * 1000 // hourly fallback
+          minInterval: 60 * 60 * 1000
         });
         console.log("Periodic background sync registered.");
       } catch (err) {
@@ -1926,8 +1914,8 @@ function closeNotifyModal() {
   document.getElementById("notifyModal").style.display = "none";
 }
 
-// Prompt cooldown
-const COOLDOWN = 24 * 60 * 60 * 1000; // 24h
+// Notification flow
+const COOLDOWN = 24 * 60 * 60 * 1000;
 
 function shouldShowNotifyPrompt() {
   const last = localStorage.getItem("notifyLaterTime");
@@ -1937,57 +1925,23 @@ function shouldShowNotifyPrompt() {
   );
 }
 
-// Allow button handler
 async function handleNotifyAllow() {
   notifyPrompt.style.display = "none";
 
   if (!("Notification" in window)) {
-    showNotifyModal("System doesn't support daily reminder notifications!");
+    showNotifyModal("System doesn't support daily reminders settings!");
     return;
   }
 
-  // Webviews handler
-  if (isWebView()) {
-    try {
-      if (window.appilix && window.appilix.postMessage) {
-        window.appilix.postMessage(
-          JSON.stringify({ type: "enable_notifications" })
-        );
-        showNotifyModal("Notifications are handled by your app. ✅");
-        return;
-      } else if (
-        window.AndroidInterface &&
-        typeof window.AndroidInterface.enableNotifications === "function"
-      ) {
-        window.AndroidInterface.enableNotifications();
-        showNotifyModal("Notifications are handled by your app. ✅");
-        return;
-      } else {
-        console.warn("⚠️ WebView detected but no bridge found.");
-        showNotifyModal(
-          "This version of the app doesn’t support direct notifications yet."
-        );
-        return;
-      }
-    } catch (e) {
-      console.error("WebView bridge error:", e);
-      showNotifyModal(
-        "Notification setup failed in this environment. Try using your browser."
-      );
-      return;
-    }
-  }
-
-  // Browser or PWA path
   const permission = await Notification.requestPermission();
   if (permission === "granted") {
+    // Local push
     await scheduleNotificationsInSW();
 
+    // FCM push
     try {
-      const registration = await navigator.serviceWorker.register(
-        "/service-worker.js"
-      );
-      console.log("✓ SW ready for Firebase messaging!");
+      const registration = await navigator.serviceWorker.register("/service-worker.js");
+      console.log("✓ SW ready for firebase messaging!");
 
       const app = firebase.initializeApp({
         apiKey: "AIzaSyDi1-Qxs-lt8ZNGUm5xW3sAr3QgK38OLI4",
@@ -2007,27 +1961,27 @@ async function handleNotifyAllow() {
 
       if (token) {
         console.log("✓ FCM Token:", token);
-        try {
-          const response = await fetch(
-            "https://lmd-fcm.chrisoteme.workers.dev/register",
-            {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({ token })
-            }
-          );
-          if (response.ok) {
-            console.log("✓ Token stored in Cloudflare Worker!");
-          } else {
-            console.warn("⚠️ Worker token registration failed:", response.status);
-          }
-        } catch (err) {
-          console.error("⚠️ Failed contacting LMD Worker:", err);
-        }
-      } else {
-        console.warn("⚠️ No FCM token received from Firebase!");
-      }
+        // send to fcf
+		  try {
+        const response = await fetch("https://lmd-fcm.chrisoteme.workers.dev/register", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ token })
+        });
 
+        if (response.ok) {
+          console.log("✓ Token successfully registered with LMD FCM Worker!");
+        } else {
+          console.warn("⚠️ Token registration failed:", response.status);
+        }
+      } catch (err) {
+        console.error("⚠️ Failed to contact LMD Worker:", err);
+      }
+    } else {
+      console.warn("⚠️ No FCM token received from Firebase!");
+	  }
+
+		// Foreground
       messaging.onMessage((payload) => {
         console.log("Message received in foreground:", payload);
       });
@@ -2035,52 +1989,30 @@ async function handleNotifyAllow() {
       console.error("Firebase messaging setup failed:", err);
     }
 
-    showNotifyModal("Daily reminder notifications are enabled! ✨");
+    showNotifyModal("Daily reminder notifications are enabled!");
   } else {
-    showNotifyModal(
-      "Notifications are blocked. Please allow them in your system settings."
-    );
+    showNotifyModal("Notifications are blocked, allow them in sytem settings!");
   }
 
   updateBellColor();
 }
 
-// Later button handler
 function handleNotifyLater() {
   notifyPrompt.style.display = "none";
   localStorage.setItem("notifyLaterTime", Date.now().toString());
 }
 
-// Attach buttons
+// Attach
 enableBtn.onclick = handleNotifyAllow;
 cancelBtn.onclick = handleNotifyLater;
 
-// Auto-prompt on load
+// Auto prompt
 window.addEventListener("load", () => {
   updateBellColor();
-
   if (shouldShowNotifyPrompt()) {
     notifyPrompt.style.display = "flex";
   } else if (Notification.permission === "granted") {
     scheduleNotificationsInSW();
-  }
-
-  // Auto prompt for WebViews
-  if (isWebView()) {
-    console.log("✓ WebView detected! auto-triggering notification setup.");
-    if (shouldShowNotifyPrompt()) {
-      notifyPrompt.style.display = "flex";
-    } else {
-      try {
-        Notification.requestPermission().then((perm) => {
-          if (perm === "granted") {
-            handleNotifyAllow();
-          }
-        });
-      } catch (e) {
-        console.warn("WebView auto permission request skipped!", e);
-      }
-    }
   }
 });
     
