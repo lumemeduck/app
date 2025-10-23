@@ -1827,16 +1827,6 @@ function closeSidebar() {
 // Add event listener to the menu button
 document.getElementById('menuButton').addEventListener('click', openSidebar);
 
-// Generated image backButton
- function goBackHome(event) {
-  event?.stopPropagation();
-  try {
-    showSection('home');
-  } catch {
-    window.location.reload();
-  }
-}
-
 // Function to show a specific section
 function showSection(sectionId) {
   // Hide all sections
@@ -2157,5 +2147,27 @@ window.addEventListener("load", () => {
   }
 }); 
 </script>
+				
+ <script>
+ // Generated image back button 
+ function goBackHome(event) {
+  if (event) event.stopPropagation(); 
+
+  if (typeof showSection === 'function') {
+    try { 
+      showSection('home'); 
+      return; 
+    } catch (err) { 
+      console.warn('Appilix showSection failed:', err); 
+    }
+  }
+
+  if (window.history.length > 1) {
+    window.history.go(-window.history.length + 1);
+  } else {
+    console.warn('No history, cannot navigate back safely in PWA.');
+  }
+}
+ </script>
 </body>
 </html>
