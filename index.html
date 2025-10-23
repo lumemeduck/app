@@ -1483,7 +1483,7 @@ ctx.textBaseline = 'alphabetic';
         <p style="width:100%;font-size:14px;opacity:0.5;color:#002d5d;align-items:center;justify-content:center;position:relative;animation:fadeInCard 0.3s ease forwards;">
           💖 <b>save</b> to device or <b>share</b> to socials 💝
         </p>
-		<button class="btn btn-accent" id="backButton" onclick="goBackHome(event)" style="margin-bottom:10px;">く Back</button>
+		<button class="btn btn-accent" id="backButton" style="margin-bottom:10px;">く Back</button>
       </div><br>
       <div class="footnote"></div>
       <div class="ad-container" aria-live="polite">
@@ -1503,6 +1503,9 @@ ctx.textBaseline = 'alphabetic';
       shareImage(dataURL);
     });
     // Back button
+	document.getElementById('backButton').addEventListener('click', () => {
+      window.location.reload();
+    });
   }, 2000);
  }
 }
@@ -2146,28 +2149,6 @@ window.addEventListener("load", () => {
       .catch((err) => console.error("SW registration failed!", err));
   }
 }); 
-</script>
-				
- <script>
- // Generated image button
- function goBackHome(event) {
-  if (event) event.stopPropagation();
-
-  if (typeof showSection === 'function') {
-    try { 
-      showSection('home'); 
-      return; 
-    } catch (err) { 
-      console.warn('Appilix showSection failed:', err); 
-    }
-  }
-
-  try {
-    window.location.reload();
-  } catch (err) {
-    console.warn('Fallback reload failed:', err);
-  }
-}
 </script>
 </body>
 </html>
