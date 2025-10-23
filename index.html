@@ -1506,10 +1506,10 @@ ctx.textBaseline = 'alphabetic';
     document.getElementById('backButton').addEventListener('click', () => {
       setTimeout(() => {
     try {
-      window.location.href = 'https://app.lumemeduck.xyz/#home';
+      window.location.href = '#home';
     } catch (e) {
       console.error('Redirect failed:', e);
-      window.location.assign('/');
+      window.location.assign('#home');
     }
     }, 500);
     });
