@@ -1504,7 +1504,14 @@ ctx.textBaseline = 'alphabetic';
     });
     // Back button
     document.getElementById('backButton').addEventListener('click', () => {
-      window.location.reload();
+      setTimeout(() => {
+        try {
+          window.location.href = window.location.href;
+        } catch (e) {
+          console.error('Back navigation failed:', e);
+          window.location.reload();
+        }
+      }, 500);
     });
   }, 2000);
 }
