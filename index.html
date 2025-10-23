@@ -1505,13 +1505,13 @@ ctx.textBaseline = 'alphabetic';
     // Back button
     document.getElementById('backButton').addEventListener('click', () => {
       setTimeout(() => {
-        try {
-          window.location.href = window.location.href;
-        } catch (e) {
-          console.error('Back navigation failed:', e);
-          window.location.reload();
-        }
-      }, 500);
+    try {
+      window.location.href = 'https://app.lumemeduck.xyz/';
+    } catch (e) {
+      console.error('Redirect failed:', e);
+      window.location.assign('/');
+    }
+    }, 500);
     });
   }, 2000);
 }
