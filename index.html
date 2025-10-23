@@ -1483,7 +1483,7 @@ ctx.textBaseline = 'alphabetic';
         <p style="width:100%;font-size:14px;opacity:0.5;color:#002d5d;align-items:center;justify-content:center;position:relative;animation:fadeInCard 0.3s ease forwards;">
           💖 <b>save</b> to device or <b>share</b> to socials 💝
         </p>
-		<button class="btn btn-accent" id="backButton" style="margin-bottom:10px;">く Back</button>
+		<button class="btn btn-accent" id="backButton" onclick="goBackHome(event)" style="margin-bottom:10px;">く Back</button>
       </div><br>
       <div class="footnote"></div>
       <div class="ad-container" aria-live="polite">
@@ -1503,9 +1503,6 @@ ctx.textBaseline = 'alphabetic';
       shareImage(dataURL);
     });
     // Back button
-    document.getElementById('backButton').addEventListener('click', () => {
-      window.location.reload();
-    });
   }, 2000);
  }
 }
@@ -1829,6 +1826,16 @@ function closeSidebar() {
 
 // Add event listener to the menu button
 document.getElementById('menuButton').addEventListener('click', openSidebar);
+
+// Generated image backButton
+ function goBackHome(event) {
+  event?.stopPropagation();
+  try {
+    showSection('home');
+  } catch {
+    window.location.reload();
+  }
+}
 
 // Function to show a specific section
 function showSection(sectionId) {
