@@ -1506,15 +1506,15 @@ ctx.textBaseline = 'alphabetic';
     document.getElementById('backButton').addEventListener('click', () => {
       setTimeout(() => {
     try {
-      window.location.href = '#home';
+      document.body.innerHTML = '';
+      window.location.reload();
     } catch (e) {
-      console.error('Redirect failed:', e);
-      window.location.assign('#home');
+      window.location.reload();
     }
     }, 500);
-    });
+   });
   }, 2000);
-}
+ }
 }
     
 // Download (browser or webview)
