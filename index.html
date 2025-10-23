@@ -1504,14 +1504,7 @@ ctx.textBaseline = 'alphabetic';
     });
     // Back button
     document.getElementById('backButton').addEventListener('click', () => {
-      setTimeout(() => {
-    try {
-      window.open('https://app.lumemeduck.xyz/?from=back', '_top');
-    } catch (err) {
-      console.error('Navigation failed:', err);
-      window.location.assign('https://app.lumemeduck.xyz/?from=back');
-    }
-    }, 800);
+      window.location.reload();
     });
   }, 2000);
  }
