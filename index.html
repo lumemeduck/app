@@ -2149,9 +2149,9 @@ window.addEventListener("load", () => {
 </script>
 				
  <script>
- // Generated image back button 
+ // Generated image button
  function goBackHome(event) {
-  if (event) event.stopPropagation(); 
+  if (event) event.stopPropagation();
 
   if (typeof showSection === 'function') {
     try { 
@@ -2162,12 +2162,12 @@ window.addEventListener("load", () => {
     }
   }
 
-  if (window.history.length > 1) {
-    window.history.go(-window.history.length + 1);
-  } else {
-    console.warn('No history, cannot navigate back safely in PWA.');
+  try {
+    window.location.reload();
+  } catch (err) {
+    console.warn('Fallback reload failed:', err);
   }
 }
- </script>
+</script>
 </body>
 </html>
