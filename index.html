@@ -514,7 +514,7 @@
 </div>
   <!-- Bottom Menu -->
 <div class="bottom-menu">
-  <button type="button" class="menu-item active" onclick="window.location.href = window.location.href">
+  <button type="button" class="menu-item active" onclick="showSection('home')">
     <i class="fas fa-home"></i>
     <span>Home</span>
   </button>
@@ -1832,6 +1832,11 @@ document.getElementById('menuButton').addEventListener('click', openSidebar);
 
 // Function to show a specific section
 function showSection(sectionId) {
+  if (sectionId === 'home') {
+    window.location.href = window.location.href;
+    return;
+  }
+
   // Hide all sections
   document.querySelectorAll('.view').forEach(section => {
     section.style.display = 'none';
