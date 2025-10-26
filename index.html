@@ -1859,7 +1859,7 @@ function showSection(sectionId) {
 showSection('home');
 
 // Home reload
-document.querySelector('.menu-item[onclick*="home"]').addEventListener('click', () => {
+document.querySelector('.menu-item active[onclick*="home"]').addEventListener('click', () => {
   window.location.href = window.location.href;
 });
 
