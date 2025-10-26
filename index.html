@@ -1832,11 +1832,6 @@ document.getElementById('menuButton').addEventListener('click', openSidebar);
 
 // Function to show a specific section
 function showSection(sectionId) {
-  if (sectionId === 'home') {
-    window.location.href = window.location.href;
-    return;
-  }
-
   // Hide all sections
   document.querySelectorAll('.view').forEach(section => {
     section.style.display = 'none';
@@ -1862,6 +1857,11 @@ function showSection(sectionId) {
 
 // Home default
 showSection('home');
+
+// Home reload
+document.querySelector('.menu-item[onclick*="home"]').addEventListener('click', () => {
+  window.location.href = window.location.href;
+});
 
 // Notifications & PWA Prompts
 const notifyPrompt = document.getElementById("notifyPrompt");
