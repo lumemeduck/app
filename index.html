@@ -1833,7 +1833,7 @@ function closeShare() {
 }
 document.addEventListener('DOMContentLoaded', init);
 
-// Open the sidebar
+// Open sidebar menu
 function showSection(sectionId) {
   document.querySelectorAll('.view').forEach(section => {
     section.style.display = 'none';
@@ -1841,9 +1841,10 @@ function showSection(sectionId) {
 
   const section = document.getElementById(sectionId);
   if (section) section.style.display = 'block';
+}
 
-   // Close sidebar on screen touch
-  document.addEventListener('click', function(event) {
+// Close sidebar on screen touch
+document.addEventListener('click', function(event) {
   const sidebar = document.getElementById('sidebar');
   const menuButton = document.getElementById('menuButton');
   if (sidebar && sidebar.style.display === 'flex') {
@@ -1853,37 +1854,37 @@ function showSection(sectionId) {
   }
 });
 
-// Function to open the sidebar
+// Open sidebar
 function openSidebar() {
   document.getElementById('sidebar').style.display = 'flex';
 }
 
-// Function to close the sidebar
+// Close sidebar
 function closeSidebar() {
   document.getElementById('sidebar').style.display = 'none';
 }
 
-// Add event listener to the menu button
+// Event listener
 document.getElementById('menuButton').addEventListener('click', openSidebar);
 
-// Function to show a specific section
+// Specific section
 function showSection(sectionId) {
   document.querySelectorAll('.view').forEach(section => {
     section.style.display = 'none';
   });
 
-  // Show the selected section
+  // Show selected
   const section = document.getElementById(sectionId);
   if (section) {
     section.style.display = 'block';
   }
 
-  // Remove active class from all menu items
+  // Remove active class
   document.querySelectorAll('.menu-item').forEach(item => {
     item.classList.remove('active');
   });
 
-  // Add active class to the clicked menu item
+  // Add active class
   const clickedItem = document.querySelector(`.menu-item[onclick*="${sectionId}"]`);
   if (clickedItem) {
     clickedItem.classList.add('active');
