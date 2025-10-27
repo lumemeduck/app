@@ -529,24 +529,24 @@
   </div>
 </div>
   <!-- Bottom Menu -->
- <div class="bottom-menu">
-  <button type="button" class="menu-item active" data-section="home">
+<div class="bottom-menu">
+  <button type="button" class="menu-item active" onclick="showSection('home')">
     <i class="fas fa-home"></i>
     <span>Home</span>
   </button>
-  <button type="button" class="menu-item" data-section="streak">
+  <button type="button" class="menu-item" onclick="showSection('streak')">
     <i class="fa-solid fa-calendar-check"></i>
     <span>Streak</span>
   </button>
-  <button type="button" class="menu-item" data-section="trivia">
+  <button type="button" class="menu-item" onclick="showSection('trivia')">
     <i class="fas fa-question-circle"></i>
     <span>Trivia</span>
   </button>
-  <button type="button" class="menu-item" data-section="game">
+  <button type="button" class="menu-item" onclick="showSection('game')">
     <i class="fas fa-gamepad"></i>
     <span>Game</span>
   </button>
- </div>
+</div>
 
   <header>
     <div class="nav">
@@ -1853,37 +1853,45 @@ function showSection(sectionId) {
   }
 });
 
-  // Bottom menu active highlight
-  document.querySelectorAll('.menu-item').forEach(item => item.classList.remove('active'));
-  const clickedItem = document.querySelector(`.menu-item[data-section="${sectionId}"]`);
-  if (clickedItem) clickedItem.classList.add('active');
-}
+// Function to open the sidebar
 function openSidebar() {
   document.getElementById('sidebar').style.display = 'flex';
 }
+
+// Function to close the sidebar
 function closeSidebar() {
   document.getElementById('sidebar').style.display = 'none';
 }
-document.addEventListener("DOMContentLoaded", () => {
-  const menuButton = document.getElementById('menuButton');
-  if (menuButton) menuButton.addEventListener('click', openSidebar);
-  
- // Bottom menu
-  document.querySelectorAll('.menu-item').forEach(button => {
-    button.addEventListener('click', () => {
-      const sectionId = button.getAttribute('data-section');
-		
-      if (sectionId === 'home') {
-        window.location.reload();
-      } else {
-        showSection(sectionId);
-      }
-    });
+
+// Add event listener to the menu button
+document.getElementById('menuButton').addEventListener('click', openSidebar);
+
+// Function to show a specific section
+function showSection(sectionId) {
+  document.querySelectorAll('.view').forEach(section => {
+    section.style.display = 'none';
   });
 
-  // Show home
-  showSection('home');
-});
+  // Show the selected section
+  const section = document.getElementById(sectionId);
+  if (section) {
+    section.style.display = 'block';
+  }
+
+  // Remove active class from all menu items
+  document.querySelectorAll('.menu-item').forEach(item => {
+    item.classList.remove('active');
+  });
+
+  // Add active class to the clicked menu item
+  const clickedItem = document.querySelector(`.menu-item[onclick*="${sectionId}"]`);
+  if (clickedItem) {
+    clickedItem.classList.add('active');
+  }
+}
+
+// Home default
+showSection('home');
 
 // Notifications & PWA Prompts
 const notifyPrompt = document.getElementById("notifyPrompt");
