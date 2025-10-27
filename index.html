@@ -284,7 +284,23 @@
    .btn-ok:hover { transform: translateY(-1px); border-color: var(--ring); box-shadow: 0 12px 40px rgba(99,102,241,.14); }
    .btn-cancel:hover{ transform: translateY(-1px); border-color: var(--ring); box-shadow: 0 12px 40px rgba(99,102,241,.14); }
     
-   .sidebar {
+ .menu-button {
+  background: none;
+  border: none;
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: none;
+  z-index: 1000;
+}
+
+ .menu-button i {
+  color: #002d5d;
+  font-size: 1.6rem;
+  pointer-events: none;
+}
+  .sidebar {
   position: fixed;
   top: 0;
   left: 0;
@@ -534,8 +550,8 @@
 
   <header>
     <div class="nav">
-      <button type="button" id="menuButton" title="Menu" style="background:none;border:none;cursor:none;">
-        <i class="fas fa-bars" style="font-size:24px;color:#002d5d;"></i>
+      <button type="button" class="menu-button" id="menuButton" title="Menu">
+        <i class="fas fa-bars"></i>
       </button>
       <div class="brand" role="button" onclick="Router.go('#home')" title="Go Home">
         <img src="icons/icon-72.png" alt="logo" height= "26px" width= "26px">
