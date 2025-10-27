@@ -284,7 +284,23 @@
    .btn-ok:hover { transform: translateY(-1px); border-color: var(--ring); box-shadow: 0 12px 40px rgba(99,102,241,.14); }
    .btn-cancel:hover{ transform: translateY(-1px); border-color: var(--ring); box-shadow: 0 12px 40px rgba(99,102,241,.14); }
     
-   .sidebar {
+ .menu-button {
+  background: none;
+  border: none;
+  padding: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: none;
+  z-index: 1000;
+}
+
+ .menu-button i {
+  color: #002d5d;
+  font-size: 1.5rem;
+  pointer-events: none;
+}
+  .sidebar {
   position: fixed;
   top: 0;
   left: 0;
@@ -475,7 +491,7 @@
     <button type="button" class="btn btn-accent" id="enableNotifyBtn">Allow</button>
   </div>
 </div>
-  <!-- Pop up menu -->
+  <!-- Sidebar menu -->
   <div id="sidebar" class="sidebar" style="display:none;">
   <div class="sidebar-content">
     <a href="#" onclick="showSection('about'); closeSidebar();">About</a>
@@ -513,29 +529,29 @@
   </div>
 </div>
   <!-- Bottom Menu -->
-<div class="bottom-menu">
-  <button type="button" class="menu-item active" onclick="showSection('home')">
+ <div class="bottom-menu">
+  <button type="button" class="menu-item active" data-section="home">
     <i class="fas fa-home"></i>
     <span>Home</span>
   </button>
-  <button type="button" class="menu-item" onclick="showSection('streak')">
+  <button type="button" class="menu-item" data-section="streak">
     <i class="fa-solid fa-calendar-check"></i>
     <span>Streak</span>
   </button>
-  <button type="button" class="menu-item" onclick="showSection('trivia')">
+  <button type="button" class="menu-item" data-section="trivia">
     <i class="fas fa-question-circle"></i>
     <span>Trivia</span>
   </button>
-  <button type="button" class="menu-item" onclick="showSection('game')">
+  <button type="button" class="menu-item" data-section="game">
     <i class="fas fa-gamepad"></i>
     <span>Game</span>
   </button>
-</div>
+ </div>
 
   <header>
     <div class="nav">
-      <button type="button" id="menuButton" title="Menu" style="background:none;border:none;cursor:none;">
-        <i class="fas fa-bars" style="font-size:24px;color:#002d5d;"></i>
+      <button type="button" class="menu-button" id="menuButton" title="Menu">
+        <i class="fas fa-bars"></i>
       </button>
       <div class="brand" role="button" onclick="Router.go('#home')" title="Go Home">
         <img src="icons/icon-72.png" alt="logo" height= "26px" width= "26px">
@@ -1794,14 +1810,14 @@ document.body.appendChild(toast);
 // Remove after fade
 setTimeout(() => document.body.removeChild(toast), 2500);
 
-// Optional CSS keyframe
+// Keyframe
 const style = document.createElement('style');
 style.textContent = '@keyframes fade{0%{opacity:1}80%{opacity:1}100%{opacity:0}}';
 document.head.appendChild(style);
       closeShare();
     })
     .catch(() => {
-      // last resort fallback for *very* old WebViews
+      // Old webviews
       const ta = document.createElement('textarea');
       ta.value = text; ta.style.position='fixed'; ta.style.opacity=0;
       document.body.appendChild(ta); ta.select();
@@ -1817,46 +1833,57 @@ function closeShare() {
 }
 document.addEventListener('DOMContentLoaded', init);
 
-// Function to open the sidebar
-function openSidebar() {
-  document.getElementById('sidebar').style.display = 'flex';
-}
-
-// Function to close the sidebar
-function closeSidebar() {
-  document.getElementById('sidebar').style.display = 'none';
-}
-
-// Add event listener to the menu button
-document.getElementById('menuButton').addEventListener('click', openSidebar);
-
-// Function to show a specific section
+// Open the sidebar
 function showSection(sectionId) {
-  // Hide all sections
   document.querySelectorAll('.view').forEach(section => {
     section.style.display = 'none';
   });
 
-  // Show the selected section
   const section = document.getElementById(sectionId);
-  if (section) {
-    section.style.display = 'block';
-  }
+  if (section) section.style.display = 'block';
 
-  // Remove active class from all menu items
-  document.querySelectorAll('.menu-item').forEach(item => {
-    item.classList.remove('active');
+   // Close sidebar on screen touch
+  document.addEventListener('click', function(event) {
+  const sidebar = document.getElementById('sidebar');
+  const menuButton = document.getElementById('menuButton');
+  if (sidebar && sidebar.style.display === 'flex') {
+    if (!sidebar.contains(event.target) && event.target !== menuButton) {
+      closeSidebar();
+    }
+  }
+});
+
+  // Bottom menu active highlight
+  document.querySelectorAll('.menu-item').forEach(item => item.classList.remove('active'));
+  const clickedItem = document.querySelector(`.menu-item[data-section="${sectionId}"]`);
+  if (clickedItem) clickedItem.classList.add('active');
+}
+function openSidebar() {
+  document.getElementById('sidebar').style.display = 'flex';
+}
+function closeSidebar() {
+  document.getElementById('sidebar').style.display = 'none';
+}
+document.addEventListener("DOMContentLoaded", () => {
+  const menuButton = document.getElementById('menuButton');
+  if (menuButton) menuButton.addEventListener('click', openSidebar);
+  
+ // Bottom menu
+  document.querySelectorAll('.menu-item').forEach(button => {
+    button.addEventListener('click', () => {
+      const sectionId = button.getAttribute('data-section');
+		
+      if (sectionId === 'home') {
+        window.location.reload();
+      } else {
+        showSection(sectionId);
+      }
+    });
   });
 
-  // Add active class to the clicked menu item
-  const clickedItem = document.querySelector(`.menu-item[onclick*="${sectionId}"]`);
-  if (clickedItem) {
-    clickedItem.classList.add('active');
-  }
-}
-
-// Home default
-showSection('home');
+  // Show home
+  showSection('home');
+});
 
 // Notifications & PWA Prompts
 const notifyPrompt = document.getElementById("notifyPrompt");
