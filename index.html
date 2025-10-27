@@ -1840,6 +1840,17 @@ function closeSidebar() {
 document.addEventListener("DOMContentLoaded", () => {
   const menuButton = document.getElementById('menuButton');
   if (menuButton) menuButton.addEventListener('click', openSidebar);
+
+ // Close sidebar on screen touch
+document.addEventListener('click', function(event) {
+  const sidebar = document.getElementById('sidebar');
+  const menuButton = document.getElementById('menuButton');
+  if (sidebar && sidebar.style.display === 'flex') {
+    if (!sidebar.contains(event.target) && event.target !== menuButton) {
+      closeSidebar();
+    }
+  }
+});
   
  // Bottom menu
   document.querySelectorAll('.menu-item').forEach(button => {
