@@ -475,7 +475,7 @@
     <button type="button" class="btn btn-accent" id="enableNotifyBtn">Allow</button>
   </div>
 </div>
-  <!-- Pop up menu -->
+  <!-- Sidebar menu -->
   <div id="sidebar" class="sidebar" style="display:none;">
   <div class="sidebar-content">
     <a href="#" onclick="showSection('about'); closeSidebar();">About</a>
@@ -1794,14 +1794,14 @@ document.body.appendChild(toast);
 // Remove after fade
 setTimeout(() => document.body.removeChild(toast), 2500);
 
-// Optional CSS keyframe
+// Keyframe
 const style = document.createElement('style');
 style.textContent = '@keyframes fade{0%{opacity:1}80%{opacity:1}100%{opacity:0}}';
 document.head.appendChild(style);
       closeShare();
     })
     .catch(() => {
-      // last resort fallback for *very* old WebViews
+      // Old webviews
       const ta = document.createElement('textarea');
       ta.value = text; ta.style.position='fixed'; ta.style.opacity=0;
       document.body.appendChild(ta); ta.select();
@@ -1817,39 +1817,35 @@ function closeShare() {
 }
 document.addEventListener('DOMContentLoaded', init);
 
-// Function to open the sidebar
+// Open the sidebar
+function showSection(sectionId) {
+  document.querySelectorAll('.view').forEach(section => {
+    section.style.display = 'none';
+  });
+
+  const section = document.getElementById(sectionId);
+  if (section) section.style.display = 'block';
+
+  // Bottom menu active highlight
+  document.querySelectorAll('.menu-item').forEach(item => item.classList.remove('active'));
+  const clickedItem = document.querySelector(`.menu-item[data-section="${sectionId}"]`);
+  if (clickedItem) clickedItem.classList.add('active');
+}
 function openSidebar() {
   document.getElementById('sidebar').style.display = 'flex';
 }
-
-// Function to close the sidebar
 function closeSidebar() {
   document.getElementById('sidebar').style.display = 'none';
 }
-
-// Add event listener to the menu button
-document.getElementById('menuButton').addEventListener('click', openSidebar);
-
-// Function to show a specific section
 document.addEventListener("DOMContentLoaded", () => {
+  const menuButton = document.getElementById('menuButton');
+  if (menuButton) menuButton.addEventListener('click', openSidebar);
   
-  function showSection(sectionId) {
-    document.querySelectorAll('.view').forEach(section => {
-      section.style.display = 'none';
-    });
-
-    const section = document.getElementById(sectionId);
-    if (section) section.style.display = 'block';
-
-    document.querySelectorAll('.menu-item').forEach(item => item.classList.remove('active'));
-    const clickedItem = document.querySelector(`.menu-item[data-section="${sectionId}"]`);
-    if (clickedItem) clickedItem.classList.add('active');
-  }
-  // Click listeners
+ // Bottom menu
   document.querySelectorAll('.menu-item').forEach(button => {
     button.addEventListener('click', () => {
       const sectionId = button.getAttribute('data-section');
-
+		
       if (sectionId === 'home') {
         window.location.reload();
       } else {
@@ -1857,7 +1853,8 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   });
-  // Home default
+
+  // Show home
   showSection('home');
 });
 
