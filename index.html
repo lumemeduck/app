@@ -1468,10 +1468,10 @@ console.log(`Today's LMD mood: ${mood.toUpperCase()}`);
 
   // Title/brand
   ctx.font = "bold 36px system-ui, Segoe UI, Roboto, Arial";
-  ctx.fillStyle = "#fff";
+  ctx.fillStyle = "#002d5d";
   ctx.fillText("LMD Quotes", cardX + 40, cardY + 70);
   ctx.font = "600 22px system-ui, Segoe UI, Roboto, Arial";
-  ctx.fillStyle = "#eef1ff";
+  ctx.fillStyle = "#dadef0";
   const dateStr = new Date().toLocaleDateString(undefined, { weekday:'short', month:'short', day:'numeric', year:'numeric' });
   ctx.fillText(dateStr, cardX + 40, cardY + 100);
 
@@ -1479,7 +1479,7 @@ console.log(`Today's LMD mood: ${mood.toUpperCase()}`);
   const quote  = document.getElementById('quoteText').textContent.replace(/[“”]/g, '');
 const author = document.getElementById('quoteAuthor').textContent;
 ctx.font = '800 46px system-ui, Segoe UI, Roboto, Arial';
-ctx.fillStyle = '#fff';
+ctx.fillStyle = '#002d5d';
 ctx.textAlign = 'center';
 ctx.textBaseline = 'middle';
 const quoteLines = wrapText(ctx, quote, cardW - 120);
@@ -1494,7 +1494,7 @@ quoteLines.forEach((line, i) => {
 
   // Author line
 ctx.font      = '600 30px system-ui';
-ctx.fillStyle = '#fff';
+ctx.fillStyle = '#002d5d';
 ctx.textAlign = 'right';               
 ctx.fillText(
   authorLine,
@@ -1508,7 +1508,7 @@ ctx.textBaseline = 'alphabetic';
 
   // Footer mark
   ctx.font = "700 20px system-ui, Segoe UI, Roboto, Arial";
-  ctx.fillStyle = "#fff";
+  ctx.fillStyle = "#002d5d";
   ctx.fillText("🌐 app.lumemeduck.xyz", cardX + 40, cardY + cardH - 50);
 
   // Decorative corner sun
