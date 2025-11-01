@@ -792,22 +792,14 @@
 
     <!-- Content -->
     <div id="result-container" style="display:none;flex-direction:column;gap:20px;align-items:center;justify-content:center;text-align:center;">
-      <h3 id="generated-title" style="font-size:18px;color:#002d5d;">
-        <i class="fa fa-check" style="font-size:22px;color:#22c55e;"></i> Image Generated!
-      </h3>
-      <img id="generatedImage" alt="Generated Quote" style="width:100%;max-width:700px;box-shadow:0 0 10px rgba(0,0,0,0.05);" />
-      
+      <img id="generatedImage" alt="Generated Quote" style="width:100%;max-width:700px;box-shadow:0 0 10px rgba(0,0,0,0.05);" />     
       <div class="row" style="display:flex;width:90%;align-items:center;justify-content:space-between;">
         <button class="btn" id="download-button"><i class="fas fa-download"></i> Save</button>
         <button class="btn" id="share-button"><i class="fas fa-share"></i> Share</button>
       </div>
-
-      <p style="width:100%;font-size:14px;opacity:0.5;color:#002d5d;">💖 <b>save</b> to device or <b>share</b> to socials 💝</p>
-
-      <button class="btn btn-accent" onclick="showSection('home')" style="margin-top:10px;">く Back</button>
+      <p style="width:100%;font-size:14px;color:#002d5d;">💖 <b>save</b> to device or <b>share</b> to socials 💝</p>
     </div>
   </article>
-
   <div class="footnote"></div>
   <div class="ad-container" aria-live="polite">
     <div class="ad-slot">
@@ -1494,20 +1486,6 @@ ctx.fillStyle = "rgba(0,0,0,0.0)";
 ctx.fillRect(0, 0, W, H);
 
 console.log(`Today's LMD mood: ${mood.toUpperCase()}`);
-
-// Smooth fade-in 
-let opacity = 1.0;
-function fadeIn() {
-  ctx.save();
-  ctx.globalAlpha = opacity;
-  ctx.fillStyle = "#fefefe";
-  ctx.fillRect(0, 0, W, H);
-  ctx.restore();
-  
-  opacity -= 0.04;
-  if (opacity > 0) requestAnimationFrame(fadeIn);
-}
-fadeIn();
 
   // Card
   const pad = 64;
