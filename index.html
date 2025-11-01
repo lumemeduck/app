@@ -1460,7 +1460,7 @@ console.log(`Today's LMD mood: ${mood.toUpperCase()}`);
   const cardR = 32;
   const cardX = pad, cardY = pad, cardW = W - pad*2, cardH = H - pad*2;
   roundRect(ctx, cardX, cardY, cardW, cardH, cardR);
-  ctx.fillStyle = "rgba(0,0,0,0.05)";
+  ctx.fillStyle = "rgba(0,0,0,0.03)";
   ctx.fill();
   ctx.strokeStyle = "rgba(255,255,255,0.20)";
   ctx.lineWidth = 2;
@@ -1468,7 +1468,7 @@ console.log(`Today's LMD mood: ${mood.toUpperCase()}`);
 
   // Title/brand
   ctx.font = "bold 36px system-ui, Segoe UI, Roboto, Arial";
-  ctx.fillStyle = "#eef1ff";
+  ctx.fillStyle = "#ffffff";
   ctx.fillText("LMD Quotes", cardX + 40, cardY + 70);
   ctx.font = "600 22px system-ui, Segoe UI, Roboto, Arial";
   ctx.fillStyle = "#eef1ff";
@@ -1479,7 +1479,7 @@ console.log(`Today's LMD mood: ${mood.toUpperCase()}`);
   const quote  = document.getElementById('quoteText').textContent.replace(/[“”]/g, '');
 const author = document.getElementById('quoteAuthor').textContent;
 ctx.font = '800 46px system-ui, Segoe UI, Roboto, Arial';
-ctx.fillStyle = '#eef1ff';
+ctx.fillStyle = '#ffffff';
 ctx.textAlign = 'center';
 ctx.textBaseline = 'middle';
 const quoteLines = wrapText(ctx, quote, cardW - 120);
@@ -1494,7 +1494,7 @@ quoteLines.forEach((line, i) => {
 
   // Author line
 ctx.font      = '600 30px system-ui';
-ctx.fillStyle = '#eef1ff';
+ctx.fillStyle = '#ffffff';
 ctx.textAlign = 'right';               
 ctx.fillText(
   authorLine,
@@ -1508,7 +1508,7 @@ ctx.textBaseline = 'alphabetic';
 
   // Footer mark
   ctx.font = "700 20px system-ui, Segoe UI, Roboto, Arial";
-  ctx.fillStyle = "#eef1ff";
+  ctx.fillStyle = "#ffffff";
   ctx.fillText("🌐 app.lumemeduck.xyz", cardX + 40, cardY + cardH - 50);
 
   // Decorative corner sun
