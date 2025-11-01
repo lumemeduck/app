@@ -1450,7 +1450,7 @@ glow2.addColorStop(1, "rgba(0,0,0,0)");
 ctx.fillStyle = glow2;
 ctx.fillRect(0, 0, W, H);
 
-ctx.fillStyle = "rgba(255,255,255,0.0)";
+ctx.fillStyle = "rgba(0,0,0,0.0)";
 ctx.fillRect(0, 0, W, H);
 
 console.log(`Today's LMD mood: ${mood.toUpperCase()}`);
@@ -1460,9 +1460,9 @@ console.log(`Today's LMD mood: ${mood.toUpperCase()}`);
   const cardR = 32;
   const cardX = pad, cardY = pad, cardW = W - pad*2, cardH = H - pad*2;
   roundRect(ctx, cardX, cardY, cardW, cardH, cardR);
-  ctx.fillStyle = "rgba(255,255,255,0.05)";
+  ctx.fillStyle = "rgba(0,0,0,0.025)";
   ctx.fill();
-  ctx.strokeStyle = "rgba(255,255,255,0.10)";
+  ctx.strokeStyle = "rgba(255,255,255,0.25)";
   ctx.lineWidth = 2;
   ctx.stroke();
 
