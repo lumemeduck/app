@@ -1460,9 +1460,9 @@ console.log(`Today's LMD mood: ${mood.toUpperCase()}`);
   const cardR = 32;
   const cardX = pad, cardY = pad, cardW = W - pad*2, cardH = H - pad*2;
   roundRect(ctx, cardX, cardY, cardW, cardH, cardR);
-  ctx.fillStyle = "rgba(0,0,0,0.05)";
+  ctx.fillStyle = "rgba(255,255,255,0.05)";
   ctx.fill();
-  ctx.strokeStyle = "rgba(255,255,255,0.20)";
+  ctx.strokeStyle = "rgba(255,255,255,0.10)";
   ctx.lineWidth = 2;
   ctx.stroke();
 
@@ -1471,7 +1471,7 @@ console.log(`Today's LMD mood: ${mood.toUpperCase()}`);
   ctx.fillStyle = "#eef1ff";
   ctx.fillText("LMD Quotes", cardX + 40, cardY + 70);
   ctx.font = "600 22px system-ui, Segoe UI, Roboto, Arial";
-  ctx.fillStyle = "#eaf0ff";
+  ctx.fillStyle = "#eef1ff";
   const dateStr = new Date().toLocaleDateString(undefined, { weekday:'short', month:'short', day:'numeric', year:'numeric' });
   ctx.fillText(dateStr, cardX + 40, cardY + 100);
 
