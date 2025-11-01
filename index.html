@@ -1460,9 +1460,9 @@ console.log(`Today's LMD mood: ${mood.toUpperCase()}`);
   const cardR = 32;
   const cardX = pad, cardY = pad, cardW = W - pad*2, cardH = H - pad*2;
   roundRect(ctx, cardX, cardY, cardW, cardH, cardR);
-  ctx.fillStyle = "rgba(255,255,255,0.04)";
+  ctx.fillStyle = "rgba(0,0,0,0.05)";
   ctx.fill();
-  ctx.strokeStyle = "rgba(255,255,255,0.18)";
+  ctx.strokeStyle = "rgba(255,255,255,0.20)";
   ctx.lineWidth = 2;
   ctx.stroke();
 
@@ -1546,7 +1546,7 @@ ctx.textBaseline = 'alphabetic';
 	 <main>
       <div class="card" style="position:relative;margin:auto;width:auto;display:flex;flex-direction:column;gap:20px;align-items:center;justify-content:center;text-align:center;font-family:sans-serif;animation:fadeInBg 0.3s ease forwards;">
        <h3 style="font-size:18px;color:002d5d;"><i class="fa fa-check" style="font-size:22px;color:#22c55e;"></i> Image Generated!</h3>
-        <img src="${dataURL}" alt="Generated" style="width:100%;display:flex;align-items:center;justify-content:center;position:relative;box-shadow:0 0 10px rgba(0,0,0,0.5);animation: fadeInCard 0.3s ease forwards;" />
+        <img src="${dataURL}" alt="Generated" style="width:100%;display:flex;align-items:center;justify-content:center;position:relative;box-shadow:0 0 10px rgba(0,0,0,0.05);animation: fadeInCard 0.3s ease forwards;" />
          <div class="row" style="display:flex;width:90%;align-items:center;justify-content:space-between;position:relative;animation:fadeInCard 0.3s ease forwards;">
           <button class="btn" id="download-button"><i class="fas fa-download" style="font-size:15px;"></i> Save</button>
           <button class="btn" id="share-button"><i class="fas fa-share" style="font-size:15px;"></i> Share</button>
