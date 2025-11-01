@@ -1468,7 +1468,7 @@ console.log(`Today's LMD mood: ${mood.toUpperCase()}`);
 
   // Title/brand
   ctx.font = "bold 36px system-ui, Segoe UI, Roboto, Arial";
-  ctx.fillStyle = "#454545";
+  ctx.fillStyle = "#666";
   ctx.fillText("LMD Quotes", cardX + 40, cardY + 70);
   ctx.font = "600 22px system-ui, Segoe UI, Roboto, Arial";
   ctx.fillStyle = "#666";
@@ -1479,7 +1479,7 @@ console.log(`Today's LMD mood: ${mood.toUpperCase()}`);
   const quote  = document.getElementById('quoteText').textContent.replace(/[“”]/g, '');
 const author = document.getElementById('quoteAuthor').textContent;
 ctx.font = '800 46px system-ui, Segoe UI, Roboto, Arial';
-ctx.fillStyle = '#454545';
+ctx.fillStyle = '#666';
 ctx.textAlign = 'center';
 ctx.textBaseline = 'middle';
 const quoteLines = wrapText(ctx, quote, cardW - 120);
@@ -1508,7 +1508,7 @@ ctx.textBaseline = 'alphabetic';
 
   // Footer mark
   ctx.font = "700 20px system-ui, Segoe UI, Roboto, Arial";
-  ctx.fillStyle = "#454545";
+  ctx.fillStyle = "#666";
   ctx.fillText("🌐 app.lumemeduck.xyz", cardX + 40, cardY + cardH - 50);
 
   // Decorative corner sun
@@ -1775,7 +1775,7 @@ function drawSun(ctx, x, y, r){
   // rays
   ctx.save();
   ctx.translate(x,y);
-  ctx.strokeStyle = "rgba(255,165,85,1)";
+  ctx.strokeStyle = "rgba(254,202,61,1)";
   ctx.lineWidth = 4;
   for(let i=0;i<12;i++){
     const a = (Math.PI*2) * (i/12);
