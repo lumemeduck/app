@@ -1455,6 +1455,20 @@ ctx.fillRect(0, 0, W, H);
 
 console.log(`Today's LMD mood: ${mood.toUpperCase()}`);
 
+// Smooth fade-in 
+let opacity = 1.0;
+function fadeIn() {
+  ctx.save();
+  ctx.globalAlpha = opacity;
+  ctx.fillStyle = "#fefefe";
+  ctx.fillRect(0, 0, W, H);
+  ctx.restore();
+  
+  opacity -= 0.04;
+  if (opacity > 0) requestAnimationFrame(fadeIn);
+}
+fadeIn();
+
   // Card
   const pad = 64;
   const cardR = 32;
