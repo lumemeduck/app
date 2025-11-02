@@ -420,7 +420,8 @@
     justify-content: center;
     background: #f1f4ff;
 	overflow: hidden;
-    border: none
+    border: none;
+	animation: fadeInCard 0.3s ease forwards;
   }
 
   .ad-slot {
@@ -780,6 +781,38 @@
 <p>This policy statements was last revised; September 29th, 2025.</p><br><p></p>
    </article>
  </section>
+
+<!-- Generated Image Section -->
+<section id="generated" class="view" aria-labelledby="generated-title">
+  <article class="card" aria-live="polite" style="">
+    <!-- Spinner -->
+    <div id="loading-container" style="display:none;flex-direction:column;align-items:center;justify-content:center;gap:20px;height:57.5vh;">
+      <div class="spinner" style="width:40px;height:40px;border:4px solid rgba(0,0,0,.1);border-top:4px solid #0ea5e9;border-radius:50%;animation:spin 1s linear infinite;"></div>
+      <p style="font-size:16px;color:#002d5d;">Generating image...</p>
+    </div>
+
+    <!-- Content -->
+    <div id="result-container" style="display:none;flex-direction:column;gap:30px;align-items:center;justify-content:center;text-align:center;animation:fadeInCard 0.3s ease forwards;">
+      <img id="generatedImage" alt="Generated Quote" style="width:100%;box-shadow:0 0 10px rgba(0,0,0,0.05);" />     
+      <div class="row" style="display:flex;width:90%;align-items:center;justify-content:space-between;">
+        <button class="btn" id="download-button"><i class="fas fa-download"></i> Save</button>
+        <button class="btn" id="share-button"><i class="fas fa-share"></i> Share</button>
+      </div>
+      <p style="width:100%;margin-bottom:0px;font-size:14px;color:#002d5d;">💖 <b>save</b> to device or <b>share</b> to socials 💝</p>
+    </div>
+  </article>
+  <div class="footnote"></div>
+  <div class="ad-container" aria-live="polite">
+    <div class="ad-slot">
+      <a href="https://otieu.com/4/7800106" target="_blank">
+        <img src="icons/monetag.gif" alt="Advert" />
+      </a>
+    </div>
+  </div>
+</section>
+<style>
+@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+</style>
 </main>
               
   <!-- Hidden canvas for image export -->
@@ -1384,28 +1417,83 @@ function saveQuoteAsImage(){
   const ctx = canvas.getContext('2d');
   const W = canvas.width, H = canvas.height;
 
-  // Background gradient
-  const g1 = ctx.createLinearGradient(0,0,W,H);
-  g1.addColorStop(0, "#11152a");
-  g1.addColorStop(1, "#0b0e1d");
-  ctx.fillStyle = g1; ctx.fillRect(0,0,W,H);
+  // Dynamic background gradient
+const palettes = {
+  calm: [
+    ["#a1c4fd", "#c2e9fb"],
+    ["#89f7fe", "#66a6ff"],
+    ["#d4fc79", "#96e6a1"]
+  ],
+  vibrant: [
+    ["#ff9a9e", "#fad0c4"],
+    ["#fbc2eb", "#a6c1ee"],
+    ["#fddb92", "#d1fdff"]
+  ],
+  dreamy: [
+    ["#a18cd1", "#fbc2eb"],
+    ["#f6d365", "#fda085"],
+    ["#84fab0", "#8fd3f4"]
+  ],
+  bold: [
+    ["#ff6a00", "#ee0979"],
+    ["#00c6ff", "#0072ff"],
+    ["#fc5c7d", "#6a82fb"]
+  ],
+  peaceful: [
+    ["#84fab0", "#8fd3f4"],
+    ["#cfd9df", "#e2ebf0"],
+    ["#d4fc79", "#96e6a1"]
+  ],
+  hopeful: [
+    ["#fddb92", "#d1fdff"],
+    ["#f6d365", "#fda085"],
+    ["#a1c4fd", "#c2e9fb"]
+  ],
+  freeSpirit: [
+    ["#fbc2eb", "#a6c1ee"],
+    ["#84fab0", "#8fd3f4"],
+    ["#fddb92", "#d1fdff"]
+  ]
+};
 
-  const g2 = ctx.createRadialGradient(W*0.8, H*0.15, 40, W*0.8, H*0.15, 700);
-  g2.addColorStop(0, "rgba(102,229,181,0.35)");
-  g2.addColorStop(1, "rgba(102,229,181,0)");
-  ctx.fillStyle = g2; ctx.fillRect(0,0,W,H);
+const moods = Object.keys(palettes);
+const today = new Date();
+const dayIndex = today.getDay();
+const mood = moods[dayIndex];
 
-  const g3 = ctx.createRadialGradient(W*0.1, H*0.85, 40, W*0.1, H*0.85, 700);
-  g3.addColorStop(0, "rgba(154,167,255,0.30)");
-  g3.addColorStop(1, "rgba(154,167,255,0)");
-  ctx.fillStyle = g3; ctx.fillRect(0,0,W,H);
+const palette = palettes[mood];
+const [color1, color2] = palette[Math.floor(Math.random() * palette.length)];
+
+const g1 = ctx.createLinearGradient(0, 0, W, H);
+g1.addColorStop(0, color1);
+g1.addColorStop(1, color2);
+ctx.fillStyle = g1;
+ctx.fillRect(0, 0, W, H);
+
+function randomAlpha() { return 0.1 + Math.random() * 0.15; }
+const glow1 = ctx.createRadialGradient(W * 0.8, H * 0.2, 50, W * 0.8, H * 0.2, 700);
+glow1.addColorStop(0, `rgba(255,255,255,${randomAlpha()})`);
+glow1.addColorStop(1, "rgba(0,0,0,0)");
+ctx.fillStyle = glow1;
+ctx.fillRect(0, 0, W, H);
+
+const glow2 = ctx.createRadialGradient(W * 0.2, H * 0.85, 50, W * 0.2, H * 0.85, 700);
+glow2.addColorStop(0, `rgba(255,255,255,${randomAlpha()})`);
+glow2.addColorStop(1, "rgba(0,0,0,0)");
+ctx.fillStyle = glow2;
+ctx.fillRect(0, 0, W, H);
+
+ctx.fillStyle = "rgba(0,0,0,0.0)";
+ctx.fillRect(0, 0, W, H);
+
+console.log(`Today's LMD mood: ${mood.toUpperCase()}`);
 
   // Card
   const pad = 64;
   const cardR = 32;
   const cardX = pad, cardY = pad, cardW = W - pad*2, cardH = H - pad*2;
   roundRect(ctx, cardX, cardY, cardW, cardH, cardR);
-  ctx.fillStyle = "rgba(255,255,255,0.04)";
+  ctx.fillStyle = "rgba(0,0,0,0.03)";
   ctx.fill();
   ctx.strokeStyle = "rgba(255,255,255,0.10)";
   ctx.lineWidth = 2;
@@ -1413,10 +1501,10 @@ function saveQuoteAsImage(){
 
   // Title/brand
   ctx.font = "bold 36px system-ui, Segoe UI, Roboto, Arial";
-  ctx.fillStyle = "#eaf0ff";
+  ctx.fillStyle = "#20416e";
   ctx.fillText("LMD Quotes", cardX + 40, cardY + 70);
   ctx.font = "600 22px system-ui, Segoe UI, Roboto, Arial";
-  ctx.fillStyle = "rgba(186,194,228,.85)";
+  ctx.fillStyle = "#20416e";
   const dateStr = new Date().toLocaleDateString(undefined, { weekday:'short', month:'short', day:'numeric', year:'numeric' });
   ctx.fillText(dateStr, cardX + 40, cardY + 100);
 
@@ -1424,7 +1512,7 @@ function saveQuoteAsImage(){
   const quote  = document.getElementById('quoteText').textContent.replace(/[“”]/g, '');
 const author = document.getElementById('quoteAuthor').textContent;
 ctx.font = '800 46px system-ui, Segoe UI, Roboto, Arial';
-ctx.fillStyle = '#eef1ff';
+ctx.fillStyle = '#20416e';
 ctx.textAlign = 'center';
 ctx.textBaseline = 'middle';
 const quoteLines = wrapText(ctx, quote, cardW - 120);
@@ -1439,7 +1527,7 @@ quoteLines.forEach((line, i) => {
 
   // Author line
 ctx.font      = '600 30px system-ui';
-ctx.fillStyle = '#eef1ff';
+ctx.fillStyle = '#20416e';
 ctx.textAlign = 'right';               
 ctx.fillText(
   authorLine,
@@ -1453,7 +1541,7 @@ ctx.textBaseline = 'alphabetic';
 
   // Footer mark
   ctx.font = "700 20px system-ui, Segoe UI, Roboto, Arial";
-  ctx.fillStyle = "rgba(200,210,255,.9)";
+  ctx.fillStyle = "#20416e";
   ctx.fillText("🌐 app.lumemeduck.xyz", cardX + 40, cardY + cardH - 50);
 
   // Decorative corner sun
@@ -1470,58 +1558,27 @@ ctx.textBaseline = 'alphabetic';
   }
 
   function showGeneratedImage(dataURL, filename) {
-  // Show waiting spinner
-  document.body.style.margin = "0";
-  document.body.style.background = "#f1f4ff";
-  document.body.innerHTML = `
-  <container>
-    <div style="max-width:800px;margin:0 auto;display:flex;flex-direction:column;align-items:center;justify-content:center;height:100vh;gap:20px;font-family:sans-serif;text-align:center;">
-      <div class="spinner" style="width:40px;height:40px;border:4px solid rgba(0,0,0,.1);border-top:4px solid #0ea5e9;border-radius:50%;animation:spin 1s linear infinite;"></div>
-      <p style="font-size:16px;color:#002d5d;">Generating image...</p>
-    </div>
-    <style>
-      @keyframes spin { from { transform:rotate(0deg);} to { transform:rotate(360deg);} }
-    </style>
-   </container>
-  `;
+  // Switch section
+  showSection('generated');
+
+  const loadingContainer = document.getElementById('loading-container');
+  const resultContainer = document.getElementById('result-container');
+  const img = document.getElementById('generatedImage');
+  const downloadBtn = document.getElementById('download-button');
+  const shareBtn = document.getElementById('share-button');
+
+  // Reset visibility
+  resultContainer.style.display = "none";
+  loadingContainer.style.display = "flex";
+
   // Simulate delay
   setTimeout(() => {
-    document.body.innerHTML = `
-	<container style="position:fixed;background-attachment:fixed;">
-	 <main>
-      <div class="card" style="position:relative;margin:auto;width:auto;display:flex;flex-direction:column;gap:20px;align-items:center;justify-content:center;text-align:center;font-family:sans-serif;animation:fadeInBg 0.3s ease forwards;">
-       <h3 style="font-size:18px;color:002d5d;"><i class="fa fa-check" style="font-size:22px;color:#22c55e;"></i> Image Generated!</h3>
-        <img src="${dataURL}" alt="Generated" style="width:100%;display:flex;align-items:center;justify-content:center;position:relative;box-shadow:0 0 10px rgba(0,0,0,0.5);animation: fadeInCard 0.3s ease forwards;" />
-         <div class="row" style="display:flex;width:90%;align-items:center;justify-content:space-between;position:relative;animation:fadeInCard 0.3s ease forwards;">
-          <button class="btn" id="download-button"><i class="fas fa-download" style="font-size:15px;"></i> Save</button>
-          <button class="btn" id="share-button"><i class="fas fa-share" style="font-size:15px;"></i> Share</button>
-        </div>
-        <p style="width:100%;font-size:14px;opacity:0.5;color:#002d5d;align-items:center;justify-content:center;position:relative;animation:fadeInCard 0.3s ease forwards;">
-          💖 <b>save</b> to device or <b>share</b> to socials 💝
-        </p>
-		<button class="btn btn-accent" id="backButton" style="margin-bottom:10px;">く Back</button>
-      </div><br>
-      <div class="footnote"></div>
-      <div class="ad-container" aria-live="polite">
-       <div class="ad-slot">
-	   <a href="https://otieu.com/4/7800106" target="_blank" style="cursor:pointer;">
-	   <img src="icons/monetag.gif" alt="Advert" /></a>
-      </div>
-     </div>
-    </main>
-    `;
-    // Save button
-    document.getElementById('download-button').addEventListener('click', () => {
-      triggerDownload(dataURL, filename);
-    });
-    // Share button
-    document.getElementById('share-button').addEventListener('click', () => {
-      shareImage(dataURL);
-    });
-    // Back button
-	document.getElementById('backButton').addEventListener('click', () => {
-      window.location.reload();
-    });
+    loadingContainer.style.display = "none";
+    resultContainer.style.display = "flex";
+    img.src = dataURL;
+
+    downloadBtn.onclick = () => triggerDownload(dataURL, filename);
+    shareBtn.onclick = () => shareImage(dataURL);
   }, 2000);
  }
 }
@@ -1720,7 +1777,7 @@ function drawSun(ctx, x, y, r){
   // rays
   ctx.save();
   ctx.translate(x,y);
-  ctx.strokeStyle = "rgba(255, 224, 132, .65)";
+  ctx.strokeStyle = "rgba(254,202,61,1)";
   ctx.lineWidth = 4;
   for(let i=0;i<12;i++){
     const a = (Math.PI*2) * (i/12);
