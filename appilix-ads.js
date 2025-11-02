@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function() {
   let adInterval;
-  const adFrequency = 300;
+  const adFrequency = 150000;
   function showInterstitialAd() {
     try {
       appilix.postMessage(JSON.stringify({
