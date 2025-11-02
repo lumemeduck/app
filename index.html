@@ -1548,16 +1548,16 @@ ctx.textBaseline = 'alphabetic';
   drawSun(ctx, cardX + cardW - 110, cardY + 110, 44);
 
   // Generate filename
-  const dataURL = canvas.toDataURL('image/png');
-  const filename = `quote_${new Date().toISOString().split('T')[0]}.png`;
-  showGeneratedImage(dataURL, filename);
+const dataURL = canvas.toDataURL('image/png');
+const filename = `quote_${new Date().toISOString().split('T')[0]}.png`;
+showGeneratedImage(dataURL, filename);
 
-  function generateFilename() {
+function generateFilename() {
   const date = new Date().toISOString().split('T')[0];
   return `quote_${Date.now()}.png`;
-  }
+}
 
-  function showGeneratedImage(dataURL, filename) {
+function showGeneratedImage(dataURL, filename) {
   // Switch section
   showSection('generated');
 
@@ -1580,15 +1580,14 @@ ctx.textBaseline = 'alphabetic';
     downloadBtn.onclick = () => triggerDownload(dataURL, filename);
     shareBtn.onclick = () => shareImage(dataURL);
   }, 2000);
- }
 }
-    
-// Download (browser or webview)
+
+// Download
 function triggerDownload(dataURL, filename) {
   const isWebView = /(wv|WebView)/i.test(navigator.userAgent);
-  
+
   if (!isWebView) {
-    // Normal browser auto-download
+    // Normal browser
     const link = document.createElement('a');
     link.href = dataURL;
     link.download = filename;
@@ -1598,15 +1597,12 @@ function triggerDownload(dataURL, filename) {
     document.body.removeChild(link);
     return;
   }
-  // Manual download
-  showGeneratedImage(dataURL, filename);
-  }
-  function showGeneratedImage(dataURL, filename) {
-  // WebView: upload image + show popup
-   const blob = dataURLToBlob(dataURL);
+
+  // WebView only
+  const blob = dataURLToBlob(dataURL);
   const fd = new FormData();
   fd.append('file', blob, `quote_${Date.now()}.png`);
-    
+
   fetch('https://tmpfiles.org/api/v1/upload', { method: 'POST', body: fd })
     .then(r => r.json())
     .then(res => {
@@ -1614,55 +1610,14 @@ function triggerDownload(dataURL, filename) {
       if (url && !url.includes('/dl/')) {
         url = url.replace('tmpfiles.org', 'tmpfiles.org/dl');
       }
-      if (!url) {
-        alert('Upload succeeded but no file URL returned.');
-        return;
-    }
-      const fallback = document.createElement('div');
-      fallback.style.cssText = `
-        position: fixed;top:0;left:0;width:100%;height:100%;
-        background: rgba(255,255,255,0.4);
-        display:flex;align-items:center;justify-content:center;
-        z-index:9999;animation:fadeInBg 0.3s ease forwards;
-      `;
-      fallback.innerHTML = `
-        <div style="background:#eef1ff;color:#002d5d;box-shadow:0 4px 15px rgba(0,0,0,0.4);
-          border-radius:18px;padding:20px;max-width:320px;text-align:center;
-          font-family:system-ui;animation:fadeInCard 0.3s ease forwards;">
-          <h3 style="margin-bottom:10px;font-size:16px;">System Isn't Responding!</h3>
-          <p style="font-size:14px;opacity:0.8;margin-bottom:15px;">
-            Click on the image below to open externally, then press-hold on the image to save.
-          </p>
-          <a href="${url}" target="_blank" download="${filename}" style="cursor:pointer;">
-          <img src="${dataURL}" alt="Generated" style="max-width:100%;border-radius:12px;box-shadow:0 0 8px rgba(0,0,0,0.2);margin-bottom:15px;"></a>
-          <button class="btn btn-accent" id="closeDownloadFallback">Done</button>
-        </div>
-      `;
-      document.body.appendChild(fallback);
-      document.getElementById('closeDownloadFallback').addEventListener('click', () => {
-        document.body.removeChild(fallback);
-      });
+      console.log('Uploaded successfully:', url);
     })
     .catch(err => {
-      console.error(err);
-      const modal = document.createElement('div');
-      modal.id = 'failModal';
-      modal.className = 'reset-modal';
-      modal.innerHTML = `
-        <div class="reset-box">
-          <div style="font-size:16px;margin-bottom:12px;">Connection Error!</div>
-          <p style="font-size:14px;margin:0 0 18px;line-height:1.4;">
-            Pull down on your screen to refresh<br>page and try saving again.
-          </p>
-          <button class="btn-ok" onclick="document.getElementById('failModal').remove()">Ok</button>
-        </div>
-      `;
-      document.body.appendChild(modal);
-      setTimeout(() => modal.remove(), 10000);
+      console.error('Upload failed:', err);
     });
-  }
-    
-  function dataURLToBlob(dataURL) {
+}
+
+function dataURLToBlob(dataURL) {
   const arr = dataURL.split(',');
   const mime = arr[0].match(/:(.*?);/)[1];
   const byteStr = atob(arr[1]);
@@ -1671,70 +1626,27 @@ function triggerDownload(dataURL, filename) {
     ab[i] = byteStr.charCodeAt(i);
   }
   return new Blob([ab], { type: mime });
-  }
+}
 
-  // Share image
-  function shareImage(dataURL) {
+// Share image
+function shareImage(dataURL) {
   const blob = dataURLToBlob(dataURL);
   const file = new File([blob], 'quote.png', { type: 'image/png' });
 
-  // Promo text as caption
   const promoText = 'Shared from Rise & Shine ✨ Check it out here: https://app.lumemeduck.xyz';
 
   if (navigator.canShare && navigator.canShare({ files: [file] })) {
     navigator.share({
-      title: 'Today\'s Quote',
+      title: "Today's Quote",
       text: promoText,
       files: [file]
-    }).then(() => {
-      console.log('Quote shared successfully!');
-    }).catch(error => {
-      console.error('Failed to share quote:', error);
-    });
+    })
+      .then(() => console.log('Quote shared successfully!'))
+      .catch(error => console.error('Failed to share quote:', error));
   } else {
-    // Fallback popup
-    const fallback = document.createElement('div');
-    fallback.style.cssText = `
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(255,255,255,0.4);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 9999;
-      animation: fadeInBg 0.3s ease forwards;
-    `;
-
-    fallback.innerHTML = `
-      <div style="
-        background: #eef1ff;
-        color: #002d5d;
-        box-shadow:0 4px 15px rgba(0, 0, 0, 0.4);
-        border:1px solid rgba(0,0,0,.1);
-        border-radius: 18px;
-        padding: 20px;
-        max-width: 300px;
-        text-align: center;
-        font-family: system-ui;
-        animation: fadeInCard 0.3s ease forwards;
-      ">
-        <h3 style="margin-bottom: 10px; font-size: 16px;">
-          Sharing Isn't Supported!
-        </h3>
-        <p style="font-size:14px; opacity:0.8; margin-bottom: 15px;">
-          System doesn’t support direct share.<br>
-          Save the image and share manually.
-        </p>
-        <button class="btn btn-accent" id="closeFallback">OK</button>
-      </div>
-    `;
-    document.body.appendChild(fallback);
-    document.getElementById('closeFallback').addEventListener('click', () => {
-      document.body.removeChild(fallback);
-    });
+    console.warn('Sharing not supported on this device.');
   }
-  }
+ }
 
   function roundRect(ctx, x, y, w, h, r){
   const rr = Math.min(r, w/2, h/2);
