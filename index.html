@@ -1580,6 +1580,7 @@ function showGeneratedImage(dataURL, filename) {
     downloadBtn.onclick = () => triggerDownload(dataURL, filename);
     shareBtn.onclick = () => shareImage(dataURL);
   }, 2000);
+ }
 }
 
 // Download
@@ -1633,7 +1634,7 @@ function shareImage(dataURL) {
   const blob = dataURLToBlob(dataURL);
   const file = new File([blob], 'quote.png', { type: 'image/png' });
 
-  const promoText = 'Shared from Rise & Shine ✨ Check it out here: https://app.lumemeduck.xyz';
+  const promoText = 'Shared from LMD Quotes, check it out here: https://app.lumemeduck.xyz';
 
   if (navigator.canShare && navigator.canShare({ files: [file] })) {
     navigator.share({
