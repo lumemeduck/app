@@ -1686,16 +1686,16 @@ function shareImage(dataURL) {
 function drawSun(ctx, x, y, r){
   // core
   const g = ctx.createRadialGradient(x, y, 5, x, y, r+28);
-  g.addColorStop(0, "#ffe084");
-  g.addColorStop(.6, "#ffbe55");
-  g.addColorStop(1, "rgba(255,190,85,0)");
+  g.addColorStop(0, "#80b0f2");
+  g.addColorStop(.6, "#20416e");
+  g.addColorStop(1, "rgba(32,65,110)");
   ctx.fillStyle = g;
   ctx.beginPath(); ctx.arc(x,y,r,0,Math.PI*2); ctx.fill();
 
   // rays
   ctx.save();
   ctx.translate(x,y);
-  ctx.strokeStyle = "rgba(254,202,61,1)";
+  ctx.strokeStyle = "rgba(32,65,110)";
   ctx.lineWidth = 4;
   for(let i=0;i<12;i++){
     const a = (Math.PI*2) * (i/12);
