@@ -163,7 +163,7 @@
   background: linear-gradient(180deg, rgba(255,255,255,0.8), rgba(248,250,252,0.8));
   border:1px solid rgba(99,102,241,0.15);
   border-radius: var(--radius);
-  padding:18px; 
+  padding:17px; 
   box-shadow: inset 0px 0px 4px 2px rgba(99,102,241,0.10);
   animation: fadeInCard 0.3s ease forwards;
   }
@@ -1549,8 +1549,22 @@ ctx.textBaseline = 'alphabetic';
   ctx.fillStyle = "#20416e";
   ctx.fillText("🌐 app.lumemeduck.xyz", cardX + 40, cardY + cardH - 50);
 
-  // Decorative corner sun
-  drawSun(ctx, cardX + cardW - 110, cardY + 110, 44);
+  // Decorative corner logo
+const logo = new Image();
+logo.src = 'icons/img.png';
+logo.onload = () => {
+  const logoSize = 80;
+  const logoCenterX = cardX + cardW - 75;
+  const logoCenterY = cardY + 80;
+  const logoX = logoCenterX - logoSize / 2;
+  const logoY = logoCenterY - logoSize / 2;
+
+  ctx.drawImage(logo, logoX, logoY, logoSize, logoSize);
+
+  const dataURL = canvas.toDataURL('image/png');
+  const filename = `quote_${new Date().toISOString().split('T')[0]}.png`;
+  showGeneratedImage(dataURL, filename);
+};
 
   // Generate filename
 const dataURL = canvas.toDataURL('image/png');
@@ -1584,7 +1598,7 @@ function showGeneratedImage(dataURL, filename) {
 
     downloadBtn.onclick = () => triggerDownload(dataURL, filename);
     shareBtn.onclick = () => shareImage(dataURL);
-  }, 2000);
+  }, 1000);
  }
 }
 
@@ -1681,31 +1695,6 @@ function shareImage(dataURL) {
   }
   if (line) lines.push(line);
   return lines;
-}
-
-function drawSun(ctx, x, y, r){
-  // core
-  const g = ctx.createRadialGradient(x, y, 5, x, y, r+28);
-  g.addColorStop(0, "#80b0f2");
-  g.addColorStop(.6, "#20416e");
-  g.addColorStop(1, "rgba(32,65,110)");
-  ctx.fillStyle = g;
-  ctx.beginPath(); ctx.arc(x,y,r,0,Math.PI*2); ctx.fill();
-
-  // rays
-  ctx.save();
-  ctx.translate(x,y);
-  ctx.strokeStyle = "rgba(32,65,110)";
-  ctx.lineWidth = 4;
-  for(let i=0;i<12;i++){
-    const a = (Math.PI*2) * (i/12);
-    const r1 = r + 10, r2 = r + 34;
-    ctx.beginPath();
-    ctx.moveTo(Math.cos(a)*r1, Math.sin(a)*r1);
-    ctx.lineTo(Math.cos(a)*r2, Math.sin(a)*r2);
-    ctx.stroke();
-  }
-  ctx.restore();
 }
 
 /* ---------- Init ---------- */
