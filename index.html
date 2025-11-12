@@ -1553,9 +1553,12 @@ ctx.textBaseline = 'alphabetic';
 const logo = new Image();
 logo.src = 'icons/icon-72.png';
 logo.onload = () => {
-  const logoSize = 26;
-  const logoX = cardX + cardW - 110 - logoSize / 2;
-  const logoY = cardY + 110 - logoSize / 2;
+  const logoSize = 64;
+  const logoCenterX = cardX + cardW - 110;
+  const logoCenterY = cardY + 110;
+  const logoX = logoCenterX - logoSize / 2;
+  const logoY = logoCenterY - logoSize / 2;
+
   ctx.drawImage(logo, logoX, logoY, logoSize, logoSize);
 
   const dataURL = canvas.toDataURL('image/png');
