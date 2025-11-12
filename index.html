@@ -1555,7 +1555,7 @@ logo.src = 'icons/icon-72.png';
 logo.onload = () => {
   const logoSize = 26;
   const logoX = cardX + cardW - 110 - logoSize / 2;
-  const logoY = cardY + 110 - logoSize / 2;
+  const logoY = cardY + 110, 44 - logoSize / 2;
   ctx.drawImage(logo, logoX, logoY, logoSize, logoSize);
 
   const dataURL = canvas.toDataURL('image/png');
@@ -1692,31 +1692,6 @@ function shareImage(dataURL) {
   }
   if (line) lines.push(line);
   return lines;
-}
-
-function drawSun(ctx, x, y, r){
-  // core
-  const g = ctx.createRadialGradient(x, y, 5, x, y, r+28);
-  g.addColorStop(0, "#80b0f2");
-  g.addColorStop(.6, "#20416e");
-  g.addColorStop(1, "rgba(32,65,110)");
-  ctx.fillStyle = g;
-  ctx.beginPath(); ctx.arc(x,y,r,0,Math.PI*2); ctx.fill();
-
-  // rays
-  ctx.save();
-  ctx.translate(x,y);
-  ctx.strokeStyle = "rgba(32,65,110)";
-  ctx.lineWidth = 4;
-  for(let i=0;i<12;i++){
-    const a = (Math.PI*2) * (i/12);
-    const r1 = r + 10, r2 = r + 34;
-    ctx.beginPath();
-    ctx.moveTo(Math.cos(a)*r1, Math.sin(a)*r1);
-    ctx.lineTo(Math.cos(a)*r2, Math.sin(a)*r2);
-    ctx.stroke();
-  }
-  ctx.restore();
 }
 
 /* ---------- Init ---------- */
