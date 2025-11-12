@@ -1553,8 +1553,8 @@ ctx.textBaseline = 'alphabetic';
 const logo = new Image();
 logo.src = 'icons/icon-72.png';
 logo.onload = () => {
-  const logoSize = 64;
-  const logoCenterX = cardX + cardW - 110;
+  const logoSize = 66;
+  const logoCenterX = cardX + cardW - 70;
   const logoCenterY = cardY + 110;
   const logoX = logoCenterX - logoSize / 2;
   const logoY = logoCenterY - logoSize / 2;
@@ -1598,7 +1598,7 @@ function showGeneratedImage(dataURL, filename) {
 
     downloadBtn.onclick = () => triggerDownload(dataURL, filename);
     shareBtn.onclick = () => shareImage(dataURL);
-  }, 2000);
+  }, 1000);
  }
 }
 
