@@ -488,9 +488,9 @@
      style="
         display:none;
         position:fixed;
-        top:50%;
+        top:240px;
         left:50%;
-        right:50%;
+        transform:translateX(-50%);
         z-index:999;
         background:#eef1ff;
         border:1px solid rgba(0,0,0,.1);
@@ -506,7 +506,7 @@
         color:#002d5d;
         font-family:system-ui;
         box-shadow:0 4px 15px rgba(0, 0, 0, 0.4);
-        animation:fadeInCard 1s ease forwards;
+        animation:fadeInBg 1s ease forwards;
      ">     
     <h3 style="margin:0 0 12px;font-size:16px;">
         Stay Motivated Daily!
@@ -2080,7 +2080,7 @@ function showAndroidInstallPrompt() {
       font-size:15px;
       z-index:999;
       text-align:center;
-      animation:fadeInCard 1.0s ease forwards;">
+      animation:fadeInBg 1.0s ease forwards;">
       📥 <b>LMD Quotes</b> works best when installed!  
       <br><br>
       <button id="dismissBtn" style="
@@ -2154,7 +2154,7 @@ if (isIos() && !isInStandaloneMode()) {
       font-size:15px;
       z-index:999;
       text-align:center;
-	  animation:fadeInCard 1.0s ease forwards;">
+	  animation:fadeInBg 1.0s ease forwards;">
       📥 <b>LMD Quotes</b> works best if you: Tap <span style="font-size:18px;">⬆️</span> then "Add to Home Screen"
       <br><br>
       <button id="closeIosPrompt" style="
