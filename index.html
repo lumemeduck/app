@@ -501,34 +501,7 @@
     <button type="button" class="btn btn-warn" onclick="closeSidebar()">Close</button>
   </div>
   </div>
-  <!-- Notify unsupported Modal -->
-<div id="notifyModal" style="
-  display:none;
-  position:fixed;top:0;left:0;width:100%;height:100%;
-  background:rgba(255,255,255,.4);
-  align-items:center;justify-content:center;
-  z-index:9999;
-  animation: fadeInBg 0.3s ease forwards;
-">
-  <div style="
-    background:#eef1ff;
-    padding:18px;
-    box-shadow:0 4px 15px rgba(0, 0, 0, 0.4);
-    border:1px solid rgba(0,0,0,.1);
-    border-radius:18px;
-    width:80%;
-    max-width:280px;
-    text-align:center;
-    font-family:system-ui;
-    color:#002d5d;
-    animation: fadeInCard 0.3s ease forwards;
-  ">
-    <p id="notifyMessage" style="margin-bottom:20px;font-size:16px;">
-      <!-- Message goes here -->
-    </p>
-    <button type="button" class="btn btn-accent" onclick="closeNotifyModal()">OK</button>
-  </div>
-</div>
+  
   <!-- Bottom Menu -->
 <div class="bottom-menu">
   <button type="button" class="menu-item active" onclick="showSection('home')">
@@ -597,8 +570,18 @@
         </article>
       </div>
       <div class="footnote">Advertisment</div>
-	  <div id="frame" style="width:320px; height:auto;"><iframe data-aa='2417408' src='//ad.a-ads.com/2417408?size=320x50' style='width:320px; height:50px; border:0px; padding:0; overflow:hidden; background-color: transparent;'></iframe>
-      <a style="display: block; text-decoration: none; text-align: right; font-size: 12px; color:#0e95e9;" id="preview-link" href="https://aads.com/campaigns/new/?source_id=2417408&source_type=ad_unit&partner=2417408">Advertise here</a></div>
+	  <div class="ad-container" aria-live="polite">
+       <div class="ad-slot">
+        <!-- advert here -->
+		<div id="frame" style="width: 320px;margin: auto;z-index: 100000;height: auto">
+          <iframe data-aa='2417197' src='//ad.a-ads.com/2417197/?size=320x50'
+                            style='border:0; padding:0; width:320px; height:50px; overflow:hidden;display: block;margin: auto'></iframe>
+          <div style="width: 320px;margin:auto;position: absolute;left: 0;right: 0">
+            <a target="_blank" style="display:inline-block;font-size: 10px;color: #0e95e9;padding: 4px 10px;background: #F8F8F9;text-decoration: none; border-radius: 0 0 4px 4px;" id="frame-link" href="https://aads.com/campaigns/new/?source_id=2417197&source_type=ad_unit&partner=2417197">Advertise here</a>
+          </div>
+		 </div>
+       </div>
+	  </div>
     </section>
 
     <!-- STREAK VIEW -->
@@ -2044,7 +2027,7 @@ function showAndroidInstallPrompt() {
       width:90%;
       box-shadow:0 2px 4px rgba(99,102,241,0.25);
       font-size:15px;
-      z-index:9999;
+      z-index:999;
       text-align:center;
       animation:fadeInBg 1.0s ease forwards;">
       📥 <b>LMD Quotes</b> works best when installed!  
@@ -2118,7 +2101,7 @@ if (isIos() && !isInStandaloneMode()) {
       width:90%;
       box-shadow:0 2px 4px rgba(99,102,241,0.25);
       font-size:15px;
-      z-index:9999;
+      z-index:999;
       text-align:center;
 	  animation:fadeInBg 1.0s ease forwards;">
       📥 <b>LMD Quotes</b> works best if you: Tap <span style="font-size:18px;">⬆️</span> then "Add to Home Screen"
