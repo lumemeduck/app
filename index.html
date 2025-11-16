@@ -488,16 +488,16 @@
      style="
         display:none;
         position:fixed;
-        top:50%;
+        top:100px;
         left:50%;
-        transform:translate(-50%, -50%);
+        transform:translateX(-50%);
         z-index:999;
         background:#eef1ff;
         border:1px solid rgba(0,0,0,.1);
         border-radius:18px;
         padding:18px 24px;
         max-width:280px;
-        width:90%;
+        width:80%;
         text-align:center;
         color:#002d5d;
         font-family:system-ui;
@@ -510,10 +510,8 @@
     <p style="margin:0 0 18px;font-size:15px;line-height:1.4;">
         Enable daily reminders so you never miss your daily dose of inspiration!
     </p>
-    <div style="display:flex;justify-content:center;gap:26px;">
-        <button type="button" class="btn btn-warn" id="cancelNotifyBtn">Later</button>
-        <button type="button" class="btn btn-accent" id="enableNotifyBtn">Allow</button>
-    </div>
+    <button type="button" class="btn btn-warn" id="cancelNotifyBtn" style="margin-left:10px;">Later</button>
+    <button type="button" class="btn btn-accent" id="enableNotifyBtn" style="margin-right:10px;">Allow</button>
   </div>
   <!-- Sidebar menu -->
   <div id="sidebar" class="sidebar" style="display:none;">
