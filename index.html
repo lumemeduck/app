@@ -484,14 +484,41 @@
   </div>
 </div>
     <!-- Notify Permission Modal -->
-<div id="notifyPrompt" style="display:none;position:fixed;inset:0;background:rgba(255,255,255,.4);z-index:999;align-items:center;justify-content:center;animation: fadeInBg 1.0s ease forwards;">
-  <div style="background:#eef1ff;border:1px solid rgba(0,0,0,.1);border-radius:18px;padding:18px 24px;box-shadow:0 4px 15px rgba(0, 0, 0, 0.4);max-width:280px;text-align:center;color:#002d5d;font-family:system-ui;animation:fadeInCard 1.0s ease forwards;">
-    <h3 style="margin:0 0 12px;font-size:16px;">Stay Motivated Daily!</h3>
-    <p style="margin:0 0 18px;font-size:15px;line-height:1.4;">Enable daily reminders so you never miss your daily dose of inspiration!</p>
-    <button type="button" class="btn btn-warn" id="cancelNotifyBtn" style="margin-right:23px;">Later</button>
+<div id="notifyPrompt"
+     style="
+        display:none;
+        position:fixed;
+        top:240px;
+        left:50%;
+        transform:translateX(-50%);
+        z-index:999;
+        background:#eef1ff;
+        border:1px solid rgba(0,0,0,.1);
+        border-radius:18px;
+        padding:18px;
+        max-width:320px;
+        width:90%;
+	    flex-direction:column;
+	    align-items:center;
+	    justify-content:center;
+        text-align:center;
+	    gap:10px;
+        color:#002d5d;
+        font-family:system-ui;
+        box-shadow:0 4px 15px rgba(0, 0, 0, 0.4);
+        animation:fadeInBg 1s ease forwards;
+     ">     
+    <h3 style="margin:0 0 12px;font-size:16px;">
+        Stay Motivated Daily!
+    </h3>
+    <p style="margin:0 0 18px;font-size:15px;line-height:1.4;">
+        Enable daily reminders so you never miss your daily dose of inspiration!
+    </p>
+	<div style="display:flex;align-items:center;justify-content:space-between;gap:30px;">
+    <button type="button" class="btn btn-warn" id="cancelNotifyBtn">Later</button>
     <button type="button" class="btn btn-accent" id="enableNotifyBtn">Allow</button>
+	</div>
   </div>
-</div>
   <!-- Sidebar menu -->
   <div id="sidebar" class="sidebar" style="display:none;">
   <div class="sidebar-content">
@@ -501,7 +528,34 @@
     <button type="button" class="btn btn-warn" onclick="closeSidebar()">Close</button>
   </div>
   </div>
-  
+  <!-- Notify unsupported Modal -->
+  <div id="notifyModal" style="
+    display:none;
+    position:fixed;top:0;left:0;width:100%;height:100%;
+    background:rgba(255,255,255,.4);
+    align-items:center;justify-content:center;
+    z-index:999;
+    animation: fadeInBg 0.3s ease forwards;
+  ">
+  <div style="
+    background:#eef1ff;
+    padding:18px;
+    box-shadow:0 4px 15px rgba(0, 0, 0, 0.4);
+    border:1px solid rgba(0,0,0,.1);
+    border-radius:18px;
+    width:80%;
+    max-width:280px;
+    text-align:center;
+    font-family:system-ui;
+    color:#002d5d;
+    animation: fadeInCard 0.3s ease forwards;
+  ">
+  <p id="notifyMessage" style="margin-bottom:20px;font-size:16px;">
+      <!-- Message goes here -->
+  </p>
+  <button type="button" class="btn btn-accent" onclick="closeNotifyModal()">OK</button>
+  </div>
+</div>
   <!-- Bottom Menu -->
 <div class="bottom-menu">
   <button type="button" class="menu-item active" onclick="showSection('home')">
@@ -2016,13 +2070,13 @@ function showAndroidInstallPrompt() {
       top:20px;
       left:50%;
       transform:translateX(-50%);
-      background:#fefefe;
+      background:#eef1ff;
       border:1px solid rgba(99,102,241,0.10);
       padding:12px;
       border-radius:14px;
       max-width:320px;
       width:90%;
-      box-shadow:0 2px 4px rgba(99,102,241,0.25);
+      box-shadow:0 4px 15px rgba(0, 0, 0, 0.4);
       font-size:15px;
       z-index:999;
       text-align:center;
@@ -2090,13 +2144,13 @@ if (isIos() && !isInStandaloneMode()) {
       top:20px;
       left:50%;
       transform:translateX(-50%);
-      background:#fff;
+      background:#eef1ff;
       border:1px solid rgba(99,102,241,0.10);
       padding:12px;
       border-radius:14px;
       max-width:320px;
       width:90%;
-      box-shadow:0 2px 4px rgba(99,102,241,0.25);
+      box-shadow:0 4px 15px rgba(0, 0, 0, 0.4);
       font-size:15px;
       z-index:999;
       text-align:center;
