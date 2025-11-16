@@ -488,14 +488,14 @@
      style="
         display:none;
         position:fixed;
-        top:100px;
+        top:180px;
         left:50%;
-        transform:translateX(-50%);
+        transform:translateX(-50%, -50%);
         z-index:999;
         background:#eef1ff;
         border:1px solid rgba(0,0,0,.1);
         border-radius:18px;
-        padding:18px 24px;
+        padding:18px;
         max-width:280px;
         width:80%;
         text-align:center;
@@ -510,8 +510,8 @@
     <p style="margin:0 0 18px;font-size:15px;line-height:1.4;">
         Enable daily reminders so you never miss your daily dose of inspiration!
     </p>
-    <button type="button" class="btn btn-warn" id="cancelNotifyBtn" style="margin-left:10px;">Later</button>
-    <button type="button" class="btn btn-accent" id="enableNotifyBtn" style="margin-right:10px;">Allow</button>
+    <button type="button" class="btn btn-warn" id="cancelNotifyBtn" style="margin-right:12px;">Later</button>
+    <button type="button" class="btn btn-accent" id="enableNotifyBtn" style="margin-left:12px;">Allow</button>
   </div>
   <!-- Sidebar menu -->
   <div id="sidebar" class="sidebar" style="display:none;">
@@ -2036,13 +2036,13 @@ function showAndroidInstallPrompt() {
       top:20px;
       left:50%;
       transform:translateX(-50%);
-      background:#fefefe;
+      background:#eef1ff;
       border:1px solid rgba(99,102,241,0.10);
       padding:12px;
       border-radius:14px;
       max-width:320px;
       width:90%;
-      box-shadow:0 2px 4px rgba(99,102,241,0.25);
+      box-shadow:0 4px 15px rgba(0, 0, 0, 0.4);
       font-size:15px;
       z-index:999;
       text-align:center;
@@ -2110,13 +2110,13 @@ if (isIos() && !isInStandaloneMode()) {
       top:20px;
       left:50%;
       transform:translateX(-50%);
-      background:#fff;
+      background:#eef1ff;
       border:1px solid rgba(99,102,241,0.10);
       padding:12px;
       border-radius:14px;
       max-width:320px;
       width:90%;
-      box-shadow:0 2px 4px rgba(99,102,241,0.25);
+      box-shadow:0 4px 15px rgba(0, 0, 0, 0.4);
       font-size:15px;
       z-index:999;
       text-align:center;
